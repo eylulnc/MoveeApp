@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MovieFragment</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movieImage">TODO</string>
+    <string name="movie_info">Movie Info</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="avengers">Avengers</string>
+    <string name="titanic">Titanic</string>
+    <string name="harry_potter">Harry Potter and Chamber of Secrets</string>
+    <string name="interstellar">Interstellar</string>
+    <string name="avengers_info">Avengers Info Text</string>
+    <string name="titanic_info">Titanic Info Text</string>
+    <string name="movie">movie</string>
+    <string name="interstellar_info">Interstellar Info Text</string>
+    <string name="harry_potter_info">Harry Potter and Chamber of Secrets Info Text</string>
+</resources>
