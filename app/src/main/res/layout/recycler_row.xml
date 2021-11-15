@@ -7,21 +7,22 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/recyclerImage"
+        android:id="@+id/movieLisRecyclerViewImage"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/image_height"
+        android:layout_height="@dimen/movie_list_recycler_view_image_height"
         android:contentDescription="@string/movieImage"
         android:scaleType="fitCenter"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:transitionName="@string/transaction_name"/>
 
     <TextView
-        android:id="@+id/recyclerName"
+        android:id="@+id/movieLisRecyclerViewName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:inputType="textMultiLine"
-        android:minHeight="48dp"
+        android:minHeight="@dimen/movie_list_recycler_view_name_min_height"
         android:text="@string/movie_name"
         android:textColor="@color/teal_700"
-        android:textSize="@dimen/font_size_20" />
+        android:textSize="@dimen/movie_list_recycler_view_name_font_size" />
 </LinearLayout>

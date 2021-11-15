@@ -1,41 +1,48 @@
 package com.eylulcan.moviefragment
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.os.bundleOf
+import androidx.core.view.doOnPreDraw
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eylulcan.moviefragment.databinding.FragmentMovieListBinding
 
 class MovieListFragment : Fragment(), MovieListener {
 
-    private lateinit var movieList: ArrayList<Movie>
+    private val movieList: ArrayList<Movie> = arrayListOf()
     private lateinit var fragmentBinding: FragmentMovieListBinding
+    private lateinit var movieAdapter:MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         return inflater.inflate(R.layout.fragment_movie_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding = FragmentMovieListBinding.bind(view)
-        movieList = ArrayList()
+        fragmentBinding.movieListRecyclerView.layoutManager = GridLayoutManager(context, 2)
         movieListGenerator()
-        fragmentBinding.recyclerView.layoutManager = GridLayoutManager(context, 2)
-        val movieAdapter = MovieAdapter(movieList, this)
-        fragmentBinding.recyclerView.adapter = movieAdapter
+        movieAdapter = MovieAdapter(movieList, this)
+        fragmentBinding.movieListRecyclerView.adapter = movieAdapter
+        postponeEnterTransition()
+        fragmentBinding.movieListRecyclerView.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
     }
 
     private fun movieListGenerator() {
-        println(getString(R.string.avengers))
-        println(R.string.avengers.toString())
         val avengers = Movie(
             getString(R.string.avengers),
             R.drawable.avengers,
@@ -62,9 +69,12 @@ class MovieListFragment : Fragment(), MovieListener {
         movieList.add(titanic)
     }
 
-    override fun onMovieClicked(position: Int) {
+    override fun onMovieClicked(position: Int, image: ImageView) {
         val movie: Movie = movieList[position]
-        val param = bundleOf((getString(R.string.movie)) to movie)
-        findNavController().navigate(R.id.action_movieListFragment_to_movieDetailFragment, param)
+        val movieDataBundle = bundleOf((getString(R.string.movie)) to movie)
+        val extras = FragmentNavigatorExtras(image to getString(R.string.transaction_name))
+        image.transitionName = movie.name
+        movieAdapter.updateMovieList(movieList)
+        findNavController().navigate(R.id.action_movieListFragment_to_movieDetailFragment, movieDataBundle,null, extras)
     }
 }

@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="font_size_20">20sp</dimen>
-    <dimen name="font_size_24">24sp</dimen>
-    <dimen name="font_size_16">16sp</dimen>
-    <dimen name="image_height">200dp</dimen>
-    <dimen name="margin_size_16">16dp</dimen>
-    <dimen name="margin_size_8">8dp</dimen>
-    <dimen name="margin_size_24">24dp</dimen>
+    <dimen name="movie_image_height">200dp</dimen>
+    <dimen name="movie_image_margin_start">16dp</dimen>
+    <dimen name="movie_image_margin_top">24dp</dimen>
+    <dimen name="movie_image_margin_end">16dp</dimen>
+    <dimen name="movie_name_margin_start">16dp</dimen>
+    <dimen name="movie_name_margin_top">16dp</dimen>
+    <dimen name="movie_name_margin_end">16dp</dimen>
+    <dimen name="movie_name_font_size">24sp</dimen>
+    <dimen name="movie_info_margin_start">16dp</dimen>
+    <dimen name="movie_info_margin_top">16dp</dimen>
+    <dimen name="movie_info_margin_end">16dp</dimen>
+    <dimen name="movie_info_margin_bottom">16dp</dimen>
+    <dimen name="movie_info_font_size">16sp</dimen>
+    <dimen name="movie_list_recycler_view_margin_start">8dp</dimen>
+    <dimen name="movie_list_recycler_view_margin_top">8dp</dimen>
+    <dimen name="movie_list_recycler_view_margin_end">8dp</dimen>
+    <dimen name="movie_list_recycler_view_margin_bottom">8dp</dimen>
+    <dimen name="movie_list_recycler_view_image_height">200dp</dimen>
+    <dimen name="movie_list_recycler_view_name_font_size">20sp</dimen>
+    <dimen name="movie_list_recycler_view_name_min_height">48sp</dimen>
 </resources>
