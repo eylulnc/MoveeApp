@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/movieListFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/movieListFragment"
@@ -25,5 +25,14 @@
         <argument
             android:name="selectedMovieDataArgument"
             app:argType="com.eylulcan.moviefragment.Movie" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.eylulcan.moviefragment.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
     </fragment>
 </navigation>
