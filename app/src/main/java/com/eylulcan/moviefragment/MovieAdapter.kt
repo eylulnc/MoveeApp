@@ -13,10 +13,6 @@ class MovieAdapter(
     private val movieListener: MovieListener
 ) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    fun MovieAdapter(movieList: ArrayList<Movie>) {
-        this.movieList.addAll(movieList)
-    }
-
     class ViewHolder(val binding: RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,11 +21,11 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.movieLisRecyclerViewImage.setImageResource(movieList[position].image)
-        holder.binding.movieLisRecyclerViewImage.transitionName = movieList[position].name
-        holder.binding.movieLisRecyclerViewName.text = movieList[position].name
+        holder.binding.movieListRecyclerViewImage.setImageResource(movieList[position].image)
+        //holder.binding.movieLisRecyclerViewImage.transitionName = movieList[position].name
+        holder.binding.movieListRecyclerViewName.text = movieList[position].name
         holder.itemView.setOnClickListener {
-            movieListener.onMovieClicked(position,holder.binding.movieLisRecyclerViewImage)
+            movieListener.onMovieClicked(position,holder.binding.movieListRecyclerViewImage)
         }
     }
 
@@ -40,7 +36,6 @@ class MovieAdapter(
      fun updateMovieList(newMovieList: ArrayList<Movie>){
         val diffCallback = MovieDiffUtil(this.movieList, newMovieList)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-
         this.movieList.clear()
         this.movieList.addAll(newMovieList)
         diffResult.dispatchUpdatesTo(this)

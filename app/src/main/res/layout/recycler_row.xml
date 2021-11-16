@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:id="@+id/recyclerRowConstraintLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/movieLisRecyclerViewImage"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/movie_list_recycler_view_image_height"
+        android:id="@+id/movieListRecyclerViewImage"
+        android:layout_width="@dimen/recycler_row_image_width"
+        android:layout_height="@dimen/recycler_row_image_height"
+        android:layout_margin="@dimen/recycler_row_image_margin"
         android:contentDescription="@string/movieImage"
         android:scaleType="fitCenter"
-        tools:srcCompat="@tools:sample/avatars"
-        android:transitionName="@string/transaction_name"/>
+        android:transitionName="@string/transaction_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/movieLisRecyclerViewName"
-        android:layout_width="match_parent"
+        android:id="@+id/movieListRecyclerViewName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/recycler_row_text_margin"
         android:gravity="center"
-        android:inputType="textMultiLine"
+        android:inputType="textMultiLine|textImeMultiLine"
         android:minHeight="@dimen/movie_list_recycler_view_name_min_height"
         android:text="@string/movie_name"
         android:textColor="@color/teal_700"
-        android:textSize="@dimen/movie_list_recycler_view_name_font_size" />
-</LinearLayout>
+        android:textSize="@dimen/movie_list_recycler_view_name_font_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/movieListRecyclerViewImage"
+        app:layout_constraintStart_toStartOf="@+id/movieListRecyclerViewImage"
+        app:layout_constraintTop_toBottomOf="@+id/movieListRecyclerViewImage" />
+</androidx.constraintlayout.widget.ConstraintLayout>

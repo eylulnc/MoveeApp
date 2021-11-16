@@ -25,8 +25,4 @@ class SplashFragment : Fragment() {
         // or update fragment action - app:popUpTo="@id/splashFragment" app:popUpToInclusive="true"
         return view
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

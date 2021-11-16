@@ -16,7 +16,6 @@ class MovieDiffUtil<Movie>(
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        println("DiffUtil  old " + oldList[oldItemPosition] + " new " +newList[newItemPosition] )
         return oldList[oldItemPosition] == newList[newItemPosition]
     }
 
