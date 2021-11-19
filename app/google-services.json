@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "9750633851",
+    "project_id": "moviefragment-7991c",
+    "storage_bucket": "moviefragment-7991c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9750633851:android:75a93a9b86c0f83f43f1de",
+        "android_client_info": {
+          "package_name": "com.eylulcan.moviefragment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9750633851-v7cora8lhfahsfk35jt8lv0cvl926nrn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eylulcan.moviefragment",
+            "certificate_hash": "b53ec6f9f3136a929c0c6adf1810ecc2c0b4dabe"
+          }
+        },
+        {
+          "client_id": "9750633851-agsek1mi6inm6hflcdoi31f3j7j5jp0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-Jctnz8kUSpEOBBID0TwoVC4yG5632ZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9750633851-agsek1mi6inm6hflcdoi31f3j7j5jp0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

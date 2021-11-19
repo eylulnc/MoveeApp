@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars"
         android:contentDescription="@string/movieImage"
-        android:transitionName="@string/transaction_name"/>
+        android:transitionName="@string/list_to_detail_transition"/>
 
     <TextView
         android:id="@+id/movieName"

@@ -13,7 +13,7 @@
         android:layout_margin="@dimen/recycler_row_image_margin"
         android:contentDescription="@string/movieImage"
         android:scaleType="fitCenter"
-        android:transitionName="@string/transaction_name"
+        android:transitionName="@string/list_to_detail_transition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
