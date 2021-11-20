@@ -20,4 +20,5 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="login_transition">LoginTransition</string>
+    <string name="or">OR</string>
 </resources>

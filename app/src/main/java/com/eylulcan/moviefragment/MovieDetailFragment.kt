@@ -6,9 +6,10 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.eylulcan.moviefragment.Movie
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 class MovieDetailFragment : Fragment() {
     private lateinit var fragmentBinding: FragmentMovieDetailBinding

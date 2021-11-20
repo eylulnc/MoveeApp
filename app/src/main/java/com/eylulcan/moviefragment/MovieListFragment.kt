@@ -1,6 +1,5 @@
 package com.eylulcan.moviefragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.*
@@ -11,19 +10,16 @@ import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.databinding.FragmentMovieListBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class MovieListFragment : Fragment(), MovieListener {
 
     private val movieList: ArrayList<Movie> = arrayListOf()
     private lateinit var fragmentBinding: FragmentMovieListBinding
-    private lateinit var movieAdapter1:MovieAdapter
-    private lateinit var movieAdapter2:MovieAdapter
+    private lateinit var movieAdapter1: MovieAdapter
+    private lateinit var movieAdapter2: MovieAdapter
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,6 +96,7 @@ class MovieListFragment : Fragment(), MovieListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         auth.signOut()
+
         Toast.makeText(context, "Logged Out", Toast.LENGTH_LONG).show()
         findNavController().navigate(R.id.action_movieListFragment_to_loginFragment)
         return super.onOptionsItemSelected(item)

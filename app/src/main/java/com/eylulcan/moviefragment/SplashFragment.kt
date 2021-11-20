@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
 import com.eylulcan.moviefragment.databinding.FragmentSplashBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -42,14 +41,16 @@ class SplashFragment : Fragment() {
 
         if(currentUser != null){
             Handler(Looper.myLooper()!!).postDelayed({findNavController()
-                .navigate(R.id.action_splashFragment_to_movieListFragment, null,
+                .navigate(
+                    R.id.action_splashFragment_to_movieListFragment, null,
                     NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build())
             },1500)
         } else {
             val extras = FragmentNavigatorExtras(binding.splashFragmentLogo to getString(R.string.login_transition))
 
                 Handler(Looper.myLooper()!!).postDelayed({findNavController()
-                    .navigate(R.id.action_splashFragment_to_loginFragment, null,
+                    .navigate(
+                        R.id.action_splashFragment_to_loginFragment, null,
                         NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build(),extras )
 
             },1500)
