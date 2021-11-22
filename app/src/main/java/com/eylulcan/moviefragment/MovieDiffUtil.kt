@@ -21,7 +21,6 @@ class MovieDiffUtil<Movie>(
 
     @Nullable
     override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-        //you can return particular field for changed item.
         return super.getChangePayload(oldItemPosition, newItemPosition)
     }
 

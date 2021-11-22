@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.databinding.RecyclerRowBinding
 import androidx.recyclerview.widget.DiffUtil
 
-
 class MovieAdapter(
     private val movieList: ArrayList<Movie>,
     private val movieListener: MovieListener
@@ -21,7 +20,6 @@ class MovieAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.movieListRecyclerViewImage.setImageResource(movieList[position].image)
-        //holder.binding.movieLisRecyclerViewImage.transitionName = movieList[position].name
         holder.binding.movieListRecyclerViewName.text = movieList[position].name
         holder.itemView.setOnClickListener {
             movieListener.onMovieClicked(position,holder.binding.movieListRecyclerViewImage)

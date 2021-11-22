@@ -20,18 +20,17 @@ class MovieListFragment : Fragment(), MovieListener {
     private lateinit var fragmentBinding: FragmentMovieListBinding
     private lateinit var movieAdapter1: MovieAdapter
     private lateinit var movieAdapter2: MovieAdapter
-    private lateinit var auth: FirebaseAuth
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        auth = FirebaseAuth.getInstance()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         return inflater.inflate(R.layout.fragment_movie_list, container, false)
     }
@@ -64,7 +63,7 @@ class MovieListFragment : Fragment(), MovieListener {
             R.drawable.interstellar,
             getString(R.string.interstellar_info)
         )
-        val harrypotter = Movie(
+        val harryPotter = Movie(
             getString(R.string.harry_potter),
             R.drawable.harrypotter,
             getString(R.string.harry_potter_info)
@@ -76,7 +75,7 @@ class MovieListFragment : Fragment(), MovieListener {
         )
         movieList.add(avengers)
         movieList.add(interstellar)
-        movieList.add(harrypotter)
+        movieList.add(harryPotter)
         movieList.add(titanic)
     }
 
@@ -90,16 +89,16 @@ class MovieListFragment : Fragment(), MovieListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        auth.signOut()
-
-        Toast.makeText(context, "Logged Out", Toast.LENGTH_LONG).show()
-        findNavController().navigate(R.id.action_movieListFragment_to_loginFragment)
+        if(item.itemId == R.id.logout ) {
+            auth.signOut()
+            Toast.makeText(context, R.string.logged_out_movie_list, Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.action_movieListFragment_to_loginFragment)
+        }
         return super.onOptionsItemSelected(item)
     }
-
 }

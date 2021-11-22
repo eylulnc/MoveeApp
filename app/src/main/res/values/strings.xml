@@ -21,4 +21,16 @@
     <string name="sign_up">Sign Up</string>
     <string name="login_transition">LoginTransition</string>
     <string name="or">OR</string>
+    <string name="empty_field">No empty field allowed please fill all the areas</string>
+    <string name="user_email">User Email</string>
+    <string name="users">Users</string>
+    <string name="user_created">User Created You Automatically Logged In</string>
+    <string name="logged_out_movie_list">Logged Out</string>
+    <string name="menu_log_out">Log Out</string>
+    <string name="logged_out_movie_detail">Logged Out</string>
+    <string name="login_log_message_firebase_auth">firebaseAuthWithGoogle</string>
+    <string name="login_log_message_failed">Google sign in failed</string>
+    <string name="login_log_message_sign_in_success">signInWithCredential:success</string>
+    <string name="login_log_message_sign_in_fail">signInWithCredential:failure</string>
+    <string name="splash_image_content_description">Splash Logo </string>
 </resources>

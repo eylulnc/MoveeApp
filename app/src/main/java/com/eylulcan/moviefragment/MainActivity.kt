@@ -2,7 +2,6 @@ package com.eylulcan.moviefragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.eylulcan.moviefragment.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
