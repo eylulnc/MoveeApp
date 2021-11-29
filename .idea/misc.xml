@@ -6,8 +6,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30520833333333336" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/fragment_movie_detail.xml" value="0.31927083333333334" />
-        <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.31927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.4864005668235416" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.26403985507246375" />
+        <entry key="app/src/main/res/layout/movie_list_recycler_row.xml" value="0.2749094202898551" />
         <entry key="app/src/main/res/layout/recycler_row.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.196875" />
       </map>
