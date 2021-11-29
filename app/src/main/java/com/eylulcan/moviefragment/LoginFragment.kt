@@ -117,7 +117,7 @@ class LoginFragment : Fragment() {
                 val googleAccount = GoogleSignIn.getLastSignedInAccount(context)
                 googleAccount?.let {
                     val userMap = hashMapOf<String, Any>()
-                    userMap[getString(com.eylulcan.moviefragment.R.string.user_email)] = googleAccount.email
+                    userMap[getString(R.string.user_email)] = googleAccount.email
                     firestore.collection(getString(R.string.users)).add(userMap)
                         .addOnSuccessListener { navigateToMovieList() }
                     Toast.makeText(context, R.string.user_created, Toast.LENGTH_LONG).show()

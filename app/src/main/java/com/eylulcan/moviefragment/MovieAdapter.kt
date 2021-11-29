@@ -3,38 +3,46 @@ package com.eylulcan.moviefragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.eylulcan.moviefragment.databinding.RecyclerRowBinding
-import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.databinding.MovieListRecyclerRowBinding
 
-class MovieAdapter(
-    private val movieList: ArrayList<Movie>,
-    private val movieListener: MovieListener
-) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val movieItem: Movie, private val listener: MovieListener) :
+    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding: RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root)
+    companion object {
+        private const val BASE_IMAGE_URL = "http://image.tmdb.org/t/p/w185"
+    }
+
+    class ViewHolder(val binding: MovieListRecyclerRowBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = RecyclerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            MovieListRecyclerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.movieListRecyclerViewImage.setImageResource(movieList[position].image)
-        holder.binding.movieListRecyclerViewName.text = movieList[position].name
-        holder.itemView.setOnClickListener {
-            movieListener.onMovieClicked(position,holder.binding.movieListRecyclerViewImage)
+        val movieList = movieItem.results
+        movieList?.get(position)?.let {  resultMovie ->
+            Glide.with(holder.binding.root).load(setImageUrl(resultMovie.posterPath))
+                .into(holder.binding.movieListRecyclerViewImage)
+            holder.binding.movieListRecyclerViewName.text = resultMovie.title
+            holder.itemView.setOnClickListener {
+                listener.onMovieClicked(resultMovie,holder.binding.movieListRecyclerViewImage)
+            }
         }
     }
 
     override fun getItemCount(): Int {
-        return movieList.size
+        movieItem.results?.let { movieList ->
+            return movieList.size
+        } ?: run {
+            return 0
+        }
     }
 
-     fun updateMovieList(newMovieList: ArrayList<Movie>){
-        val diffCallback = MovieDiffUtil(this.movieList, newMovieList)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        this.movieList.clear()
-        this.movieList.addAll(newMovieList)
-        diffResult.dispatchUpdatesTo(this)
+    private fun setImageUrl(poster_path: String?): String {
+        return BASE_IMAGE_URL.plus(poster_path)
     }
 }

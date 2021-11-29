@@ -26,8 +26,8 @@
             android:id="@+id/action_movieDetailFragment_to_movieListFragment"
             app:destination="@id/movieListFragment" />
         <argument
-            android:name="selectedMovieDataArgument"
-            app:argType="com.eylulcan.moviefragment.Movie" />
+            android:name="selectedResultMovieDataArgument"
+            app:argType="com.eylulcan.moviefragment.ResultMovie" />
         <action
             android:id="@+id/action_movieDetailFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

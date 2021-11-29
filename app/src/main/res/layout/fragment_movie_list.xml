@@ -7,28 +7,60 @@
     android:layout_height="match_parent"
     tools:context=".MovieListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movieListRecyclerView"
+    <TextView
+        android:id="@+id/mostPopularCategoryText"
         android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:scrollbars="horizontal"
-        android:layout_marginStart="@dimen/movie_list_recycler_view_margin_start"
-        android:layout_marginTop="@dimen/movie_list_recycler_view_margin_top"
-        android:layout_marginEnd="@dimen/movie_list_recycler_view_margin_end"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/movieList_mostPopularCategoryText_marginStart"
+        android:layout_marginTop="@dimen/movieList_mostPopularCategoryText_marginTop"
+        android:layout_marginEnd="@dimen/movieList_mostPopularCategoryText_marginEnd"
+        android:text="@string/most_popular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/movieList_mostPopularCategoryText_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movieListRecyclerView2"
-        android:layout_width="match_parent"
+        android:id="@+id/movieListPopularRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/movie_list_recycler_view_margin_start"
+        android:layout_marginTop="@dimen/movieList_popularRecyclerView_marginTop"
+        android:layout_marginEnd="@dimen/movie_list_recycler_view_margin_end"
         android:scrollbars="horizontal"
-        android:layout_height="250dp"
-        android:layout_marginStart="@dimen/movie_list_recycler_view_2_margin_start"
-        android:layout_marginTop="@dimen/movie_list_recycler_view_2_margin_top"
-        android:layout_marginEnd="@dimen/movie_list_recycler_view_2_margin_end"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieListRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/mostPopularCategoryText" />
+
+    <TextView
+        android:id="@+id/topRatedText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/movieList_topRatedText_marginStart"
+        android:layout_marginTop="@dimen/movieList_topRatedText_marginTop"
+        android:layout_marginEnd="@dimen/movieList_topRatedText_marginEnd"
+        android:text="@string/top_rated"
+        android:textColor="@color/black"
+        android:textSize="@dimen/movieList_topRatedText_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieListPopularRecyclerView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movieListTopRatedRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/movieList_topRated_recyclerView_marginStart"
+        android:layout_marginTop="@dimen/movieList_topRated_recyclerView_marginTop"
+        android:layout_marginEnd="@dimen/movieList_topRated_recyclerView_marginEnd"
+        android:scrollbars="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topRatedText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

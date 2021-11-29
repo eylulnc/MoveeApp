@@ -33,4 +33,6 @@
     <string name="login_log_message_sign_in_success">signInWithCredential:success</string>
     <string name="login_log_message_sign_in_fail">signInWithCredential:failure</string>
     <string name="splash_image_content_description">Splash Logo </string>
+    <string name="most_popular">Most Popular</string>
+    <string name="top_rated">Top Rated</string>
 </resources>
