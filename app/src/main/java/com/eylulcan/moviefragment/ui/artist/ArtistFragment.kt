@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.artist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.eylulcan.moviefragment.ui.movielist.MovieListViewModel
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistBinding
 
 class ArtistFragment : Fragment() {
 
-    private val artistViewModel: MovieListViewModel by viewModels()
+    private val artistViewModel: ArtistViewModel by viewModels()
     private lateinit var binding: FragmentArtistBinding
     private lateinit var artistAdapter: ArtistAdapter
 

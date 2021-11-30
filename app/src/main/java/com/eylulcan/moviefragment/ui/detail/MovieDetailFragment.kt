@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.detail
 
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
+import com.eylulcan.moviefragment.model.ResultMovie
 
 class MovieDetailFragment : Fragment() {
 

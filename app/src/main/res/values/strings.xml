@@ -35,6 +35,10 @@
     <string name="splash_image_content_description">Splash Logo </string>
     <string name="most_popular">Most Popular</string>
     <string name="top_rated">Top Rated</string>
-    <string name="show_genre_list">Show Genre List</string>
-    <string name="show_popular_people">Show Popular People</string>
+    <string name="onboard_title"><![CDATA[Movies & Series]]></string>
+    <string name="onboard_info_text">The world\'s most popular and authoritative source for movies and series</string>
+    <string name="explore_collection">Explore Collection</string>
+    <string name="discover">Discover</string>
+    <string name="genres">Genres</string>
+    <string name="artists">Artists</string>
 </resources>

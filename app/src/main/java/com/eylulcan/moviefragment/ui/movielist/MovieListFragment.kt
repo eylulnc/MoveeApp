@@ -1,26 +1,27 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.movielist
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieListBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.eylulcan.moviefragment.model.ResultMovie
 
 class MovieListFragment : Fragment(), MovieListener {
 
     private lateinit var fragmentBinding: FragmentMovieListBinding
     private val movieListViewModel: MovieListViewModel by viewModels()
     private lateinit var movieListRecyclerAdapter: MovieAdapter
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,34 +61,10 @@ class MovieListFragment : Fragment(), MovieListener {
         val extras = FragmentNavigatorExtras(image to getString(R.string.list_to_detail_transition))
         image.transitionName = image.id.toString()
         //movieAdapter.updateMovieList(movieList)
-        findNavController().navigate(
-            R.id.action_movieListFragment_to_movieDetailFragment,
-            movieDataBundle,
-            null,
-            extras
+        this.parentFragment?.parentFragment?.findNavController()?.navigate(
+            R.id.action_dashboardFragment_to_movieDetailFragment,
+            movieDataBundle, null, extras
         )
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.logout -> {
-                auth.signOut()
-                Toast.makeText(context, R.string.logged_out_movie_list, Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.action_movieListFragment_to_loginFragment)
-            }
-            R.id.menuGenreList -> {
-                findNavController().navigate(R.id.action_movieListFragment_to_genresFragment)
-            }
-            R.id.menuPopularPeopleList -> {
-                findNavController().navigate(R.id.action_movieListFragment_to_artistFragment)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun observeViewModel() {

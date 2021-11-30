@@ -1,8 +1,12 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.movielist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.eylulcan.moviefragment.api.MovieAPI
+import com.eylulcan.moviefragment.model.GenreList
+import com.eylulcan.moviefragment.model.Movie
+import com.eylulcan.moviefragment.model.PopularPeopleList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,10 +25,6 @@ class MovieListViewModel : ViewModel() {
     val popularMovies: LiveData<Movie> get() = popularMovieList
     private val topRatedMovieList = MutableLiveData<Movie>()
     val topRatedMovies: LiveData<Movie> get() = topRatedMovieList
-    private val genreList = MutableLiveData<GenreList>()
-    val genres: LiveData<GenreList> get() = genreList
-    private val popularPeopleList = MutableLiveData<PopularPeopleList>()
-    val popularPeople: LiveData<PopularPeopleList> get() = popularPeopleList
 
     init {
         retrofit = Retrofit.Builder()
@@ -59,38 +59,6 @@ class MovieListViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             topRatedMovieList.postValue(it)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    fun getGenreList() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getGenresData()
-            withContext(Dispatchers.Main) {
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            genreList.postValue(it)
-
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    fun getPopularPeople() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getPopularPeople()
-            withContext(Dispatchers.Main) {
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            popularPeopleList.postValue(it)
-
                         }
                     }
                 }

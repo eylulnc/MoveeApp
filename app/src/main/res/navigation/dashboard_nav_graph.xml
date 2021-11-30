@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_nav_graph"
+    app:startDestination="@id/discoverFragment">
+
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="com.eylulcan.moviefragment.ui.movielist.MovieListFragment"
+        android:label="fragment_movie_list"
+        tools:layout="@layout/fragment_movie_list" />
+    <fragment
+        android:id="@+id/artistsFragment"
+        android:name="com.eylulcan.moviefragment.ui.artist.ArtistFragment"
+        android:label="fragment_artists"
+        tools:layout="@layout/fragment_artist" />
+    <fragment
+        android:id="@+id/genresFragment"
+        android:name="com.eylulcan.moviefragment.ui.genres.GenresFragment"
+        android:label="fragment_genres"
+        tools:layout="@layout/fragment_genres" />
+</navigation>

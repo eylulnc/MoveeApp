@@ -1,9 +1,10 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.genres
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.databinding.GenresFragmentRecyclerRowBinding
+import com.eylulcan.moviefragment.model.GenreList
 
 class GenresAdapter(private val genreList: GenreList) :
     RecyclerView.Adapter<GenresAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.model
 
 import javax.annotation.Generated
 import com.google.gson.annotations.Expose

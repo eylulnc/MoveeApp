@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import android.util.Log
+import com.eylulcan.moviefragment.R
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -130,7 +131,7 @@ class LoginFragment : Fragment() {
     
     private fun navigateToMovieList(){
         findNavController().navigate(
-            R.id.action_loginFragment_to_movieListFragment,
+            R.id.action_loginFragment_to_dashboardFragment,
             null,
             NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build())
     }

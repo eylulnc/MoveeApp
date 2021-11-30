@@ -1,9 +1,10 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.artist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
+import com.eylulcan.moviefragment.model.PopularPeopleList
 
 class ArtistAdapter(private val popularPeopleList: PopularPeopleList) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {

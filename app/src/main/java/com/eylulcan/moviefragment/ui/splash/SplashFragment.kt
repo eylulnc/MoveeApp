@@ -1,5 +1,7 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.splash
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSplashBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -20,6 +23,13 @@ class SplashFragment : Fragment() {
 
     private val auth: FirebaseAuth = Firebase.auth
     private lateinit var binding: FragmentSplashBinding
+    lateinit var sharedPreferences: SharedPreferences
+    private var firstTimeOpened: Boolean? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedPreferences = requireActivity().getSharedPreferences("com.eylulcan.moviefragment", Context.MODE_PRIVATE)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +47,13 @@ class SplashFragment : Fragment() {
         currentUser?.let {
             navigateToMovieList()
         } ?: run {
-            navigateToLogin()
+            firstTimeOpened = sharedPreferences.getBoolean("isFirst",true)
+            if(firstTimeOpened == true) {
+                sharedPreferences.edit().putBoolean("isFirst",false).apply()
+                navigateToOnboard()
+            } else {
+                navigateToLogin()
+            }
         }
     }
 
@@ -45,7 +61,7 @@ class SplashFragment : Fragment() {
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController()
                 .navigate(
-                    R.id.action_splashFragment_to_movieListFragment, null,
+                    R.id.action_splashFragment_to_dashboardFragment, null,
                     NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build()
                 )
         }, 1500)
@@ -59,6 +75,16 @@ class SplashFragment : Fragment() {
                 .navigate(
                     R.id.action_splashFragment_to_loginFragment, null,
                     NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build(), extras
+                )
+        }, 1500)
+    }
+
+    private fun navigateToOnboard(){
+        Handler(Looper.myLooper()!!).postDelayed({
+            findNavController()
+                .navigate(
+                    R.id.action_splashFragment_to_onBoardViewPagerFragment, null,
+                    NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build()
                 )
         }, 1500)
     }

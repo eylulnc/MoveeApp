@@ -1,10 +1,11 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.movielist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.databinding.MovieListRecyclerRowBinding
+import com.eylulcan.moviefragment.model.Movie
 
 class MovieAdapter(private val movieItem: Movie, private val listener: MovieListener) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {

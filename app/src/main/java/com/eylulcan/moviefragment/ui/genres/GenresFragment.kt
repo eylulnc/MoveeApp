@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.ui.genres
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenresBinding
 
 class GenresFragment : Fragment() {
 
-    private val genreViewModel: MovieListViewModel by viewModels()
+    private val genreViewModel: GenresViewModel by viewModels()
     private lateinit var binding: FragmentGenresBinding
     private lateinit var genreListAdapter: GenresAdapter
 

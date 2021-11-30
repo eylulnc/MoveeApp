@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.util
 
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil

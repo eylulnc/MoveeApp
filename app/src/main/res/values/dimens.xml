@@ -4,6 +4,7 @@
     <dimen name="recycler_row_image_height">200dp</dimen>
     <dimen name="recycler_row_text_margin">8dp</dimen>
     <dimen name="recycler_row_image_marginTop">16dp</dimen>
+
     <dimen name="detail_movie_image_height">200dp</dimen>
     <dimen name="detail_movie_image_margin_start">16dp</dimen>
     <dimen name="detail_movie_image_margin_top">24dp</dimen>
@@ -17,18 +18,10 @@
     <dimen name="detail_movie_info_margin_end">16dp</dimen>
     <dimen name="detail_movie_info_margin_bottom">16dp</dimen>
     <dimen name="detail_movie_info_font_size">16sp</dimen>
-    <dimen name="movie_list_recycler_view_margin_start">8dp</dimen>
-    <dimen name="movie_list_recycler_view_margin_top">8dp</dimen>
-    <dimen name="movie_list_recycler_view_margin_end">8dp</dimen>
-    <dimen name="movie_list_recycler_view_margin_bottom">8dp</dimen>
-    <dimen name="movie_list_recycler_view_2_margin_start">8dp</dimen>
-    <dimen name="movie_list_recycler_view_2_margin_top">16dp</dimen>
-    <dimen name="movie_list_recycler_view_2_margin_end">8dp</dimen>
-    <dimen name="movie_list_recycler_view_image_height">200dp</dimen>
-    <dimen name="movie_list_recycler_view_name_font_size">16sp</dimen>
-    <dimen name="movie_list_recycler_view_name_min_height">48sp</dimen>
+
     <dimen name="splash_fragment_image_height">200dp</dimen>
     <dimen name="splash_fragment_image_width">200dp</dimen>
+
     <dimen name="login_movie_image_height">150dp</dimen>
     <dimen name="login_movie_image_width">150dp</dimen>
     <dimen name="login_movie_image_margin_top">24dp</dimen>
@@ -42,6 +35,7 @@
     <dimen name="login_user_email_margin_end">16dp</dimen>
     <dimen name="login_user_email_margin_top">60dp</dimen>
     <dimen name="login_user_email_min_height">48dp</dimen>
+
     <dimen name="movieList_recyclerRow_movieName_marginTop">8dp</dimen>
     <dimen name="movieList_recyclerRow_movieName_size">16sp</dimen>
     <dimen name="movieList_recyclerRow_movieImage_width">150dp</dimen>
@@ -49,6 +43,7 @@
     <dimen name="movieList_recyclerRow_movieImage_marginTop">16dp</dimen>
     <dimen name="movieList_rowLayout_marginStart">2dp</dimen>
     <dimen name="movieList_rowLayout_marginEnd">2dp</dimen>
+
     <dimen name="movieList_mostPopularCategoryText_size">16sp</dimen>
     <dimen name="movieList_mostPopularCategoryText_marginStart">8dp</dimen>
     <dimen name="movieList_mostPopularCategoryText_marginTop">16dp</dimen>
@@ -63,16 +58,39 @@
     <dimen name="movieList_topRated_recyclerView_marginStart">8dp</dimen>
     <dimen name="movieList_topRated_recyclerView_marginEnd">8dp</dimen>
     <dimen name="movieList_topRated_recyclerView_marginTop">4dp</dimen>
+    <dimen name="movie_list_recycler_view_margin_start">8dp</dimen>
+    <dimen name="movie_list_recycler_view_margin_top">8dp</dimen>
+    <dimen name="movie_list_recycler_view_margin_end">8dp</dimen>
+    <dimen name="movie_list_recycler_view_margin_bottom">8dp</dimen>
+    <dimen name="movie_list_recycler_view_2_margin_start">8dp</dimen>
+    <dimen name="movie_list_recycler_view_2_margin_top">16dp</dimen>
+    <dimen name="movie_list_recycler_view_2_margin_end">8dp</dimen>
+    <dimen name="movie_list_recycler_view_image_height">200dp</dimen>
+    <dimen name="movie_list_recycler_view_name_font_size">16sp</dimen>
+    <dimen name="movie_list_recycler_view_name_min_height">48sp</dimen>
+
     <dimen name="artist_recycler_row_text_width">100dp</dimen>
     <dimen name="artist_recycler_row_text_height">200dp</dimen>
     <dimen name="artist_recycler_row_text_size">18sp</dimen>
     <dimen name="artist_recycler_row_text_padding">8dp</dimen>
     <dimen name="artist_recycler_row_text_margin">8dp</dimen>
     <dimen name="artist_recycler_view_margin">4dp</dimen>
+
     <dimen name="genres_recyclerView_marginBottom">8dp</dimen>
     <dimen name="genres_recyclerView_marginTop">8dp</dimen>
     <dimen name="genres_recyclerView_row_text_marginTop">24dp</dimen>
     <dimen name="genres_recyclerView_row_text_minHeight">60dp</dimen>
     <dimen name="genres_recyclerView_row_text_size">24sp</dimen>
+
+    <dimen name="onboard_title_marginBottom">16dp</dimen>
+    <dimen name="onboard_title_size">34sp</dimen>
+    <dimen name="onboard_info_marginBottom">150dp</dimen>
+    <dimen name="onboard_info_marginStart">16dp</dimen>
+    <dimen name="onboard_info_margiEnd">16dp</dimen>
+    <dimen name="onboard_info_size">18sp</dimen>
+    <dimen name="onboard_button_height">70dp</dimen>
+    <dimen name="onboard_button_marginStart">50dp</dimen>
+    <dimen name="onboard_button_marginEnd">50dp</dimen>
+    <dimen name="onboard_button_marginBottom">50dp</dimen>
 
 </resources>

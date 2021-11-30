@@ -1,5 +1,8 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.api
 
+import com.eylulcan.moviefragment.model.GenreList
+import com.eylulcan.moviefragment.model.PopularPeopleList
+import com.eylulcan.moviefragment.model.Movie
 import retrofit2.Response
 import retrofit2.http.GET
 
