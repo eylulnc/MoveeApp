@@ -63,5 +63,16 @@
     <dimen name="movieList_topRated_recyclerView_marginStart">8dp</dimen>
     <dimen name="movieList_topRated_recyclerView_marginEnd">8dp</dimen>
     <dimen name="movieList_topRated_recyclerView_marginTop">4dp</dimen>
+    <dimen name="artist_recycler_row_text_width">100dp</dimen>
+    <dimen name="artist_recycler_row_text_height">200dp</dimen>
+    <dimen name="artist_recycler_row_text_size">18sp</dimen>
+    <dimen name="artist_recycler_row_text_padding">8dp</dimen>
+    <dimen name="artist_recycler_row_text_margin">8dp</dimen>
+    <dimen name="artist_recycler_view_margin">4dp</dimen>
+    <dimen name="genres_recyclerView_marginBottom">8dp</dimen>
+    <dimen name="genres_recyclerView_marginTop">8dp</dimen>
+    <dimen name="genres_recyclerView_row_text_marginTop">24dp</dimen>
+    <dimen name="genres_recyclerView_row_text_minHeight">60dp</dimen>
+    <dimen name="genres_recyclerView_row_text_size">24sp</dimen>
 
 </resources>

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/logout" android:title="@string/menu_log_out"/>
+    <item android:id="@+id/menuGenreList" android:title="@string/show_genre_list"/>
+    <item android:id="@+id/menuPopularPeopleList" android:title="@string/show_popular_people"/>
 </menu>

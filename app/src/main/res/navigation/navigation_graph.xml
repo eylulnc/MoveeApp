@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_movieListFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_movieListFragment_to_genresFragment"
+            app:destination="@id/genresFragment" />
+        <action
+            android:id="@+id/action_movieListFragment_to_artistFragment"
+            app:destination="@id/artistFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -53,4 +59,14 @@
             android:id="@+id/action_loginFragment_to_movieListFragment"
             app:destination="@id/movieListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/genresFragment"
+        android:name="com.eylulcan.moviefragment.GenresFragment"
+        android:label="fragment_genres"
+        tools:layout="@layout/fragment_genres" />
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.eylulcan.moviefragment.ArtistFragment"
+        android:label="fragment_artist"
+        tools:layout="@layout/fragment_artist" />
 </navigation>

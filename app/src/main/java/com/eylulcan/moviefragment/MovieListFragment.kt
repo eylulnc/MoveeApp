@@ -55,13 +55,18 @@ class MovieListFragment : Fragment(), MovieListener {
         }
     }
 
-     override fun onMovieClicked(resultMovie: ResultMovie, image: ImageView) {
-         val movieDataBundle = bundleOf((getString(R.string.movie)) to resultMovie)
-         val extras = FragmentNavigatorExtras(image to getString(R.string.list_to_detail_transition))
-         image.transitionName = image.id.toString()
-         //movieAdapter.updateMovieList(movieList)
-         findNavController().navigate(R.id.action_movieListFragment_to_movieDetailFragment, movieDataBundle,null, extras)
-     }
+    override fun onMovieClicked(resultMovie: ResultMovie, image: ImageView) {
+        val movieDataBundle = bundleOf((getString(R.string.movie)) to resultMovie)
+        val extras = FragmentNavigatorExtras(image to getString(R.string.list_to_detail_transition))
+        image.transitionName = image.id.toString()
+        //movieAdapter.updateMovieList(movieList)
+        findNavController().navigate(
+            R.id.action_movieListFragment_to_movieDetailFragment,
+            movieDataBundle,
+            null,
+            extras
+        )
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu, menu)
@@ -69,10 +74,18 @@ class MovieListFragment : Fragment(), MovieListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.logout) {
-            auth.signOut()
-            Toast.makeText(context, R.string.logged_out_movie_list, Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_movieListFragment_to_loginFragment)
+        when (item.itemId) {
+            R.id.logout -> {
+                auth.signOut()
+                Toast.makeText(context, R.string.logged_out_movie_list, Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_movieListFragment_to_loginFragment)
+            }
+            R.id.menuGenreList -> {
+                findNavController().navigate(R.id.action_movieListFragment_to_genresFragment)
+            }
+            R.id.menuPopularPeopleList -> {
+                findNavController().navigate(R.id.action_movieListFragment_to_artistFragment)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -80,13 +93,13 @@ class MovieListFragment : Fragment(), MovieListener {
     private fun observeViewModel() {
         movieListViewModel.popularMovies.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                movieListRecyclerAdapter = MovieAdapter(movie,this)
+                movieListRecyclerAdapter = MovieAdapter(movie, this)
                 fragmentBinding.movieListPopularRecyclerView.adapter = movieListRecyclerAdapter
             }
         })
         movieListViewModel.topRatedMovies.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                movieListRecyclerAdapter = MovieAdapter(movie,this)
+                movieListRecyclerAdapter = MovieAdapter(movie, this)
                 fragmentBinding.movieListTopRatedRecyclerView.adapter = movieListRecyclerAdapter
             }
         })

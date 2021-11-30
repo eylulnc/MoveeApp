@@ -24,7 +24,7 @@
     <string name="empty_field">No empty field allowed please fill all the areas</string>
     <string name="user_email">User Email</string>
     <string name="users">Users</string>
-    <string name="user_created">User Created You Automatically Logged In</string>
+    <string name="user_created">Logged In</string>
     <string name="logged_out_movie_list">Logged Out</string>
     <string name="menu_log_out">Log Out</string>
     <string name="logged_out_movie_detail">Logged Out</string>
@@ -35,4 +35,6 @@
     <string name="splash_image_content_description">Splash Logo </string>
     <string name="most_popular">Most Popular</string>
     <string name="top_rated">Top Rated</string>
+    <string name="show_genre_list">Show Genre List</string>
+    <string name="show_popular_people">Show Popular People</string>
 </resources>

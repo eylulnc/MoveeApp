@@ -16,14 +16,18 @@ class MovieListViewModel : ViewModel() {
         private const val BASE_URL = "https://api.themoviedb.org/3/"
     }
 
-    private var retrofit : MovieAPI? = null
+    private var retrofit: MovieAPI? = null
     private val popularMovieList = MutableLiveData<Movie>()
-    val popularMovies: LiveData<Movie> get() =  popularMovieList
+    val popularMovies: LiveData<Movie> get() = popularMovieList
     private val topRatedMovieList = MutableLiveData<Movie>()
-    val topRatedMovies: LiveData<Movie> get() =  topRatedMovieList
+    val topRatedMovies: LiveData<Movie> get() = topRatedMovieList
+    private val genreList = MutableLiveData<GenreList>()
+    val genres: LiveData<GenreList> get() = genreList
+    private val popularPeopleList = MutableLiveData<PopularPeopleList>()
+    val popularPeople: LiveData<PopularPeopleList> get() = popularPeopleList
 
     init {
-         retrofit = Retrofit.Builder()
+        retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -31,7 +35,7 @@ class MovieListViewModel : ViewModel() {
     }
 
     fun getPopularMovieList() {
-        CoroutineScope(Dispatchers.IO ).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getPopularData()
 
             withContext(Dispatchers.Main) {
@@ -45,8 +49,9 @@ class MovieListViewModel : ViewModel() {
             }
         }
     }
+
     fun getTopRatedMovieList() {
-        CoroutineScope(Dispatchers.IO ).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getTopRatedData()
 
             withContext(Dispatchers.Main) {
@@ -61,4 +66,35 @@ class MovieListViewModel : ViewModel() {
         }
     }
 
+    fun getGenreList() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getGenresData()
+            withContext(Dispatchers.Main) {
+                response?.let {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            genreList.postValue(it)
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun getPopularPeople() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getPopularPeople()
+            withContext(Dispatchers.Main) {
+                response?.let {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            popularPeopleList.postValue(it)
+
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
