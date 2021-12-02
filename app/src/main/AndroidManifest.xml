@@ -11,7 +11,8 @@
         android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MovieFragment">
+        android:theme="@style/Theme.MovieFragment"
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true">

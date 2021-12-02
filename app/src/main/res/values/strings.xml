@@ -41,4 +41,5 @@
     <string name="discover">Discover</string>
     <string name="genres">Genres</string>
     <string name="artists">Artists</string>
+    <string name="search">Search</string>
 </resources>

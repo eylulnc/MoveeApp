@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/genres_recyclerView_row_text_marginTop"
-        android:background="@color/teal_700"
+        android:background="@color/gray_blue"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"

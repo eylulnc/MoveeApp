@@ -71,10 +71,14 @@
 
     <dimen name="artist_recycler_row_text_width">100dp</dimen>
     <dimen name="artist_recycler_row_text_height">200dp</dimen>
-    <dimen name="artist_recycler_row_text_size">18sp</dimen>
+    <dimen name="artist_recycler_row_text_size">16sp</dimen>
     <dimen name="artist_recycler_row_text_padding">8dp</dimen>
     <dimen name="artist_recycler_row_text_margin">8dp</dimen>
+    <dimen name="artist_recycler_row_text_minHeight">40dp</dimen>
     <dimen name="artist_recycler_view_margin">4dp</dimen>
+    <dimen name="artist_recyclerRow_movieImage_width">150dp</dimen>
+    <dimen name="artist_recyclerRow_movieImage_height">200dp</dimen>
+
 
     <dimen name="genres_recyclerView_marginBottom">8dp</dimen>
     <dimen name="genres_recyclerView_marginTop">8dp</dimen>

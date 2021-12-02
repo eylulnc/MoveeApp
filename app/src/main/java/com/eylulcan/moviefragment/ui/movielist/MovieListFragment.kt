@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieListBinding
 import com.eylulcan.moviefragment.model.ResultMovie
@@ -25,7 +26,6 @@ class MovieListFragment : Fragment(), MovieListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -34,6 +34,7 @@ class MovieListFragment : Fragment(), MovieListener {
     ): View? {
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        updateToolbar()
         return inflater.inflate(R.layout.fragment_movie_list, container, false)
     }
 
@@ -80,5 +81,10 @@ class MovieListFragment : Fragment(), MovieListener {
                 fragmentBinding.movieListTopRatedRecyclerView.adapter = movieListRecyclerAdapter
             }
         })
+    }
+
+    private fun updateToolbar(){
+        val activity = activity as MainActivity
+        activity.supportActionBar?.title = getString(R.string.discover)
     }
 }

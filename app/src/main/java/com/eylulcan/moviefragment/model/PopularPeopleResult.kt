@@ -37,5 +37,5 @@ class PopularPeopleResult {
 
     @SerializedName("profile_path")
     @Expose
-    private val profilePath: String? = null
+    val profilePath: String? = null
 }

@@ -3,24 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/artist_recycler_view_margin">
+
+    <ImageView
+        android:id="@+id/artistRecyclerRowImage"
+        android:layout_width="@dimen/artist_recyclerRow_movieImage_width"
+        android:layout_height="@dimen/artist_recyclerRow_movieImage_height"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/artistRecyclerPersonName"
-        android:layout_width="@dimen/artist_recycler_row_text_width"
-        android:layout_height="@dimen/artist_recycler_row_text_height"
-        android:background="@color/teal_700"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/artist_recycler_row_text_margin"
+        android:background="@color/light_lavender"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="3"
+        android:minHeight="@dimen/artist_recycler_row_text_minHeight"
+        android:maxLines="2"
         android:singleLine="false"
-        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="@dimen/artist_recycler_row_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="@dimen/artist_recycler_row_text_padding"
-        android:layout_margin="@dimen/artist_recycler_row_text_margin"
-        tools:text="TextView" />
+        app:layout_constraintEnd_toEndOf="@+id/artistRecyclerRowImage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/artistRecyclerRowImage"
+        app:layout_constraintTop_toBottomOf="@+id/artistRecyclerRowImage"
+        tools:text="Artist Name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
