@@ -26,12 +26,5 @@ class OnboardFragment(private val imageId: Int) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.onboardBackgroundImage.setImageResource(imageId)
-        binding.onboardButton.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_onBoardViewPagerFragment_to_loginFragment,
-                null,
-                NavOptions.Builder().setPopUpTo(R.id.onBoardViewPagerFragment, true).build()
-            )
-        }
     }
 }

@@ -71,7 +71,7 @@
 
     <dimen name="artist_recycler_row_text_width">100dp</dimen>
     <dimen name="artist_recycler_row_text_height">200dp</dimen>
-    <dimen name="artist_recycler_row_text_size">16sp</dimen>
+    <dimen name="artist_recycler_row_text_size">14sp</dimen>
     <dimen name="artist_recycler_row_text_padding">8dp</dimen>
     <dimen name="artist_recycler_row_text_margin">8dp</dimen>
     <dimen name="artist_recycler_row_text_minHeight">40dp</dimen>
@@ -88,13 +88,18 @@
 
     <dimen name="onboard_title_marginBottom">16dp</dimen>
     <dimen name="onboard_title_size">34sp</dimen>
-    <dimen name="onboard_info_marginBottom">150dp</dimen>
+    <dimen name="onboard_info_marginTop">24dp</dimen>
     <dimen name="onboard_info_marginStart">16dp</dimen>
-    <dimen name="onboard_info_margiEnd">16dp</dimen>
+    <dimen name="onboard_info_marginEnd">16dp</dimen>
     <dimen name="onboard_info_size">18sp</dimen>
-    <dimen name="onboard_button_height">70dp</dimen>
-    <dimen name="onboard_button_marginStart">50dp</dimen>
-    <dimen name="onboard_button_marginEnd">50dp</dimen>
-    <dimen name="onboard_button_marginBottom">50dp</dimen>
 
+    <dimen name="onboard_pager_button_height">70dp</dimen>
+    <dimen name="onboard_pager_button_marginStart">50dp</dimen>
+    <dimen name="onboard_pager_button_marginEnd">50dp</dimen>
+    <dimen name="onboard_pager_button_marginBottom">50dp</dimen>
+
+    <dimen name="onboard_pager_dot_indicator_cornerRadius">8dp</dimen>
+    <dimen name="onboard_pager_dot_indicator_dotSize">8dp</dimen>
+    <dimen name="onboard_pager_dot_indicator_marginBottom">8dp</dimen>
+    <dimen name="onboard_pager_dot_indicator_dotSpacing">4dp</dimen>
 </resources>

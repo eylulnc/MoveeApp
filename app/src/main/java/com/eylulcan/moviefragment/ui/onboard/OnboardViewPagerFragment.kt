@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentOnboardViewPagerBinding
 
@@ -23,6 +25,13 @@ class OnboardViewPagerFragment : Fragment() {
         binding = FragmentOnboardViewPagerBinding.bind(view)
         binding.onboardingViewPager.adapter = OnboardAdapter(this)
         binding.dotsIndicator.setViewPager2(binding.onboardingViewPager)
+        binding.onboardButton.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_onBoardViewPagerFragment_to_loginFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.onBoardViewPagerFragment, true).build()
+            )
+        }
     }
 
 }

@@ -2,31 +2,30 @@ package com.eylulcan.moviefragment.ui.movielist
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieListBinding
 import com.eylulcan.moviefragment.model.ResultMovie
+import com.google.firebase.auth.FirebaseAuth
 
-class MovieListFragment : Fragment(), MovieListener {
+class MovieListFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener  {
 
     private lateinit var fragmentBinding: FragmentMovieListBinding
     private val movieListViewModel: MovieListViewModel by viewModels()
     private lateinit var movieListRecyclerAdapter: MovieAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,13 +33,14 @@ class MovieListFragment : Fragment(), MovieListener {
     ): View? {
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        updateToolbar()
-        return inflater.inflate(R.layout.fragment_movie_list, container, false)
+        val view =  inflater.inflate(R.layout.fragment_movie_list, container, false)
+        fragmentBinding = FragmentMovieListBinding.bind(view)
+        setToolbarMenu()
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentBinding = FragmentMovieListBinding.bind(view)
         fragmentBinding.movieListPopularRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragmentBinding.movieListTopRatedRecyclerView.layoutManager =
@@ -83,8 +83,22 @@ class MovieListFragment : Fragment(), MovieListener {
         })
     }
 
-    private fun updateToolbar(){
-        val activity = activity as MainActivity
-        activity.supportActionBar?.title = getString(R.string.discover)
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.logout) {
+            auth.signOut()
+            Toast.makeText(context, R.string.logged_out_movie_list, Toast.LENGTH_LONG).show()
+            this.parentFragment?.parentFragment?.findNavController()?.navigate(
+                R.id.action_dashboardFragment_to_loginFragment, null,
+                NavOptions.Builder().setPopUpTo(R.id.dashboardFragment, true).build()
+            )
+            return true
+        }
+        return false
+    }
+
+    private fun setToolbarMenu(){
+        val toolbar = fragmentBinding.toolbar
+        toolbar.inflateMenu(R.menu.menu)
+        toolbar.setOnMenuItemClickListener(this)
     }
 }

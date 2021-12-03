@@ -15,22 +15,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </androidx.viewpager2.widget.ViewPager2>
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/dots_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/onboard_pager_dot_indicator_marginBottom"
         app:dotsColor="@color/white"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="8dp"
-        app:dotsSpacing="4dp"
+        app:dotsCornerRadius="@dimen/onboard_pager_dot_indicator_cornerRadius"
+        app:dotsSize="@dimen/onboard_pager_dot_indicator_dotSize"
+        app:dotsSpacing="@dimen/onboard_pager_dot_indicator_dotSpacing"
         app:dotsWidthFactor="2.5"
         app:layout_constraintBottom_toBottomOf="@+id/onboardingViewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:progressMode="true"
-        app:selectedDotColor="@color/teal_700" />
+        app:selectedDotColor="@color/purple_mountain" />
+
+    <Button
+        android:id="@+id/onboardButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/onboard_pager_button_height"
+        android:layout_marginStart="@dimen/onboard_pager_button_marginStart"
+        android:layout_marginEnd="@dimen/onboard_pager_button_marginEnd"
+        android:layout_marginBottom="@dimen/onboard_pager_button_marginBottom"
+        android:backgroundTint="@color/purple_mountain"
+        android:text="@string/explore_collection"
+        android:textColor="@color/white"
+        app:icon="@drawable/ic_baseline_arrow_forward_ios_24"
+        app:iconGravity="textEnd"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
