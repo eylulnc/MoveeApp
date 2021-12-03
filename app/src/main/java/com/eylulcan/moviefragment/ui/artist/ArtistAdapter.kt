@@ -38,6 +38,9 @@ class ArtistAdapter(private val popularPeopleList: PopularPeopleList) :
                 .into(holder.binding.artistRecyclerRowImage)
             holder.binding.artistRecyclerPersonName.text = peopleList.name
         }
+        holder.itemView.setOnClickListener {
+
+        }
     }
 
     override fun getItemCount(): Int {
