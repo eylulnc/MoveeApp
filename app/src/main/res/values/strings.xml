@@ -47,4 +47,5 @@
     <string name="summary">Summary</string>
     <string name="movies">Movies</string>
     <string name="more">More</string>
+    <string name="artistId">artistId</string>
 </resources>

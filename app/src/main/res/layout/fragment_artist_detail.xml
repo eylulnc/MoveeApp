@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/artistDetailCoverImage"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
         android:contentDescription="@string/artist_cover_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +21,9 @@
         android:id="@+id/artistShortInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="15dp"
+        android:minHeight="@dimen/artist_detail_artistShortInfo_text_minHeight"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="@dimen/artist_detail_artistShortInfo_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/artistDetailCoverImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,9 +33,9 @@
         android:id="@+id/artistName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="30dp"
+        android:minHeight="@dimen/artist_detail_artistName_text_minHeight"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="@dimen/artist_detail_artistName_text_size"
         app:layout_constraintBottom_toTopOf="@+id/artistShortInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,10 +43,10 @@
 
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/artist_detail_backButton_width"
+        android:layout_height="@dimen/artist_detail_backButton_height"
+        android:layout_marginStart="@dimen/artist_detail_backButton_marginStart"
+        android:layout_marginTop="@dimen/artist_detail_backButton_marginTop"
         android:background="@null"
         android:contentDescription="@string/back_button"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
@@ -54,25 +54,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutArtistDetail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/artist_detail_linearLayout_marginTop"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/artistDetailCoverImage">
 
         <ImageView
-            android:id="@+id/albumCo"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:id="@+id/albumCover"
+            android:layout_width="@dimen/artist_detail_albumCover_width"
+            android:layout_height="@dimen/artist_detail_albumCover_height"
             tools:src="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:id="@+id/albumPreviewElement1"
+            android:layout_width="@dimen/artist_detail_previewImages1_width"
+            android:layout_height="@dimen/artist_detail_previewImages1_height"
             tools:src="@tools:sample/avatars" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,42 +80,42 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:id="@+id/albumPreviewElement2"
+                android:layout_width="@dimen/artist_detail_previewImages_width"
+                android:layout_height="@dimen/artist_detail_previewImages_height"
                 android:layout_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/imageView11"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:id="@+id/albumPreviewElement3"
+                android:layout_width="@dimen/artist_detail_previewImages_width"
+                android:layout_height="@dimen/artist_detail_previewImages_height"
                 android:layout_weight="1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintStart_toEndOf="@+id/albumPreviewElement2"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:id="@+id/albumPreviewElement4"
+                android:layout_width="@dimen/artist_detail_previewImages_width"
+                android:layout_height="@dimen/artist_detail_previewImages_height"
                 android:layout_weight="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView9"
+                app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement2"
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/imageView12"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:id="@+id/albumPreviewElement5"
+                android:layout_width="@dimen/artist_detail_previewImages_width"
+                android:layout_height="@dimen/artist_detail_previewImages_height"
                 android:layout_weight="1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView10"
-                app:layout_constraintTop_toBottomOf="@+id/imageView11"
+                app:layout_constraintStart_toEndOf="@+id/albumPreviewElement4"
+                app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement3"
                 tools:src="@tools:sample/avatars" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutArtistDetail"
         app:tabGravity="fill"
         app:tabMode="fixed">
 

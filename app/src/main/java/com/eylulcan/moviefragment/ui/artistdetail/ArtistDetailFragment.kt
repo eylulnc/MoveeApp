@@ -5,18 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistDetailBinding
-import com.google.android.material.tabs.TabLayout
+import com.eylulcan.moviefragment.model.PopularPeopleResult
+import com.eylulcan.moviefragment.model.ResultMovie
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ArtistDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentArtistDetailBinding
+
+    private val tabNames = arrayOf(
+        "Summary",
+        "Movies",
+        "More"
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +32,14 @@ class ArtistDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter: TabAdapter? = fragmentManager?.let { TabAdapter(it,lifecycle) }
+        val adapter: TabAdapter? = fragmentManager?.let { TabAdapter(it, lifecycle) }
         binding.artistsFragmentViewPager.adapter = adapter
+        TabLayoutMediator(binding.tabLayout, binding.artistsFragmentViewPager) { tab, position ->
+            tab.text = tabNames[position]
+        }.attach()
+
+        val selectedPopularPersonID =
+            arguments?.get(getString(R.string.artistId)) as Int
 
     }
 

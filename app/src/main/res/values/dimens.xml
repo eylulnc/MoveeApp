@@ -102,4 +102,28 @@
     <dimen name="onboard_pager_dot_indicator_dotSize">8dp</dimen>
     <dimen name="onboard_pager_dot_indicator_marginBottom">8dp</dimen>
     <dimen name="onboard_pager_dot_indicator_dotSpacing">4dp</dimen>
+
+    <dimen name="artist_movie_recycler_row_text_movie_name_size">14sp</dimen>
+    <dimen name="artist_movie_recycler_row_text_genres_name_size">12sp</dimen>
+    <dimen name="artist_movie_recycler_row_linear_layout_marginStart">8dp</dimen>
+    <dimen name="artist_movie_recycler_row_linear_layout_marginEnd">16dp</dimen>
+    <dimen name="artist_movie_recycler_row_ratingBar_marginEnd">32dp</dimen>
+
+    <dimen name="artist_detail_artistDetailCoverImage_height">250sp</dimen>
+    <dimen name="artist_detail_artistShortInfo_text_minHeight">15dp</dimen>
+    <dimen name="artist_detail_artistShortInfo_text_size">14sp</dimen>
+    <dimen name="artist_detail_artistName_text_minHeight">30dp</dimen>
+    <dimen name="artist_detail_artistName_text_size">24sp</dimen>
+    <dimen name="artist_detail_backButton_marginStart">8dp</dimen>
+    <dimen name="artist_detail_backButton_marginTop">8dp</dimen>
+    <dimen name="artist_detail_backButton_width">50dp</dimen>
+    <dimen name="artist_detail_backButton_height">50dp</dimen>
+    <dimen name="artist_detail_linearLayout_marginTop">8dp</dimen>
+    <dimen name="artist_detail_previewImages_width">75dp</dimen>
+    <dimen name="artist_detail_previewImages_height">75dp</dimen>
+    <dimen name="artist_detail_albumCover_width">150dp</dimen>
+    <dimen name="artist_detail_albumCover_height">150dp</dimen>
+    <dimen name="artist_detail_previewImages1_width">150dp</dimen>
+    <dimen name="artist_detail_previewImages1_height">150dp</dimen>
+
 </resources>

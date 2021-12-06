@@ -66,5 +66,17 @@
         <action
             android:id="@+id/action_dashboardFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_artistDetailFragment"
+            app:destination="@id/artistDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/artistDetailFragment"
+        android:name="com.eylulcan.moviefragment.ui.artistdetail.ArtistDetailFragment"
+        android:label="fragment_artist_detail"
+        tools:layout="@layout/fragment_artist_detail" >
+        <argument
+            android:name="selectedPopularPersonID"
+            app:argType="integer" />
     </fragment>
 </navigation>

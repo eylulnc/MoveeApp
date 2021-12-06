@@ -4,12 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30520833333333336" />
+        <entry key="app/src/main/res/layout/artist_fragment_recycler_row.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/artist_movie_fragment_recycler_row.xml" value="0.31927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_artist_detail.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_artist_movies.xml" value="0.223731884057971" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/fragment_movie_detail.xml" value="0.31927083333333334" />
-        <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.4864005668235416" />
+        <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_onboard.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_onboard_view_pager.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.26403985507246375" />
+        <entry key="app/src/main/res/layout/fragment_summary.xml" value="0.223731884057971" />
+        <entry key="app/src/main/res/layout/genres_fragment_recycler_row.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/movie_list_recycler_row.xml" value="0.2749094202898551" />
         <entry key="app/src/main/res/layout/recycler_row.xml" value="0.31927083333333334" />
+        <entry key="app/src/main/res/menu-v26/menu.xml" value="0.2515625" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.196875" />
       </map>
     </option>

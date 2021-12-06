@@ -7,9 +7,12 @@ import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.PopularPeopleList
-import com.eylulcan.moviefragment.ui.movielist.MovieAdapter
 
-class ArtistAdapter(private val popularPeopleList: PopularPeopleList) :
+
+class ArtistAdapter(
+    private val popularPeopleList: PopularPeopleList,
+    private val artistListener: ArtistListener
+) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
     companion object {
@@ -31,15 +34,18 @@ class ArtistAdapter(private val popularPeopleList: PopularPeopleList) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val popularPeopleList = popularPeopleList.results
-        holder.binding.artistRecyclerPersonName.text = popularPeopleList?.get(position)?.name
-        popularPeopleList?.get(position)?.let { peopleList ->
-            Glide.with(holder.binding.root).load(setImageUrl(peopleList.profilePath))
+        val artist = popularPeopleList?.get(position)
+        holder.binding.artistRecyclerPersonName.text = artist?.name
+        artist?.let { artist ->
+            Glide.with(holder.binding.root).load(setImageUrl(artist.profilePath))
                 .placeholder(R.drawable.placeholder_profile)
                 .into(holder.binding.artistRecyclerRowImage)
-            holder.binding.artistRecyclerPersonName.text = peopleList.name
+            holder.binding.artistRecyclerPersonName.text = artist.name
         }
         holder.itemView.setOnClickListener {
-
+            artist?.id?.let { id ->
+                artistListener.onArtistClicked(id)
+            }
         }
     }
 

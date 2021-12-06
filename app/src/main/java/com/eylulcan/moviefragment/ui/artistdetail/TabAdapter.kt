@@ -17,11 +17,11 @@ class TabAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
     }
 
     override fun createFragment(position: Int): Fragment {
-        when (position) {
-            0 -> return SummaryFragment()
-            1 -> return ArtistMoviesFragment()
-            //2-> return MoreFragment()
+        return when (position) {
+            0 -> SummaryFragment()
+            1 -> ArtistMoviesFragment()
+            2 -> SummaryFragment()
+            else -> SummaryFragment()
         }
-        return SummaryFragment()
     }
 }

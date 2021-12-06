@@ -16,16 +16,15 @@ class PopularPeopleResult {
 
     @SerializedName("id")
     @Expose
-    private val id: Int? = null
+    val id: Int? = null
 
-    //@SerializedName("known_for")
-    //@Expose
-    //private val knownFor: List<KnownFor>? = null
-    //KnowFor model is not created
+    @SerializedName("known_for")
+    @Expose
+    private val knownFor: List<KnownFor>? = null
 
     @SerializedName("known_for_department")
     @Expose
-    private val knownForDepartment: String? = null
+    val knownForDepartment: String? = null
 
     @SerializedName("name")
     @Expose
