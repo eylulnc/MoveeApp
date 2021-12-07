@@ -1,199 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/artistDetailConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.artistdetail.ArtistDetailFragment">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/artistDetailCoverImage"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
-        android:contentDescription="@string/artist_cover_image"
-        android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/artistShortInfo"
-        android:layout_width="0dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/artist_detail_artistShortInfo_text_minHeight"
-        android:textColor="@color/white"
-        android:textSize="@dimen/artist_detail_artistShortInfo_text_size"
-        android:paddingStart="@dimen/artist_detail_artistShortInfo_paddingStart"
-        android:paddingEnd="@dimen/artist_detail_artistShortInfo_paddingEnd"
-        android:paddingBottom="@dimen/artist_detail_artistShortInfo_paddingEnd"
-        android:ellipsize="end"
-        app:layout_constraintBottom_toBottomOf="@+id/artistDetailCoverImage"
+        android:background="@color/white"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="TextView"
-        android:background="@color/tr60_greylight"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/artistName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/artist_detail_artistShortInfo_paddingStart"
-        android:paddingEnd="@dimen/artist_detail_artistShortInfo_paddingEnd"
-        android:minHeight="@dimen/artist_detail_artistName_text_minHeight"
-        android:textColor="@color/white"
-        android:textSize="@dimen/artist_detail_artistName_text_size"
-        android:ellipsize="end"
-        app:layout_constraintBottom_toTopOf="@+id/artistShortInfo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="TextView"
-        android:background="@color/tr60_greylight"/>
-
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="@dimen/artist_detail_backButton_width"
-        android:layout_height="@dimen/artist_detail_backButton_height"
-        android:layout_marginStart="@dimen/artist_detail_backButton_marginStart"
-        android:layout_marginTop="@dimen/artist_detail_backButton_marginTop"
-        android:background="@null"
-        android:contentDescription="@string/back_button"
-        android:src="@drawable/ic_baseline_arrow_back_ios_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutArtistDetail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artistDetailCoverImage">
-
-        <LinearLayout
-            android:id="@+id/albumCoverLayout"
-            android:layout_width="@dimen/artist_detail_albumCoverLayout_width"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/artistDetailConstraintLayout"
+            app:layout_scrollFlags="scroll"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/purple_mountain"
-            android:orientation="vertical"
-            android:padding="@dimen/artist_detail_albumCoverLayout_padding">
+            tools:context=".ui.artistdetail.ArtistDetailFragment">
+
+            <ImageView
+                android:id="@+id/artistDetailCoverImage"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
+                android:contentDescription="@string/artist_cover_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/albumSizeText"
+                android:id="@+id/artistName"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/artist_detail_albumSize_height"
-                android:background="@color/purple_mountain"
-                android:gravity="bottom|center"
-                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:background="@color/tr60_greylight"
+                android:ellipsize="end"
+                android:minHeight="@dimen/artist_detail_artistName_text_minHeight"
+                android:paddingStart="@dimen/artist_detail_artistShortInfo_paddingStart"
+                android:paddingEnd="@dimen/artist_detail_artistShortInfo_paddingEnd"
                 android:textColor="@color/white"
-                android:textSize="@dimen/artist_detail_albumSize_text_size"
+                android:textSize="@dimen/artist_detail_artistName_text_size"
+                app:layout_constraintBottom_toTopOf="@+id/artistShortInfo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:text="TextView" />
 
             <TextView
-                android:id="@+id/photosTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@color/purple_mountain"
-                android:gravity="center|top"
-                android:text="@string/photos"
-                android:textAlignment="center"
+                android:id="@+id/artistShortInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/tr60_greylight"
+                android:ellipsize="end"
+                android:minHeight="@dimen/artist_detail_artistShortInfo_text_minHeight"
+                android:paddingStart="@dimen/artist_detail_artistShortInfo_paddingStart"
+                android:paddingEnd="@dimen/artist_detail_artistShortInfo_paddingEnd"
+                android:paddingBottom="@dimen/artist_detail_artistShortInfo_paddingEnd"
                 android:textColor="@color/white"
-                android:textSize="@dimen/artist_detail_photosTextView_text_size"
-                tools:ignore="TextContrastCheck" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/albumPreviewElement1"
-            android:layout_width="@dimen/artist_detail_previewImages1_width"
-            android:layout_height="@dimen/artist_detail_previewImages1_height"
-            tools:src="@tools:sample/avatars" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/albumPreviewElement2"
-                android:layout_width="@dimen/artist_detail_previewImages_width"
-                android:layout_height="@dimen/artist_detail_previewImages_height"
-                android:layout_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/albumPreviewElement3"
-                android:layout_width="@dimen/artist_detail_previewImages_width"
-                android:layout_height="@dimen/artist_detail_previewImages_height"
-                android:layout_weight="1"
+                android:textSize="@dimen/artist_detail_artistShortInfo_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/artistDetailCoverImage"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/albumPreviewElement2"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
-
-            <ImageView
-                android:id="@+id/albumPreviewElement4"
-                android:layout_width="@dimen/artist_detail_previewImages_width"
-                android:layout_height="@dimen/artist_detail_previewImages_height"
-                android:layout_weight="1"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement2"
-                tools:src="@tools:sample/avatars" />
+                tools:text="TextView" />
 
-            <ImageView
-                android:id="@+id/albumPreviewElement5"
-                android:layout_width="@dimen/artist_detail_previewImages_width"
-                android:layout_height="@dimen/artist_detail_previewImages_height"
-                android:layout_weight="1"
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="@dimen/artist_detail_backButton_width"
+                android:layout_height="@dimen/artist_detail_backButton_height"
+                android:layout_marginStart="@dimen/artist_detail_backButton_marginStart"
+                android:layout_marginTop="@dimen/artist_detail_backButton_marginTop"
+                android:background="@null"
+                android:contentDescription="@string/back_button"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutArtistDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/albumPreviewElement4"
-                app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement3"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artistDetailCoverImage">
 
+                <LinearLayout
+                    android:id="@+id/albumCoverLayout"
+                    android:layout_width="@dimen/artist_detail_albumCoverLayout_width"
+                    android:layout_height="match_parent"
+                    android:background="@color/purple_mountain"
+                    android:orientation="vertical"
+                    android:padding="@dimen/artist_detail_albumCoverLayout_padding">
+
+                    <TextView
+                        android:id="@+id/albumSizeText"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/artist_detail_albumSize_height"
+                        android:background="@color/purple_mountain"
+                        android:gravity="bottom|center"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/artist_detail_albumSize_text_size"
+                        tools:text="TextView" />
+
+                    <TextView
+                        android:id="@+id/photosTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@color/purple_mountain"
+                        android:gravity="center|top"
+                        android:text="@string/photos"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/artist_detail_photosTextView_text_size"
+                        tools:ignore="TextContrastCheck" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/albumPreviewElement1"
+                    android:layout_width="@dimen/artist_detail_previewImages1_width"
+                    android:layout_height="@dimen/artist_detail_previewImages1_height"
+                    tools:src="@tools:sample/avatars"
+                    android:contentDescription="@string/preview_image" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement2"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:contentDescription="@string/preview_image"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars" />
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement3"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:contentDescription="@string/preview_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/albumPreviewElement2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars" />
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement4"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:contentDescription="@string/preview_image"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement2"
+                        tools:src="@tools:sample/avatars" />
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement5"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:contentDescription="@string/preview_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/albumPreviewElement4"
+                        app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement3"
+                        tools:src="@tools:sample/avatars" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutArtistDetail"
-        app:tabGravity="fill"
-        app:tabMode="fixed">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/summary" />
+            android:orientation="vertical">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/movies" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutArtistDetail"
+                app:tabGravity="fill"
+                app:tabMode="fixed">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/more" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summary" />
 
-    </com.google.android.material.tabs.TabLayout>
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/movies" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/artistsFragmentViewPager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/artistsFragmentViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

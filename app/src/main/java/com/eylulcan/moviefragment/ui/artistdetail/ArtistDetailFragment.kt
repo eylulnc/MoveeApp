@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistDetailBinding
-import com.eylulcan.moviefragment.model.PopularPeopleResult
-import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.ui.artist.ArtistAdapter
-import com.eylulcan.moviefragment.ui.movielist.MovieAdapter
-import com.eylulcan.moviefragment.ui.movielist.MovieListViewModel
 import com.eylulcan.moviefragment.util.Utils
 import com.google.android.material.tabs.TabLayoutMediator
 
