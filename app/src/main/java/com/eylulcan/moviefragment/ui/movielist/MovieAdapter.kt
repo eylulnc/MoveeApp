@@ -6,13 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.databinding.MovieListRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Movie
+import com.eylulcan.moviefragment.util.Utils
 
 class MovieAdapter(private val movieItem: Movie, private val listener: MovieListener) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-
-    companion object {
-        private const val BASE_IMAGE_URL = "http://image.tmdb.org/t/p/w185"
-    }
 
     class ViewHolder(val binding: MovieListRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -44,6 +41,6 @@ class MovieAdapter(private val movieItem: Movie, private val listener: MovieList
     }
 
     private fun setImageUrl(poster_path: String?): String {
-        return BASE_IMAGE_URL.plus(poster_path)
+        return Utils.BASE_IMAGE_URL_185.plus(poster_path)
     }
 }

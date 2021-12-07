@@ -4,11 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30520833333333336" />
+        <entry key="app/src/main/res/layout/album_fragment_recycler_row.xml" value="0.2869791666666667" />
+        <entry key="app/src/main/res/layout/album_recycler_row.xml" value="0.25" />
         <entry key="app/src/main/res/layout/artist_fragment_recycler_row.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/artist_movie_fragment_recycler_row.xml" value="0.31927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_album.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_artist_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_artist_movies.xml" value="0.223731884057971" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_image.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/fragment_movie_detail.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.25" />
