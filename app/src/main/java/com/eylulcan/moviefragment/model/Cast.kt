@@ -17,7 +17,7 @@ class Cast {
 
     @SerializedName("poster_path")
     @Expose
-    private val posterPath: String? = null
+    val posterPath: String? = null
 
     @SerializedName("video")
     @Expose
@@ -25,7 +25,7 @@ class Cast {
 
     @SerializedName("vote_average")
     @Expose
-    private val voteAverage: Double? = null
+    val voteAverage: Double? = null
 
     @SerializedName("overview")
     @Expose
@@ -41,7 +41,7 @@ class Cast {
 
     @SerializedName("title")
     @Expose
-    private val title: String? = null
+    val title: String? = null
 
     @SerializedName("adult")
     @Expose
@@ -49,7 +49,7 @@ class Cast {
 
     @SerializedName("backdrop_path")
     @Expose
-    private val backdropPath: String? = null
+    val backdropPath: String? = null
 
     @SerializedName("original_language")
     @Expose
@@ -57,7 +57,7 @@ class Cast {
 
     @SerializedName("genre_ids")
     @Expose
-    private val genreIds: List<Int>? = null
+    val genreIds: List<Int>? = null
 
     @SerializedName("popularity")
     @Expose

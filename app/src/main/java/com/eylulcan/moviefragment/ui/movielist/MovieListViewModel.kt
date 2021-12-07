@@ -7,6 +7,7 @@ import com.eylulcan.moviefragment.api.MovieAPI
 import com.eylulcan.moviefragment.model.GenreList
 import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.model.PopularPeopleList
+import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,10 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MovieListViewModel : ViewModel() {
 
-    companion object {
-        private const val BASE_URL = "https://api.themoviedb.org/3/"
-    }
-
     private var retrofit: MovieAPI? = null
     private val popularMovieList = MutableLiveData<Movie>()
     val popularMovies: LiveData<Movie> get() = popularMovieList
@@ -28,7 +25,7 @@ class MovieListViewModel : ViewModel() {
 
     init {
         retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Utils.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MovieAPI::class.java)

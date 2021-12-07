@@ -78,5 +78,8 @@
         <argument
             android:name="selectedPopularPersonID"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_artistDetailFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
     </fragment>
 </navigation>

@@ -8,7 +8,6 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.PopularPeopleList
 
-
 class ArtistAdapter(
     private val popularPeopleList: PopularPeopleList,
     private val artistListener: ArtistListener
@@ -38,7 +37,7 @@ class ArtistAdapter(
         holder.binding.artistRecyclerPersonName.text = artist?.name
         artist?.let { artist ->
             Glide.with(holder.binding.root).load(setImageUrl(artist.profilePath))
-                .placeholder(R.drawable.placeholder_profile)
+                .placeholder(R.color.greylight)
                 .into(holder.binding.artistRecyclerRowImage)
             holder.binding.artistRecyclerPersonName.text = artist.name
         }

@@ -11,7 +11,9 @@
     <color name="purple_mountain">#9F86C0</color>
     <color name="light_lavender">#D5CAE3</color>
     <color name="gray_blue">#6F65A4</color>
-    <color name="greyligt">#7C7C7C</color>
+    <color name="greylight">#7C7C7C</color>
     <color name="lightorange">#F5B901</color>
-
+    <color name="tr50_purple_mountain">#809F86C0</color>
+    <color name="tr60_purple_mountain">#669F86C0</color>
+    <color name="tr60_greylight">#667C7C7C</color>
 </resources>

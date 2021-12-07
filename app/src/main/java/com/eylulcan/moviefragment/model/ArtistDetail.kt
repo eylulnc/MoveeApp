@@ -17,11 +17,11 @@ class ArtistDetail {
 
     @SerializedName("biography")
     @Expose
-    private val biography: String? = null
+    val biography: String? = null
 
     @SerializedName("birthday")
     @Expose
-    private val birthday: String? = null
+    val birthday: String? = null
 
     @SerializedName("deathday")
     @Expose
@@ -45,11 +45,11 @@ class ArtistDetail {
 
     @SerializedName("known_for_department")
     @Expose
-    private val knownForDepartment: String? = null
+    val knownForDepartment: String? = null
 
     @SerializedName("name")
     @Expose
-    private val name: String? = null
+    val name: String? = null
 
     @SerializedName("place_of_birth")
     @Expose
@@ -61,5 +61,5 @@ class ArtistDetail {
 
     @SerializedName("profile_path")
     @Expose
-    private val profilePath: String? = null
+    val profilePath: String? = null
 }

@@ -48,4 +48,6 @@
     <string name="movies">Movies</string>
     <string name="more">More</string>
     <string name="artistId">artistId</string>
+    <string name="photos">Photos</string>
+    <string name="unknown">Unknown</string>
 </resources>

@@ -108,10 +108,17 @@
     <dimen name="artist_movie_recycler_row_linear_layout_marginStart">8dp</dimen>
     <dimen name="artist_movie_recycler_row_linear_layout_marginEnd">16dp</dimen>
     <dimen name="artist_movie_recycler_row_ratingBar_marginEnd">32dp</dimen>
+    <dimen name="artist_movie_recycler_row_artistMovieMainConstraintLayout">8dp</dimen>
 
-    <dimen name="artist_detail_artistDetailCoverImage_height">250sp</dimen>
+    <dimen name="artist_detail_artistDetailCoverImage_height">300dp</dimen>
     <dimen name="artist_detail_artistShortInfo_text_minHeight">15dp</dimen>
     <dimen name="artist_detail_artistShortInfo_text_size">14sp</dimen>
+    <dimen name="artist_detail_artistShortInfo_paddingStart">8sp</dimen>
+    <dimen name="artist_detail_artistShortInfo_paddingBottom">8sp</dimen>
+    <dimen name="artist_detail_artistShortInfo_paddingEnd">4sp</dimen>
+    <dimen name="artist_detail_artistName_paddingStart">8sp</dimen>
+    <dimen name="artist_detail_artistName_paddingBottom">8sp</dimen>
+    <dimen name="artist_detail_albumCoverLayout_padding">7sp</dimen>
     <dimen name="artist_detail_artistName_text_minHeight">30dp</dimen>
     <dimen name="artist_detail_artistName_text_size">24sp</dimen>
     <dimen name="artist_detail_backButton_marginStart">8dp</dimen>
@@ -121,9 +128,14 @@
     <dimen name="artist_detail_linearLayout_marginTop">8dp</dimen>
     <dimen name="artist_detail_previewImages_width">75dp</dimen>
     <dimen name="artist_detail_previewImages_height">75dp</dimen>
-    <dimen name="artist_detail_albumCover_width">150dp</dimen>
+    <dimen name="artist_detail_albumCoverLayout_width">110dp</dimen>
     <dimen name="artist_detail_albumCover_height">150dp</dimen>
     <dimen name="artist_detail_previewImages1_width">150dp</dimen>
     <dimen name="artist_detail_previewImages1_height">150dp</dimen>
+    <dimen name="artist_detail_albumSize_text_size">20sp</dimen>
+    <dimen name="artist_detail_albumSize_height">75dp</dimen>
+    <dimen name="artist_detail_photosTextView_text_size">16sp</dimen>
+
+    <dimen name="summary_summaryTextView_margin">8dp</dimen>
 
 </resources>

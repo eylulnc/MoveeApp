@@ -1,10 +1,9 @@
 package com.eylulcan.moviefragment.api
 
-import com.eylulcan.moviefragment.model.GenreList
-import com.eylulcan.moviefragment.model.PopularPeopleList
-import com.eylulcan.moviefragment.model.Movie
+import com.eylulcan.moviefragment.model.*
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface MovieAPI {
     @GET("movie/popular?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
@@ -19,4 +18,12 @@ interface MovieAPI {
     @GET("person/popular?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
     suspend fun getPopularPeople(): Response<PopularPeopleList>
 
+    @GET("person/{id}/movie_credits?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
+    suspend fun getArtistMovieCredits(@Path("id")id: Int): Response<ArtistMovieCredits>
+
+    @GET("person/{id}?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
+    suspend fun getArtistDetail(@Path("id")id: Int): Response<ArtistDetail>
+
+    @GET("person/{id}/images?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
+    suspend fun getArtistImages(@Path("id")id: Int): Response<ArtistAlbum>
 }
