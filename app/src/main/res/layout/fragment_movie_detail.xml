@@ -21,7 +21,7 @@
             <VideoView
                 android:id="@+id/videoView"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/detail_movie_videoView_height"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -29,10 +29,10 @@
 
             <ImageView
                 android:id="@+id/detailImagePoster"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_width="@dimen/detail_movie_detailImagePoster_width"
+                android:layout_height="@dimen/detail_movie_videoView_height"
+                android:layout_marginStart="@dimen/detail_movie_detailImagePoster_margin_start"
+                android:layout_marginTop="@dimen/detail_movie_detailImagePoster_margin_top"
                 android:contentDescription="@string/movie_poster"
                 app:layout_constraintDimensionRatio="16:9"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,13 +41,13 @@
                 android:transitionName="@string/list_to_detail_transition"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/textRatingBarConstraintLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/detail_movie_textRatingBarConstraintLayout_margin_start"
+            android:layout_marginTop="@dimen/detail_movie_textRatingBarConstraintLayout_margin_top"
+            android:layout_marginEnd="@dimen/detail_movie_textRatingBarConstraintLayout_margin_end"
+            android:layout_marginBottom="@dimen/detail_movie_textRatingBarConstraintLayout_margin_bottom"
             app:layout_constraintBottom_toBottomOf="@+id/detailImagePoster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detailImagePoster"
@@ -58,9 +58,9 @@
                 android:id="@+id/detailDurationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp"
+                android:layout_marginStart="@dimen/detail_movie_detailDurationText_margin_start"
+                android:layout_marginTop="@dimen/detail_movie_detailDurationText_margin_top"
+                android:textSize="@dimen/detail_movie_detailDurationText_textSize"
                 app:layout_constraintStart_toEndOf="@+id/detailReleaseDateText"
                 app:layout_constraintTop_toBottomOf="@+id/detailLanguageText"
                 tools:text="TextView" />
@@ -69,30 +69,30 @@
                 android:id="@+id/detailReleaseDateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp"
+                android:layout_marginTop="@dimen/detail_movie_detailReleaseDate_margin_top"
+                android:textSize="@dimen/detail_movie_detailReleaseDate_textSize"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/languageText"
+                app:layout_constraintTop_toBottomOf="@+id/languageStringText"
                 tools:text="TextView" />
 
             <TextView
                 android:id="@+id/detailMovieNameText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="20sp"
+                android:layout_marginTop="@dimen/detail_movie_detailMovieNameText_margin_top"
+                android:textSize="@dimen/detail_movie_detailMovieNameText_textSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="MovieName" />
 
             <TextView
-                android:id="@+id/languageText"
+                android:id="@+id/languageStringText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/detail_movie_languageStringText_margin_top"
                 android:text="@string/language"
-                android:textSize="16sp"
+                android:textSize="@dimen/detail_movie_languageStringText_textSize"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailRatingBar" />
 
@@ -100,10 +100,10 @@
                 android:id="@+id/detailLanguageText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/languageText"
-                app:layout_constraintTop_toTopOf="@+id/languageText"
+                android:layout_marginStart="@dimen/detail_movie_detailLanguageText_margin_start"
+                android:textSize="@dimen/detail_movie_detailLanguageText_textSize"
+                app:layout_constraintStart_toEndOf="@+id/languageStringText"
+                app:layout_constraintTop_toTopOf="@+id/languageStringText"
                 tools:text="Language" />
 
             <RatingBar
@@ -111,9 +111,10 @@
                 style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/detail_movie_ratingBar_margin_top"
                 android:numStars="5"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:theme="@style/RatingBar"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailGenreNameText" />
@@ -122,10 +123,10 @@
                 android:id="@+id/detailGenreNameText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/detail_movie_detailGenreNameText_margin_top"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:textSize="16sp"
+                android:textSize="@dimen/detail_movie_detailGenreNameText_textSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailMovieNameText"
@@ -136,10 +137,10 @@
             android:id="@+id/relativeLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:minHeight="50dp"
+            android:layout_marginStart="@dimen/detail_movie_relativeLayout_marginStart"
+            android:layout_marginTop="@dimen/detail_movie_relativeLayout_marginTop"
+            android:layout_marginEnd="@dimen/detail_movie_relativeLayout_marginEnd"
+            android:minHeight="@dimen/detail_movie_relativeLayout_minHeight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailImagePoster">
@@ -161,7 +162,7 @@
                     android:id="@id/expandable_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/detail_movie_expandableText_size" />
 
             </com.ms.square.android.expandabletextview.ExpandableTextView>
         </RelativeLayout>
@@ -172,7 +173,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/detail_movie_nestedScrollView_margin_top"
         android:clipToPadding="false"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -208,6 +209,7 @@
             </com.google.android.material.tabs.TabLayout>
 
             <androidx.viewpager2.widget.ViewPager2
+                android:layout_marginTop="@dimen/detail_movie_viewPager_margin_top"
                 android:id="@+id/movieDetailViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

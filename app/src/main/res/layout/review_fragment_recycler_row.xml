@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/review_fragment_reviewMainConstraintLayout_marginTop"
+    android:background="@color/white"
+    android:layout_marginStart="@dimen/review_fragment_reviewMainConstraintLayout_marginStart"
+    android:layout_marginEnd="@dimen/review_fragment_reviewMainConstraintLayout_marginEnd"
+    android:paddingBottom="@dimen/review_fragment_reviewMainConstraintLayout_paddingBottom"
+    android:id="@+id/reviewMainConstraintLayout">
+
+    <ImageView
+        android:id="@+id/authorProfileImage"
+        android:layout_width="@dimen/review_fragment_authorProfileImage_width"
+        android:layout_height="@dimen/review_fragment_authorProfileImage_height"
+        android:layout_marginStart="@dimen/review_fragment_authorProfileImage_marginStart"
+        android:layout_marginTop="@dimen/review_fragment_authorProfileImage_marginTop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:id="@+id/reviewlinearLayout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toStartOf="@+id/reviewsRatingBar"
+        app:layout_constraintStart_toEndOf="@+id/authorProfileImage"
+        app:layout_constraintTop_toTopOf="@+id/authorProfileImage">
+
+        <TextView
+            android:id="@+id/authorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="18sp"
+            tools:text="TextView" />
+
+        <TextView
+            android:id="@+id/postDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/review_fragment_authorName_marginStart"
+            android:layout_marginTop="@dimen/review_fragment_authorName_marginTop"
+            tools:text="TextView" />
+    </LinearLayout>
+
+    <RatingBar
+        android:id="@+id/reviewsRatingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/review_fragment_reviewRatingBar_marginEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/reviewlinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reviewlinearLayout"
+        app:layout_constraintTop_toTopOf="@+id/reviewlinearLayout" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/review_fragment_divider_height"
+        android:layout_margin="@dimen/review_fragment_divider_margin"
+        android:background="@color/greylight"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/authorProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/reviewlinearLayout" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/review_fragment_relativeLayout_marginStart"
+        android:layout_marginTop="@dimen/review_fragment_relativeLayout_marginTop"
+        android:layout_marginEnd="@dimen/review_fragment_reviewRatingBar_marginEnd"
+        android:minHeight="@dimen/review_fragment_relativeLayout_minHeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authorProfileImage">
+
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            android:id="@+id/expand_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            expandableTextView:maxCollapsedLines="3">
+
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:background="@android:color/transparent" />
+
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/review_fragment_expandableText_size" />
+
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

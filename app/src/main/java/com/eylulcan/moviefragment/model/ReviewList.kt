@@ -17,7 +17,7 @@ class ReviewList {
 
     @SerializedName("results")
     @Expose
-    private val results: List<Review>? = null
+    val results: List<Review>? = null
 
     @SerializedName("total_pages")
     @Expose

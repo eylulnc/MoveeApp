@@ -16,7 +16,7 @@ class AuthorDetails {
 
     @SerializedName("avatar_path")
     @Expose
-    private val avatarPath: Any? = null
+    val avatarPath: Any? = null
 
     @SerializedName("rating")
     @Expose

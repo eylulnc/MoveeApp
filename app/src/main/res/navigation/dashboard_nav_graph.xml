@@ -9,7 +9,7 @@
         android:id="@+id/discoverFragment"
         android:name="com.eylulcan.moviefragment.ui.discover.DiscoverFragment"
         android:label="fragment_movie_list"
-        tools:layout="@layout/fragment_movie_list" />
+        tools:layout="@layout/fragment_discover" />
     <fragment
         android:id="@+id/artistsFragment"
         android:name="com.eylulcan.moviefragment.ui.artist.ArtistFragment"

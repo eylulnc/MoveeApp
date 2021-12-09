@@ -18,9 +18,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/artistDetailConstraintLayout"
-            app:layout_scrollFlags="scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll"
             tools:context=".ui.artistdetail.ArtistDetailFragment">
 
             <ImageView
@@ -68,19 +68,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="TextView" />
 
-
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="@dimen/artist_detail_backButton_width"
-                android:layout_height="@dimen/artist_detail_backButton_height"
-                android:layout_marginStart="@dimen/artist_detail_backButton_marginStart"
-                android:layout_marginTop="@dimen/artist_detail_backButton_marginTop"
-                android:background="@null"
-                android:contentDescription="@string/back_button"
-                android:src="@drawable/ic_baseline_arrow_back_ios_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <LinearLayout
                 android:id="@+id/linearLayoutArtistDetail"
                 android:layout_width="match_parent"
@@ -127,8 +114,8 @@
                     android:id="@+id/albumPreviewElement1"
                     android:layout_width="@dimen/artist_detail_previewImages1_width"
                     android:layout_height="@dimen/artist_detail_previewImages1_height"
-                    tools:src="@tools:sample/avatars"
-                    android:contentDescription="@string/preview_image" />
+                    android:contentDescription="@string/preview_image"
+                    tools:src="@tools:sample/avatars" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

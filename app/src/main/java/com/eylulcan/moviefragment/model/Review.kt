@@ -8,15 +8,15 @@ import javax.annotation.Generated
 class Review {
     @SerializedName("author")
     @Expose
-    private val author: String? = null
+    val author: String? = null
 
     @SerializedName("author_details")
     @Expose
-    private val authorDetails: AuthorDetails? = null
+    val authorDetails: AuthorDetails? = null
 
     @SerializedName("content")
     @Expose
-    private val content: String? = null
+    val content: String? = null
 
     @SerializedName("created_at")
     @Expose
@@ -28,7 +28,7 @@ class Review {
 
     @SerializedName("updated_at")
     @Expose
-    private val updatedAt: String? = null
+    val updatedAt: String? = null
 
     @SerializedName("url")
     @Expose

@@ -5,13 +5,13 @@
     android:id="@+id/albumFragmentConstraintLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp">
+    android:layout_marginStart="@dimen/album_fragment_albumConstraintLayout_marginStart"
+    android:layout_marginEnd="@dimen/album_fragment_albumConstraintLayout_marginEnd">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/album_fragment_imageView_height"
         android:contentDescription="@string/artist_image"
         app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
