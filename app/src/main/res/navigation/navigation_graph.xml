@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.eylulcan.moviefragment.ui.detail.MovieDetailFragment"
+        android:name="com.eylulcan.moviefragment.ui.moviedetail.MovieDetailFragment"
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail" >
         <argument
@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_movieDetailFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_artistDetailFragment"
+            app:destination="@id/artistDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -84,6 +87,9 @@
         <action
             android:id="@+id/action_artistDetailFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
+        <action
+            android:id="@+id/action_artistDetailFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/albumFragment"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/discoverFragment"
-        android:name="com.eylulcan.moviefragment.ui.movielist.MovieListFragment"
+        android:name="com.eylulcan.moviefragment.ui.discover.DiscoverFragment"
         android:label="fragment_movie_list"
         tools:layout="@layout/fragment_movie_list" />
     <fragment

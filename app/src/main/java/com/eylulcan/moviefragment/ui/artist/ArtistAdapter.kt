@@ -7,16 +7,13 @@ import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.PopularPeopleList
+import com.eylulcan.moviefragment.util.Utils
 
 class ArtistAdapter(
     private val popularPeopleList: PopularPeopleList,
     private val artistListener: ArtistListener
 ) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
-
-    companion object {
-        private const val BASE_IMAGE_URL = "http://image.tmdb.org/t/p/w185"
-    }
 
     class ViewHolder(val binding: ArtistFragmentRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -57,6 +54,6 @@ class ArtistAdapter(
     }
 
     private fun setImageUrl(poster_path: String?): String {
-        return BASE_IMAGE_URL.plus(poster_path)
+        return Utils.BASE_IMAGE_URL_185.plus(poster_path)
     }
 }

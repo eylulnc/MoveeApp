@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.movielist.MovieListFragment">
+    tools:context=".ui.discover.DiscoverFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -54,7 +54,7 @@
                 android:textSize="@dimen/movieList_mostPopularCategoryText_size" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/movieListPopularRecyclerView"
+                android:id="@+id/discoverPopularRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/movie_list_recycler_view_margin_start"
@@ -74,7 +74,7 @@
                 android:textSize="@dimen/movieList_topRatedText_size" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/movieListTopRatedRecyclerView"
+                android:id="@+id/discoverTopRatedRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/movieList_topRated_recyclerView_marginStart"

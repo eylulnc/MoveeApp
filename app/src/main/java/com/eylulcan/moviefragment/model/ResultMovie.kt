@@ -14,19 +14,19 @@ class ResultMovie: Serializable {
 
     @SerializedName("backdrop_path")
     @Expose
-    private var backdropPath: String? = null
+    var backdropPath: String? = null
 
     @SerializedName("genre_ids")
     @Expose
-    private var genreIds: List<Int?>? = null
+    var genreIds: List<Int?>? = null
 
     @SerializedName("id")
     @Expose
-    private var id: Int? = null
+    var id: Int? = null
 
     @SerializedName("original_language")
     @Expose
-    private var originalLanguage: String? = null
+    var originalLanguage: String? = null
 
     @SerializedName("original_title")
     @Expose
@@ -46,7 +46,7 @@ class ResultMovie: Serializable {
 
     @SerializedName("release_date")
     @Expose
-    private var releaseDate: String? = null
+    var releaseDate: String? = null
 
     @SerializedName("title")
     @Expose
@@ -54,11 +54,11 @@ class ResultMovie: Serializable {
 
     @SerializedName("video")
     @Expose
-    private var video: Boolean? = null
+    var video: Boolean? = null
 
     @SerializedName("vote_average")
     @Expose
-    private var voteAverage: Double? = null
+    var voteAverage: Double? = null
 
     @SerializedName("vote_count")
     @Expose

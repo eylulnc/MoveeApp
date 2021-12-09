@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment.ui.movielist
+package com.eylulcan.moviefragment.ui.discover
 
 import android.widget.ImageView
 import com.eylulcan.moviefragment.model.ResultMovie

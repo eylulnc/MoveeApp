@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment.ui.movielist
+package com.eylulcan.moviefragment.ui.discover
 
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -19,11 +19,11 @@ import com.eylulcan.moviefragment.databinding.FragmentMovieListBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.google.firebase.auth.FirebaseAuth
 
-class MovieListFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener  {
+class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener  {
 
     private lateinit var fragmentBinding: FragmentMovieListBinding
-    private val movieListViewModel: MovieListViewModel by viewModels()
-    private lateinit var movieListRecyclerAdapter: MovieAdapter
+    private val discoverViewModel: DiscoverViewModel by viewModels()
+    private lateinit var discoverListRecyclerAdapter: DiscoverAdapter
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
@@ -40,18 +40,18 @@ class MovieListFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentBinding.movieListPopularRecyclerView.layoutManager =
+        fragmentBinding.discoverPopularRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        fragmentBinding.movieListTopRatedRecyclerView.layoutManager =
+        fragmentBinding.discoverTopRatedRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         observeViewModel()
-        movieListViewModel.getPopularMovieList()
-        movieListViewModel.getTopRatedMovieList()
+        discoverViewModel.getPopularMovieList()
+        discoverViewModel.getTopRatedMovieList()
         postponeEnterTransition()
-        fragmentBinding.movieListPopularRecyclerView.doOnPreDraw {
+        fragmentBinding.discoverPopularRecyclerView.doOnPreDraw {
             startPostponedEnterTransition()
         }
-        fragmentBinding.movieListTopRatedRecyclerView.doOnPreDraw {
+        fragmentBinding.discoverTopRatedRecyclerView.doOnPreDraw {
             startPostponedEnterTransition()
         }
     }
@@ -68,16 +68,16 @@ class MovieListFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickList
     }
 
     private fun observeViewModel() {
-        movieListViewModel.popularMovies.observe(viewLifecycleOwner, { movieData ->
+        discoverViewModel.popularMovies.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                movieListRecyclerAdapter = MovieAdapter(movie, this)
-                fragmentBinding.movieListPopularRecyclerView.adapter = movieListRecyclerAdapter
+                discoverListRecyclerAdapter = DiscoverAdapter(movie, this)
+                fragmentBinding.discoverPopularRecyclerView.adapter = discoverListRecyclerAdapter
             }
         })
-        movieListViewModel.topRatedMovies.observe(viewLifecycleOwner, { movieData ->
+        discoverViewModel.topRatedMovies.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                movieListRecyclerAdapter = MovieAdapter(movie, this)
-                fragmentBinding.movieListTopRatedRecyclerView.adapter = movieListRecyclerAdapter
+                discoverListRecyclerAdapter = DiscoverAdapter(movie, this)
+                fragmentBinding.discoverTopRatedRecyclerView.adapter = discoverListRecyclerAdapter
             }
         })
     }

@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment.ui.movielist
+package com.eylulcan.moviefragment.ui.discover
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,8 @@ import com.eylulcan.moviefragment.databinding.MovieListRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.util.Utils
 
-class MovieAdapter(private val movieItem: Movie, private val listener: MovieListener) :
-    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class DiscoverAdapter(private val movieItem: Movie, private val listener: MovieListener) :
+    RecyclerView.Adapter<DiscoverAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: MovieListRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)

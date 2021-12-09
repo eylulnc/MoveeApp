@@ -1,10 +1,10 @@
-package com.eylulcan.moviefragment.ui.artist
+package com.eylulcan.moviefragment.ui.discover
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.model.PopularPeopleList
+import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,11 +13,13 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ArtistViewModel : ViewModel() {
+class DiscoverViewModel : ViewModel() {
 
     private var retrofit: MovieAPI? = null
-    private val popularPeopleList = MutableLiveData<PopularPeopleList>()
-    val popularPeople: LiveData<PopularPeopleList> get() = popularPeopleList
+    private val popularMovieList = MutableLiveData<Movie>()
+    val popularMovies: LiveData<Movie> get() = popularMovieList
+    private val topRatedMovieList = MutableLiveData<Movie>()
+    val topRatedMovies: LiveData<Movie> get() = topRatedMovieList
 
     init {
         retrofit = Retrofit.Builder()
@@ -27,14 +29,31 @@ class ArtistViewModel : ViewModel() {
             .create(MovieAPI::class.java)
     }
 
-    fun getPopularPeople() {
+    fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getPopularPeople()
+            val response = retrofit?.getPopularData()
+
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            popularPeopleList.postValue(it)
+                            popularMovieList.postValue(it)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun getTopRatedMovieList() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getTopRatedData()
+
+            withContext(Dispatchers.Main) {
+                response?.let {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            topRatedMovieList.postValue(it)
                         }
                     }
                 }
