@@ -68,8 +68,8 @@ class MovieDetailFragment : Fragment() {
     private fun observeViewModel() {
         movieDetailViewModel.videos.observe(viewLifecycleOwner, { videoList ->
             if (videoList.results?.isNotEmpty() == true) {
-                videoList?.results[0].site?.let { videoSite ->
-                    videoList.results[0].key?.let { key ->
+                videoList?.results.first().site?.let { videoSite ->
+                    videoList.results.first().key?.let { key ->
                         mediaItem = MediaItem.fromUri(setVideoUri(videoSite, key))
                         val player: ExoPlayer = ExoPlayer.Builder(requireContext()).build()
                         player.setMediaItem(mediaItem)
