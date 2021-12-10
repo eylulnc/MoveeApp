@@ -1,6 +1,7 @@
 package com.eylulcan.moviefragment.api
 
 import com.eylulcan.moviefragment.model.*
+import com.eylulcan.moviefragment.model.MovieCredits
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -38,4 +39,7 @@ interface MovieAPI {
 
     @GET("movie/{id}/videos?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
     suspend fun getMovieVideoClips(@Path("id")id: Int): Response<VideoList>
+
+    @GET("movie/{id}?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
+    suspend fun getMovieDetail(@Path("id")id: Int): Response<MovieDetail>
 }

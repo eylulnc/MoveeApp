@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.api.MovieAPI
 import com.eylulcan.moviefragment.model.Movie
+import com.eylulcan.moviefragment.model.MovieDetail
 import com.eylulcan.moviefragment.model.MovieCredits
 import com.eylulcan.moviefragment.model.ReviewList
 import com.eylulcan.moviefragment.model.VideoList
@@ -27,6 +28,8 @@ class DetailViewModel : ViewModel() {
     val more: LiveData<Movie> get() = movieMore
     private val videoList = MutableLiveData<VideoList>()
     val videos: LiveData<VideoList> get() = videoList
+    private val movieDetails = MutableLiveData<MovieDetail>()
+    val detail: LiveData<MovieDetail> get() = movieDetails
 
     init {
         retrofit = Retrofit.Builder()
@@ -89,6 +92,21 @@ class DetailViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             videoList.postValue(it)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun getMovieDetail(id:Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getMovieDetail(id)
+            withContext(Dispatchers.Main) {
+                response?.let {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            movieDetails.postValue(it)
                         }
                     }
                 }

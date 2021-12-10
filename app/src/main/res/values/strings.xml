@@ -60,5 +60,6 @@
     <string name="movie_poster">Movie Poster</string>
     <string name="youtube">Youtube</string>
     <string name="vimeo">Vimeo</string>
+    <string name="duration">%2$d h %2$d m</string>
 
 </resources>

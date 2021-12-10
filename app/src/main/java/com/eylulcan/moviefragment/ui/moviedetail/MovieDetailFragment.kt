@@ -53,6 +53,7 @@ class MovieDetailFragment : Fragment() {
             movieDetailViewModel.getMovieMore(id)
             movieDetailViewModel.getReviews(id)
             movieDetailViewModel.getVideoClips(id)
+            movieDetailViewModel.getMovieDetail(id)
         }
         tabAdapterSetup()
         setupUI(selectedResultMovieDataArgument)
@@ -104,6 +105,7 @@ class MovieDetailFragment : Fragment() {
                     }
                 }
         })
+
     }
 
     private fun setVideoUri(videoSite: String, key: String): String {
@@ -114,5 +116,13 @@ class MovieDetailFragment : Fragment() {
             uri = vimeoLink.plus(key)
         }
         return uri
+    }
+
+    private fun calculateDuration(duration: String): String {
+        val durationTime : Int = duration.toInt()
+        val durationHour = durationTime / 60
+        val durationMinute = durationTime % 60
+        return getString(R.string.duration, durationHour ,durationMinute)
+
     }
 }
