@@ -20,11 +20,11 @@ class VideoResult {
 
     @SerializedName("key")
     @Expose
-    private val key: String? = null
+    val key: String? = null
 
     @SerializedName("site")
     @Expose
-    private val site: String? = null
+    val site: String? = null
 
     @SerializedName("size")
     @Expose

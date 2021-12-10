@@ -58,4 +58,7 @@
     <string name="cast">Cast</string>
     <string name="reviews">Reviews</string>
     <string name="movie_poster">Movie Poster</string>
+    <string name="youtube">Youtube</string>
+    <string name="vimeo">Vimeo</string>
+
 </resources>

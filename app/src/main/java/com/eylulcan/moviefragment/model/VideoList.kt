@@ -12,5 +12,5 @@ class VideoList {
 
     @SerializedName("results")
     @Expose
-    private val results: List<VideoResult>? = null
+    val results: List<VideoResult>? = null
 }

@@ -7,6 +7,7 @@ import com.eylulcan.moviefragment.api.MovieAPI
 import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.model.MovieCredits
 import com.eylulcan.moviefragment.model.ReviewList
+import com.eylulcan.moviefragment.model.VideoList
 import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,8 @@ class DetailViewModel : ViewModel() {
     val reviews: LiveData<ReviewList> get() = movieReviews
     private val movieMore = MutableLiveData<Movie>()
     val more: LiveData<Movie> get() = movieMore
+    private val videoList = MutableLiveData<VideoList>()
+    val videos: LiveData<VideoList> get() = videoList
 
     init {
         retrofit = Retrofit.Builder()
@@ -35,7 +38,7 @@ class DetailViewModel : ViewModel() {
 
     fun getMovieCast(id:Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieCredits(id)//TODO
+            val response = retrofit?.getMovieCredits(id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
@@ -50,7 +53,7 @@ class DetailViewModel : ViewModel() {
 
     fun getReviews(id:Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieReviews(id)//TODO
+            val response = retrofit?.getMovieReviews(id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
@@ -65,12 +68,27 @@ class DetailViewModel : ViewModel() {
 
     fun getMovieMore(id:Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMoreMovie(id)//TODO
+            val response = retrofit?.getMoreMovie(id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             movieMore.postValue(it)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun getVideoClips(id:Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getMovieVideoClips(id)
+            withContext(Dispatchers.Main) {
+                response?.let {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            videoList.postValue(it)
                         }
                     }
                 }

@@ -15,6 +15,8 @@ import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.ui.artistdetail.TabAdapter
 import com.eylulcan.moviefragment.util.Utils
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ms.square.android.expandabletextview.ExpandableTextView
 
@@ -23,6 +25,9 @@ class MovieDetailFragment : Fragment() {
     private lateinit var fragmentBinding: FragmentMovieDetailBinding
     private val tabNames = arrayOf("Cast", "Reviews", "More")
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
+    private val youtubeLink: String = "https://www.youtube.com/watch?v="
+    private val vimeoLink: String = "https://vimeo.com/"
+    private lateinit var mediaItem: MediaItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,18 +43,20 @@ class MovieDetailFragment : Fragment() {
         fragmentBinding = FragmentMovieDetailBinding.bind(view)
         val selectedResultMovieDataArgument =
             arguments?.get(getString(R.string.movie)) as ResultMovie
+        if (selectedResultMovieDataArgument.video == true) {
+            observeViewModel()
+        } else {
+            fragmentBinding.playerView.isGone = true
+        }
         selectedResultMovieDataArgument.id?.let { id ->
             movieDetailViewModel.getMovieCast(id)
             movieDetailViewModel.getMovieMore(id)
             movieDetailViewModel.getReviews(id)
+            movieDetailViewModel.getVideoClips(id)
         }
         tabAdapterSetup()
         setupUI(selectedResultMovieDataArgument)
-        if (selectedResultMovieDataArgument.video == true) {
-            //TODO add get request to api in order to get video observe
-        } else {
-            fragmentBinding.videoView.isGone = true
-        }
+
     }
 
     private fun setImageUrl(poster_path: String?): String {
@@ -83,5 +90,29 @@ class MovieDetailFragment : Fragment() {
             }
             fragmentBinding.detailGenreNameText.text = genresString
         }
+    }
+
+    private fun observeViewModel() {
+        movieDetailViewModel.videos.observe(viewLifecycleOwner, { videoList ->
+                videoList?.results?.get(0)?.site?.let { videoSite ->
+                    videoList.results[0].key?.let { key ->
+                        mediaItem = MediaItem.fromUri(setVideoUri(videoSite, key))
+                        val player: ExoPlayer = ExoPlayer.Builder(requireContext()).build()
+                        player.setMediaItem(mediaItem)
+                        player.prepare()
+                        fragmentBinding.playerView.player = player
+                    }
+                }
+        })
+    }
+
+    private fun setVideoUri(videoSite: String, key: String): String {
+        var uri = ""
+        if (videoSite == getString(R.string.youtube)) {
+            uri = youtubeLink.plus(key)
+        } else if (videoSite == getString(R.string.vimeo)) {
+            uri = vimeoLink.plus(key)
+        }
+        return uri
     }
 }
