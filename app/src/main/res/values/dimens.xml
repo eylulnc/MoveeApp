@@ -7,7 +7,7 @@
 
     <dimen name="detail_movie_detailImagePoster_height">200dp</dimen>
     <dimen name="detail_movie_detailImagePoster_width">150dp</dimen>
-    <dimen name="detail_movie_videoView_height">200dp</dimen>
+    <dimen name="detail_movie_playerView_height">200dp</dimen>
     <dimen name="detail_movie_detailImagePoster_margin_start">4dp</dimen>
     <dimen name="detail_movie_detailImagePoster_margin_top">4dp</dimen>
     <dimen name="detail_movie_textRatingBarConstraintLayout_margin_end">16dp</dimen>

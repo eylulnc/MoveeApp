@@ -9,8 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        xmlns:expandableTextView="http://schemas.android.com/apk/res-auto">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -18,27 +17,39 @@
             app:layout_scrollFlags="scroll"
             tools:context=".ui.moviedetail.MovieDetailFragment">
 
-            <VideoView
-                android:id="@+id/videoView"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/detail_movie_videoView_height"
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/playerView"
+                android:layout_width="wrap_content"
+                android:layout_height="167dp"
+                android:focusable="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.google.android.exoplayer2.ui.PlayerView>
 
             <ImageView
                 android:id="@+id/detailImagePoster"
                 android:layout_width="@dimen/detail_movie_detailImagePoster_width"
-                android:layout_height="@dimen/detail_movie_videoView_height"
+                android:layout_height="@dimen/detail_movie_detailImagePoster_height"
                 android:layout_marginStart="@dimen/detail_movie_detailImagePoster_margin_start"
                 android:layout_marginTop="@dimen/detail_movie_detailImagePoster_margin_top"
                 android:contentDescription="@string/movie_poster"
-                app:layout_constraintDimensionRatio="16:9"
+                android:transitionName="@string/list_to_detail_transition"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/videoView"
-                tools:src="@tools:sample/avatars"
-                android:transitionName="@string/list_to_detail_transition"/>
+                app:layout_constraintTop_toBottomOf="@+id/playerView"
+                tools:src="@tools:sample/avatars" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/textRatingBarConstraintLayout"
@@ -51,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/detailImagePoster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detailImagePoster"
-            app:layout_constraintTop_toBottomOf="@+id/videoView"
+            app:layout_constraintTop_toBottomOf="@+id/playerView"
             app:layout_constraintVertical_bias="0.5">
 
             <TextView
@@ -149,7 +160,7 @@
                 android:id="@+id/expand_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                expandableTextView:maxCollapsedLines="3">
+                app:maxCollapsedLines="3">
 
                 <ImageButton
                     android:id="@id/expand_collapse"

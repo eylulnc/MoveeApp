@@ -35,4 +35,7 @@ interface MovieAPI {
 
     @GET("movie/{id}/credits?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
     suspend fun getMovieCredits(@Path("id")id: Int): Response<MovieCredits>
+
+    @GET("movie/{id}/videos?api_key=a2d3d4e6888e49e2bcbb7ffe79963274&language=en-US")
+    suspend fun getMovieVideoClips(@Path("id")id: Int): Response<VideoList>
 }
