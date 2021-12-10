@@ -48,18 +48,20 @@
     <string name="movies">Movies</string>
     <string name="more">More</string>
     <string name="artistId">artistId</string>
+    <string name="movieId">movieId</string>
     <string name="photos">Photos</string>
     <string name="unknown">Unknown</string>
     <string name="preview_image">Preview Image</string>
     <string name="artist_image">Artist Image</string>
     <string name="photo_album">photoAlbum</string>
     <string name="image_url">ImageUrl</string>
-    <string name="language">Language:</string>
+    <string name="language">Language: %1$s</string>
     <string name="cast">Cast</string>
     <string name="reviews">Reviews</string>
     <string name="movie_poster">Movie Poster</string>
     <string name="youtube">Youtube</string>
     <string name="vimeo">Vimeo</string>
-    <string name="duration">%2$d h %2$d m</string>
+    <string name="duration">%1$dh %2$dm</string>
+
 
 </resources>

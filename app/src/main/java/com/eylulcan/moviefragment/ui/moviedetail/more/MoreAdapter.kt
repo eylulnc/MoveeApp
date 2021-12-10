@@ -8,9 +8,11 @@ import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.MoreFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Movie
+import com.eylulcan.moviefragment.ui.discover.MovieListener
+import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 import com.eylulcan.moviefragment.util.Utils
 
-class MoreAdapter(private val movie: Movie) :
+class MoreAdapter(private val movie: Movie , private val movieListener: MovieDetailListener) :
     RecyclerView.Adapter<MoreAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: MoreFragmentRecyclerRowBinding) :
@@ -39,8 +41,7 @@ class MoreAdapter(private val movie: Movie) :
         holder.binding.genresMore.text = genresString
         holder.binding.ratingBarMore.rating = (movie?.voteAverage?.toFloat()?.div(2) ?: 0) as Float
         holder.itemView.setOnClickListener {
-          // movie?.id?.let { movieListener.onMovieClicked(it) }
-            //TODO
+           movie?.id?.let { movieListener.onMovieClicked(it) }
         }
     }
 

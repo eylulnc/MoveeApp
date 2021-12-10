@@ -24,7 +24,8 @@
                 android:layout_height="167dp"
                 android:focusable="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone">
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -73,7 +74,7 @@
                 android:layout_marginTop="@dimen/detail_movie_detailDurationText_margin_top"
                 android:textSize="@dimen/detail_movie_detailDurationText_textSize"
                 app:layout_constraintStart_toEndOf="@+id/detailReleaseDateText"
-                app:layout_constraintTop_toBottomOf="@+id/detailLanguageText"
+                app:layout_constraintTop_toBottomOf="@+id/languageText"
                 tools:text="TextView" />
 
             <TextView
@@ -83,7 +84,7 @@
                 android:layout_marginTop="@dimen/detail_movie_detailReleaseDate_margin_top"
                 android:textSize="@dimen/detail_movie_detailReleaseDate_textSize"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/languageStringText"
+                app:layout_constraintTop_toBottomOf="@+id/languageText"
                 tools:text="TextView" />
 
             <TextView
@@ -98,24 +99,17 @@
                 tools:text="MovieName" />
 
             <TextView
-                android:id="@+id/languageStringText"
-                android:layout_width="wrap_content"
+                android:id="@+id/languageText"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/detail_movie_languageStringText_margin_top"
                 android:text="@string/language"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:textSize="@dimen/detail_movie_languageStringText_textSize"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailRatingBar" />
-
-            <TextView
-                android:id="@+id/detailLanguageText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detail_movie_detailLanguageText_margin_start"
-                android:textSize="@dimen/detail_movie_detailLanguageText_textSize"
-                app:layout_constraintStart_toEndOf="@+id/languageStringText"
-                app:layout_constraintTop_toTopOf="@+id/languageStringText"
-                tools:text="Language" />
 
             <RatingBar
                 android:id="@+id/detailRatingBar"
@@ -136,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/detail_movie_detailGenreNameText_margin_top"
                 android:ellipsize="end"
-                android:singleLine="true"
+                android:maxLines="2"
                 android:textSize="@dimen/detail_movie_detailGenreNameText_textSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

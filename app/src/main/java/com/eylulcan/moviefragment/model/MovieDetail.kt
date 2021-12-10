@@ -24,7 +24,7 @@ class MovieDetail {
 
     @SerializedName("genres")
     @Expose
-    private val genres: List<Genre>? = null
+    val genres: List<Genre>? = null
 
     @SerializedName("homepage")
     @Expose
@@ -40,7 +40,7 @@ class MovieDetail {
 
     @SerializedName("original_language")
     @Expose
-    private val originalLanguage: String? = null
+    val originalLanguage: String? = null
 
     @SerializedName("original_title")
     @Expose
@@ -48,7 +48,7 @@ class MovieDetail {
 
     @SerializedName("overview")
     @Expose
-    private val overview: String? = null
+    val overview: String? = null
 
     @SerializedName("popularity")
     @Expose
@@ -56,7 +56,7 @@ class MovieDetail {
 
     @SerializedName("poster_path")
     @Expose
-    private val posterPath: String? = null
+    val posterPath: String? = null
 
     @SerializedName("production_companies")
     @Expose
@@ -68,7 +68,7 @@ class MovieDetail {
 
     @SerializedName("release_date")
     @Expose
-    private val releaseDate: String? = null
+    val releaseDate: String? = null
 
     @SerializedName("revenue")
     @Expose
@@ -76,11 +76,11 @@ class MovieDetail {
 
     @SerializedName("runtime")
     @Expose
-    private val runtime: Int? = null
+    val runtime: Int? = null
 
     @SerializedName("spoken_languages")
     @Expose
-    private val spokenLanguages: List<SpokenLanguage>? = null
+    val spokenLanguages: List<SpokenLanguage>? = null
 
     @SerializedName("status")
     @Expose
@@ -92,15 +92,15 @@ class MovieDetail {
 
     @SerializedName("title")
     @Expose
-    private val title: String? = null
+    val title: String? = null
 
     @SerializedName("video")
     @Expose
-    private val video: Boolean? = null
+    val video: Boolean? = null
 
     @SerializedName("vote_average")
     @Expose
-    private val voteAverage: Double? = null
+    val voteAverage: Double? = null
 
     @SerializedName("vote_count")
     @Expose

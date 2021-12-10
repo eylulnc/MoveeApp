@@ -33,6 +33,7 @@ class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
             .into(holder.binding.movieBackdropImage)
         var genresString = ""
         movie?.genreIds?.forEach { genreId ->
+
             genresString = genresString.plus(Genres.valueOfInt(genreId)).plus(" ")
         }
         holder.binding.genresArtistMovie.text = genresString

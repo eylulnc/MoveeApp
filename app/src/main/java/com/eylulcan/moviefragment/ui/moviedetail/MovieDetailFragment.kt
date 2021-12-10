@@ -5,20 +5,17 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
-import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.ui.artistdetail.TabAdapter
+import com.eylulcan.moviefragment.model.MovieDetail
 import com.eylulcan.moviefragment.util.Utils
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.tabs.TabLayoutMediator
-import com.ms.square.android.expandabletextview.ExpandableTextView
 
 class MovieDetailFragment : Fragment() {
 
@@ -41,23 +38,16 @@ class MovieDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding = FragmentMovieDetailBinding.bind(view)
-        val selectedResultMovieDataArgument =
-            arguments?.get(getString(R.string.movie)) as ResultMovie
-        if (selectedResultMovieDataArgument.video == true) {
-            observeViewModel()
-        } else {
-            fragmentBinding.playerView.isGone = true
-        }
-        selectedResultMovieDataArgument.id?.let { id ->
+        val selectedMovieDataArgument =
+            arguments?.get(getString(R.string.movieId)) as Int
+        observeViewModel()
+        selectedMovieDataArgument.let { id ->
             movieDetailViewModel.getMovieCast(id)
             movieDetailViewModel.getMovieMore(id)
             movieDetailViewModel.getReviews(id)
-            movieDetailViewModel.getVideoClips(id)
             movieDetailViewModel.getMovieDetail(id)
         }
         tabAdapterSetup()
-        setupUI(selectedResultMovieDataArgument)
-
     }
 
     private fun setImageUrl(poster_path: String?): String {
@@ -75,27 +65,10 @@ class MovieDetailFragment : Fragment() {
         }.attach()
     }
 
-    private fun setupUI(selectedResultMovieDataArgument: ResultMovie?) {
-        selectedResultMovieDataArgument?.let { selectedMovie ->
-            Glide.with(this).load(setImageUrl(selectedMovie.posterPath))
-                .into(fragmentBinding.detailImagePoster)
-            fragmentBinding.detailMovieNameText.text = selectedMovie.title
-            fragmentBinding.expandTextView.text = selectedMovie.overview
-            fragmentBinding.detailReleaseDateText.text = selectedMovie.releaseDate
-            fragmentBinding.detailRatingBar.rating =
-                (selectedMovie.voteAverage?.toFloat()?.div(2) ?: 0) as Float
-            fragmentBinding.detailLanguageText.text = selectedMovie.originalLanguage
-            var genresString = ""
-            selectedMovie.genreIds?.forEach { genreId ->
-                genresString = genresString.plus(genreId?.let { Genres.valueOfInt(it) }).plus(" ")
-            }
-            fragmentBinding.detailGenreNameText.text = genresString
-        }
-    }
-
     private fun observeViewModel() {
         movieDetailViewModel.videos.observe(viewLifecycleOwner, { videoList ->
-                videoList?.results?.get(0)?.site?.let { videoSite ->
+            if (videoList.results?.isNotEmpty() == true) {
+                videoList?.results[0].site?.let { videoSite ->
                     videoList.results[0].key?.let { key ->
                         mediaItem = MediaItem.fromUri(setVideoUri(videoSite, key))
                         val player: ExoPlayer = ExoPlayer.Builder(requireContext()).build()
@@ -104,8 +77,16 @@ class MovieDetailFragment : Fragment() {
                         fragmentBinding.playerView.player = player
                     }
                 }
+            }
         })
 
+        movieDetailViewModel.detail.observe(viewLifecycleOwner, { movie ->
+            if (movie.video == true) {
+                movieDetailViewModel.getVideoClips(id)
+                fragmentBinding.playerView.isVisible = true
+            }
+            setupUI(movie)
+        })
     }
 
     private fun setVideoUri(videoSite: String, key: String): String {
@@ -118,11 +99,35 @@ class MovieDetailFragment : Fragment() {
         return uri
     }
 
-    private fun calculateDuration(duration: String): String {
-        val durationTime : Int = duration.toInt()
-        val durationHour = durationTime / 60
-        val durationMinute = durationTime % 60
-        return getString(R.string.duration, durationHour ,durationMinute)
+    private fun calculateDuration(duration: Int): String {
+        val durationHour = duration / 60
+        val durationMinute = duration % 60
+        return getString(R.string.duration, durationHour, durationMinute)
+    }
 
+    private fun setupUI(movieDetails: MovieDetail?) {
+        movieDetails?.let { selectedMovie ->
+
+            Glide.with(this).load(setImageUrl(selectedMovie.posterPath))
+                .into(fragmentBinding.detailImagePoster)
+            fragmentBinding.detailMovieNameText.text = selectedMovie.title
+            fragmentBinding.expandTextView.text = selectedMovie.overview
+            fragmentBinding.detailReleaseDateText.text = selectedMovie.releaseDate
+            fragmentBinding.detailRatingBar.rating =
+                (selectedMovie.voteAverage?.toFloat()?.div(2) ?: 0) as Float
+            var movieLanguage = "|"
+            selectedMovie.spokenLanguages?.forEach { language ->
+                movieLanguage=movieLanguage.plus(language.name).plus(" | ")
+            }
+            fragmentBinding.languageText.text = getString(R.string.language, movieLanguage)
+            var genresString = ""
+            selectedMovie.genres?.forEach { genre ->
+                genresString = genresString.plus(genre.name).plus(" | ")
+            }
+            fragmentBinding.detailGenreNameText.text = genresString
+            selectedMovie.runtime?.let { runtime ->
+                fragmentBinding.detailDurationText.text = calculateDuration(runtime)
+            }
+        }
     }
 }

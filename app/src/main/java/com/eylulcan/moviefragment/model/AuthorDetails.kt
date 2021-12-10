@@ -20,5 +20,5 @@ class AuthorDetails {
 
     @SerializedName("rating")
     @Expose
-    private val rating: Double? = null
+    val rating: Double? = null
 }

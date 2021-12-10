@@ -16,5 +16,5 @@ class SpokenLanguage {
 
     @SerializedName("name")
     @Expose
-    private val name: String? = null
+    val name: String? = null
 }

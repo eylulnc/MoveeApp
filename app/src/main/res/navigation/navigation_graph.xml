@@ -11,8 +11,8 @@
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail" >
         <argument
-            android:name="selectedResultMovieDataArgument"
-            app:argType="com.eylulcan.moviefragment.model.ResultMovie" />
+            android:name="selectedMovieDataArgument"
+            app:argType="integer" />
         <action
             android:id="@+id/action_movieDetailFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_movieDetailFragment_to_artistDetailFragment"
             app:destination="@id/artistDetailFragment" />
+        <action
+            android:id="@+id/action_movieDetailFragment_self"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"

@@ -57,7 +57,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     }
 
     override fun onMovieClicked(resultMovie: ResultMovie, image: ImageView) {
-        val movieDataBundle = bundleOf((getString(R.string.movie)) to resultMovie)
+        val movieDataBundle = bundleOf((getString(R.string.movieId)) to resultMovie.id)
         val extras = FragmentNavigatorExtras(image to getString(R.string.list_to_detail_transition))
         image.transitionName = image.id.toString()
         //movieAdapter.updateMovieList(movieList)
@@ -95,7 +95,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         return false
     }
 
-    private fun setToolbarMenu(){
+    private fun setToolbarMenu() {
         val toolbar = fragmentBinding.toolbar
         toolbar.inflateMenu(R.menu.menu)
         toolbar.setOnMenuItemClickListener(this)
