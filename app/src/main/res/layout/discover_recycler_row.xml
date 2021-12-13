@@ -23,7 +23,10 @@
         android:id="@+id/movieListRecyclerViewName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/recycler_row_text_margin"
+        android:layout_marginEnd="@dimen/recycler_row_text_margin"
+        android:layout_marginStart="@dimen/recycler_row_text_margin"
+        android:layout_marginBottom="@dimen/recycler_row_text_margin"
+        android:gravity="center"
         android:singleLine="false"
         android:text="@string/movie_name"
         android:textAlignment="center"
@@ -36,5 +39,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/movieListRecyclerViewImage"
         app:layout_constraintTop_toBottomOf="@+id/movieListRecyclerViewImage"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@color/white"
+        android:minHeight="45dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

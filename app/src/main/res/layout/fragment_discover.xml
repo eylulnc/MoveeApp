@@ -35,7 +35,8 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/tr15_greylight">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +58,6 @@
                 android:id="@+id/discoverPopularRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/movie_list_recycler_view_margin_start"
                 android:layout_marginTop="@dimen/movieList_popularRecyclerView_marginTop"
                 android:layout_marginEnd="@dimen/movie_list_recycler_view_margin_end"
                 android:scrollbars="horizontal" />
@@ -77,7 +77,6 @@
                 android:id="@+id/discoverTopRatedRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/movieList_topRated_recyclerView_marginStart"
                 android:layout_marginTop="@dimen/movieList_topRated_recyclerView_marginTop"
                 android:layout_marginEnd="@dimen/movieList_topRated_recyclerView_marginEnd"
                 android:scrollbars="horizontal" />

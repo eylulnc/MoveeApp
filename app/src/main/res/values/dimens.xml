@@ -28,13 +28,15 @@
     <dimen name="detail_movie_ratingBar_margin_top">8dp</dimen>
     <dimen name="detail_movie_detailGenreNameText_margin_top">8dp</dimen>
     <dimen name="detail_movie_detailGenreNameText_textSize">16sp</dimen>
-    <dimen name="detail_movie_viewPager_margin_top">16dp</dimen>
     <dimen name="detail_movie_nestedScrollView_margin_top">8dp</dimen>
-    <dimen name="detail_movie_expandableText_size">16sp</dimen>
     <dimen name="detail_movie_relativeLayout_marginStart">8dp</dimen>
     <dimen name="detail_movie_relativeLayout_marginTop">8dp</dimen>
     <dimen name="detail_movie_relativeLayout_marginEnd">8dp</dimen>
     <dimen name="detail_movie_relativeLayout_minHeight">50dp</dimen>
+    <dimen name="detail_movie_expandableText_size">16sp</dimen>
+    <dimen name="detail_movie_expandableText_marginLeft">8dp</dimen>
+    <dimen name="detail_movie_expandableText_marginRight">8dp</dimen>
+    <dimen name="detail_movie_expandCollapseButton_padding">4dp</dimen>
 
     <dimen name="splash_fragment_image_height">200dp</dimen>
     <dimen name="splash_fragment_image_width">200dp</dimen>
@@ -122,10 +124,11 @@
 
     <dimen name="artist_movie_recycler_row_text_movie_name_size">14sp</dimen>
     <dimen name="artist_movie_recycler_row_text_genres_name_size">12sp</dimen>
-    <dimen name="artist_movie_recycler_row_linear_layout_marginStart">8dp</dimen>
+    <dimen name="artist_movie_recycler_row_linear_layout_marginStart">16dp</dimen>
     <dimen name="artist_movie_recycler_row_linear_layout_marginEnd">16dp</dimen>
     <dimen name="artist_movie_recycler_row_ratingBar_marginEnd">32dp</dimen>
-    <dimen name="artist_movie_recycler_row_artistMovieMainConstraintLayout">8dp</dimen>
+    <dimen name="artist_movie_recycler_row_artistMovieMainConstraintLayout_margin">16dp</dimen>
+    <dimen name="artist_movie_recycler_row_linearLayout_minHeight">50dp</dimen>
 
     <dimen name="artist_detail_artistDetailCoverImage_height">300dp</dimen>
     <dimen name="artist_detail_artistShortInfo_text_minHeight">15dp</dimen>
@@ -164,7 +167,9 @@
     <dimen name="review_fragment_authorProfileImage_marginStart">8dp</dimen>
     <dimen name="review_fragment_authorProfileImage_marginTop">8dp</dimen>
     <dimen name="review_fragment_authorName_marginStart">16dp</dimen>
-    <dimen name="review_fragment_authorName_marginTop">8dp</dimen>
+    <dimen name="review_fragment_postDate_marginStart">16dp</dimen>
+    <dimen name="review_fragment_postDate_marginTop">8dp</dimen>
+    <dimen name="review_fragment_authorName_textSize">18sp</dimen>
     <dimen name="review_fragment_reviewRatingBar_marginEnd">8dp</dimen>
     <dimen name="review_fragment_divider_margin">8dp</dimen>
     <dimen name="review_fragment_divider_height">2dp</dimen>
@@ -173,12 +178,17 @@
     <dimen name="review_fragment_relativeLayout_marginEnd">8dp</dimen>
     <dimen name="review_fragment_relativeLayout_minHeight">8dp</dimen>
     <dimen name="review_fragment_expandableText_size">16sp</dimen>
+    <dimen name="review_fragment_expandableText_marginLeft">8dp</dimen>
+    <dimen name="review_fragment_expandableText_marginRight">8dp</dimen>
+    <dimen name="review_fragment_expandCollapseButton_padding">4dp</dimen>
 
     <dimen name="moreRecyclerRow_moreMainConstraintLayout_margin">16dp</dimen>
     <dimen name="moreRecyclerRow_linearLayout_marginStart">16dp</dimen>
     <dimen name="moreRecyclerRow_linearLayout_marginEnd">16dp</dimen>
-    <dimen name="moreRecyclerRow_movieName_size">14sp</dimen>
-    <dimen name="moreRecyclerRow_genres_size">12sp</dimen>
+    <dimen name="moreRecyclerRow_linearLayout_padding">8dp</dimen>
+    <dimen name="moreRecyclerRow_linearLayout_minHeight">50dp</dimen>
+    <dimen name="moreRecyclerRow_movieName_size">16sp</dimen>
+    <dimen name="moreRecyclerRow_genres_size">14sp</dimen>
     <dimen name="moreRecyclerRow_ratingBar_marginEnd">32dp</dimen>
 
     <dimen name="album_fragment_albumConstraintLayout_marginStart">4dp</dimen>
@@ -193,9 +203,5 @@
     <dimen name="castRecyclerRow_castArtistName_minHeight">40dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_padding">8dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_textSize">14dp</dimen>
-
-
-
-
 
 </resources>

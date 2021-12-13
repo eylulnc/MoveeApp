@@ -20,10 +20,11 @@
         android:layout_marginTop="@dimen/review_fragment_authorProfileImage_marginTop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/author_profile_image"/>
 
     <LinearLayout
-        android:id="@+id/reviewlinearLayout"
+        android:id="@+id/reviewLinearLayout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -36,18 +37,19 @@
             android:id="@+id/authorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/review_fragment_authorName_marginStart"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textSize="18sp"
-            tools:text="TextView" />
+            android:textSize="@dimen/review_fragment_authorName_textSize"
+            tools:text="TextView"
+            android:textColor="@color/black"  />
 
         <TextView
             android:id="@+id/postDateText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/review_fragment_authorName_marginStart"
-            android:layout_marginTop="@dimen/review_fragment_authorName_marginTop"
+            android:layout_marginStart="@dimen/review_fragment_postDate_marginStart"
+            android:layout_marginTop="@dimen/review_fragment_postDate_marginTop"
             tools:text="TextView" />
     </LinearLayout>
 
@@ -56,11 +58,12 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:theme="@style/RatingBar"
         android:layout_marginEnd="@dimen/review_fragment_reviewRatingBar_marginEnd"
-        app:layout_constraintBottom_toBottomOf="@+id/reviewlinearLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/reviewLinearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reviewlinearLayout"
-        app:layout_constraintTop_toTopOf="@+id/reviewlinearLayout" />
+        app:layout_constraintStart_toEndOf="@+id/reviewLinearLayout"
+        app:layout_constraintTop_toTopOf="@+id/reviewLinearLayout" />
 
     <View
         android:id="@+id/divider"
@@ -71,7 +74,7 @@
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/authorProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/reviewlinearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewLinearLayout" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -88,21 +91,25 @@
         <com.ms.square.android.expandabletextview.ExpandableTextView
             android:id="@+id/expand_text_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            expandableTextView:maxCollapsedLines="3">
-
-            <ImageButton
-                android:id="@id/expand_collapse"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:background="@android:color/transparent" />
-
+            android:layout_height="wrap_content"
+            expandableTextView:maxCollapsedLines="3"
+            expandableTextView:animDuration="200">
             <TextView
                 android:id="@id/expandable_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/review_fragment_expandableText_size" />
+                android:layout_marginStart="@dimen/review_fragment_expandableText_marginLeft"
+                android:layout_marginEnd="@dimen/review_fragment_expandableText_marginRight"
+                android:textSize="@dimen/review_fragment_expandableText_size"
+                android:textColor="@color/black" />
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/review_fragment_expandCollapseButton_padding"
+                android:layout_gravity="end|bottom"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/expand_button"/>
 
         </com.ms.square.android.expandabletextview.ExpandableTextView>
     </RelativeLayout>

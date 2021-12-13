@@ -16,4 +16,6 @@
     <color name="tr50_purple_mountain">#809F86C0</color>
     <color name="tr60_purple_mountain">#669F86C0</color>
     <color name="tr60_greylight">#667C7C7C</color>
+    <color name="tr15_greylight">#267C7C7C</color>
+    <color name="tr20_greylight">#337C7C7C</color>
 </resources>

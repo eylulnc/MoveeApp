@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/tr60_purple_mountain"
-    android:layout_marginTop="8dp"
+    android:background="@color/white"
+    android:layout_margin="@dimen/artist_movie_recycler_row_artistMovieMainConstraintLayout_margin"
     android:id="@+id/artistMovieMainConstraintLayout">
 
     <ImageView
@@ -27,7 +27,8 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/ratingBarArtistMovie"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieBackdropImage">
+        app:layout_constraintTop_toBottomOf="@+id/movieBackdropImage"
+        android:minHeight="@dimen/artist_movie_recycler_row_linearLayout_minHeight">
 
         <TextView
             android:id="@+id/movieNameArtistMovie"
@@ -36,7 +37,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textSize="@dimen/artist_movie_recycler_row_text_movie_name_size"
-            tools:text="Movie Name" />
+            tools:text="Movie Name"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/genresArtistMovie"
@@ -45,7 +47,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textSize="@dimen/artist_movie_recycler_row_text_genres_name_size"
-            tools:text="Movie Genres" />
+            tools:text="Movie Genres"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <RatingBar

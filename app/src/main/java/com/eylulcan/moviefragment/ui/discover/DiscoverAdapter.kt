@@ -4,19 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.eylulcan.moviefragment.databinding.MovieListRecyclerRowBinding
+import com.eylulcan.moviefragment.databinding.DiscoverRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.util.Utils
 
 class DiscoverAdapter(private val movieItem: Movie, private val listener: MovieListener) :
     RecyclerView.Adapter<DiscoverAdapter.ViewHolder>() {
 
-    class ViewHolder(val binding: MovieListRecyclerRowBinding) :
+    class ViewHolder(val binding: DiscoverRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            MovieListRecyclerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            DiscoverRecyclerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
