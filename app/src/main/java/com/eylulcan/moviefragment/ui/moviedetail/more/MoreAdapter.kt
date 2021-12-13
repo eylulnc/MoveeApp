@@ -8,7 +8,6 @@ import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.MoreFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Movie
-import com.eylulcan.moviefragment.ui.discover.MovieListener
 import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 import com.eylulcan.moviefragment.util.Utils
 
@@ -37,7 +36,7 @@ class MoreAdapter(private val movie: Movie, private val movieListener: MovieDeta
         var genresString = ""
         movie?.genreIds?.forEach { genreId ->
             genresString =
-                genresString.plus(genreId?.let { Genres.valueOfInt(it)?.movieGenre() }).plus(" | ")
+                genresString.plus(genreId?.let { Genres.valueOfInt(it)?.movieGenreName() }).plus(" | ")
         }
         holder.binding.genresMore.text = genresString.substring(0, genresString.length - 2)
         holder.binding.ratingBarMore.rating = (movie?.voteAverage?.toFloat()?.div(2) ?: 0) as Float

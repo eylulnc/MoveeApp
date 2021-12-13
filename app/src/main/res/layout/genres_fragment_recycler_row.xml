@@ -3,14 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/genresRowConstraintLayout"
+    android:layout_margin="@dimen/genres_recyclerView_row_genresRowConstraintLayout_margin">
+
+
+    <ImageView
+        android:id="@+id/genresFragmentImageView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/genres_recyclerView_row_genresFragmentImageView_height"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/action_image" />
 
     <TextView
         android:id="@+id/genresRowText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/genres_recyclerView_row_text_marginTop"
-        android:background="@color/gray_blue"
+        android:background="@color/purple_mountain"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
@@ -18,9 +31,9 @@
         android:singleLine="false"
         android:textColor="@color/white"
         android:textSize="@dimen/genres_recyclerView_row_text_size"
-
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genresFragmentImageView"
         tools:text="TextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

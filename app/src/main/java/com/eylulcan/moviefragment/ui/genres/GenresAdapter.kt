@@ -3,6 +3,7 @@ package com.eylulcan.moviefragment.ui.genres
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.databinding.GenresFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.GenreList
 
@@ -26,6 +27,10 @@ class GenresAdapter(private val genreList: GenreList) :
         val genres = genreList.genres
         genres?.get(position)?.let { genre ->
             holder.binding.genresRowText.text = genre.name
+            genre.id?.let { id ->
+                Genres.valueOfInt(id)?.movieGenreImage()
+                    ?.let { holder.binding.genresFragmentImageView.setImageResource(it) }
+            }
         }
     }
 

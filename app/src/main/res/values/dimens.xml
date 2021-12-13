@@ -101,9 +101,10 @@
 
     <dimen name="genres_recyclerView_marginBottom">8dp</dimen>
     <dimen name="genres_recyclerView_marginTop">8dp</dimen>
-    <dimen name="genres_recyclerView_row_text_marginTop">24dp</dimen>
+    <dimen name="genres_recyclerView_row_genresRowConstraintLayout_margin">16dp</dimen>
+    <dimen name="genres_recyclerView_row_genresFragmentImageView_height">150dp</dimen>
     <dimen name="genres_recyclerView_row_text_minHeight">60dp</dimen>
-    <dimen name="genres_recyclerView_row_text_size">24sp</dimen>
+    <dimen name="genres_recyclerView_row_text_size">20sp</dimen>
 
     <dimen name="onboard_title_marginBottom">16dp</dimen>
     <dimen name="onboard_title_size">34sp</dimen>

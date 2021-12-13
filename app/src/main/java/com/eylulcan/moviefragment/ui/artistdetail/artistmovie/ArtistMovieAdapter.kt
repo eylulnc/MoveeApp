@@ -35,7 +35,7 @@ class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
         var genresString = ""
         movie?.genreIds?.forEach { genreId ->
 
-            genresString = genresString.plus(Genres.valueOfInt(genreId)?.movieGenre()).plus(" ")
+            genresString = genresString.plus(Genres.valueOfInt(genreId)?.movieGenreName()).plus(" ")
         }
         holder.binding.genresArtistMovie.text = genresString.substring(0, genresString.length - 2)
         holder.binding.ratingBarArtistMovie.rating =
