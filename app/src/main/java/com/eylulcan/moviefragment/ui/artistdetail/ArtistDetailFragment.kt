@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -59,9 +58,9 @@ class ArtistDetailFragment : Fragment() {
         })
 
         artistDetailViewModel.artistAlbum.observe(viewLifecycleOwner, { album ->
-            val albumSize = album.profiles?.size
+            val albumSize = album.artistProfileImages?.size
             photoAlbum = album
-            val profileImage = album.profiles
+            val profileImage = album.artistProfileImages
 
             binding.albumSizeText.text = albumSize.toString()
             albumSize?.let { size ->
@@ -86,7 +85,7 @@ class ArtistDetailFragment : Fragment() {
     }
 
     private fun tabAdapterSetup(){
-        val adapter: TabAdapter = TabAdapter(childFragmentManager, lifecycle)
+        val adapter = TabAdapter(childFragmentManager, lifecycle)
         binding.artistsFragmentViewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.artistsFragmentViewPager) { tab, position ->
             tab.text = tabNames[position]

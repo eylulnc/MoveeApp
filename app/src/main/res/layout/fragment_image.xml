@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.album.image.ImageFragment">
 
-    <ImageView
-        android:id="@+id/artistImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imageFragmentRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

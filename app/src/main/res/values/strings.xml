@@ -59,11 +59,12 @@
     <string name="cast">Cast</string>
     <string name="reviews">Reviews</string>
     <string name="movie_poster">Movie Poster</string>
-    <string name="youtube">Youtube</string>
+    <string name="youtube">YouTube</string>
     <string name="vimeo">Vimeo</string>
     <string name="duration">%1$dh %2$dm</string>
     <string name="author_profile_image">Author Profile Image</string>
     <string name="expand_button">Expand Button</string>
+    <string name="noInfo">There is no information about this person.</string>
 
 
 </resources>

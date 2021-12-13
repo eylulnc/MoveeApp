@@ -15,5 +15,5 @@ class ArtistAlbum : Serializable{
 
     @SerializedName("profiles")
     @Expose
-    val profiles: List<ProfileImage>? = null
+    val artistProfileImages: List<ProfileImage>? = null
 }

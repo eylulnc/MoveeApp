@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentImageBinding
+import com.eylulcan.moviefragment.model.ProfileImage
 import com.eylulcan.moviefragment.util.Utils
+import com.google.api.Distribution
 
 class ImageFragment : Fragment() {
-     private lateinit var binding:FragmentImageBinding
+
+    private lateinit var binding: FragmentImageBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,15 +23,18 @@ class ImageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_image, container, false)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentImageBinding.bind(view)
-        val selectedImageUrl = arguments?.get(getString(R.string.image_url)) as String
-        Glide.with(binding.root).load(setImageUrl(selectedImageUrl)).into(binding.artistImageView)
+        binding.imageFragmentRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val albumInformation = arguments?.get(getString(R.string.image_url)) as Pair<*, *>
+        val album = albumInformation.first as List<ProfileImage>?
+        val position = albumInformation.second as Int
+        binding.imageFragmentRecyclerView.adapter = ImageAdapter(album)
+        binding.imageFragmentRecyclerView.scrollToPosition(position)
 
     }
 
-    private fun setImageUrl(profile_path: String?): String {
-        return Utils.BASE_IMAGE_URL_ORIGINAL.plus(profile_path)
-    }
 }

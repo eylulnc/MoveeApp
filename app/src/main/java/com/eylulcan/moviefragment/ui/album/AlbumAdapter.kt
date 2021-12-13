@@ -25,16 +25,16 @@ class AlbumAdapter(private val artistAlbum: ArtistAlbum , private val imageListe
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val album = artistAlbum.profiles
+        val album = artistAlbum.artistProfileImages
         val url = setImageUrl(album?.get(position)?.filePath)
         Glide.with(holder.binding.root).load(url).into(holder.binding.imageView)
         holder.itemView.setOnClickListener{
-            imageListener.onImageClicked(url)
+            imageListener.onImageClicked(album, position)
         }
     }
 
     override fun getItemCount(): Int {
-        val size = artistAlbum.profiles?.size
+        val size = artistAlbum.artistProfileImages?.size
         size?.let { return size } ?: return 0
     }
 

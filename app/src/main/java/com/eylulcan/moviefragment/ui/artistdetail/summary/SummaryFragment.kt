@@ -1,9 +1,13 @@
 package com.eylulcan.moviefragment.ui.artistdetail.summary
 
 import android.os.Bundle
+import android.print.PrintAttributes
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.marginBottom
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.eylulcan.moviefragment.R
@@ -29,7 +33,14 @@ class SummaryFragment() : Fragment() {
 
     private fun observeViewModel(){
         artistDetailViewModel.artistDetail.observe(viewLifecycleOwner, { detail ->
-            binding.summaryTextView.text = detail.biography
+            if (detail.biography.isNullOrEmpty()) {
+                binding.summaryTextView.gravity = Gravity.CENTER
+                binding.summaryTextView.text = getString(R.string.noInfo)
+            } else {
+                binding.summaryTextView.gravity = Gravity.NO_GRAVITY
+                binding.summaryTextView.text = detail.biography
+            }
+
         })
     }
 }

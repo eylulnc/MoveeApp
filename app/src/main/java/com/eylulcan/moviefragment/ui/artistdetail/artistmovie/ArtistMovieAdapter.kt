@@ -29,15 +29,17 @@ class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movieCredits.cast?.get(position)
         holder.binding.movieNameArtistMovie.text = movie?.title
-        Glide.with(holder.binding.root).load(setImageUrl(movie?.backdropPath)).placeholder(R.color.grey)
+        Glide.with(holder.binding.root).load(setImageUrl(movie?.backdropPath))
+            .placeholder(R.color.grey)
             .into(holder.binding.movieBackdropImage)
         var genresString = ""
         movie?.genreIds?.forEach { genreId ->
 
-            genresString = genresString.plus(Genres.valueOfInt(genreId)).plus(" ")
+            genresString = genresString.plus(Genres.valueOfInt(genreId)?.movieGenre()).plus(" ")
         }
-        holder.binding.genresArtistMovie.text = genresString
-        holder.binding.ratingBarArtistMovie.rating = (movie?.voteAverage?.toFloat()?.div(2) ?: 0) as Float
+        holder.binding.genresArtistMovie.text = genresString.substring(0, genresString.length - 2)
+        holder.binding.ratingBarArtistMovie.rating =
+            (movie?.voteAverage?.toFloat()?.div(2) ?: 0) as Float
     }
 
     override fun getItemCount(): Int {

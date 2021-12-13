@@ -1,5 +1,6 @@
 package com.eylulcan.moviefragment.ui.moviedetail
 
+import android.net.Uri
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.eylulcan.moviefragment.util.Utils
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.tabs.TabLayoutMediator
+
 
 class MovieDetailFragment : Fragment() {
 
@@ -46,6 +48,7 @@ class MovieDetailFragment : Fragment() {
             movieDetailViewModel.getMovieMore(id)
             movieDetailViewModel.getReviews(id)
             movieDetailViewModel.getMovieDetail(id)
+            movieDetailViewModel.getVideoClips(id)
         }
         tabAdapterSetup()
     }
@@ -68,23 +71,22 @@ class MovieDetailFragment : Fragment() {
     private fun observeViewModel() {
         movieDetailViewModel.videos.observe(viewLifecycleOwner, { videoList ->
             if (videoList.results?.isNotEmpty() == true) {
+                fragmentBinding.playerView.isVisible = true
                 videoList?.results.first().site?.let { videoSite ->
                     videoList.results.first().key?.let { key ->
-                        mediaItem = MediaItem.fromUri(setVideoUri(videoSite, key))
+                        val mediaUri = Uri.parse(setVideoUri(videoSite, key))
+                        mediaItem = MediaItem.fromUri(mediaUri)
                         val player: ExoPlayer = ExoPlayer.Builder(requireContext()).build()
-                        player.setMediaItem(mediaItem)
-                        player.prepare()
                         fragmentBinding.playerView.player = player
+                        player.addMediaItem(mediaItem)
+                        player.prepare()
+                        player.playWhenReady = true
                     }
                 }
             }
         })
 
         movieDetailViewModel.detail.observe(viewLifecycleOwner, { movie ->
-            if (movie.video == true) {
-                movieDetailViewModel.getVideoClips(id)
-                fragmentBinding.playerView.isVisible = true
-            }
             setupUI(movie)
         })
     }
@@ -115,16 +117,18 @@ class MovieDetailFragment : Fragment() {
             fragmentBinding.detailReleaseDateText.text = selectedMovie.releaseDate
             fragmentBinding.detailRatingBar.rating =
                 (selectedMovie.voteAverage?.toFloat()?.div(2) ?: 0) as Float
-            var movieLanguage = "|"
+            var movieLanguage = ""
             selectedMovie.spokenLanguages?.forEach { language ->
-                movieLanguage=movieLanguage.plus(language.name).plus(" | ")
+                movieLanguage = movieLanguage.plus(language.name).plus(" | ")
             }
+            movieLanguage = movieLanguage.subSequence(0, movieLanguage.length - 2) as String
             fragmentBinding.languageText.text = getString(R.string.language, movieLanguage)
             var genresString = ""
             selectedMovie.genres?.forEach { genre ->
                 genresString = genresString.plus(genre.name).plus(" | ")
             }
-            fragmentBinding.detailGenreNameText.text = genresString
+            fragmentBinding.detailGenreNameText.text =
+                genresString.subSequence(0, genresString.length - 2)
             selectedMovie.runtime?.let { runtime ->
                 fragmentBinding.detailDurationText.text = calculateDuration(runtime)
             }

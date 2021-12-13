@@ -1,17 +1,18 @@
 package com.eylulcan.moviefragment.ui.album
 
-import android.os.Binder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentAlbumBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
+import com.eylulcan.moviefragment.model.ProfileImage
 
 class AlbumFragment : Fragment() , ImageListener {
 
@@ -34,8 +35,9 @@ class AlbumFragment : Fragment() , ImageListener {
         binding.albumRecyclerView.adapter = albumAdapter
     }
 
-    override fun onImageClicked(image: String) {
-        val imageUrlDataBundle = bundleOf((getString(R.string.image_url) to image))
-        findNavController().navigate(R.id.action_albumFragment_to_imageFragment, imageUrlDataBundle)
+    override fun onImageClicked(album: List<ProfileImage>?, position: Int) {
+        val albumPositionPair: Pair<List<ProfileImage>?,Int> = Pair(album,position)
+        val imageAlbumDataBundle = bundleOf((getString(R.string.image_url) to albumPositionPair))
+        findNavController().navigate(R.id.action_albumFragment_to_imageFragment, imageAlbumDataBundle)
     }
 }

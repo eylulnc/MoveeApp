@@ -156,7 +156,7 @@
     <dimen name="artist_detail_albumSize_height">75dp</dimen>
     <dimen name="artist_detail_photosTextView_text_size">16sp</dimen>
 
-    <dimen name="summary_summaryTextView_margin">8dp</dimen>
+    <dimen name="summary_summaryTextView_margin">16dp</dimen>
 
     <dimen name="review_fragment_reviewMainConstraintLayout_marginTop">16dp</dimen>
     <dimen name="review_fragment_reviewMainConstraintLayout_marginStart">16dp</dimen>

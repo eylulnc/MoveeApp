@@ -115,25 +115,30 @@
                     android:layout_width="@dimen/artist_detail_previewImages1_width"
                     android:layout_height="@dimen/artist_detail_previewImages1_height"
                     android:contentDescription="@string/preview_image"
+                    android:scaleType="centerCrop"
                     tools:src="@tools:sample/avatars" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/tr15_greylight">
 
                     <ImageView
                         android:id="@+id/albumPreviewElement2"
                         android:layout_width="@dimen/artist_detail_previewImages_width"
                         android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:scaleType="centerCrop"
                         android:contentDescription="@string/preview_image"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@tools:sample/avatars" />
+                        tools:src="@tools:sample/avatars"
+                        />
 
                     <ImageView
                         android:id="@+id/albumPreviewElement3"
                         android:layout_width="@dimen/artist_detail_previewImages_width"
                         android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:scaleType="centerCrop"
                         android:contentDescription="@string/preview_image"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/albumPreviewElement2"
@@ -144,6 +149,7 @@
                         android:id="@+id/albumPreviewElement4"
                         android:layout_width="@dimen/artist_detail_previewImages_width"
                         android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:scaleType="centerCrop"
                         android:contentDescription="@string/preview_image"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -154,6 +160,7 @@
                         android:id="@+id/albumPreviewElement5"
                         android:layout_width="@dimen/artist_detail_previewImages_width"
                         android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:scaleType="centerCrop"
                         android:contentDescription="@string/preview_image"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/albumPreviewElement4"
