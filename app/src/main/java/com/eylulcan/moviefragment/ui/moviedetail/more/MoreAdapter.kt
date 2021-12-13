@@ -38,7 +38,7 @@ class MoreAdapter(private val movie: Movie, private val movieListener: MovieDeta
             genresString =
                 genresString.plus(genreId?.let { Genres.valueOfInt(it)?.movieGenreName() }).plus(" | ")
         }
-        holder.binding.genresMore.text = genresString.substring(0, genresString.length - 2)
+        holder.binding.genresMore.text = genresString
         holder.binding.ratingBarMore.rating = (movie?.voteAverage?.toFloat()?.div(2) ?: 0) as Float
         holder.itemView.setOnClickListener {
             movie?.id?.let { movieListener.onMovieClicked(it) }

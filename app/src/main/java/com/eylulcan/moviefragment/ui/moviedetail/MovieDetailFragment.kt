@@ -121,14 +121,12 @@ class MovieDetailFragment : Fragment() {
             selectedMovie.spokenLanguages?.forEach { language ->
                 movieLanguage = movieLanguage.plus(language.name).plus(" | ")
             }
-            movieLanguage = movieLanguage.subSequence(0, movieLanguage.length - 2) as String
             fragmentBinding.languageText.text = getString(R.string.language, movieLanguage)
             var genresString = ""
             selectedMovie.genres?.forEach { genre ->
                 genresString = genresString.plus(genre.name).plus(" | ")
             }
-            fragmentBinding.detailGenreNameText.text =
-                genresString.subSequence(0, genresString.length - 2)
+            fragmentBinding.detailGenreNameText.text = genresString
             selectedMovie.runtime?.let { runtime ->
                 fragmentBinding.detailDurationText.text = calculateDuration(runtime)
             }

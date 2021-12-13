@@ -37,7 +37,8 @@ class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
 
             genresString = genresString.plus(Genres.valueOfInt(genreId)?.movieGenreName()).plus(" ")
         }
-        holder.binding.genresArtistMovie.text = genresString.substring(0, genresString.length - 2)
+
+        holder.binding.genresArtistMovie.text = genresString
         holder.binding.ratingBarArtistMovie.rating =
             (movie?.voteAverage?.toFloat()?.div(2) ?: 0) as Float
     }
