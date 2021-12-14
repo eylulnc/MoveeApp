@@ -2,8 +2,10 @@ package com.eylulcan.moviefragment.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import javax.annotation.Generated
 
-class PopularPeopleList {
+@Generated("jsonschema2pojo")
+class SearchResultList {
 
     @SerializedName("page")
     @Expose
@@ -11,7 +13,7 @@ class PopularPeopleList {
 
     @SerializedName("results")
     @Expose
-    val results: List<PeopleResult>? = null
+    val searchResults: List<SearchResult>? = null
 
     @SerializedName("total_pages")
     @Expose

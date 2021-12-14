@@ -208,4 +208,13 @@
     <dimen name="castRecyclerRow_castArtistName_padding">8dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_textSize">14dp</dimen>
 
+    <dimen name="search_recycler_row_text_width">100dp</dimen>
+    <dimen name="search_recycler_row_text_height">200dp</dimen>
+    <dimen name="search_recycler_row_text_size">14sp</dimen>
+    <dimen name="search_recycler_row_text_padding">8dp</dimen>
+    <dimen name="search_recycler_row_text_margin">8dp</dimen>
+    <dimen name="search_recycler_row_text_minHeight">40dp</dimen>
+    <dimen name="search_recycler_view_margin">4dp</dimen>
+    <dimen name="search_recyclerRow_image_width">150dp</dimen>
+    <dimen name="search_recyclerRow_image_height">200dp</dimen>
 </resources>

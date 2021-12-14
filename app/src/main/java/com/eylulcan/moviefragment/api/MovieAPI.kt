@@ -75,4 +75,10 @@ interface MovieAPI {
         @Query("api_key") apiKey: String = Utils.API_KEY
     ): Response<MovieDetail>
 
+    @GET("search/multi")
+    suspend fun getSearchResult(
+        @Query("api_key") apiKey: String = Utils.API_KEY,
+        @Query("query") query: String
+    ): Response<SearchResultList>
+
 }

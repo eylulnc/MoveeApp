@@ -91,7 +91,10 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
                 NavOptions.Builder().setPopUpTo(R.id.dashboardFragment, true).build()
             )
             return true
+        } else if (item?.itemId == R.id.search_button) {
+            findNavController().navigate(R.id.action_discoverFragment_to_searchFragment)
         }
+
         return false
     }
 
