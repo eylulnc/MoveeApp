@@ -28,7 +28,10 @@ class SplashFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreferences = requireActivity().getSharedPreferences("com.eylulcan.moviefragment", Context.MODE_PRIVATE)
+        sharedPreferences = requireActivity().getSharedPreferences(
+            "com.eylulcan.moviefragment",
+            Context.MODE_PRIVATE
+        )
     }
 
     override fun onCreateView(
@@ -47,9 +50,9 @@ class SplashFragment : Fragment() {
         currentUser?.let {
             navigateToMovieList()
         } ?: run {
-            firstTimeOpened = sharedPreferences.getBoolean("isFirst",true)
-            if(firstTimeOpened == true) {
-                sharedPreferences.edit().putBoolean("isFirst",false).apply()
+            firstTimeOpened = sharedPreferences.getBoolean("isFirst", true)
+            if (firstTimeOpened == true) {
+                sharedPreferences.edit().putBoolean("isFirst", false).apply()
                 navigateToOnboard()
             } else {
                 navigateToLogin()
@@ -57,7 +60,7 @@ class SplashFragment : Fragment() {
         }
     }
 
-    private fun navigateToMovieList(){
+    private fun navigateToMovieList() {
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController()
                 .navigate(
@@ -67,7 +70,7 @@ class SplashFragment : Fragment() {
         }, 1500)
     }
 
-    private fun navigateToLogin(){
+    private fun navigateToLogin() {
         val extras =
             FragmentNavigatorExtras(binding.splashFragmentLogo to getString(R.string.login_transition))
         Handler(Looper.myLooper()!!).postDelayed({
@@ -79,7 +82,7 @@ class SplashFragment : Fragment() {
         }, 1500)
     }
 
-    private fun navigateToOnboard(){
+    private fun navigateToOnboard() {
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController()
                 .navigate(

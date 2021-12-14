@@ -36,5 +36,4 @@ class ImageFragment : Fragment() {
         binding.imageFragmentRecyclerView.scrollToPosition(position)
 
     }
-
 }

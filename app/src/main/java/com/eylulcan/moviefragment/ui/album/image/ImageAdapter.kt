@@ -31,11 +31,9 @@ class ImageAdapter(val album: List<ProfileImage>?) :
 
     }
 
-    override fun getItemCount(): Int {
-        return album?.size ?: 0
-    }
+    override fun getItemCount(): Int = album?.size ?: 0
 
-    private fun setImageUrl(profile_path: String?): String {
-        return Utils.BASE_IMAGE_URL_ORIGINAL.plus(profile_path)
-    }
+    private fun setImageUrl(profile_path: String?): String =
+        Utils.BASE_IMAGE_URL_ORIGINAL.plus(profile_path)
+
 }

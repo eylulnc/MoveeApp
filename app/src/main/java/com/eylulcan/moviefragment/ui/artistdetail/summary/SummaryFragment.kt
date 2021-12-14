@@ -40,7 +40,6 @@ class SummaryFragment() : Fragment() {
                 binding.summaryTextView.gravity = Gravity.NO_GRAVITY
                 binding.summaryTextView.text = detail.biography
             }
-
         })
     }
 }

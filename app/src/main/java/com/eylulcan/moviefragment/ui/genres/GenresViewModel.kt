@@ -48,17 +48,12 @@ class GenresViewModel : ViewModel() {
 
     fun getMovieListByGenre(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieByGenreId(id)
+            val response = retrofit?.getMovieByGenreId(genreId = id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             movieList.postValue(it)
-                            it.results?.forEach { res ->
-                                println("eylll ${res.title}")
-
-                            }
-
                         }
                     }
                 }

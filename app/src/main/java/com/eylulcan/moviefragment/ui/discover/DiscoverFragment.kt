@@ -19,7 +19,7 @@ import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.google.firebase.auth.FirebaseAuth
 
-class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener  {
+class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by viewModels()
@@ -32,7 +32,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     ): View? {
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        val view =  inflater.inflate(R.layout.fragment_discover, container, false)
+        val view = inflater.inflate(R.layout.fragment_discover, container, false)
         fragmentBinding = FragmentDiscoverBinding.bind(view)
         setToolbarMenu()
         return view

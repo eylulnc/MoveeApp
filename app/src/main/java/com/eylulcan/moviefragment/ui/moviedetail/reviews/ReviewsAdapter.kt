@@ -1,6 +1,5 @@
 package com.eylulcan.moviefragment.ui.moviedetail.reviews
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -32,22 +31,21 @@ class ReviewsAdapter(private val reviewList: ReviewList) :
         reviewList.results?.get(position)?.let { review ->
             holder.binding.authorName.text = review.author
             holder.binding.expandTextView.text = review.content
-            holder.binding.reviewsRatingBar.rating = review.authorDetails?.rating?.toFloat()?.div(2f) ?: 0f
-            val format = SimpleDateFormat("yyyy-MM-dd")
-            review.updatedAt?.let {  it ->
-                val date: Date? = format.parse(it)
-                holder.binding.postDateText.text = date.toString()
+            holder.binding.reviewsRatingBar.rating =
+                review.authorDetails?.rating?.toFloat()?.div(2f) ?: 0f
+            review.updatedAt?.let { it ->
+                val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
+                val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH)
+                val output = formatter.format(parser.parse(it))
+                holder.binding.postDateText.text = output
             }
-            Glide.with(holder.binding.root).load(setImageUrl(review.authorDetails?.avatarPath)).placeholder(R.color.greylight).into(holder.binding.authorProfileImage)
+            Glide.with(holder.binding.root).load(setImageUrl(review.authorDetails?.avatarPath))
+                .placeholder(R.color.greylight).into(holder.binding.authorProfileImage)
         }
     }
 
-    override fun getItemCount(): Int {
-        return reviewList.results?.size ?: 0
-    }
+    override fun getItemCount(): Int = reviewList.results?.size ?: 0
 
-    private fun setImageUrl(poster_path: Any?): String {
-        return Utils.BASE_IMAGE_URL_185.plus(poster_path)
-    }
+    private fun setImageUrl(poster_path: Any?): String = Utils.BASE_IMAGE_URL_185.plus(poster_path)
 
 }

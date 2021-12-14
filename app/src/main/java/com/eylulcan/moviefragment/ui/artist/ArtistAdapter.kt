@@ -30,30 +30,23 @@ class ArtistAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val popularPeopleList = popularPeopleList.results
-        val artist = popularPeopleList?.get(position)
-        holder.binding.artistRecyclerPersonName.text = artist?.name
-        artist?.let { artist ->
+        popularPeopleList?.get(position)?.let { artist ->
+            holder.binding.artistRecyclerPersonName.text = artist.name
             Glide.with(holder.binding.root).load(setImageUrl(artist.profilePath))
                 .placeholder(R.color.greylight)
                 .into(holder.binding.artistRecyclerRowImage)
             holder.binding.artistRecyclerPersonName.text = artist.name
         }
         holder.itemView.setOnClickListener {
-            artist?.id?.let { id ->
-                artistListener.onArtistClicked(id)
+            popularPeopleList?.get(position)?.id?.let { artistId ->
+                artistListener.onArtistClicked(artistId)
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        popularPeopleList.results?.let { results ->
-            return results.size
-        } ?: run {
-            return 0
-        }
-    }
+    override fun getItemCount(): Int = popularPeopleList.results?.size ?: 0
 
-    private fun setImageUrl(poster_path: String?): String {
-        return Utils.BASE_IMAGE_URL_185.plus(poster_path)
-    }
+    private fun setImageUrl(poster_path: String?): String =
+        Utils.BASE_IMAGE_URL_185.plus(poster_path)
+
 }

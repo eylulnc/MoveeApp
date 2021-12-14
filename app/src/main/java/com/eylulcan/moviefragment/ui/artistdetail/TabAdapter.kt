@@ -7,12 +7,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.eylulcan.moviefragment.ui.artistdetail.artistmovie.ArtistMoviesFragment
 import com.eylulcan.moviefragment.ui.artistdetail.summary.SummaryFragment
 
+private const val NUM_TABS = 3
+
 class TabAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(manager, lifecycle) {
-
-    companion object {
-        private const val NUM_TABS = 3
-    }
 
     override fun getItemCount(): Int {
         return NUM_TABS

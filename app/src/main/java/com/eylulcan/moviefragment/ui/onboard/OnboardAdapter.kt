@@ -4,11 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.eylulcan.moviefragment.R
 
-class OnboardAdapter(activity: OnboardViewPagerFragment) : FragmentStateAdapter(activity) {
+private const val FRAGMENT_COUNT = 3
 
-    companion object{
-        private const val FRAGMENT_COUNT = 3
-    }
+class OnboardAdapter(activity: OnboardViewPagerFragment) : FragmentStateAdapter(activity) {
 
     override fun getItemCount(): Int {
         return FRAGMENT_COUNT

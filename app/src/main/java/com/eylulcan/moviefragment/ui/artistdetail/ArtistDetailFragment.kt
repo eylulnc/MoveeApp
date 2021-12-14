@@ -40,9 +40,12 @@ class ArtistDetailFragment : Fragment() {
         artistDetailViewModel.getArtistDetail(selectedPopularPersonID)
         artistDetailViewModel.getArtistMovieCredits(selectedPopularPersonID)
         binding.albumCoverLayout.setOnClickListener {
-            photoAlbum?.let{ album ->
+            photoAlbum?.let { album ->
                 val albumDataBundle = bundleOf((getString(R.string.photo_album) to album))
-                findNavController().navigate(R.id.action_artistDetailFragment_to_albumFragment, albumDataBundle)
+                findNavController().navigate(
+                    R.id.action_artistDetailFragment_to_albumFragment,
+                    albumDataBundle
+                )
             }
         }
     }
@@ -64,15 +67,20 @@ class ArtistDetailFragment : Fragment() {
 
             binding.albumSizeText.text = albumSize.toString()
             albumSize?.let { size ->
-                if(size > 0){
-                    for (i in 0..5){
+                if (size > 0) {
+                    for (i in 0..5) {
                         val imagePath = profileImage?.getOrNull(i)?.filePath
-                        when (i){
-                            0-> Glide.with(this).load(setImageUrl(imagePath)).into(binding.albumPreviewElement1)
-                            1-> Glide.with(this).load(setImageUrl(imagePath)).into(binding.albumPreviewElement2)
-                            2->Glide.with(this).load(setImageUrl(imagePath)).into(binding.albumPreviewElement3)
-                            3-> Glide.with(this).load(setImageUrl(imagePath)).into(binding.albumPreviewElement4)
-                            4->Glide.with(this).load(setImageUrl(imagePath)).into(binding.albumPreviewElement5)
+                        when (i) {
+                            0 -> Glide.with(this).load(setImageUrl(imagePath))
+                                .into(binding.albumPreviewElement1)
+                            1 -> Glide.with(this).load(setImageUrl(imagePath))
+                                .into(binding.albumPreviewElement2)
+                            2 -> Glide.with(this).load(setImageUrl(imagePath))
+                                .into(binding.albumPreviewElement3)
+                            3 -> Glide.with(this).load(setImageUrl(imagePath))
+                                .into(binding.albumPreviewElement4)
+                            4 -> Glide.with(this).load(setImageUrl(imagePath))
+                                .into(binding.albumPreviewElement5)
                         }
                     }
                 }
@@ -80,11 +88,10 @@ class ArtistDetailFragment : Fragment() {
         })
     }
 
-    private fun setImageUrl(profile_path: String?): String {
-        return Utils.BASE_IMAGE_URL_ORIGINAL.plus(profile_path)
-    }
+    private fun setImageUrl(profile_path: String?): String =
+        Utils.BASE_IMAGE_URL_ORIGINAL.plus(profile_path)
 
-    private fun tabAdapterSetup(){
+    private fun tabAdapterSetup() {
         val adapter = TabAdapter(childFragmentManager, lifecycle)
         binding.artistsFragmentViewPager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.artistsFragmentViewPager) { tab, position ->

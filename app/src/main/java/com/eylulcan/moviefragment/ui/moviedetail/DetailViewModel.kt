@@ -39,9 +39,9 @@ class DetailViewModel : ViewModel() {
             .create(MovieAPI::class.java)
     }
 
-    fun getMovieCast(id:Int) {
+    fun getMovieCast(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieCredits(id)
+            val response = retrofit?.getMovieCredits(movieId = id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
@@ -54,9 +54,9 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun getReviews(id:Int) {
+    fun getReviews(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieReviews(id)
+            val response = retrofit?.getMovieReviews(movieId = id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
@@ -69,9 +69,9 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun getMovieMore(id:Int) {
+    fun getMovieMore(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMoreMovie(id)
+            val response = retrofit?.getMoreMovie(movieId = id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
@@ -84,9 +84,9 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun getVideoClips(id:Int){
+    fun getVideoClips(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieVideoClips(id)
+            val response = retrofit?.getMovieVideoClips(movieId = id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
@@ -99,9 +99,9 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun getMovieDetail(id:Int){
+    fun getMovieDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieDetail(id)
+            val response = retrofit?.getMovieDetail(genreId = id)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {

@@ -18,15 +18,18 @@ import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.tabs.TabLayoutMediator
 
+private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
+private const val VIMEO_LINK = "https://vimeo.com/"
+private const val MINUTES_IN_HOUR = 60
 
 class MovieDetailFragment : Fragment() {
 
     private lateinit var fragmentBinding: FragmentMovieDetailBinding
     private val tabNames = arrayOf("Cast", "Reviews", "More")
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
-    private val youtubeLink: String = "https://www.youtube.com/watch?v="
-    private val vimeoLink: String = "https://vimeo.com/"
     private lateinit var mediaItem: MediaItem
+    private var genreNames: String = ""
+    private var movieLanguages: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,9 +56,8 @@ class MovieDetailFragment : Fragment() {
         tabAdapterSetup()
     }
 
-    private fun setImageUrl(poster_path: String?): String {
-        return Utils.BASE_IMAGE_URL_185.plus(poster_path)
-    }
+    private fun setImageUrl(poster_path: String?): String =
+        Utils.BASE_IMAGE_URL_185.plus(poster_path)
 
     private fun tabAdapterSetup() {
         val adapter = DetailTabAdapter(childFragmentManager, lifecycle)
@@ -85,7 +87,6 @@ class MovieDetailFragment : Fragment() {
                 }
             }
         })
-
         movieDetailViewModel.detail.observe(viewLifecycleOwner, { movie ->
             setupUI(movie)
         })
@@ -94,16 +95,16 @@ class MovieDetailFragment : Fragment() {
     private fun setVideoUri(videoSite: String, key: String): String {
         var uri = ""
         if (videoSite == getString(R.string.youtube)) {
-            uri = youtubeLink.plus(key)
+            uri = YOUTUBE_LINK.plus(key)
         } else if (videoSite == getString(R.string.vimeo)) {
-            uri = vimeoLink.plus(key)
+            uri = VIMEO_LINK.plus(key)
         }
         return uri
     }
 
     private fun calculateDuration(duration: Int): String {
-        val durationHour = duration / 60
-        val durationMinute = duration % 60
+        val durationHour = duration.div(MINUTES_IN_HOUR)
+        val durationMinute = duration.mod(MINUTES_IN_HOUR)
         return getString(R.string.duration, durationHour, durationMinute)
     }
 
@@ -116,20 +117,19 @@ class MovieDetailFragment : Fragment() {
             fragmentBinding.expandTextView.text = selectedMovie.overview
             fragmentBinding.detailReleaseDateText.text = selectedMovie.releaseDate
             fragmentBinding.detailRatingBar.rating =
-                (selectedMovie.voteAverage?.toFloat()?.div(2) ?: 0) as Float
-            var movieLanguage = ""
+                (selectedMovie.voteAverage?.toFloat()?.div(2) ?: 0f)
             selectedMovie.spokenLanguages?.forEach { language ->
-                movieLanguage = movieLanguage.plus(language.name).plus(" | ")
+                movieLanguages = movieLanguages.plus(language.name).plus(" | ")
             }
-            fragmentBinding.languageText.text = getString(R.string.language, movieLanguage)
-            var genresString = ""
+            fragmentBinding.languageText.text = getString(R.string.language, movieLanguages)
             selectedMovie.genres?.forEach { genre ->
-                genresString = genresString.plus(genre.name).plus(" | ")
+                genreNames = genreNames.plus(genre.name).plus(" | ")
             }
-            fragmentBinding.detailGenreNameText.text = genresString
+            fragmentBinding.detailGenreNameText.text = genreNames
             selectedMovie.runtime?.let { runtime ->
                 fragmentBinding.detailDurationText.text = calculateDuration(runtime)
             }
         }
     }
+
 }

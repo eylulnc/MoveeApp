@@ -14,7 +14,9 @@ import com.eylulcan.moviefragment.databinding.FragmentAlbumBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
 import com.eylulcan.moviefragment.model.ProfileImage
 
-class AlbumFragment : Fragment() , ImageListener {
+private const val SPAN_COUNT = 4
+
+class AlbumFragment : Fragment(), ImageListener {
 
     private lateinit var binding: FragmentAlbumBinding
     private lateinit var albumAdapter: AlbumAdapter
@@ -24,20 +26,23 @@ class AlbumFragment : Fragment() , ImageListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_album, container, false)
         binding = FragmentAlbumBinding.bind(view)
-        binding.albumRecyclerView.layoutManager = GridLayoutManager(context,4)
+        binding.albumRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val selectedArtistAlbum =  arguments?.get(getString(R.string.photo_album)) as ArtistAlbum
-        albumAdapter = AlbumAdapter(selectedArtistAlbum,this)
+        val selectedArtistAlbum = arguments?.get(getString(R.string.photo_album)) as ArtistAlbum
+        albumAdapter = AlbumAdapter(selectedArtistAlbum, this)
         binding.albumRecyclerView.adapter = albumAdapter
     }
 
     override fun onImageClicked(album: List<ProfileImage>?, position: Int) {
-        val albumPositionPair: Pair<List<ProfileImage>?,Int> = Pair(album,position)
+        val albumPositionPair: Pair<List<ProfileImage>?, Int> = Pair(album, position)
         val imageAlbumDataBundle = bundleOf((getString(R.string.image_url) to albumPositionPair))
-        findNavController().navigate(R.id.action_albumFragment_to_imageFragment, imageAlbumDataBundle)
+        findNavController().navigate(
+            R.id.action_albumFragment_to_imageFragment,
+            imageAlbumDataBundle
+        )
     }
 }

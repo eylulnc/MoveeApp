@@ -14,7 +14,7 @@ import com.eylulcan.moviefragment.databinding.FragmentMoreBinding
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 
-class MoreFragment : Fragment() , MovieDetailListener {
+class MoreFragment : Fragment(), MovieDetailListener {
 
     private lateinit var binding: FragmentMoreBinding
     private lateinit var moreAdapter: MoreAdapter
@@ -35,9 +35,9 @@ class MoreFragment : Fragment() , MovieDetailListener {
         observeViewModel()
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         detailViewModel.more.observe(viewLifecycleOwner, { movie ->
-            moreAdapter = MoreAdapter(movie,this)
+            moreAdapter = MoreAdapter(movie, this)
             binding.moreRecyclerView.adapter = moreAdapter
         })
     }

@@ -13,6 +13,8 @@ import com.eylulcan.moviefragment.util.Utils
 class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
     RecyclerView.Adapter<ArtistMovieAdapter.ViewHolder>() {
 
+    private var genreNames: String = ""
+
     class ViewHolder(val binding: ArtistMovieFragmentRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -32,26 +34,17 @@ class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
         Glide.with(holder.binding.root).load(setImageUrl(movie?.backdropPath))
             .placeholder(R.color.grey)
             .into(holder.binding.movieBackdropImage)
-        var genresString = ""
         movie?.genreIds?.forEach { genreId ->
-
-            genresString = genresString.plus(Genres.valueOfInt(genreId)?.movieGenreName()).plus(" ")
+            genreNames = genreNames.plus(Genres.valueOfInt(genreId)?.movieGenreName()).plus(" ")
         }
-
-        holder.binding.genresArtistMovie.text = genresString
+        holder.binding.genresArtistMovie.text = genreNames
         holder.binding.ratingBarArtistMovie.rating =
-            (movie?.voteAverage?.toFloat()?.div(2) ?: 0) as Float
+            (movie?.voteAverage?.toFloat()?.div(2) ?: 0f)
     }
 
-    override fun getItemCount(): Int {
-        movieCredits.cast?.size.let {
-            return it ?: run {
-                return 0
-            }
-        }
-    }
+    override fun getItemCount(): Int = movieCredits.cast?.size ?: 0
 
-    private fun setImageUrl(poster_path: String?): String {
-        return Utils.BASE_IMAGE_URL_300.plus(poster_path)
-    }
+    private fun setImageUrl(poster_path: String?): String =
+        Utils.BASE_IMAGE_URL_300.plus(poster_path)
+
 }

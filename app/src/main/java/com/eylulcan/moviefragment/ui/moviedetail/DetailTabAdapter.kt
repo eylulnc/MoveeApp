@@ -8,12 +8,10 @@ import com.eylulcan.moviefragment.ui.moviedetail.cast.CastFragment
 import com.eylulcan.moviefragment.ui.moviedetail.more.MoreFragment
 import com.eylulcan.moviefragment.ui.moviedetail.reviews.ReviewsFragment
 
+private const val NUM_TABS = 3
+
 class DetailTabAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(manager, lifecycle) {
-
-    companion object {
-        private const val NUM_TABS = 3
-    }
 
     override fun getItemCount(): Int {
         return NUM_TABS

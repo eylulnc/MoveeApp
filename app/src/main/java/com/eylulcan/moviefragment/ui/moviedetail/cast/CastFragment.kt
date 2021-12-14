@@ -14,6 +14,8 @@ import com.eylulcan.moviefragment.databinding.FragmentCastBinding
 import com.eylulcan.moviefragment.ui.artist.ArtistListener
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 
+private const val SPAN_COUNT = 4
+
 class CastFragment : Fragment(), ArtistListener {
 
     private lateinit var binding: FragmentCastBinding
@@ -29,7 +31,7 @@ class CastFragment : Fragment(), ArtistListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCastBinding.bind(view)
-        binding.castRecyclerView.layoutManager = GridLayoutManager(context, 4)
+        binding.castRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
         observeViewModel()
 
     }

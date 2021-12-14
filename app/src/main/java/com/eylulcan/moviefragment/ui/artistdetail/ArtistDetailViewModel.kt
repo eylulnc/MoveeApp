@@ -35,7 +35,7 @@ class ArtistDetailViewModel : ViewModel() {
 
     fun getArtistDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getArtistDetail(id)
+            val response = retrofit?.getArtistDetail(personId = id)
 
             withContext(Dispatchers.Main) {
                 response?.let {
@@ -51,7 +51,7 @@ class ArtistDetailViewModel : ViewModel() {
 
     fun getArtistAlbum(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getArtistImages(id)
+            val response = retrofit?.getArtistImages(personId = id)
 
             withContext(Dispatchers.Main) {
                 response?.let {
@@ -67,7 +67,7 @@ class ArtistDetailViewModel : ViewModel() {
 
     fun getArtistMovieCredits(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getArtistMovieCredits(id)
+            val response = retrofit?.getArtistMovieCredits(personId = id)
 
             withContext(Dispatchers.Main) {
                 response?.let {

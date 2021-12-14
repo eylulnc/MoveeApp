@@ -8,7 +8,7 @@ import com.eylulcan.moviefragment.databinding.AlbumFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
 import com.eylulcan.moviefragment.util.Utils
 
-class AlbumAdapter(private val artistAlbum: ArtistAlbum , private val imageListener:ImageListener) :
+class AlbumAdapter(private val artistAlbum: ArtistAlbum, private val imageListener: ImageListener) :
     RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: AlbumFragmentRecyclerRowBinding) :
@@ -28,18 +28,13 @@ class AlbumAdapter(private val artistAlbum: ArtistAlbum , private val imageListe
         val album = artistAlbum.artistProfileImages
         val url = setImageUrl(album?.get(position)?.filePath)
         Glide.with(holder.binding.root).load(url).into(holder.binding.imageView)
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             imageListener.onImageClicked(album, position)
         }
     }
 
-    override fun getItemCount(): Int {
-        val size = artistAlbum.artistProfileImages?.size
-        size?.let { return size } ?: return 0
-    }
+    override fun getItemCount(): Int = artistAlbum.artistProfileImages?.size ?: 0
 
-    private fun setImageUrl(file_path: String?): String {
-        return Utils.BASE_IMAGE_URL_185.plus(file_path)
-    }
+    private fun setImageUrl(file_path: String?): String = Utils.BASE_IMAGE_URL_185.plus(file_path)
 
 }

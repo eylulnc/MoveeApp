@@ -13,7 +13,7 @@ import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 
 class ReviewsFragment : Fragment() {
 
-    private lateinit var binding : FragmentReviewsBinding
+    private lateinit var binding: FragmentReviewsBinding
     private val detailViewModel: DetailViewModel by activityViewModels()
     private lateinit var reviewsAdapter: ReviewsAdapter
 
@@ -27,15 +27,17 @@ class ReviewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentReviewsBinding.bind(view)
-        binding.reviewFragmentRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.reviewFragmentRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         observeViewModel()
 
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         detailViewModel.reviews.observe(viewLifecycleOwner, { reviewList ->
             reviewsAdapter = ReviewsAdapter(reviewList)
             binding.reviewFragmentRecyclerView.adapter = reviewsAdapter
         })
     }
+
 }

@@ -22,25 +22,19 @@ class DiscoverAdapter(private val movieItem: Movie, private val listener: MovieL
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movieList = movieItem.results
-        movieList?.get(position)?.let {  resultMovie ->
+        movieList?.get(position)?.let { resultMovie ->
             Glide.with(holder.binding.root).load(setImageUrl(resultMovie.posterPath))
                 .into(holder.binding.movieListRecyclerViewImage)
             holder.binding.movieListRecyclerViewName.text = resultMovie.title
             holder.itemView.setOnClickListener {
-                listener.onMovieClicked(resultMovie,holder.binding.movieListRecyclerViewImage)
+                listener.onMovieClicked(resultMovie, holder.binding.movieListRecyclerViewImage)
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        movieItem.results?.let { movieList ->
-            return movieList.size
-        } ?: run {
-            return 0
-        }
-    }
+    override fun getItemCount(): Int = movieItem.results?.size ?: 0
 
-    private fun setImageUrl(poster_path: String?): String {
-        return Utils.BASE_IMAGE_URL_185.plus(poster_path)
-    }
+    private fun setImageUrl(poster_path: String?): String =
+        Utils.BASE_IMAGE_URL_185.plus(poster_path)
+
 }

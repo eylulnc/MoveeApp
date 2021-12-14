@@ -32,7 +32,7 @@ class ArtistMoviesFragment : Fragment() {
         observeViewModel()
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner, { movieCredits ->
             artistMovieAdapter = ArtistMovieAdapter(movieCredits)
             binding.artistMovieRecyclerView.adapter = artistMovieAdapter

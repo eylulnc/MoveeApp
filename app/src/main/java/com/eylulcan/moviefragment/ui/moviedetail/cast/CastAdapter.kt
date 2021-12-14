@@ -10,7 +10,10 @@ import com.eylulcan.moviefragment.model.MovieCredits
 import com.eylulcan.moviefragment.ui.artist.ArtistListener
 import com.eylulcan.moviefragment.util.Utils
 
-class CastAdapter(private val movieCredits: MovieCredits, private val artistListener: ArtistListener) :
+class CastAdapter(
+    private val movieCredits: MovieCredits,
+    private val artistListener: ArtistListener
+) :
     RecyclerView.Adapter<CastAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: CastFragmentRecyclerRowBinding) :
@@ -31,16 +34,14 @@ class CastAdapter(private val movieCredits: MovieCredits, private val artistList
         holder.binding.castArtistName.text = artist?.name
         Glide.with(holder.binding.root).load(setImageUrl(artist?.profilePath))
             .placeholder(R.color.greylight).into(holder.binding.castArtistImage)
-        holder.itemView.setOnClickListener{
-            artist?.id?.let { artistListener.onArtistClicked(it)}
+        holder.itemView.setOnClickListener {
+            artist?.id?.let { artistListener.onArtistClicked(it) }
         }
     }
 
-    override fun getItemCount(): Int {
-        return movieCredits.cast?.size ?: 0
-    }
+    override fun getItemCount(): Int = movieCredits.cast?.size ?: 0
 
-    private fun setImageUrl(poster_path: String?): String {
-        return Utils.BASE_IMAGE_URL_185.plus(poster_path)
-    }
+    private fun setImageUrl(poster_path: String?): String =
+        Utils.BASE_IMAGE_URL_185.plus(poster_path)
+
 }

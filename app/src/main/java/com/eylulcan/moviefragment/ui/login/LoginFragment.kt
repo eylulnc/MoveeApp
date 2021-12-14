@@ -21,15 +21,13 @@ import com.eylulcan.moviefragment.R
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
+private const val TAG: String = "SignInGoogle"
+private const val RC_SIGN_IN: Int = 7777
+
 class LoginFragment : Fragment() {
 
-    companion object {
-        private const val TAG: String = "SignInGoogle"
-        private const val RC_SIGN_IN: Int = 7777
-    }
-
-    private  val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private  val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var binding: FragmentLoginBinding
     private lateinit var email: String
     private lateinit var password: String
@@ -128,15 +126,16 @@ class LoginFragment : Fragment() {
             }
         }
     }
-    
-    private fun navigateToMovieList(){
+
+    private fun navigateToMovieList() {
         findNavController().navigate(
             R.id.action_loginFragment_to_dashboardFragment,
             null,
-            NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build())
+            NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
+        )
     }
 
-    private fun googleClientGetter(){
+    private fun googleClientGetter() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()

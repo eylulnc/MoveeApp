@@ -30,7 +30,6 @@ class GenresAdapter(private val genreList: GenreList, private val genresListener
             genre.id?.let { id ->
                 Genres.valueOfInt(id)?.movieGenreImage()
                     ?.let { holder.binding.genresFragmentImageView.setImageResource(it) }
-
                 holder.itemView.setOnClickListener {
                     genresListener.onGenreClicked(id)
                 }
@@ -39,11 +38,6 @@ class GenresAdapter(private val genreList: GenreList, private val genresListener
         }
     }
 
-    override fun getItemCount(): Int {
-        genreList.genres?.let { genreList ->
-            return genreList.size
-        } ?: run {
-            return 0
-        }
-    }
+    override fun getItemCount(): Int = genreList.genres?.size ?: 0
+
 }
