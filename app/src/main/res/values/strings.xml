@@ -65,6 +65,7 @@
     <string name="author_profile_image">Author Profile Image</string>
     <string name="expand_button">Expand Button</string>
     <string name="noInfo">There is no information about this person.</string>
+    <string name="watch_trailer">Watch Trailer</string>
 
 
 </resources>

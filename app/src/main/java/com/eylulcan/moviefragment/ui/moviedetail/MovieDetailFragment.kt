@@ -17,6 +17,9 @@ import com.eylulcan.moviefragment.util.Utils
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.tabs.TabLayoutMediator
+import android.content.Intent
+import androidx.core.view.isGone
+
 
 private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
 private const val VIMEO_LINK = "https://vimeo.com/"
@@ -73,16 +76,14 @@ class MovieDetailFragment : Fragment() {
     private fun observeViewModel() {
         movieDetailViewModel.videos.observe(viewLifecycleOwner, { videoList ->
             if (videoList.results?.isNotEmpty() == true) {
-                fragmentBinding.playerView.isVisible = true
-                videoList?.results.first().site?.let { videoSite ->
-                    videoList.results.first().key?.let { key ->
-                        val mediaUri = Uri.parse(setVideoUri(videoSite, key))
-                        mediaItem = MediaItem.fromUri(mediaUri)
-                        val player: ExoPlayer = ExoPlayer.Builder(requireContext()).build()
-                        fragmentBinding.playerView.player = player
-                        player.addMediaItem(mediaItem)
-                        player.prepare()
-                        player.playWhenReady = true
+                fragmentBinding.watchButton.visibility = View.VISIBLE
+                fragmentBinding.watchButton.setOnClickListener {
+                    videoList?.results.first().site?.let { videoSite ->
+                        videoList.results.first().key?.let { key ->
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse(setVideoUri(videoSite, key))
+                            startActivity(intent)
+                        }
                     }
                 }
             }

@@ -14,7 +14,7 @@ import com.eylulcan.moviefragment.databinding.FragmentMoreBinding
 import com.eylulcan.moviefragment.ui.genres.GenresViewModel
 import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 
-class GenreMovieListFragment: Fragment(), MovieDetailListener {
+class GenreMovieListFragment : Fragment(), MovieDetailListener {
 
     private lateinit var binding: FragmentMoreBinding
     private lateinit var genreMovieListAdapter: GenreMovieListAdapter
@@ -37,16 +37,21 @@ class GenreMovieListFragment: Fragment(), MovieDetailListener {
         observeViewModel()
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         genresViewModel.movies.observe(viewLifecycleOwner, { movie ->
-            genreMovieListAdapter = GenreMovieListAdapter(movie,this)
+            genreMovieListAdapter = GenreMovieListAdapter(movie, this)
             binding.moreRecyclerView.adapter = genreMovieListAdapter
         })
     }
 
     override fun onMovieClicked(id: Int) {
         val movieIdBundle = bundleOf(getString(R.string.movieId) to id)
-        findNavController().navigate(R.id.action_genreMovieListFragment_to_movieDetailFragment, movieIdBundle, null, null)
+        findNavController().navigate(
+            R.id.action_genreMovieListFragment_to_movieDetailFragment,
+            movieIdBundle,
+            null,
+            null
+        )
     }
 
 }
