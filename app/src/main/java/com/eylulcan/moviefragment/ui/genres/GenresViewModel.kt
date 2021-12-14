@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.api.MovieAPI
 import com.eylulcan.moviefragment.model.GenreList
+import com.eylulcan.moviefragment.model.Movie
+import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,17 +16,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class GenresViewModel : ViewModel() {
 
-    companion object {
-        private const val BASE_URL = "https://api.themoviedb.org/3/"
-    }
-
     private var retrofit: MovieAPI? = null
     private val genreList = MutableLiveData<GenreList>()
     val genres: LiveData<GenreList> get() = genreList
+    private val movieList = MutableLiveData<Movie>()
+    val movies: LiveData<Movie> get() = movieList
 
     init {
         retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Utils.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MovieAPI::class.java)
@@ -38,6 +38,26 @@ class GenresViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             genreList.postValue(it)
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun getMovieListByGenre(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getMovieByGenreId(id)
+            withContext(Dispatchers.Main) {
+                response?.let {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            movieList.postValue(it)
+                            it.results?.forEach { res ->
+                                println("eylll ${res.title}")
+
+                            }
 
                         }
                     }

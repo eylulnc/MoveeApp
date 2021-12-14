@@ -7,7 +7,7 @@ import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.databinding.GenresFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.GenreList
 
-class GenresAdapter(private val genreList: GenreList) :
+class GenresAdapter(private val genreList: GenreList, private val genresListener: GenreListener) :
     RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: GenresFragmentRecyclerRowBinding) :
@@ -30,7 +30,12 @@ class GenresAdapter(private val genreList: GenreList) :
             genre.id?.let { id ->
                 Genres.valueOfInt(id)?.movieGenreImage()
                     ?.let { holder.binding.genresFragmentImageView.setImageResource(it) }
+
+                holder.itemView.setOnClickListener {
+                    genresListener.onGenreClicked(id)
+                }
             }
+
         }
     }
 

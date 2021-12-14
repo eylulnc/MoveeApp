@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/moreRecyclerRow_moreMainConstraintLayout_margin"
+    android:id="@+id/moreMainConstraintLayout"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/movieBackdropImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:id="@+id/moreLinearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/moreRecyclerRow_linearLayout_marginStart"
+        android:layout_marginEnd="@dimen/moreRecyclerRow_linearLayout_marginEnd"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/ratingBarMore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieBackdropImage"
+        android:minHeight="@dimen/moreRecyclerRow_linearLayout_minHeight"
+        android:padding="@dimen/moreRecyclerRow_linearLayout_padding">
+
+        <TextView
+            android:id="@+id/movieNameMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="@dimen/moreRecyclerRow_movieName_size"
+            tools:text="Movie Name"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/genresMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="@dimen/moreRecyclerRow_genres_size"
+            tools:text="Movie Genres"
+            android:textColor="@color/black"  />
+    </LinearLayout>
+
+    <RatingBar
+        android:id="@+id/ratingBarMore"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/moreRecyclerRow_ratingBar_marginEnd"
+        android:numStars="5"
+        android:rating="3"
+        android:theme="@style/RatingBar"
+        app:layout_constraintBottom_toBottomOf="@+id/moreLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieBackdropImage" />
+</androidx.constraintlayout.widget.ConstraintLayout>
