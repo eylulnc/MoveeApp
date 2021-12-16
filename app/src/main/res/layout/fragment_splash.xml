@@ -15,6 +15,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/splash_image_content_description"
-        android:transitionName="@string/login_transition"/>
+        android:contentDescription="@string/splash_image_content_description" />
 </androidx.constraintlayout.widget.ConstraintLayout>

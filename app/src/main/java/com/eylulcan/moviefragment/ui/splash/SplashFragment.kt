@@ -44,8 +44,6 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSplashBinding.bind(view)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         val currentUser = auth.currentUser
         currentUser?.let {
             navigateToMovieList()
@@ -71,13 +69,11 @@ class SplashFragment : Fragment() {
     }
 
     private fun navigateToLogin() {
-        val extras =
-            FragmentNavigatorExtras(binding.splashFragmentLogo to getString(R.string.login_transition))
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController()
                 .navigate(
                     R.id.action_splashFragment_to_loginFragment, null,
-                    NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build(), extras
+                    NavOptions.Builder().setPopUpTo(R.id.splashFragment, true).build(), null
                 )
         }, 1500)
     }

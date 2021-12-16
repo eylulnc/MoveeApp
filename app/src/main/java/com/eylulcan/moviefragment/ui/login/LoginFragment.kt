@@ -42,8 +42,6 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -113,10 +111,10 @@ class LoginFragment : Fragment() {
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d(TAG, getString(R.string.login_log_message_sign_in_success))
-                val googleAccount = GoogleSignIn.getLastSignedInAccount(context)
+                val googleAccount = GoogleSignIn.getLastSignedInAccount(requireContext())
                 googleAccount?.let {
                     val userMap = hashMapOf<String, Any>()
-                    userMap[getString(R.string.user_email)] = googleAccount.email
+                    userMap[getString(R.string.user_email)] = googleAccount.email as String
                     firestore.collection(getString(R.string.users)).add(userMap)
                         .addOnSuccessListener { navigateToMovieList() }
                     Toast.makeText(context, R.string.user_created, Toast.LENGTH_LONG).show()
@@ -140,7 +138,7 @@ class LoginFragment : Fragment() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        googleSignInClient = GoogleSignIn.getClient(context, gso)
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
     }
 
 
