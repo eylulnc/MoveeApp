@@ -30,7 +30,6 @@ class SearchViewModel : ViewModel() {
     }
 
     fun getSearchResult(query: String) {
-        println("naz $query")
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getSearchResult(query = query)
             withContext(Dispatchers.Main) {
@@ -38,10 +37,6 @@ class SearchViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             searchResults.postValue(it)
-                            it.searchResults?.forEach{ it2 ->
-                                println("naz ${it2.mediaType}")
-                            }
-
                         }
                     }
                 }

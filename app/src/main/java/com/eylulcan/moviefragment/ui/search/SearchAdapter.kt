@@ -3,18 +3,18 @@ package com.eylulcan.moviefragment.ui.search
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.SearchFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.PeopleResult
-import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.model.ResultTvShow
 import com.eylulcan.moviefragment.model.SearchResultList
 
 private const val PERSON_SEARCH = 0
 private const val MOVIE_SEARCH = 1
 private const val TV_SHOW_SEARCH = 2
 
-
-class SearchAdapter(private val resultList: SearchResultList) :
+class SearchAdapter(
+    private val resultList: SearchResultList,
+    private val searchListener: SearchListener
+) :
     RecyclerView.Adapter<SearchRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchRecyclerViewHolder {
@@ -51,10 +51,31 @@ class SearchAdapter(private val resultList: SearchResultList) :
     }
 
     override fun onBindViewHolder(holder: SearchRecyclerViewHolder, position: Int) {
-        when(holder){
-            is SearchRecyclerViewHolder.PersonViewHolder -> holder.bind(resultList.searchResults?.get(position)?.data as PeopleResult)
-            is SearchRecyclerViewHolder.MovieViewHolder -> holder.bind(resultList.searchResults?.get(position)?.data as ResultMovie)
-            is SearchRecyclerViewHolder.TvShowViewHolder -> holder.bind(resultList.searchResults?.get(position)?.data as ResultTvShow)
+        when (getItemViewType(position)) {
+            PERSON_SEARCH -> {
+                holder.apply {
+                    (holder as SearchRecyclerViewHolder.PersonViewHolder)
+                    holder.bind(resultList.searchResults?.get(position))
+
+                }
+            }
+            MOVIE_SEARCH -> {
+                holder.apply {
+                    (holder as SearchRecyclerViewHolder.MovieViewHolder)
+                    holder.bind(resultList.searchResults?.get(position))
+                    holder.itemView.setOnClickListener {
+                        resultList.searchResults?.get(position)?.id?.let { id ->
+                            searchListener.onMovieClicked(id, holder.itemView.findViewById(R.id.searchItemImage))
+                        }
+                    }
+                }
+            }
+            TV_SHOW_SEARCH -> {
+                holder.apply {
+                    (holder as SearchRecyclerViewHolder.TvShowViewHolder)
+                    holder.bind(resultList.searchResults?.get(position))
+                }
+            }
         }
     }
 
