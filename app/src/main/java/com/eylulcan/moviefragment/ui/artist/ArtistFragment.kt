@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,14 @@ class ArtistFragment : Fragment(), ArtistListener {
         observeViewModel()
         artistViewModel.getPopularPeople()
         setupUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lastLoadedPage = 1
+        val size = artistList.size
+        artistList.clear()
+        artistAdapter.notifyItemRangeRemoved(0, size)
     }
 
     private fun observeViewModel() {

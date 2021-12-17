@@ -100,4 +100,12 @@ class SearchFragment : Fragment(), SearchListener {
             }
         })
     }
+
+    override fun onResume() {
+        super.onResume()
+        lastLoadedPage = 1
+        val size = searchResultList.size
+        searchResultList.clear()
+        searchAdapter.notifyItemRangeRemoved(0, size)
+    }
 }

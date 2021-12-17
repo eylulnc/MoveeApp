@@ -51,7 +51,8 @@ interface MovieAPI {
     @GET("movie/{id}/reviews")
     suspend fun getMovieReviews(
         @Path("id") movieId: Int,
-        @Query("api_key") apiKey: String = Utils.API_KEY
+        @Query("api_key") apiKey: String = Utils.API_KEY,
+        @Query("page") pageNo: Int
     ): Response<ReviewList>
 
     @GET("movie/{id}/credits")
@@ -69,7 +70,8 @@ interface MovieAPI {
     @GET("discover/movie")
     suspend fun getMovieByGenreId(
         @Query("api_key") apiKey: String = Utils.API_KEY,
-        @Query("with_genres") genreId: Int
+        @Query("with_genres") genreId: Int,
+        @Query("page") pageNo: Int
     ): Response<Movie>
 
     @GET("movie/{id}")

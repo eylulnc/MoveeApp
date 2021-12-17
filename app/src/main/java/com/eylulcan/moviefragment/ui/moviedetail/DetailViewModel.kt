@@ -54,9 +54,9 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun getReviews(id: Int) {
+    fun getReviews(movieId: Int, pageNo: Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieReviews(movieId = id)
+            val response = retrofit?.getMovieReviews(movieId = movieId, pageNo = pageNo)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
