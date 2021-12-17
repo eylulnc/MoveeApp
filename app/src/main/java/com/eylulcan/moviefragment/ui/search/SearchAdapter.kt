@@ -2,9 +2,12 @@ package com.eylulcan.moviefragment.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.SearchFragmentRecyclerRowBinding
+import com.eylulcan.moviefragment.model.SearchResult
 import com.eylulcan.moviefragment.model.SearchResultList
 
 private const val PERSON_SEARCH = 0
@@ -12,7 +15,6 @@ private const val MOVIE_SEARCH = 1
 private const val TV_SHOW_SEARCH = 2
 
 class SearchAdapter(
-    private val resultList: SearchResultList,
     private val searchListener: SearchListener
 ) :
     RecyclerView.Adapter<SearchRecyclerViewHolder>() {
@@ -55,17 +57,20 @@ class SearchAdapter(
             PERSON_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.PersonViewHolder)
-                    holder.bind(resultList.searchResults?.get(position))
+                    holder.bind(searchResult[position])
 
                 }
             }
             MOVIE_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.MovieViewHolder)
-                    holder.bind(resultList.searchResults?.get(position))
+                    holder.bind(searchResult[position])
                     holder.itemView.setOnClickListener {
-                        resultList.searchResults?.get(position)?.id?.let { id ->
-                            searchListener.onMovieClicked(id, holder.itemView.findViewById(R.id.searchItemImage))
+                        searchResult[position].id?.let { id ->
+                            searchListener.onMovieClicked(
+                                id,
+                                holder.itemView.findViewById(R.id.searchItemImage)
+                            )
                         }
                     }
                 }
@@ -73,13 +78,13 @@ class SearchAdapter(
             TV_SHOW_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.TvShowViewHolder)
-                    holder.bind(resultList.searchResults?.get(position))
+                    holder.bind(searchResult[position])
                 }
             }
         }
     }
 
-    override fun getItemCount(): Int = resultList.searchResults?.size ?: 0
+    override fun getItemCount(): Int = searchResult.size
 
     override fun getItemViewType(position: Int): Int {
         return when {
@@ -91,16 +96,40 @@ class SearchAdapter(
     }
 
     private fun isMovie(position: Int): Boolean {
-        return resultList.searchResults?.get(position)?.mediaType == "movie"
+        return searchResult[position].mediaType == "movie"
     }
 
     private fun isPerson(position: Int): Boolean {
-        return resultList.searchResults?.get(position)?.mediaType == "person"
+        return searchResult[position].mediaType == "person"
     }
 
     private fun isTvShow(position: Int): Boolean {
-        return resultList.searchResults?.get(position)?.mediaType == "tv"
+        return searchResult[position].mediaType == "tv"
     }
+
+    private val diffUtil = object : DiffUtil.ItemCallback<SearchResult>() {
+        override fun areItemsTheSame(
+            oldItem: SearchResult,
+            newItem: SearchResult
+        ): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: SearchResult,
+            newItem: SearchResult
+        ): Boolean {
+            return oldItem.equals(newItem)
+        }
+
+    }
+
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
+
+    var searchResult: List<SearchResult>
+        get() = recyclerListDiffer.currentList
+        set(value) = recyclerListDiffer.submitList(value)
+
 }
 
 

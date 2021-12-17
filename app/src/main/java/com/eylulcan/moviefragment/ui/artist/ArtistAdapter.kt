@@ -2,15 +2,16 @@ package com.eylulcan.moviefragment.ui.artist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.PopularPeopleList
+import com.eylulcan.moviefragment.model.PeopleResult
 import com.eylulcan.moviefragment.util.Utils
 
 class ArtistAdapter(
-    private val popularPeopleList: PopularPeopleList,
     private val artistListener: ArtistListener
 ) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
@@ -29,8 +30,7 @@ class ArtistAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val popularPeopleList = popularPeopleList.results
-        popularPeopleList?.get(position)?.let { artist ->
+        peopleResult[position].let { artist ->
             holder.binding.artistRecyclerPersonName.text = artist.name
             Glide.with(holder.binding.root).load(setImageUrl(artist.profilePath))
                 .placeholder(R.color.greylight)
@@ -38,15 +38,37 @@ class ArtistAdapter(
             holder.binding.artistRecyclerPersonName.text = artist.name
         }
         holder.itemView.setOnClickListener {
-            popularPeopleList?.get(position)?.id?.let { artistId ->
+            peopleResult[position].id?.let { artistId ->
                 artistListener.onArtistClicked(artistId)
             }
         }
     }
 
-    override fun getItemCount(): Int = popularPeopleList.results?.size ?: 0
+    override fun getItemCount(): Int = peopleResult.size ?: 0
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_185.plus(poster_path)
 
+    private val diffUtil = object : DiffUtil.ItemCallback<PeopleResult>() {
+        override fun areItemsTheSame(
+            oldItem: PeopleResult,
+            newItem: PeopleResult
+        ): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: PeopleResult,
+            newItem: PeopleResult
+        ): Boolean {
+            return oldItem.equals(newItem)
+        }
+
+    }
+
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
+
+    var peopleResult: List<PeopleResult>
+        get() = recyclerListDiffer.currentList
+        set(value) = recyclerListDiffer.submitList(value)
 }

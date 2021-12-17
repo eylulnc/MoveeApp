@@ -27,9 +27,9 @@ class ArtistViewModel : ViewModel() {
             .create(MovieAPI::class.java)
     }
 
-    fun getPopularPeople() {
+    fun getPopularPeople(pageNo: Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getPopularPeople()
+            val response = retrofit?.getPopularPeople(pageNo = pageNo)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {

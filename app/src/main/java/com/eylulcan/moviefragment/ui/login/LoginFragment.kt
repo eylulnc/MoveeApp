@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import android.util.Log
+import androidx.core.view.ViewCompat
 import com.eylulcan.moviefragment.R
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
@@ -47,6 +48,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ViewCompat.setTranslationZ(view, 1F)
         binding = FragmentLoginBinding.bind(view)
         binding.signInButton.setOnClickListener { signIn() }
         binding.signUpButton.setOnClickListener { signUp() }

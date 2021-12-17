@@ -19,7 +19,10 @@ interface MovieAPI {
     suspend fun getGenresData(@Query("api_key") apiKey: String = Utils.API_KEY): Response<GenreList>
 
     @GET("person/popular")
-    suspend fun getPopularPeople(@Query("api_key") apiKey: String = Utils.API_KEY): Response<PopularPeopleList>
+    suspend fun getPopularPeople(
+        @Query("api_key") apiKey: String = Utils.API_KEY,
+        @Query("page") pageNo: Int
+    ): Response<PopularPeopleList>
 
     @GET("person/{id}/movie_credits")
     suspend fun getArtistMovieCredits(
@@ -78,7 +81,8 @@ interface MovieAPI {
     @GET("search/multi")
     suspend fun getSearchResult(
         @Query("api_key") apiKey: String = Utils.API_KEY,
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("page") pageNo: Int
     ): Response<SearchResultList>
 
 }

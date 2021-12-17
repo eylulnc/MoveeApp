@@ -29,9 +29,9 @@ class SearchViewModel : ViewModel() {
             .create(MovieAPI::class.java)
     }
 
-    fun getSearchResult(query: String) {
+    fun getSearchResult(query: String, pageNo: Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getSearchResult(query = query)
+            val response = retrofit?.getSearchResult(query = query, pageNo = pageNo)
             withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
