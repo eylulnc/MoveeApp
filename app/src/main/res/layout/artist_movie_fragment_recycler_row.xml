@@ -22,6 +22,7 @@
         android:id="@+id/artistMovieLinearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/artist_movie_recycler_row_linear_layout_paddingTop"
         android:layout_marginStart="@dimen/artist_movie_recycler_row_linear_layout_marginStart"
         android:layout_marginEnd="@dimen/artist_movie_recycler_row_linear_layout_marginEnd"
         android:orientation="vertical"

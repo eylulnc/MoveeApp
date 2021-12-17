@@ -2,12 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.moviedetail.reviews.ReviewsFragment"
-    android:background="@color/tr60_purple_mountain">
+    android:background="@color/tr60_purple_mountain"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewFragmentRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="32dp"/>
 </FrameLayout>

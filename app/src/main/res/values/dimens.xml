@@ -88,13 +88,14 @@
     <dimen name="movie_list_recycler_view_2_margin_top">16dp</dimen>
     <dimen name="movie_list_recycler_view_2_margin_end">8dp</dimen>
     <dimen name="movie_list_recycler_view_image_height">200dp</dimen>
-    <dimen name="movie_list_recycler_view_name_font_size">16sp</dimen>
+    <dimen name="movie_list_recycler_view_name_font_size">14sp</dimen>
     <dimen name="movie_list_recycler_view_name_min_height">48sp</dimen>
 
     <dimen name="artist_recycler_row_text_width">100dp</dimen>
     <dimen name="artist_recycler_row_text_height">200dp</dimen>
     <dimen name="artist_recycler_row_text_size">14sp</dimen>
-    <dimen name="artist_recycler_row_text_padding">8dp</dimen>
+    <dimen name="artist_recycler_row_text_paddingLeft">16dp</dimen>
+    <dimen name="artist_recycler_row_text_paddingRight">16dp</dimen>
     <dimen name="artist_recycler_row_text_margin">8dp</dimen>
     <dimen name="artist_recycler_row_text_minHeight">40dp</dimen>
     <dimen name="artist_recycler_view_margin">4dp</dimen>
@@ -129,6 +130,7 @@
     <dimen name="artist_movie_recycler_row_text_movie_name_size">14sp</dimen>
     <dimen name="artist_movie_recycler_row_text_genres_name_size">12sp</dimen>
     <dimen name="artist_movie_recycler_row_linear_layout_marginStart">16dp</dimen>
+    <dimen name="artist_movie_recycler_row_linear_layout_paddingTop">8dp</dimen>
     <dimen name="artist_movie_recycler_row_linear_layout_marginEnd">16dp</dimen>
     <dimen name="artist_movie_recycler_row_ratingBar_marginEnd">32dp</dimen>
     <dimen name="artist_movie_recycler_row_artistMovieMainConstraintLayout_margin">16dp</dimen>

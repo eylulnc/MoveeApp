@@ -35,7 +35,7 @@ class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
             .placeholder(R.color.grey)
             .into(holder.binding.movieBackdropImage)
         movie?.genreIds?.forEach { genreId ->
-            genreNames = genreNames.plus(Genres.valueOfInt(genreId)?.movieGenreName()).plus(" ")
+            genreNames = genreNames.plus(Genres.valueOfInt(genreId)?.movieGenreName()).plus(" | ")
         }
         holder.binding.genresArtistMovie.text = genreNames
         holder.binding.ratingBarArtistMovie.rating =
