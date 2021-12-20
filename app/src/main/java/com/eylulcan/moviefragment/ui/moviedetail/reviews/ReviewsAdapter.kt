@@ -9,8 +9,6 @@ import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ReviewFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Review
-import com.eylulcan.moviefragment.model.ReviewList
-import com.eylulcan.moviefragment.model.SearchResult
 import com.eylulcan.moviefragment.util.Utils
 import java.text.SimpleDateFormat
 import java.util.*

@@ -9,9 +9,7 @@ import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.GenreMovieListRecyclerRowBinding
-import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.model.SearchResult
 import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 import com.eylulcan.moviefragment.util.Utils
 
@@ -53,7 +51,7 @@ class GenreMovieListAdapter(
         }
     }
 
-    override fun getItemCount(): Int = movieResult.size ?: 0
+    override fun getItemCount(): Int = movieResult.size
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_300.plus(poster_path)
@@ -72,7 +70,6 @@ class GenreMovieListAdapter(
         ): Boolean {
             return oldItem.equals(newItem)
         }
-
     }
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
@@ -80,4 +77,5 @@ class GenreMovieListAdapter(
     var movieResult: List<ResultMovie>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
+
 }

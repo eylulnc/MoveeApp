@@ -34,7 +34,6 @@ class GenresAdapter(private val genreList: GenreList, private val genresListener
                     genresListener.onGenreClicked(id)
                 }
             }
-
         }
     }
 

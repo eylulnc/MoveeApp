@@ -53,4 +53,5 @@ class GenresFragment : Fragment(), GenreListener {
             null
         )
     }
+
 }

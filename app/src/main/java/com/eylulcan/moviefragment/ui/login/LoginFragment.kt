@@ -2,25 +2,24 @@ package com.eylulcan.moviefragment.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.transition.TransitionInflater
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import android.util.Log
-import androidx.core.view.ViewCompat
-import com.eylulcan.moviefragment.R
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 
 private const val TAG: String = "SignInGoogle"
 private const val RC_SIGN_IN: Int = 7777
@@ -142,6 +141,5 @@ class LoginFragment : Fragment() {
             .build()
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
     }
-
 
 }

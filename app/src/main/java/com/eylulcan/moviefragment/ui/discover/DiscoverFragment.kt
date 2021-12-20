@@ -60,7 +60,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         val movieDataBundle = bundleOf((getString(R.string.movieId)) to resultMovie.id)
         val extras = FragmentNavigatorExtras(image to getString(R.string.list_to_detail_transition))
         image.transitionName = image.id.toString()
-        //movieAdapter.updateMovieList(movieList)
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_dashboardFragment_to_movieDetailFragment,
             movieDataBundle, null, extras
@@ -94,7 +93,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         } else if (item?.itemId == R.id.search_button) {
             findNavController().navigate(R.id.action_discoverFragment_to_searchFragment)
         }
-
         return false
     }
 
@@ -103,4 +101,5 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         toolbar.inflateMenu(R.menu.menu)
         toolbar.setOnMenuItemClickListener(this)
     }
+
 }

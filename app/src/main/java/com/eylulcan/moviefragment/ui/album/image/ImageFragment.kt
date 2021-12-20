@@ -1,16 +1,14 @@
 package com.eylulcan.moviefragment.ui.album.image
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentImageBinding
 import com.eylulcan.moviefragment.model.ProfileImage
-import com.eylulcan.moviefragment.util.Utils
-import com.google.api.Distribution
 
 class ImageFragment : Fragment() {
 

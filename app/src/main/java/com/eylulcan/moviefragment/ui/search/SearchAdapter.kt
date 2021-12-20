@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.SearchFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.SearchResult
-import com.eylulcan.moviefragment.model.SearchResultList
 
 private const val PERSON_SEARCH = 0
 private const val MOVIE_SEARCH = 1

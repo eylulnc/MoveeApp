@@ -1,20 +1,17 @@
 package com.eylulcan.moviefragment.ui.artistdetail.summary
 
 import android.os.Bundle
-import android.print.PrintAttributes
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.marginBottom
-import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSummaryBinding
 import com.eylulcan.moviefragment.ui.artistdetail.ArtistDetailViewModel
 
-class SummaryFragment() : Fragment() {
+class SummaryFragment : Fragment() {
 
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
     private lateinit var binding: FragmentSummaryBinding

@@ -1,19 +1,17 @@
 package com.eylulcan.moviefragment.ui.moviedetail.reviews
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentReviewsBinding
 import com.eylulcan.moviefragment.model.Review
-import com.eylulcan.moviefragment.model.SearchResult
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
-import com.eylulcan.moviefragment.ui.search.SearchAdapter
 
 class ReviewsFragment : Fragment() {
 
@@ -47,7 +45,6 @@ class ReviewsFragment : Fragment() {
                 }
             }
         })
-
     }
 
     private fun observeViewModel() {

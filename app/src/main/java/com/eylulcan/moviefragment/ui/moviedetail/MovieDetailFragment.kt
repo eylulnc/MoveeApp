@@ -1,12 +1,12 @@
 package com.eylulcan.moviefragment.ui.moviedetail
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -14,11 +14,7 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
 import com.eylulcan.moviefragment.model.MovieDetail
 import com.eylulcan.moviefragment.util.Utils
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.tabs.TabLayoutMediator
-import android.content.Intent
-import androidx.core.view.isGone
 
 
 private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
@@ -30,7 +26,6 @@ class MovieDetailFragment : Fragment() {
     private lateinit var fragmentBinding: FragmentMovieDetailBinding
     private val tabNames = arrayOf("Cast", "Reviews", "More")
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
-    private lateinit var mediaItem: MediaItem
     private var genreNames: String = ""
     private var movieLanguages: String = ""
 
@@ -123,6 +118,7 @@ class MovieDetailFragment : Fragment() {
                 movieLanguages = movieLanguages.plus(language.name).plus(" | ")
             }
             fragmentBinding.languageText.text = getString(R.string.language, movieLanguages)
+            genreNames = ""
             selectedMovie.genres?.forEach { genre ->
                 genreNames = genreNames.plus(genre.name).plus(" | ")
             }

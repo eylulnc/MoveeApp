@@ -1,12 +1,10 @@
 package com.eylulcan.moviefragment.ui.onboard
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentOnboardBinding
 
@@ -27,4 +25,5 @@ class OnboardFragment(private val imageId: Int) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.onboardBackgroundImage.setImageResource(imageId)
     }
+
 }

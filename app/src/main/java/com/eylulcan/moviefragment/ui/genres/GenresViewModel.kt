@@ -60,4 +60,5 @@ class GenresViewModel : ViewModel() {
             }
         }
     }
+
 }

@@ -44,7 +44,7 @@ class ArtistAdapter(
         }
     }
 
-    override fun getItemCount(): Int = peopleResult.size ?: 0
+    override fun getItemCount(): Int = peopleResult.size
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_185.plus(poster_path)
