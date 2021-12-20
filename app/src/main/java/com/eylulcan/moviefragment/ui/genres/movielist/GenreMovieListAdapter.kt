@@ -40,6 +40,7 @@ class GenreMovieListAdapter(
         Glide.with(holder.binding.root).load(setImageUrl(movie.backdropPath))
             .placeholder(R.color.grey)
             .into(holder.binding.movieBackdropImage)
+        genreNames = ""
         movie.genreIds?.forEach { genreId ->
             genreNames =
                 genreNames.plus(genreId?.let { Genres.valueOfInt(it)?.movieGenreName() })

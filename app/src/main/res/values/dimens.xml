@@ -29,9 +29,9 @@
     <dimen name="detail_movie_detailGenreNameText_margin_top">8dp</dimen>
     <dimen name="detail_movie_detailGenreNameText_textSize">16sp</dimen>
     <dimen name="detail_movie_nestedScrollView_margin_top">8dp</dimen>
-    <dimen name="detail_movie_relativeLayout_marginStart">8dp</dimen>
+    <dimen name="detail_movie_relativeLayout_marginStart">16dp</dimen>
     <dimen name="detail_movie_relativeLayout_marginTop">8dp</dimen>
-    <dimen name="detail_movie_relativeLayout_marginEnd">8dp</dimen>
+    <dimen name="detail_movie_relativeLayout_marginEnd">16dp</dimen>
     <dimen name="detail_movie_relativeLayout_minHeight">50dp</dimen>
     <dimen name="detail_movie_expandableText_size">16sp</dimen>
     <dimen name="detail_movie_expandableText_marginLeft">8dp</dimen>
@@ -89,15 +89,13 @@
     <dimen name="movie_list_recycler_view_2_margin_end">8dp</dimen>
     <dimen name="movie_list_recycler_view_image_height">200dp</dimen>
     <dimen name="movie_list_recycler_view_name_font_size">14sp</dimen>
-    <dimen name="movie_list_recycler_view_name_min_height">48sp</dimen>
+    <dimen name="movie_list_recycler_view_name_min_height">45dp</dimen>
 
-    <dimen name="artist_recycler_row_text_width">100dp</dimen>
-    <dimen name="artist_recycler_row_text_height">200dp</dimen>
     <dimen name="artist_recycler_row_text_size">14sp</dimen>
     <dimen name="artist_recycler_row_text_paddingLeft">16dp</dimen>
     <dimen name="artist_recycler_row_text_paddingRight">16dp</dimen>
     <dimen name="artist_recycler_row_text_margin">8dp</dimen>
-    <dimen name="artist_recycler_row_text_minHeight">40dp</dimen>
+    <dimen name="artist_recycler_row_text_height">50dp</dimen>
     <dimen name="artist_recycler_view_margin">4dp</dimen>
     <dimen name="artist_recyclerRow_movieImage_width">150dp</dimen>
     <dimen name="artist_recyclerRow_movieImage_height">200dp</dimen>
@@ -187,6 +185,7 @@
     <dimen name="review_fragment_expandableText_marginLeft">8dp</dimen>
     <dimen name="review_fragment_expandableText_marginRight">8dp</dimen>
     <dimen name="review_fragment_expandCollapseButton_padding">4dp</dimen>
+    <dimen name="review_recyclerview_marginBottom">32dp</dimen>
 
     <dimen name="moreRecyclerRow_moreMainConstraintLayout_margin">16dp</dimen>
     <dimen name="moreRecyclerRow_linearLayout_marginStart">16dp</dimen>
@@ -219,4 +218,7 @@
     <dimen name="search_recycler_view_margin">4dp</dimen>
     <dimen name="search_recyclerRow_image_width">150dp</dimen>
     <dimen name="search_recyclerRow_image_height">200dp</dimen>
+
+    <dimen name="image_fragment_recyclerRow_artistImage_height">500dp</dimen>
+    <dimen name="image_fragment_recyclerRow_artistImage_width">350dp</dimen>
 </resources>

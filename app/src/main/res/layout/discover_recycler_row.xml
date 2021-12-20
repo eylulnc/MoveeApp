@@ -41,5 +41,5 @@
         app:layout_constraintTop_toBottomOf="@+id/movieListRecyclerViewImage"
         app:layout_constraintVertical_bias="0.0"
         android:background="@color/white"
-        android:minHeight="45dp"/>
+        android:minHeight="@dimen/movie_list_recycler_view_name_min_height"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

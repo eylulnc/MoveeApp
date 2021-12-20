@@ -34,6 +34,7 @@ class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
         Glide.with(holder.binding.root).load(setImageUrl(movie?.backdropPath))
             .placeholder(R.color.grey)
             .into(holder.binding.movieBackdropImage)
+        genreNames = ""
         movie?.genreIds?.forEach { genreId ->
             genreNames = genreNames.plus(Genres.valueOfInt(genreId)?.movieGenreName()).plus(" | ")
         }

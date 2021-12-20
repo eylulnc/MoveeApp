@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/artistImageView"
-        android:layout_width="348dp"
-        android:layout_height="521dp"
+        android:layout_width="@dimen/image_fragment_recyclerRow_artistImage_width"
+        android:layout_height="@dimen/image_fragment_recyclerRow_artistImage_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

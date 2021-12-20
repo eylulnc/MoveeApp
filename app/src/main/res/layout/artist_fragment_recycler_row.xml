@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/artistRecyclerPersonName"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/artist_recycler_row_text_height"
         android:background="@color/light_lavender"
         android:ellipsize="end"
         android:gravity="center"
