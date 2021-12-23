@@ -20,6 +20,8 @@ class DiscoverViewModel : ViewModel() {
     val popularMovies: LiveData<Movie> get() = popularMovieList
     private val topRatedMovieList = MutableLiveData<Movie>()
     val topRatedMovies: LiveData<Movie> get() = topRatedMovieList
+    private val nowPlayingMovieList = MutableLiveData<Movie>()
+    val nowPlaying: LiveData<Movie> get() = nowPlayingMovieList
 
     init {
         retrofit = Retrofit.Builder()
@@ -32,13 +34,11 @@ class DiscoverViewModel : ViewModel() {
     fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getPopularData()
-            withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             popularMovieList.postValue(it)
                         }
-                    }
                 }
             }
         }
@@ -47,13 +47,24 @@ class DiscoverViewModel : ViewModel() {
     fun getTopRatedMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getTopRatedData()
-            withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             topRatedMovieList.postValue(it)
                         }
-                    }
+                }
+            }
+        }
+    }
+
+    fun getNowPlayingMovieList(pageNo:Int = 1) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getNowPlayingData(pageNo = pageNo)
+                response?.let {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            nowPlayingMovieList.postValue(it)
+                        }
                 }
             }
         }
