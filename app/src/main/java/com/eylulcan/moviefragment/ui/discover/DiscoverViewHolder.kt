@@ -38,7 +38,7 @@ open class DiscoverViewHolder(binding: DiscoverRecyclerRowBinding) :
             Utils.BASE_IMAGE_URL_185.plus(poster_path)
     }
 
-    class ThirdRecycler(private val binding: DiscoverRecyclerRowBinding) :
+    class NowPlaying(private val binding: DiscoverRecyclerRowBinding) :
         DiscoverViewHolder(binding) {
         fun bind(movie: ResultMovie, listener: MovieListener) {
             Glide.with(binding.root).load(setImageUrl(movie.posterPath))

@@ -10,7 +10,7 @@ import com.eylulcan.moviefragment.model.ResultMovie
 
 private const val MOST_POPULAR = 0
 private const val TOP_RATED = 1
-private const val THIRD = 2
+private const val NOW_PLAYING = 2
 
 class DiscoverAdapter(
     private val listener: MovieListener,
@@ -34,7 +34,7 @@ class DiscoverAdapter(
                     false
                 )
             )
-            THIRD -> DiscoverViewHolder.ThirdRecycler(
+            NOW_PLAYING -> DiscoverViewHolder.NowPlaying(
                 DiscoverRecyclerRowBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -65,9 +65,9 @@ class DiscoverAdapter(
                     movieResultList?.get(position)?.let { holder.bind(it, listener) }
                 }
             }
-            THIRD -> {
+            NOW_PLAYING -> {
                 holder.apply {
-                    (holder as DiscoverViewHolder.ThirdRecycler)
+                    (holder as DiscoverViewHolder.NowPlaying)
                     movieResultList?.get(position)?.let { holder.bind(it, listener) }
                 }
             }
@@ -78,7 +78,7 @@ class DiscoverAdapter(
         return when {
             isMostPopular() -> MOST_POPULAR
             isTopRated() -> TOP_RATED
-            isThird() -> THIRD
+            isThird() -> NOW_PLAYING
             else -> MOST_POPULAR
         }
     }

@@ -42,7 +42,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         val view = inflater.inflate(R.layout.fragment_discover, container, false)
         fragmentBinding = FragmentDiscoverBinding.bind(view)
         setToolbarMenu()
-        fragmentBinding.discoverThirdRecyclerView.layoutManager = GridLayoutManager(context, 3)
+        fragmentBinding.discoverNowPlayingRecyclerView.layoutManager = GridLayoutManager(context, 3)
         fragmentBinding.discoverTopRatedRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragmentBinding.discoverPopularRecyclerView.layoutManager =
@@ -65,7 +65,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         fragmentBinding.discoverTopRatedRecyclerView.doOnPreDraw {
             startPostponedEnterTransition()
         }
-        fragmentBinding.discoverThirdRecyclerView.doOnPreDraw {
+        fragmentBinding.discoverNowPlayingRecyclerView.doOnPreDraw {
             startPostponedEnterTransition()
         }
     }
@@ -101,15 +101,15 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         topRatedAdapter = DiscoverAdapter(this, getString(R.string.top_rated))
         fragmentBinding.discoverTopRatedRecyclerView.adapter = topRatedAdapter
         nowPlayingAdapter = DiscoverAdapter(this, getString(R.string.now_playing))
-        fragmentBinding.discoverThirdRecyclerView.adapter = nowPlayingAdapter
+        fragmentBinding.discoverNowPlayingRecyclerView.adapter = nowPlayingAdapter
         mostPopularAdapter = DiscoverAdapter(this, getString(R.string.most_popular))
         fragmentBinding.discoverPopularRecyclerView.adapter = mostPopularAdapter
 
-        fragmentBinding.discoverThirdRecyclerView.addOnScrollListener(object :
+        fragmentBinding.discoverNowPlayingRecyclerView.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = fragmentBinding.discoverThirdRecyclerView.layoutManager as GridLayoutManager
+                val layoutManager = fragmentBinding.discoverNowPlayingRecyclerView.layoutManager as GridLayoutManager
                 val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
                 if (lastVisiblePosition == nowPlayingResultList.size - 1 && enableToRequest) {
                     discoverViewModel.getNowPlayingMovieList()

@@ -83,7 +83,7 @@
                     android:scrollbars="horizontal" />
 
                 <TextView
-                    android:id="@+id/thirdRecyclerViewText"
+                    android:id="@+id/nowPlayingRecyclerViewText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/movieList_topRatedText_marginStart"
@@ -94,7 +94,7 @@
                     android:textSize="@dimen/movieList_topRatedText_size" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/discoverThirdRecyclerView"
+                    android:id="@+id/discoverNowPlayingRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/movieList_topRated_recyclerView_marginTop"

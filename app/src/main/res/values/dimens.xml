@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="recycler_row_image_width">150dp</dimen>
-    <dimen name="recycler_row_image_height">200dp</dimen>
-    <dimen name="recycler_row_text_margin">8dp</dimen>
-    <dimen name="recycler_row_image_marginTop">16dp</dimen>
+    <dimen name="discover_recycler_row_image_width">150dp</dimen>
+    <dimen name="discover_recycler_row_image_height">200dp</dimen>
+    <dimen name="discover_recycler_row_text_margin">8dp</dimen>
+    <dimen name="discover_recycler_row_image_marginTop">16dp</dimen>
+    <dimen name="discover_recycler_row_text_padding">6dp</dimen>
 
     <dimen name="detail_movie_detailImagePoster_height">200dp</dimen>
     <dimen name="detail_movie_detailImagePoster_width">150dp</dimen>
