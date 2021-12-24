@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/searchItemName"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="@dimen/search_recycler_row_text_margin"
         android:layout_marginEnd="@dimen/search_recycler_row_text_margin"
         android:layout_marginBottom="@dimen/search_recycler_row_text_margin"
@@ -27,7 +27,8 @@
         android:gravity="center"
         android:maxLines="2"
         android:minHeight="@dimen/search_recycler_row_text_minHeight"
-        android:padding="@dimen/search_recycler_row_text_padding"
+        android:paddingStart="@dimen/search_recycler_row_text_padding"
+        android:paddingEnd="@dimen/search_recycler_row_text_padding"
         android:singleLine="false"
         android:textAlignment="center"
         android:textColor="@color/black"

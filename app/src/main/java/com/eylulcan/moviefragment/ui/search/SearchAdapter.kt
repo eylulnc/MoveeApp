@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.SearchFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.SearchResult
 
@@ -56,22 +55,13 @@ class SearchAdapter(
             PERSON_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.PersonViewHolder)
-                    holder.bind(searchResult[position])
-
+                    holder.bind(searchResult[position],searchListener)
                 }
             }
             MOVIE_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.MovieViewHolder)
-                    holder.bind(searchResult[position])
-                    holder.itemView.setOnClickListener {
-                        searchResult[position].id?.let { id ->
-                            searchListener.onMovieClicked(
-                                id,
-                                holder.itemView.findViewById(R.id.searchItemImage)
-                            )
-                        }
-                    }
+                    holder.bind(searchResult[position],searchListener)
                 }
             }
             TV_SHOW_SEARCH -> {
@@ -111,7 +101,7 @@ class SearchAdapter(
             oldItem: SearchResult,
             newItem: SearchResult
         ): Boolean {
-            return oldItem == newItem
+            return oldItem === newItem
         }
 
         override fun areContentsTheSame(

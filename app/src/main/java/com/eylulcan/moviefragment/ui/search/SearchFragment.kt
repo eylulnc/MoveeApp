@@ -25,9 +25,9 @@ class SearchFragment : Fragment(), SearchListener {
     private lateinit var binding: FragmentSearchBinding
     private val searchViewModel: SearchViewModel by viewModels()
     private var searchQuery: String = ""
-    private var lastLoadedPage: Int = 1
     private lateinit var searchAdapter: SearchAdapter
     private var searchResultList: ArrayList<SearchResult> = arrayListOf()
+    private var searchItemsInAPage: List<SearchResult>? = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +50,13 @@ class SearchFragment : Fragment(), SearchListener {
 
     private fun observeViewModel() {
         searchViewModel.result.observe(viewLifecycleOwner, { results ->
-            searchResultList.addAll(results.searchResults ?: arrayListOf())
+            searchItemsInAPage =
+                if (results.searchResults?.let { searchItemsInAPage?.containsAll(it) } == true) {
+                    emptyList()
+                } else {
+                    results.searchResults
+                }
+            searchResultList.addAll(searchItemsInAPage ?: arrayListOf())
             searchAdapter.searchResult = searchResultList
             searchAdapter.notifyDataSetChanged()
         })
@@ -60,52 +66,57 @@ class SearchFragment : Fragment(), SearchListener {
         val movieDataBundle = bundleOf((getString(R.string.movieId)) to id)
         val extras = FragmentNavigatorExtras(image to getString(R.string.list_to_detail_transition))
         image.transitionName = image.id.toString()
-        this.parentFragment?.parentFragment?.findNavController()?.navigate(
-            R.id.action_dashboardFragment_to_movieDetailFragment,
+        this.parentFragment?.findNavController()?.navigate(
+            R.id.action_searchFragment_to_movieDetailFragment,
             movieDataBundle, null, extras
         )
     }
 
     override fun onPersonClicked(id: Int) {
         val artistIdBundle = bundleOf(getString(R.string.artistId) to id)
-        this.parentFragment?.parentFragment?.findNavController()?.navigate(
-            R.id.action_dashboardFragment_to_artistDetailFragment, artistIdBundle, null, null
+        findNavController()?.navigate(
+            R.id.action_searchFragment_to_artistDetailFragment, artistIdBundle, null, null
         )
     }
 
     private fun setupUI() {
-        binding.searchBar.isSubmitButtonEnabled = true
         binding.searchBar.isFocusable = true
         binding.searchBar.isIconified = false
         binding.searchBar.requestFocusFromTouch()
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchQuery = binding.searchBar.query.toString()
+                val size = searchResultList.size
+                searchResultList.clear()
+                searchAdapter.notifyItemRangeRemoved(0,size)
+                searchViewModel.lastLoadedPage = 1
+                println("encenc setup UI ${searchViewModel.lastLoadedPage}")
                 searchViewModel.getSearchResult(searchQuery)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 searchQuery = binding.searchBar.query.toString()
+                searchViewModel.lastLoadedPage = 1
                 return false
             }
         })
         binding.searchRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1)) {
-                    lastLoadedPage += 1
-                    searchViewModel.getSearchResult(query = searchQuery, pageNo = lastLoadedPage)
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = binding.searchRecyclerView.layoutManager as GridLayoutManager
+                val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
+                if (lastVisiblePosition == searchResultList.size - 1) {
+                    searchViewModel.lastLoadedPage++
+                    println("encenc onscroll UI ${searchViewModel.lastLoadedPage}")
+                    searchViewModel.getSearchResult(searchQuery)
                 }
             }
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        lastLoadedPage = 1
-        val size = searchResultList.size
-        searchResultList.clear()
-        searchAdapter.notifyItemRangeRemoved(0, size)
+    override fun onStop() {
+        super.onStop()
+        searchViewModel.result.removeObservers(this)
     }
 }

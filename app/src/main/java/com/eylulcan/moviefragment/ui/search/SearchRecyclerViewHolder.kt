@@ -11,9 +11,13 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
 
     class PersonViewHolder(private val binding: SearchFragmentRecyclerRowBinding) : SearchRecyclerViewHolder(binding){
 
-        fun bind(person: SearchResult?){
+        fun bind(person: SearchResult?, listener: SearchListener){
             Glide.with(binding.root).load(setImageUrl(person?.profilePath)).placeholder(R.color.greylight).into(binding.searchItemImage)
             binding.searchItemName.text = person?.name
+            itemView.setOnClickListener {
+                println("view holder person clicked")
+                person?.id?.let { listener.onPersonClicked(it) }
+            }
         }
 
         fun setImageUrl(poster_path: String?): String =
@@ -22,9 +26,14 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
 
     class MovieViewHolder(private val binding: SearchFragmentRecyclerRowBinding) : SearchRecyclerViewHolder(binding){
 
-        fun bind(movie: SearchResult?){
+        fun bind(movie: SearchResult?,listener: SearchListener){
             Glide.with(binding.root).load(setImageUrl(movie?.posterPath)).placeholder(R.color.greylight).into(binding.searchItemImage)
             binding.searchItemName.text = movie?.title
+            itemView.setOnClickListener {
+                println("view holder movie clicked")
+                movie?.id?.let { listener.onMovieClicked(it,binding.searchItemImage) }
+            }
+
         }
 
         fun setImageUrl(poster_path: String?): String =
