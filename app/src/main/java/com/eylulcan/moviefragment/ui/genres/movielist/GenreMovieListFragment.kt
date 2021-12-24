@@ -6,45 +6,57 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
-import com.eylulcan.moviefragment.databinding.FragmentMoreBinding
+import com.eylulcan.moviefragment.databinding.FragmentGenreMovieListBinding
 import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.ui.genres.GenresViewModel
 import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 
 class GenreMovieListFragment : Fragment(), MovieDetailListener {
 
-    private lateinit var binding: FragmentMoreBinding
+    private lateinit var binding: FragmentGenreMovieListBinding
     private lateinit var genreMovieListAdapter: GenreMovieListAdapter
-    private val genresViewModel: GenresViewModel by activityViewModels()
-    private var lastLoadedPage: Int = 1
+    private val genresListViewModel: GenreMovieListViewModel by viewModels()
     private var movieList: ArrayList<ResultMovie> = arrayListOf()
     private var selectedGenreId: Int = 0
+    private var enableToRequest: Boolean = false
+    private var moviesInAPage: List<ResultMovie>? = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_more, container, false)
+        return inflater.inflate(R.layout.fragment_genre_movie_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMoreBinding.bind(view)
+        binding = FragmentGenreMovieListBinding.bind(view)
         selectedGenreId = arguments?.get("genreId") as Int
-        genresViewModel.getMovieListByGenre(genreId = selectedGenreId)
+        println("encenc  on View Created ${genresListViewModel.lastLoadedPage}")
+        genresListViewModel.getMovieListByGenre(
+            genreId = selectedGenreId,
+            genresListViewModel.lastLoadedPage
+        )
+        genresListViewModel.lastLoadedPage++
         observeViewModel()
         setUI()
     }
 
     private fun observeViewModel() {
-        genresViewModel.movies.observe(viewLifecycleOwner, { movie ->
-            movieList.addAll(movie.results ?: arrayListOf())
+        genresListViewModel.movies.observe(viewLifecycleOwner, { movie ->
+            moviesInAPage =
+                if (movie.results?.let { moviesInAPage?.containsAll(it) } == true) {
+                    emptyList()
+                } else {
+                    movie.results
+                }
+            movieList.addAll(moviesInAPage ?: arrayListOf())
             genreMovieListAdapter.movieResult = movieList
+            enableToRequest = true
             genreMovieListAdapter.notifyDataSetChanged()
         })
     }
@@ -59,29 +71,35 @@ class GenreMovieListFragment : Fragment(), MovieDetailListener {
         )
     }
 
-    private fun setUI(){
-        binding.moreRecyclerView.layoutManager =
+    private fun setUI() {
+        binding.genreMovieListRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        genreMovieListAdapter = GenreMovieListAdapter( this)
-        binding.moreRecyclerView.adapter = genreMovieListAdapter
+        genreMovieListAdapter = GenreMovieListAdapter(this)
+        binding.genreMovieListRecyclerView.adapter = genreMovieListAdapter
 
-        binding.moreRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1)) {
-                    lastLoadedPage += 1
-                    genresViewModel.getMovieListByGenre(genreId = selectedGenreId, pageNo = lastLoadedPage)
+        binding.genreMovieListRecyclerView.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager =
+                    binding.genreMovieListRecyclerView.layoutManager as LinearLayoutManager
+                val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
+                if (lastVisiblePosition == movieList.size - 1 && enableToRequest) {
+                    println("encenc  on Scroll page no : ${genresListViewModel.lastLoadedPage}")
+                    genresListViewModel.getMovieListByGenre(
+                        genreId = selectedGenreId,
+                        pageNo = genresListViewModel.lastLoadedPage
+                    )
+                    genresListViewModel.lastLoadedPage++
+                    enableToRequest = false
                 }
             }
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        lastLoadedPage = 1
-        val size = movieList.size
-        movieList.clear()
-        genreMovieListAdapter.notifyItemRangeRemoved(0, size)
+    override fun onStop() {
+        super.onStop()
+        genresListViewModel.movies.removeObservers(this)
     }
 
 }

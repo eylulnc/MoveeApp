@@ -61,7 +61,7 @@ class GenreMovieListAdapter(
             oldItem: ResultMovie,
             newItem: ResultMovie
         ): Boolean {
-            return oldItem == newItem
+            return oldItem === newItem
         }
 
         override fun areContentsTheSame(
