@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
@@ -45,7 +46,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragmentBinding.discoverPopularRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
         return view
     }
 
@@ -57,6 +57,15 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         discoverViewModel.getTopRatedMovieList()
         discoverViewModel.getNowPlayingMovieList()
         postponeEnterTransition()
+        fragmentBinding.discoverPopularRecyclerView.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+        fragmentBinding.discoverTopRatedRecyclerView.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+        fragmentBinding.discoverThirdRecyclerView.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
     }
 
     private fun observeViewModel() {
@@ -120,7 +129,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
             )
             return true
         } else if (item?.itemId == R.id.search_button) {
-            findNavController().navigate(R.id.action_discover2Fragment_to_searchFragment)
+            this.parentFragment?.parentFragment?.findNavController()?.navigate(R.id.action_dashboardFragment_to_searchFragment)
         }
         return false
     }

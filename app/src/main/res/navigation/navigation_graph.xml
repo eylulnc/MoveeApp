@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_genreMovieListFragment"
             app:destination="@id/genreMovieListFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/artistDetailFragment"
@@ -146,4 +149,9 @@
             android:name="selectedGenreId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.eylulcan.moviefragment.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>

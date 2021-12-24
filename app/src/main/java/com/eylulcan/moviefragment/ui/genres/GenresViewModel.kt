@@ -33,14 +33,11 @@ class GenresViewModel : ViewModel() {
     fun getGenreList() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getGenresData()
-            withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             genreList.postValue(it)
-
                         }
-                    }
                 }
             }
         }
@@ -49,14 +46,12 @@ class GenresViewModel : ViewModel() {
     fun getMovieListByGenre(genreId: Int, pageNo: Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getMovieByGenreId(genreId = genreId, pageNo = pageNo)
-            withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             movieList.postValue(it)
                         }
                     }
-                }
             }
         }
     }

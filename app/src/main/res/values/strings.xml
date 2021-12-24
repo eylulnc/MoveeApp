@@ -66,6 +66,7 @@
     <string name="expand_button">Expand Button</string>
     <string name="noInfo">There is no information about this person.</string>
     <string name="watch_trailer">Watch Trailer</string>
+    <string name="now_playing">Now Playing</string>
 
 
 </resources>

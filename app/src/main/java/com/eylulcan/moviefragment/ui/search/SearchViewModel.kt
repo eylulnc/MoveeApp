@@ -32,13 +32,11 @@ class SearchViewModel : ViewModel() {
     fun getSearchResult(query: String, pageNo: Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getSearchResult(query = query, pageNo = pageNo)
-            withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             searchResults.postValue(it)
                         }
-                    }
                 }
             }
         }
