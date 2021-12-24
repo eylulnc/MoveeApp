@@ -26,11 +26,12 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by viewModels()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var lastLoadedPage: Int = 1
+    private var lastLoadedPageItems: List<ResultMovie>? = emptyList()
     private var nowPlayingResultList: ArrayList<ResultMovie> = arrayListOf()
     private lateinit var nowPlayingAdapter: DiscoverAdapter
     private lateinit var topRatedAdapter: DiscoverAdapter
     private lateinit var mostPopularAdapter: DiscoverAdapter
+    private var enableToRequest: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +57,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         discoverViewModel.getPopularMovieList()
         discoverViewModel.getTopRatedMovieList()
         discoverViewModel.getNowPlayingMovieList()
+        discoverViewModel.lastLoadedPage++
         postponeEnterTransition()
         fragmentBinding.discoverPopularRecyclerView.doOnPreDraw {
             startPostponedEnterTransition()
@@ -83,8 +85,14 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         })
         discoverViewModel.nowPlaying.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                nowPlayingResultList.addAll(movie.results ?: arrayListOf())
+                    lastLoadedPageItems = if (movie.results?.let { lastLoadedPageItems?.containsAll(it) } == true) {
+                        emptyList()
+                    } else {
+                        movie.results
+                    }
+                nowPlayingResultList.addAll(lastLoadedPageItems ?: arrayListOf())
                 nowPlayingAdapter.movieResultList = nowPlayingResultList
+                enableToRequest = true
                 nowPlayingAdapter.notifyDataSetChanged()
             }
         })
@@ -99,11 +107,14 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
 
         fragmentBinding.discoverThirdRecyclerView.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1)) {
-                    lastLoadedPage += 1
-                    discoverViewModel.getNowPlayingMovieList(pageNo = lastLoadedPage)
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = fragmentBinding.discoverThirdRecyclerView.layoutManager as GridLayoutManager
+                val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
+                if (lastVisiblePosition == nowPlayingResultList.size - 1 && enableToRequest) {
+                    discoverViewModel.getNowPlayingMovieList()
+                    discoverViewModel.lastLoadedPage++
+                    enableToRequest = false
                 }
             }
         })
@@ -138,14 +149,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         val toolbar = fragmentBinding.toolbar
         toolbar.inflateMenu(R.menu.menu)
         toolbar.setOnMenuItemClickListener(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        lastLoadedPage = 1
-        val size = nowPlayingResultList.size
-        nowPlayingResultList.clear()
-        nowPlayingAdapter.notifyItemRangeRemoved(0, size)
     }
 
 }

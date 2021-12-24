@@ -21,6 +21,7 @@ class DiscoverViewModel : ViewModel() {
     val topRatedMovies: LiveData<Movie> get() = topRatedMovieList
     private val nowPlayingMovieList = MutableLiveData<Movie>()
     val nowPlaying: LiveData<Movie> get() = nowPlayingMovieList
+    var lastLoadedPage: Int = 1
 
     init {
         retrofit = Retrofit.Builder()
@@ -56,9 +57,9 @@ class DiscoverViewModel : ViewModel() {
         }
     }
 
-    fun getNowPlayingMovieList(pageNo:Int = 1) {
+    fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getNowPlayingData(pageNo = pageNo)
+            val response = retrofit?.getNowPlayingData(pageNo = lastLoadedPage)
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
