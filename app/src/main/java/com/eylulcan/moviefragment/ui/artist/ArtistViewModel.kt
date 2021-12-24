@@ -9,7 +9,6 @@ import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -18,6 +17,7 @@ class ArtistViewModel : ViewModel() {
     private var retrofit: MovieAPI? = null
     private val popularPeopleList = MutableLiveData<PopularPeopleList>()
     val popularPeople: LiveData<PopularPeopleList> get() = popularPeopleList
+    var lastLoadedPage: Int = 1
 
     init {
         retrofit = Retrofit.Builder()
@@ -27,18 +27,19 @@ class ArtistViewModel : ViewModel() {
             .create(MovieAPI::class.java)
     }
 
-    fun getPopularPeople(pageNo: Int = 1) {
+    fun getPopularPeople(pageNo:Int) {
+        println("encenc viewModel $pageNo")
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getPopularPeople(pageNo = pageNo)
-            withContext(Dispatchers.Main) {
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            popularPeopleList.postValue(it)
-                        }
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        popularPeopleList.postValue(it)
+                        println("encenc getPopular called")
                     }
                 }
             }
         }
     }
+
 }

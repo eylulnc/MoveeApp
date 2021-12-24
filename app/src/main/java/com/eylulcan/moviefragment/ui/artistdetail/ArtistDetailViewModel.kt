@@ -36,14 +36,11 @@ class ArtistDetailViewModel : ViewModel() {
     fun getArtistDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getArtistDetail(personId = id)
-
-            withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             artistDetailInfo.postValue(it)
                         }
-                    }
                 }
             }
         }
@@ -52,14 +49,11 @@ class ArtistDetailViewModel : ViewModel() {
     fun getArtistAlbum(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getArtistImages(personId = id)
-
-            withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             artistAlbumInfo.postValue(it)
                         }
-                    }
                 }
             }
         }
@@ -68,15 +62,12 @@ class ArtistDetailViewModel : ViewModel() {
     fun getArtistMovieCredits(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getArtistMovieCredits(personId = id)
-
-            withContext(Dispatchers.Main) {
                 response?.let {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             artistMovieCreditsInfo.postValue(it)
                         }
                     }
-                }
             }
         }
     }

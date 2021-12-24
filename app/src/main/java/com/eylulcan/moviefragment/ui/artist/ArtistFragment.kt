@@ -14,13 +14,16 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistBinding
 import com.eylulcan.moviefragment.model.PeopleResult
 
+private const val SPAN_COUNT = 3
+
 class ArtistFragment : Fragment(), ArtistListener {
 
     private val artistViewModel: ArtistViewModel by viewModels()
     private lateinit var binding: FragmentArtistBinding
     private lateinit var artistAdapter: ArtistAdapter
     private var artistList: ArrayList<PeopleResult> = arrayListOf()
-    private var lastLoadedPage: Int = 1
+    private var enableToRequest: Boolean = false
+    private var moviesInAPage: List<PeopleResult>? = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,33 +31,38 @@ class ArtistFragment : Fragment(), ArtistListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_artist, container, false)
         binding = FragmentArtistBinding.bind(view)
-        binding.artistRecyclerView.layoutManager = GridLayoutManager(context, 3)
+        binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+        artistAdapter = ArtistAdapter(this)
+        binding.artistRecyclerView.adapter = artistAdapter
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        artistAdapter = ArtistAdapter(this)
-        binding.artistRecyclerView.adapter = artistAdapter
         observeViewModel()
-        artistViewModel.getPopularPeople()
+        artistViewModel.getPopularPeople(artistViewModel.lastLoadedPage)
+        artistViewModel.lastLoadedPage++
         setupUI()
     }
 
-    override fun onResume() {
-        super.onResume()
-        lastLoadedPage = 1
-        val size = artistList.size
-        artistList.clear()
-        artistAdapter.notifyItemRangeRemoved(0, size)
-    }
-
     private fun observeViewModel() {
-        artistViewModel.popularPeople.observe(viewLifecycleOwner, { popularPeopleList ->
-            artistList.addAll(popularPeopleList.results ?: arrayListOf())
+        artistViewModel.popularPeople.observe(this, { popularPeopleList ->
+            moviesInAPage =
+                if (popularPeopleList.results?.let { moviesInAPage?.containsAll(it) } == true) {
+                    emptyList()
+                } else {
+                    popularPeopleList.results
+                }
+            artistList.addAll(moviesInAPage ?: arrayListOf())
             artistAdapter.peopleResult = artistList
+            enableToRequest = true
             artistAdapter.notifyDataSetChanged()
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        artistViewModel.popularPeople.removeObservers(this)
     }
 
     override fun onArtistClicked(id: Int) {
@@ -66,11 +74,14 @@ class ArtistFragment : Fragment(), ArtistListener {
 
     private fun setupUI() {
         binding.artistRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1)) {
-                    lastLoadedPage += 1
-                    artistViewModel.getPopularPeople(pageNo = lastLoadedPage)
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = binding.artistRecyclerView.layoutManager as GridLayoutManager
+                val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
+                if (lastVisiblePosition == artistList.size - 1 && enableToRequest) {
+                    artistViewModel.getPopularPeople(artistViewModel.lastLoadedPage)
+                    artistViewModel.lastLoadedPage++
+                    enableToRequest = false
                 }
             }
         })
