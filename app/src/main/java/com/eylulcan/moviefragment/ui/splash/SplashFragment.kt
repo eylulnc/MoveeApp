@@ -27,7 +27,7 @@ class SplashFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = requireActivity().getSharedPreferences(
-            "com.eylulcan.moviefragment",
+            getString(R.string.app_package_name),
             Context.MODE_PRIVATE
         )
     }
@@ -46,9 +46,9 @@ class SplashFragment : Fragment() {
         currentUser?.let {
             navigateToMovieList()
         } ?: run {
-            firstTimeOpened = sharedPreferences.getBoolean("isFirst", true)
+            firstTimeOpened = sharedPreferences.getBoolean(getString(R.string.isFirst), true)
             if (firstTimeOpened == true) {
-                sharedPreferences.edit().putBoolean("isFirst", false).apply()
+                sharedPreferences.edit().putBoolean(getString(R.string.isFirst), false).apply()
                 navigateToOnboard()
             } else {
                 navigateToLogin()

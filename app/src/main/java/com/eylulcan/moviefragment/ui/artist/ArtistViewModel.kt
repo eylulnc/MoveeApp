@@ -28,14 +28,12 @@ class ArtistViewModel : ViewModel() {
     }
 
     fun getPopularPeople(pageNo:Int) {
-        println("encenc viewModel $pageNo")
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getPopularPeople(pageNo = pageNo)
             response?.let {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         popularPeopleList.postValue(it)
-                        println("encenc getPopular called")
                     }
                 }
             }

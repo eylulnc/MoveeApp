@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.eylulcan.moviefragment.R
-import com.eylulcan.moviefragment.databinding.PopupRatingScreenBinding
+import com.eylulcan.moviefragment.databinding.MovieDetailPopupRatingScreenBinding
 
 class CustomPopUpDialogFragment : DialogFragment() {
 
     private var movieID: Int = -1
     private var sessionID: String = ""
-    private lateinit var binding: PopupRatingScreenBinding
+    private lateinit var binding: MovieDetailPopupRatingScreenBinding
     private val popUpViewModel: PopUpViewModel by viewModels()
 
     override fun onCreateView(
@@ -22,9 +22,9 @@ class CustomPopUpDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.popup_rating_screen, container, false)
+        val rootView: View = inflater.inflate(R.layout.movie_detail_popup_rating_screen, container, false)
         observeViewModel()
-        binding = PopupRatingScreenBinding.bind(rootView)
+        binding = MovieDetailPopupRatingScreenBinding.bind(rootView)
         val sharedPref =
             activity?.getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE)
         sessionID = sharedPref?.getString(getString(R.string.sessionId), null).toString()

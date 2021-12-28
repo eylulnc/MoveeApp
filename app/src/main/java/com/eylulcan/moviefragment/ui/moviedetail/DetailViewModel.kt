@@ -42,10 +42,10 @@ class DetailViewModel : ViewModel() {
     fun getMovieCast(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getMovieCredits(movieId = id)
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            movieCast.postValue(it)
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        movieCast.postValue(it)
                     }
                 }
             }
@@ -55,10 +55,10 @@ class DetailViewModel : ViewModel() {
     fun getReviews(movieId: Int, pageNo: Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getMovieReviews(movieId = movieId, pageNo = pageNo)
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            movieReviews.postValue(it)
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        movieReviews.postValue(it)
                     }
                 }
             }
@@ -68,12 +68,12 @@ class DetailViewModel : ViewModel() {
     fun getMovieMore(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getMoreMovie(movieId = id)
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            movieMore.postValue(it)
-                        }
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        movieMore.postValue(it)
                     }
+                }
             }
         }
     }
@@ -81,11 +81,11 @@ class DetailViewModel : ViewModel() {
     fun getVideoClips(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getMovieVideoClips(movieId = id)
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            videoList.postValue(it)
-                        }
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        videoList.postValue(it)
+                    }
                 }
             }
         }
@@ -94,12 +94,12 @@ class DetailViewModel : ViewModel() {
     fun getMovieDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getMovieDetail(genreId = id)
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            movieDetails.postValue(it)
-                        }
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        movieDetails.postValue(it)
                     }
+                }
             }
         }
     }

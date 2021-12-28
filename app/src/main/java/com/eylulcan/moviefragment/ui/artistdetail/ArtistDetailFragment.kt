@@ -19,7 +19,7 @@ class ArtistDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentArtistDetailBinding
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
-    private val tabNames = arrayOf("Summary", "Movies", "More")
+    private val tabNames = arrayOf(getString(R.string.summary), getString(R.string.movies), getString(R.string.more))
     private var photoAlbum: ArtistAlbum? = null
 
     override fun onCreateView(

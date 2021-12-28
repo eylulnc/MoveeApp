@@ -3,17 +3,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="350dp"
-    android:layout_height="350dp"
+    android:layout_width="@dimen/movie_detail_popup_popUpLayout_width"
+    android:layout_height="@dimen/movie_detail_popup_popUpLayout_height"
     android:layout_gravity="center"
-    android:background="@color/tr60_purple_mountain">
+    android:background="@color/tr60_purple_mountain"
+    android:id="@+id/popUpLayout">
 
     <RatingBar
         android:id="@+id/popUpRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/movie_detail_popup_popUpRatingBar_marginStart"
+        android:layout_marginEnd="@dimen/movie_detail_popup_popUpRatingBar_marginEnd"
         android:background="@color/white"
         android:numStars="5"
         android:theme="@style/RatingBar"
@@ -30,25 +31,25 @@
         android:text="@string/rate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popUpRatingBar"
-        app:layout_constraintVertical_bias="0.100000024" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/rateMovieText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/movie_detail_popup_rateMovieText_marginStart"
+        android:layout_marginEnd="@dimen/movie_detail_popup_rateMovieText_marginEnd"
         android:text="@string/rateMovie"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="@dimen/movie_detail_popup_rateMovieText_size"
         app:layout_constraintBottom_toTopOf="@+id/popUpRatingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.800" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/cancelButton"
@@ -59,6 +60,6 @@
         app:layout_constraintEnd_toStartOf="@+id/rateButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popUpRatingBar"
-        app:layout_constraintVertical_bias="0.100000024" />
+        app:layout_constraintVertical_bias="0.2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

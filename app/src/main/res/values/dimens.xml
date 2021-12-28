@@ -41,6 +41,17 @@
     <dimen name="detail_movie_watchButton_marginStart">16dp</dimen>
     <dimen name="detail_movie_watchButton_marginEnd">16dp</dimen>
     <dimen name="detail_movie_watchButton_textSize">11sp</dimen>
+    <dimen name="detail_movie_linearLayoutForButtons_marginStart">16dp</dimen>
+    <dimen name="detail_movie_linearLayoutForButtons_marginEnd">16dp</dimen>
+    <dimen name="detail_movie_linearLayoutForButtons_marginTop">8dp</dimen>
+
+    <dimen name="movie_detail_popup_rateMovieText_marginStart">16dp</dimen>
+    <dimen name="movie_detail_popup_rateMovieText_marginEnd">16dp</dimen>
+    <dimen name="movie_detail_popup_rateMovieText_size">20sp</dimen>
+    <dimen name="movie_detail_popup_popUpRatingBar_marginStart">16dp</dimen>
+    <dimen name="movie_detail_popup_popUpRatingBar_marginEnd">16dp</dimen>
+    <dimen name="movie_detail_popup_popUpLayout_width">350dp</dimen>
+    <dimen name="movie_detail_popup_popUpLayout_height">350dp</dimen>
 
     <dimen name="splash_fragment_image_height">200dp</dimen>
     <dimen name="splash_fragment_image_width">200dp</dimen>

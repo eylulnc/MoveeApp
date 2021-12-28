@@ -45,7 +45,7 @@ class GenresFragment : Fragment(), GenreListener {
     }
 
     override fun onGenreClicked(id: Int) {
-        val genreIdBundle = bundleOf("genreId" to id)
+        val genreIdBundle = bundleOf(getString(R.string.genreId) to id)
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_dashboardFragment_to_genreMovieListFragment,
             genreIdBundle,

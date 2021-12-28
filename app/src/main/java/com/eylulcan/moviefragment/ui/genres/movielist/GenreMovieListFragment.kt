@@ -35,8 +35,7 @@ class GenreMovieListFragment : Fragment(), MovieDetailListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGenreMovieListBinding.bind(view)
-        selectedGenreId = arguments?.get("genreId") as Int
-        println("encenc  on View Created ${genresListViewModel.lastLoadedPage}")
+        selectedGenreId = arguments?.get(getString(R.string.genreId)) as Int
         genresListViewModel.getMovieListByGenre(
             genreId = selectedGenreId,
             genresListViewModel.lastLoadedPage
@@ -85,7 +84,6 @@ class GenreMovieListFragment : Fragment(), MovieDetailListener {
                     binding.genreMovieListRecyclerView.layoutManager as LinearLayoutManager
                 val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
                 if (lastVisiblePosition == movieList.size - 1 && enableToRequest) {
-                    println("encenc  on Scroll page no : ${genresListViewModel.lastLoadedPage}")
                     genresListViewModel.getMovieListByGenre(
                         genreId = selectedGenreId,
                         pageNo = genresListViewModel.lastLoadedPage

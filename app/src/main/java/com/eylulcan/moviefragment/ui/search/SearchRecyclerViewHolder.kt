@@ -15,7 +15,6 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
             Glide.with(binding.root).load(setImageUrl(person?.profilePath)).placeholder(R.color.greylight).into(binding.searchItemImage)
             binding.searchItemName.text = person?.name
             itemView.setOnClickListener {
-                println("view holder person clicked")
                 person?.id?.let { listener.onPersonClicked(it) }
             }
         }
@@ -30,7 +29,6 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
             Glide.with(binding.root).load(setImageUrl(movie?.posterPath)).placeholder(R.color.greylight).into(binding.searchItemImage)
             binding.searchItemName.text = movie?.title
             itemView.setOnClickListener {
-                println("view holder movie clicked")
                 movie?.id?.let { listener.onMovieClicked(it,binding.searchItemImage) }
             }
 

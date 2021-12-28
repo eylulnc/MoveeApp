@@ -39,7 +39,6 @@ class PopUpViewModel : ViewModel() {
             response?.let {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        println("encenc in response ${it.statusMessage}")
                         ratingResponse.postValue(it)
                     }
                 }

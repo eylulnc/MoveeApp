@@ -24,7 +24,7 @@ private const val MINUTES_IN_HOUR = 60
 class MovieDetailFragment : Fragment() {
 
     private lateinit var fragmentBinding: FragmentMovieDetailBinding
-    private val tabNames = arrayOf("Cast", "Reviews", "More")
+    private val tabNames = arrayOf(getString(R.string.cast), getString(R.string.reviews), getString(R.string.more))
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
     private var genreNames: String = ""
     private var movieLanguages: String = ""

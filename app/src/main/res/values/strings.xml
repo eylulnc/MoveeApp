@@ -78,5 +78,7 @@
     <string name="movie_backdrop">Movie Backdrop</string>
     <string name="onboardimage">onBoardImage</string>
     <string name="search_fragment_image">Search Fragment Image</string>
+    <string name="genreId">genreId</string>
+    <string name="isFirst">isFirst</string>
 
 </resources>

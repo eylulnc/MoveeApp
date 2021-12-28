@@ -74,7 +74,7 @@ class SearchFragment : Fragment(), SearchListener {
 
     override fun onPersonClicked(id: Int) {
         val artistIdBundle = bundleOf(getString(R.string.artistId) to id)
-        findNavController()?.navigate(
+        findNavController().navigate(
             R.id.action_searchFragment_to_artistDetailFragment, artistIdBundle, null, null
         )
     }
@@ -90,7 +90,6 @@ class SearchFragment : Fragment(), SearchListener {
                 searchResultList.clear()
                 searchAdapter.notifyItemRangeRemoved(0,size)
                 searchViewModel.lastLoadedPage = 1
-                println("encenc setup UI ${searchViewModel.lastLoadedPage}")
                 searchViewModel.getSearchResult(searchQuery)
                 return false
             }
@@ -108,7 +107,6 @@ class SearchFragment : Fragment(), SearchListener {
                 val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
                 if (lastVisiblePosition == searchResultList.size - 1) {
                     searchViewModel.lastLoadedPage++
-                    println("encenc onscroll UI ${searchViewModel.lastLoadedPage}")
                     searchViewModel.getSearchResult(searchQuery)
                 }
             }

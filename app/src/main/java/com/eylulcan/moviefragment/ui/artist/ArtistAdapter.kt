@@ -11,7 +11,6 @@ import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.PeopleResult
 import com.eylulcan.moviefragment.util.Utils
 
-
 class ArtistAdapter(
     private val artistListener: ArtistListener
 ) :
