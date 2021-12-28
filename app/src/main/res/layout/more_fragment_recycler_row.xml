@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/movie_backdrop"/>
 
     <LinearLayout
         android:id="@+id/moreLinearLayout"
@@ -39,6 +40,7 @@
             android:singleLine="true"
             android:textSize="@dimen/moreRecyclerRow_movieName_size"
             tools:text="Movie Name"
+            android:fontFamily="@font/lato_bold"
             android:textColor="@color/black" />
 
         <TextView
@@ -47,6 +49,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
+            android:fontFamily="@font/lato_regular"
             android:textSize="@dimen/moreRecyclerRow_genres_size"
             tools:text="Movie Genres"
             android:textColor="@color/black"  />

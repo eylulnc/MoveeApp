@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/movie_backdrop"/>
 
     <LinearLayout
         android:id="@+id/artistMovieLinearLayout"
@@ -36,20 +37,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:fontFamily="@font/lato_bold"
             android:singleLine="true"
+            android:textColor="@color/black"
             android:textSize="@dimen/artist_movie_recycler_row_text_movie_name_size"
-            tools:text="Movie Name"
-            android:textColor="@color/black"/>
+            tools:text="Movie Name" />
 
         <TextView
             android:id="@+id/genresArtistMovie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:fontFamily="@font/lato_regular"
             android:singleLine="true"
+            android:textColor="@color/black"
             android:textSize="@dimen/artist_movie_recycler_row_text_genres_name_size"
-            tools:text="Movie Genres"
-            android:textColor="@color/black" />
+            tools:text="Movie Genres" />
     </LinearLayout>
 
     <RatingBar

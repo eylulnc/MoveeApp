@@ -13,7 +13,8 @@
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/search_fragment_image"/>
 
     <TextView
         android:id="@+id/searchItemName"
@@ -21,9 +22,9 @@
         android:layout_height="40dp"
         android:layout_marginStart="@dimen/search_recycler_row_text_margin"
         android:layout_marginEnd="@dimen/search_recycler_row_text_margin"
-        android:layout_marginBottom="@dimen/search_recycler_row_text_margin"
         android:background="@color/white"
         android:ellipsize="end"
+        android:fontFamily="@font/lato_regular"
         android:gravity="center"
         android:maxLines="2"
         android:minHeight="@dimen/search_recycler_row_text_minHeight"

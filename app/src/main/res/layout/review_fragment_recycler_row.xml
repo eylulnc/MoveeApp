@@ -39,10 +39,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/review_fragment_authorName_marginStart"
             android:ellipsize="end"
+            android:fontFamily="@font/lato_italic"
             android:singleLine="true"
+            android:textColor="@color/black"
             android:textSize="@dimen/review_fragment_authorName_textSize"
-            tools:text="TextView"
-            android:textColor="@color/black"  />
+            tools:text="TextView" />
 
         <TextView
             android:id="@+id/postDateText"
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/review_fragment_postDate_marginStart"
             android:layout_marginTop="@dimen/review_fragment_postDate_marginTop"
+            android:fontFamily="@font/lato_regular"
             tools:text="TextView" />
     </LinearLayout>
 

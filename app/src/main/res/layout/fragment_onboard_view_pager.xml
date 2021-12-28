@@ -43,6 +43,7 @@
         android:layout_marginBottom="@dimen/onboard_pager_button_marginBottom"
         android:backgroundTint="@color/purple_mountain"
         android:text="@string/explore_collection"
+        android:fontFamily="@font/lato_bold"
         android:textColor="@color/white"
         app:icon="@drawable/ic_baseline_arrow_forward_ios_24"
         app:iconGravity="textEnd"

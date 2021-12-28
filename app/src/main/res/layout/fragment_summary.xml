@@ -15,7 +15,8 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/summary_summaryTextView_margin"
             tools:text="Summary"
-            android:textColor="@color/black">
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_regular">
         </TextView>
     </LinearLayout>
 </ScrollView>

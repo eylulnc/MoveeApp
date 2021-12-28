@@ -18,7 +18,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/action_image" />
+        app:srcCompat="@drawable/action_image"
+        android:contentDescription="@string/movie_backdrop"/>
 
     <TextView
         android:id="@+id/genresRowText"
@@ -31,6 +32,7 @@
         android:singleLine="false"
         android:textColor="@color/white"
         android:textSize="@dimen/genres_recyclerView_row_text_size"
+        android:fontFamily="@font/lato_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -18,12 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        android:contentDescription="@string/onboardimage"/>
 
     <TextView
         android:id="@+id/onboard_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_black"
         android:gravity="center"
         android:text="@string/onboard_title"
         android:textColor="@color/white"
@@ -41,6 +43,7 @@
         android:layout_marginStart="@dimen/onboard_info_marginStart"
         android:layout_marginTop="@dimen/onboard_info_marginTop"
         android:layout_marginEnd="@dimen/onboard_info_marginEnd"
+        android:fontFamily="@font/lato_bold_italic"
         android:gravity="center"
         android:singleLine="false"
         android:text="@string/onboard_info_text"

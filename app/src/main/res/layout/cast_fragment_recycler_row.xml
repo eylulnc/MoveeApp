@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/artist_image"/>
 
     <TextView
         android:id="@+id/castArtistName"
@@ -26,6 +27,7 @@
         android:layout_marginBottom="@dimen/castRecyclerRow_castArtistName_marginBottom"
         android:background="@color/white"
         android:ellipsize="end"
+        android:fontFamily="@font/lato_regular"
         android:gravity="center"
         android:maxLines="2"
         android:minHeight="@dimen/castRecyclerRow_castArtistName_minHeight"
