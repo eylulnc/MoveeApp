@@ -13,9 +13,9 @@ import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
 import com.eylulcan.moviefragment.model.MovieDetail
+import com.eylulcan.moviefragment.ui.moviedetail.popup.CustomPopUpDialogFragment
 import com.eylulcan.moviefragment.util.Utils
 import com.google.android.material.tabs.TabLayoutMediator
-
 
 private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
 private const val VIMEO_LINK = "https://vimeo.com/"
@@ -126,7 +126,16 @@ class MovieDetailFragment : Fragment() {
             selectedMovie.runtime?.let { runtime ->
                 fragmentBinding.detailDurationText.text = calculateDuration(runtime)
             }
+            fragmentBinding.rateButton.setOnClickListener {
+                val popUpDialog = CustomPopUpDialogFragment()
+                selectedMovie.id?.let { id ->
+                    popUpDialog.setMovieID(id)
+                }
+                fragmentManager?.let { manager ->
+                    popUpDialog.dialog?.window?.setLayout(400,400)
+                    popUpDialog.show(manager, "customDialog")
+                }
+            }
         }
     }
-
 }

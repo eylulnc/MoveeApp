@@ -32,7 +32,7 @@ class MovieDetail {
 
     @SerializedName("id")
     @Expose
-    private val id: Int? = null
+    val id: Int? = null
 
     @SerializedName("imdb_id")
     @Expose

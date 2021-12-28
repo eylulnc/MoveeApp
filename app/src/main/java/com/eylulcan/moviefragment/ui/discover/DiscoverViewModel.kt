@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.api.MovieAPI
+import com.eylulcan.moviefragment.model.GuestSession
 import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
@@ -21,6 +22,8 @@ class DiscoverViewModel : ViewModel() {
     val topRatedMovies: LiveData<Movie> get() = topRatedMovieList
     private val nowPlayingMovieList = MutableLiveData<Movie>()
     val nowPlaying: LiveData<Movie> get() = nowPlayingMovieList
+    private val userSession = MutableLiveData<GuestSession>()
+    val sessionId: LiveData<GuestSession> get() = userSession
     var lastLoadedPage: Int = 1
 
     init {
@@ -69,4 +72,18 @@ class DiscoverViewModel : ViewModel() {
             }
         }
     }
+
+    fun getGuestSession(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getGuestSessionId()
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        userSession.postValue(it)
+                    }
+                }
+            }
+        }
+    }
+
 }

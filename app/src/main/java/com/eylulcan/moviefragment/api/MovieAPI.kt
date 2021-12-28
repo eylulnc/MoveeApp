@@ -4,9 +4,7 @@ import com.eylulcan.moviefragment.model.*
 import com.eylulcan.moviefragment.model.MovieCredits
 import com.eylulcan.moviefragment.util.Utils
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface MovieAPI {
     @GET("movie/popular")
@@ -16,7 +14,10 @@ interface MovieAPI {
     suspend fun getTopRatedData(@Query("api_key") apiKey: String = Utils.API_KEY): Response<Movie>
 
     @GET("movie/now_playing")
-    suspend fun getNowPlayingData(@Query("api_key") apiKey: String = Utils.API_KEY, @Query("page") pageNo: Int): Response<Movie>
+    suspend fun getNowPlayingData(
+        @Query("api_key") apiKey: String = Utils.API_KEY,
+        @Query("page") pageNo: Int
+    ): Response<Movie>
 
     @GET("genre/movie/list")
     suspend fun getGenresData(@Query("api_key") apiKey: String = Utils.API_KEY): Response<GenreList>
@@ -90,4 +91,15 @@ interface MovieAPI {
         @Query("page") pageNo: Int
     ): Response<SearchResultList>
 
+    @GET("authentication/guest_session/new")
+    suspend fun getGuestSessionId(@Query("api_key") apiKey: String = Utils.API_KEY)
+            : Response<GuestSession>
+
+    @POST("movie/{movie_id}/rating")
+    suspend fun postMovieRating(
+        @Path("movie_id") movieID: Int,
+        @Query("api_key") apiKey: String = Utils.API_KEY,
+        @Query("guest_session_id") sessionId: String,
+        @Body postRatingBody: PostRatingBody
+    ): Response<RatingPostResponse>
 }
