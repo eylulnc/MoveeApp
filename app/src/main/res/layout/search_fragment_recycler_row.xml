@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/searchItemName"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/search_recycler_row_text_height"
         android:layout_marginStart="@dimen/search_recycler_row_text_margin"
         android:layout_marginEnd="@dimen/search_recycler_row_text_margin"
         android:background="@color/white"

@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".ui.moviedetail.reviews.ReviewsFragment"
-    android:background="@color/tr60_purple_mountain"
-    >
+    android:background="@color/tr60_purple_mountain">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reviewFragmentRecyclerView"

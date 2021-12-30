@@ -132,7 +132,6 @@ class MovieDetailFragment : Fragment() {
                     popUpDialog.setMovieID(id)
                 }
                 fragmentManager?.let { manager ->
-                    popUpDialog.dialog?.window?.setLayout(400,400)
                     popUpDialog.show(manager, "customDialog")
                 }
             }

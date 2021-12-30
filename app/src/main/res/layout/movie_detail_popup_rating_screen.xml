@@ -3,11 +3,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popUpLayout"
     android:layout_width="@dimen/movie_detail_popup_popUpLayout_width"
     android:layout_height="@dimen/movie_detail_popup_popUpLayout_height"
     android:layout_gravity="center"
     android:background="@color/tr60_purple_mountain"
-    android:id="@+id/popUpLayout">
+    android:minWidth="@dimen/movie_detail_popup_popUpLayout_width"
+    android:minHeight="@dimen/movie_detail_popup_popUpLayout_height">
 
     <RatingBar
         android:id="@+id/popUpRatingBar"

@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.album.image.ImageFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imageFragmentRecyclerView"
         android:layout_width="match_parent"
