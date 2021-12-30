@@ -37,11 +37,11 @@ class DiscoverViewModel : ViewModel() {
     fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getPopularData()
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            popularMovieList.postValue(it)
-                        }
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        popularMovieList.postValue(it)
+                    }
                 }
             }
         }
@@ -50,11 +50,11 @@ class DiscoverViewModel : ViewModel() {
     fun getTopRatedMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getTopRatedData()
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            topRatedMovieList.postValue(it)
-                        }
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        topRatedMovieList.postValue(it)
+                    }
                 }
             }
         }
@@ -63,17 +63,17 @@ class DiscoverViewModel : ViewModel() {
     fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getNowPlayingData(pageNo = lastLoadedPage)
-                response?.let {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            nowPlayingMovieList.postValue(it)
-                        }
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        nowPlayingMovieList.postValue(it)
+                    }
                 }
             }
         }
     }
 
-    fun getGuestSession(){
+    fun getGuestSession() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = retrofit?.getGuestSessionId()
             response?.let {

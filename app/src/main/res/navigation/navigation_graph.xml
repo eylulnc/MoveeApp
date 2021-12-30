@@ -84,16 +84,32 @@
             app:popExitAnim="@animator/slide_out_right"/>
         <action
             android:id="@+id/action_dashboardFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right"/>
         <action
             android:id="@+id/action_dashboardFragment_to_artistDetailFragment"
-            app:destination="@id/artistDetailFragment" />
+            app:destination="@id/artistDetailFragment"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right"/>
         <action
             android:id="@+id/action_dashboardFragment_to_genreMovieListFragment"
-            app:destination="@id/genreMovieListFragment" />
+            app:destination="@id/genreMovieListFragment"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right"/>
         <action
             android:id="@+id/action_dashboardFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@animator/slide_in_right"
+            app:exitAnim="@animator/slide_out_left"
+            app:popEnterAnim="@animator/slide_in_left"
+            app:popExitAnim="@animator/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/artistDetailFragment"

@@ -29,7 +29,7 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
             Glide.with(binding.root).load(setImageUrl(movie?.posterPath)).placeholder(R.color.greylight).into(binding.searchItemImage)
             binding.searchItemName.text = movie?.title
             itemView.setOnClickListener {
-                movie?.id?.let { listener.onMovieClicked(it,binding.searchItemImage) }
+                movie?.id?.let { listener.onMovieClicked(it) }
             }
 
         }

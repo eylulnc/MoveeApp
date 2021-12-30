@@ -16,7 +16,7 @@ open class DiscoverViewHolder(binding: DiscoverRecyclerRowBinding) :
                 .into(binding.movieListRecyclerViewImage)
             binding.movieListRecyclerViewName.text = movie.title
             itemView.setOnClickListener {
-                listener.onMovieClicked(movie, binding.movieListRecyclerViewImage)
+                listener.onMovieClicked(movie)
             }
         }
 
@@ -30,7 +30,7 @@ open class DiscoverViewHolder(binding: DiscoverRecyclerRowBinding) :
                 .into(binding.movieListRecyclerViewImage)
             binding.movieListRecyclerViewName.text = movie.title
             itemView.setOnClickListener {
-                listener.onMovieClicked(movie, binding.movieListRecyclerViewImage)
+                listener.onMovieClicked(movie)
             }
         }
 
@@ -45,7 +45,7 @@ open class DiscoverViewHolder(binding: DiscoverRecyclerRowBinding) :
                 .into(binding.movieListRecyclerViewImage)
             binding.movieListRecyclerViewName.text = movie.title
             itemView.setOnClickListener {
-                listener.onMovieClicked(movie, binding.movieListRecyclerViewImage)
+                listener.onMovieClicked(movie)
             }
         }
 

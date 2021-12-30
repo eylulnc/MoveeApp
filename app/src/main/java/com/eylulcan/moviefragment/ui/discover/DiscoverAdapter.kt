@@ -89,7 +89,7 @@ class DiscoverAdapter(
     private fun isTopRated(): Boolean = title == "Top Rated"
 
 
-    private fun isThird(): Boolean = title == "Third Recycler View"
+    private fun isThird(): Boolean = title == "Now Playing"
 
     override fun getItemCount(): Int {
         return movieResultList?.size ?: 0

@@ -3,20 +3,16 @@ package com.eylulcan.moviefragment.ui.discover
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
-import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,16 +47,9 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         val view = inflater.inflate(R.layout.fragment_discover, container, false)
         fragmentBinding = FragmentDiscoverBinding.bind(view)
         setToolbarMenu()
-        fragmentBinding.discoverNowPlayingRecyclerView.layoutManager = GridLayoutManager(context, 3)
-        fragmentBinding.discoverTopRatedRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        fragmentBinding.discoverPopularRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         return view
     }
 
@@ -75,16 +64,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         sessionID = sharedPreferenceForSessionID.getString(getString(R.string.sessionId), null)
         if (sessionID == null) {
             discoverViewModel.getGuestSession()
-        }
-        postponeEnterTransition()
-        fragmentBinding.discoverPopularRecyclerView.doOnPreDraw {
-            startPostponedEnterTransition()
-        }
-        fragmentBinding.discoverTopRatedRecyclerView.doOnPreDraw {
-            startPostponedEnterTransition()
-        }
-        fragmentBinding.discoverNowPlayingRecyclerView.doOnPreDraw {
-            startPostponedEnterTransition()
         }
     }
 
@@ -122,6 +101,11 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     }
 
     private fun setupUI() {
+        fragmentBinding.discoverNowPlayingRecyclerView.layoutManager = GridLayoutManager(context, 3)
+        fragmentBinding.discoverTopRatedRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        fragmentBinding.discoverPopularRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         topRatedAdapter = DiscoverAdapter(this, getString(R.string.top_rated))
         fragmentBinding.discoverTopRatedRecyclerView.adapter = topRatedAdapter
         nowPlayingAdapter = DiscoverAdapter(this, getString(R.string.now_playing))
@@ -145,13 +129,11 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         })
     }
 
-    override fun onMovieClicked(resultMovie: ResultMovie, image: ImageView) {
+    override fun onMovieClicked(resultMovie: ResultMovie) {
         val movieDataBundle = bundleOf((getString(R.string.movieId)) to resultMovie.id)
-        val extras = FragmentNavigatorExtras(image to getString(R.string.list_to_detail_transition))
-        image.transitionName = image.id.toString()
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_dashboardFragment_to_movieDetailFragment,
-            movieDataBundle, null, extras
+            movieDataBundle, null, null
         )
     }
 

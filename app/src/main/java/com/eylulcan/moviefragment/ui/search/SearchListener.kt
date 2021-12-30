@@ -1,8 +1,6 @@
 package com.eylulcan.moviefragment.ui.search
 
-import android.widget.ImageView
-
 interface SearchListener {
-    fun onMovieClicked(id: Int, image: ImageView)
+    fun onMovieClicked(id: Int)
     fun onPersonClicked(id: Int)
 }

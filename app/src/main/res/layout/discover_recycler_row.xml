@@ -14,7 +14,6 @@
         android:layout_marginTop="@dimen/discover_recycler_row_image_marginTop"
         android:contentDescription="@string/movieImage"
         app:layout_constraintDimensionRatio="16:9"
-        android:transitionName="@string/list_to_detail_transition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

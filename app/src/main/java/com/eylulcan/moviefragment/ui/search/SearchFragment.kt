@@ -1,16 +1,13 @@
 package com.eylulcan.moviefragment.ui.search
 
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,8 +30,6 @@ class SearchFragment : Fragment(), SearchListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
@@ -62,13 +57,11 @@ class SearchFragment : Fragment(), SearchListener {
         })
     }
 
-    override fun onMovieClicked(id: Int, image: ImageView) {
+    override fun onMovieClicked(id: Int) {
         val movieDataBundle = bundleOf((getString(R.string.movieId)) to id)
-        val extras = FragmentNavigatorExtras(image to getString(R.string.list_to_detail_transition))
-        image.transitionName = image.id.toString()
         this.parentFragment?.findNavController()?.navigate(
             R.id.action_searchFragment_to_movieDetailFragment,
-            movieDataBundle, null, extras
+            movieDataBundle, null, null
         )
     }
 
