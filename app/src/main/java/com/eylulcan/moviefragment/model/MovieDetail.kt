@@ -20,7 +20,7 @@ class MovieDetail {
 
     @SerializedName("budget")
     @Expose
-    private val budget: Int? = null
+    private val budget: Long? = null
 
     @SerializedName("genres")
     @Expose
@@ -72,11 +72,11 @@ class MovieDetail {
 
     @SerializedName("revenue")
     @Expose
-    private val revenue: Int? = null
+    private val revenue: Long? = null
 
     @SerializedName("runtime")
     @Expose
-    val runtime: Int? = null
+    val runtime: Long? = null
 
     @SerializedName("spoken_languages")
     @Expose
@@ -104,6 +104,6 @@ class MovieDetail {
 
     @SerializedName("vote_count")
     @Expose
-    private val voteCount: Int? = null
+    private val voteCount: Long? = null
 
 }

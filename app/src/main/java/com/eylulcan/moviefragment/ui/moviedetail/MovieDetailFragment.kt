@@ -33,8 +33,6 @@ class MovieDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         return inflater.inflate(R.layout.fragment_movie_detail, container, false)
     }
 
@@ -98,7 +96,7 @@ class MovieDetailFragment : Fragment() {
         return uri
     }
 
-    private fun calculateDuration(duration: Int): String {
+    private fun calculateDuration(duration: Long): String {
         val durationHour = duration.div(MINUTES_IN_HOUR)
         val durationMinute = duration.mod(MINUTES_IN_HOUR)
         return getString(R.string.duration, durationHour, durationMinute)
