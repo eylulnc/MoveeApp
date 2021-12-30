@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSearchBinding
 import com.eylulcan.moviefragment.model.SearchResult
+import com.eylulcan.moviefragment.util.Utils
 
-private const val SPAN_COUNT = 3
+private const val SPAN_COUNT_PHONE = 3
+private const val SPAN_COUNT_TABLET = 4
 
 class SearchFragment : Fragment(), SearchListener {
 
@@ -36,7 +38,12 @@ class SearchFragment : Fragment(), SearchListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchBinding.bind(view)
-        binding.searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+        if(Utils.isTablet(requireContext())) {
+            binding.searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
+        }
+        else {
+            binding.searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_PHONE)
+        }
         searchAdapter = SearchAdapter(this)
         binding.searchRecyclerView.adapter = searchAdapter
         observeViewModel()

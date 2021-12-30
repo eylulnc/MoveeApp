@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/castRecyclerRow_castConstraintLayout_marginLeft"
+    android:layout_marginRight="@dimen/castRecyclerRow_castConstraintLayout_marginRight"
+    android:id="@+id/castConstraintLayout">
+
+    <ImageView
+        android:id="@+id/castArtistImage"
+        android:layout_width="@dimen/castRecyclerRow_castArtistImage_width_tablet"
+        android:layout_height="@dimen/castRecyclerRow_castArtistImage_height_tablet"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/artist_image"/>
+
+    <TextView
+        android:id="@+id/castArtistName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/castRecyclerRow_castArtistName_marginBottom"
+        android:background="@color/white"
+        android:ellipsize="end"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="center"
+        android:maxLines="2"
+        android:minHeight="@dimen/castRecyclerRow_castArtistName_minHeight"
+        android:minLines="2"
+        android:padding="@dimen/castRecyclerRow_castArtistName_padding"
+        android:singleLine="false"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/castRecyclerRow_castArtistName_textSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/castArtistImage"
+        app:layout_constraintStart_toStartOf="@+id/castArtistImage"
+        app:layout_constraintTop_toBottomOf="@+id/castArtistImage"
+        tools:text="Artist Name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

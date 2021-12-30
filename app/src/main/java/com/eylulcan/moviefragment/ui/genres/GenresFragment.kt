@@ -8,9 +8,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenresBinding
+import com.eylulcan.moviefragment.util.Utils
 
 class GenresFragment : Fragment(), GenreListener {
 
@@ -24,8 +26,14 @@ class GenresFragment : Fragment(), GenreListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_genres, container, false)
         binding = FragmentGenresBinding.bind(view)
-        binding.genresFragmentRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        if (Utils.isTablet(requireContext())) {
+            binding.genresFragmentRecyclerView.layoutManager =
+                GridLayoutManager(context, 2)
+        } else {
+            binding.genresFragmentRecyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        }
+
         return view
     }
 
@@ -53,5 +61,4 @@ class GenresFragment : Fragment(), GenreListener {
             null
         )
     }
-
 }

@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistBinding
 import com.eylulcan.moviefragment.model.PeopleResult
+import com.eylulcan.moviefragment.util.Utils
 
-private const val SPAN_COUNT = 3
+private const val SPAN_COUNT_PHONE = 3
+private const val SPAN_COUNT_TABLET = 4
 
 class ArtistFragment : Fragment(), ArtistListener {
 
@@ -31,7 +33,12 @@ class ArtistFragment : Fragment(), ArtistListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_artist, container, false)
         binding = FragmentArtistBinding.bind(view)
-        binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+        if(Utils.isTablet(requireContext())) {
+            binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
+        } else {
+            binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_PHONE)
+        }
+
         artistAdapter = ArtistAdapter(this)
         binding.artistRecyclerView.adapter = artistAdapter
         return view

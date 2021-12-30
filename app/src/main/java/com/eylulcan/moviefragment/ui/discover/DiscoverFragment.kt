@@ -20,7 +20,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.model.ResultMovie
+import com.eylulcan.moviefragment.util.Utils
 import com.google.firebase.auth.FirebaseAuth
+
+private const val SPAN_COUNT = 3
 
 class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener {
 
@@ -95,13 +98,23 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
             }
         })
         discoverViewModel.sessionId.observe(viewLifecycleOwner, { session ->
-            sharedPreferenceForSessionID.edit().putString(getString(R.string.sessionId), session.sessionID).commit()
+            sharedPreferenceForSessionID.edit()
+                .putString(getString(R.string.sessionId), session.sessionID).commit()
         })
 
     }
 
     private fun setupUI() {
-        fragmentBinding.discoverNowPlayingRecyclerView.layoutManager = GridLayoutManager(context, 3)
+        if (Utils.isTablet(requireContext())) {
+            val height = fragmentBinding.discoverNowPlayingRecyclerView.layoutParams.height
+            fragmentBinding.discoverNowPlayingRecyclerView.layoutParams.height =
+                (height * 1.1).toInt()
+            fragmentBinding.discoverTopRatedRecyclerView.layoutParams.height =
+                (height * 1.1).toInt()
+            fragmentBinding.discoverPopularRecyclerView.layoutParams.height = (height * 1.1).toInt()
+        }
+        fragmentBinding.discoverNowPlayingRecyclerView.layoutManager =
+            GridLayoutManager(context, SPAN_COUNT)
         fragmentBinding.discoverTopRatedRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragmentBinding.discoverPopularRecyclerView.layoutManager =

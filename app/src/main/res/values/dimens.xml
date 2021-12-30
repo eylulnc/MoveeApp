@@ -2,13 +2,18 @@
 <resources>
     <dimen name="discover_recycler_row_image_width">150dp</dimen>
     <dimen name="discover_recycler_row_image_height">200dp</dimen>
+    <dimen name="discover_recycler_row_image_tablet_width">200dp</dimen>
+    <dimen name="discover_recycler_row_image_tablet_height">250dp</dimen>
     <dimen name="discover_recycler_row_text_margin">8dp</dimen>
+    <dimen name="discover_recycler_row_text_margin_tablet">16dp</dimen>
     <dimen name="discover_recycler_row_image_marginTop">16dp</dimen>
     <dimen name="discover_recycler_row_text_padding">6dp</dimen>
     <dimen name="discover_recycler_view_height">300dp</dimen>
 
     <dimen name="detail_movie_detailImagePoster_height">200dp</dimen>
     <dimen name="detail_movie_detailImagePoster_width">150dp</dimen>
+    <dimen name="detail_movie_detailImagePosterTablet_height">400dp</dimen>
+    <dimen name="detail_movie_detailImagePosterTablet_width">300dp</dimen>
     <dimen name="detail_movie_playerView_height">200dp</dimen>
     <dimen name="detail_movie_detailImagePoster_margin_start">4dp</dimen>
     <dimen name="detail_movie_detailImagePoster_margin_top">4dp</dimen>
@@ -148,7 +153,9 @@
     <dimen name="artist_movie_recycler_row_linearLayout_minHeight">50dp</dimen>
 
     <dimen name="artist_detail_artistDetailCoverImage_height">300dp</dimen>
+    <dimen name="artist_detail_artistDetailCoverImage_height_tablet">500dp</dimen>
     <dimen name="artist_detail_artistShortInfo_text_minHeight">15dp</dimen>
+    <dimen name="artist_detail_artistShortInfo_text_minHeight_tablet">30dp</dimen>
     <dimen name="artist_detail_artistShortInfo_text_size">14sp</dimen>
     <dimen name="artist_detail_artistShortInfo_paddingStart">8sp</dimen>
     <dimen name="artist_detail_artistShortInfo_paddingBottom">8sp</dimen>
@@ -157,6 +164,7 @@
     <dimen name="artist_detail_artistName_paddingBottom">8sp</dimen>
     <dimen name="artist_detail_albumCoverLayout_padding">7sp</dimen>
     <dimen name="artist_detail_artistName_text_minHeight">30dp</dimen>
+    <dimen name="artist_detail_artistName_text_minHeight_tablet">50dp</dimen>
     <dimen name="artist_detail_artistName_text_size">24sp</dimen>
     <dimen name="artist_detail_backButton_marginStart">8dp</dimen>
     <dimen name="artist_detail_backButton_marginTop">8dp</dimen>
@@ -217,6 +225,8 @@
     <dimen name="castRecyclerRow_castConstraintLayout_marginRight">8dp</dimen>
     <dimen name="castRecyclerRow_castArtistImage_width">100dp</dimen>
     <dimen name="castRecyclerRow_castArtistImage_height">150dp</dimen>
+    <dimen name="castRecyclerRow_castArtistImage_width_tablet">200dp</dimen>
+    <dimen name="castRecyclerRow_castArtistImage_height_tablet">200dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_marginBottom">8dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_minHeight">40dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_padding">8dp</dimen>

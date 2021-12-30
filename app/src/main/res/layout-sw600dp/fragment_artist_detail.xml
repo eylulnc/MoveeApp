@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/artistDetailConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll"
+            tools:context=".ui.artistdetail.ArtistDetailFragment">
+
+            <ImageView
+                android:id="@+id/artistDetailCoverImage"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height_tablet"
+                android:contentDescription="@string/artist_cover_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/artistName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tr60_greylight"
+                android:ellipsize="end"
+                android:fontFamily="@font/lato_bold"
+                android:minHeight="@dimen/artist_detail_artistName_text_minHeight_tablet"
+                android:paddingStart="@dimen/artist_detail_artistShortInfo_paddingStart"
+                android:paddingEnd="@dimen/artist_detail_artistShortInfo_paddingEnd"
+                android:textColor="@color/white"
+                android:textSize="@dimen/artist_detail_artistName_text_size"
+                app:layout_constraintBottom_toTopOf="@+id/artistShortInfo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="TextView" />
+
+            <TextView
+                android:id="@+id/artistShortInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/tr60_greylight"
+                android:ellipsize="end"
+                android:fontFamily="@font/lato_regular"
+                android:minHeight="@dimen/artist_detail_artistShortInfo_text_minHeight_tablet"
+                android:paddingStart="@dimen/artist_detail_artistShortInfo_paddingStart"
+                android:paddingEnd="@dimen/artist_detail_artistShortInfo_paddingEnd"
+                android:paddingBottom="@dimen/artist_detail_artistShortInfo_paddingEnd"
+                android:textColor="@color/white"
+                android:textSize="@dimen/artist_detail_artistShortInfo_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/artistDetailCoverImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="TextView" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutArtistDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artistDetailCoverImage">
+
+                <LinearLayout
+                    android:id="@+id/albumCoverLayout"
+                    android:layout_width="@dimen/artist_detail_albumCoverLayout_width"
+                    android:layout_height="match_parent"
+                    android:background="@color/purple_mountain"
+                    android:orientation="vertical"
+                    android:padding="@dimen/artist_detail_albumCoverLayout_padding">
+
+                    <TextView
+                        android:id="@+id/albumSizeText"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/artist_detail_albumSize_height"
+                        android:background="@color/purple_mountain"
+                        android:fontFamily="@font/lato_regular"
+                        android:gravity="bottom|center"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/artist_detail_albumSize_text_size"
+                        tools:text="TextView" />
+
+                    <TextView
+                        android:id="@+id/photosTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@color/purple_mountain"
+                        android:fontFamily="@font/lato_regular"
+                        android:gravity="center|top"
+                        android:text="@string/photos"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/artist_detail_photosTextView_text_size"
+                        tools:ignore="TextContrastCheck" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/albumPreviewElement1"
+                    android:layout_width="@dimen/artist_detail_previewImages1_width"
+                    android:layout_height="@dimen/artist_detail_previewImages1_height"
+                    android:contentDescription="@string/preview_image"
+                    android:scaleType="centerCrop"
+                    tools:src="@tools:sample/avatars" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tr15_greylight">
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement2"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/preview_image"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars"
+                        />
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement3"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/preview_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/albumPreviewElement2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@tools:sample/avatars" />
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement4"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/preview_image"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement2"
+                        tools:src="@tools:sample/avatars" />
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement5"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="@dimen/artist_detail_previewImages_height"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/preview_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/albumPreviewElement4"
+                        app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement3"
+                        tools:src="@tools:sample/avatars" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutArtistDetail"
+                app:tabGravity="fill"
+                app:tabMode="fixed">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/summary" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/movies" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/more" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/artistsFragmentViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSummaryBinding
 import com.eylulcan.moviefragment.ui.artistdetail.ArtistDetailViewModel
+import com.eylulcan.moviefragment.util.Utils
 
 class SummaryFragment : Fragment() {
 
@@ -25,6 +26,9 @@ class SummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSummaryBinding.bind(view)
+        if(Utils.isTablet(requireContext())){
+            binding.summaryTextView.textSize = 18F
+        }
         observeViewModel()
     }
 
