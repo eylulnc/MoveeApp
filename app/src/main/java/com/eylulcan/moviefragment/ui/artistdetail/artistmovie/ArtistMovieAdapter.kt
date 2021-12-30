@@ -10,7 +10,10 @@ import com.eylulcan.moviefragment.databinding.ArtistMovieFragmentRecyclerRowBind
 import com.eylulcan.moviefragment.model.ArtistMovieCredits
 import com.eylulcan.moviefragment.util.Utils
 
-class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
+class ArtistMovieAdapter(
+    private val movieCredits: ArtistMovieCredits,
+    private val artistMovieClickListener: ArtistMovieClickListener
+) :
     RecyclerView.Adapter<ArtistMovieAdapter.ViewHolder>() {
 
     private var genreNames: String = ""
@@ -41,6 +44,9 @@ class ArtistMovieAdapter(private val movieCredits: ArtistMovieCredits) :
         holder.binding.genresArtistMovie.text = genreNames
         holder.binding.ratingBarArtistMovie.rating =
             (movie?.voteAverage?.toFloat()?.div(2) ?: 0f)
+        holder.itemView.setOnClickListener {
+            movie?.id?.let { id -> artistMovieClickListener.onMovieClick(id) }
+        }
     }
 
     override fun getItemCount(): Int = movieCredits.cast?.size ?: 0

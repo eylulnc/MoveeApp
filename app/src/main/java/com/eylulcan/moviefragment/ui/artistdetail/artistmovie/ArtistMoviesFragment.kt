@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistMoviesBinding
 import com.eylulcan.moviefragment.ui.artistdetail.ArtistDetailViewModel
 
-class ArtistMoviesFragment : Fragment() {
+class ArtistMoviesFragment : Fragment(), ArtistMovieClickListener {
 
     private lateinit var binding: FragmentArtistMoviesBinding
     private lateinit var artistMovieAdapter: ArtistMovieAdapter
@@ -34,8 +36,16 @@ class ArtistMoviesFragment : Fragment() {
 
     private fun observeViewModel() {
         artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner, { movieCredits ->
-            artistMovieAdapter = ArtistMovieAdapter(movieCredits)
+            artistMovieAdapter = ArtistMovieAdapter(movieCredits, artistMovieClickListener = this)
             binding.artistMovieRecyclerView.adapter = artistMovieAdapter
         })
+    }
+
+    override fun onMovieClick(movieID: Int) {
+        val movieDataBundle = bundleOf((getString(R.string.movieId)) to movieID)
+        findNavController().navigate(
+            R.id.action_artistDetailFragment_to_movieDetailFragment,
+            movieDataBundle, null, null
+        )
     }
 }

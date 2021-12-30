@@ -9,7 +9,7 @@ import javax.annotation.Generated
 class Cast {
     @SerializedName("id")
     @Expose
-    private val id: Int? = null
+    val id: Int? = null
 
     @SerializedName("original_title")
     @Expose
