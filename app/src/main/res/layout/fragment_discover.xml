@@ -58,7 +58,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/discoverPopularRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/discover_recycler_view_height"
                     android:layout_marginTop="@dimen/movieList_popularRecyclerView_marginTop"
                     android:layout_marginEnd="@dimen/movie_list_recycler_view_margin_end"
                     android:scrollbars="horizontal" />
@@ -77,7 +77,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/discoverTopRatedRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/discover_recycler_view_height"
                     android:layout_marginTop="@dimen/movieList_topRated_recyclerView_marginTop"
                     android:layout_marginEnd="@dimen/movieList_topRated_recyclerView_marginEnd"
                     android:scrollbars="horizontal" />
@@ -96,7 +96,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/discoverNowPlayingRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/discover_recycler_view_height"
                     android:layout_marginTop="@dimen/movieList_topRated_recyclerView_marginTop"
                     android:layout_marginEnd="@dimen/movieList_topRated_recyclerView_marginEnd"
                     android:scrollbars="horizontal" />
