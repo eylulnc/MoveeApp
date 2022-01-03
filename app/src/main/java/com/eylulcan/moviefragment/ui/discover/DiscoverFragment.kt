@@ -11,33 +11,27 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
 import com.google.firebase.auth.FirebaseAuth
 
-private const val SPAN_COUNT = 3
-
 class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
-    private val discoverViewModel: DiscoverViewModel by viewModels()
+    private val discoverViewModel: DiscoverViewModel by activityViewModels()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var lastLoadedPageItems: List<ResultMovie>? = emptyList()
     private var nowPlayingResultList: ArrayList<ResultMovie> = arrayListOf()
-    private lateinit var nowPlayingAdapter: DiscoverAdapter
-    private lateinit var topRatedAdapter: DiscoverAdapter
-    private lateinit var mostPopularAdapter: DiscoverAdapter
     private var enableToRequest: Boolean = false
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
+    private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +55,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         setupUI()
         observeViewModel()
         discoverViewModel.getPopularMovieList()
-        discoverViewModel.getTopRatedMovieList()
-        discoverViewModel.getNowPlayingMovieList()
         discoverViewModel.lastLoadedPage++
         sessionID = sharedPreferenceForSessionID.getString(getString(R.string.sessionId), null)
         if (sessionID == null) {
@@ -73,14 +65,15 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     private fun observeViewModel() {
         discoverViewModel.popularMovies.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                mostPopularAdapter.movieResultList = movie.results
-                mostPopularAdapter.notifyDataSetChanged()
+                allListItems.clear()
+                allListItems.add(movie.results as java.util.ArrayList<ResultMovie>)
+                discoverViewModel.getTopRatedMovieList()
             }
         })
         discoverViewModel.topRatedMovies.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                topRatedAdapter.movieResultList = movie.results
-                topRatedAdapter.notifyDataSetChanged()
+                allListItems.add(movie.results as java.util.ArrayList<ResultMovie>)
+                discoverViewModel.getNowPlayingMovieList()
             }
         })
         discoverViewModel.nowPlaying.observe(viewLifecycleOwner, { movieData ->
@@ -92,9 +85,13 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
                         movie.results
                     }
                 nowPlayingResultList.addAll(lastLoadedPageItems ?: arrayListOf())
-                nowPlayingAdapter.movieResultList = nowPlayingResultList
                 enableToRequest = true
-                nowPlayingAdapter.notifyDataSetChanged()
+                allListItems.add(movie.results as java.util.ArrayList<ResultMovie>)
+
+                fragmentBinding.discoverMainRecyclerView.apply {
+                    layoutManager = LinearLayoutManager(this@DiscoverFragment.context, LinearLayoutManager.VERTICAL, false )
+                    adapter = FlexibleAdapter(allListItems,this@DiscoverFragment)
+                }
             }
         })
         discoverViewModel.sessionId.observe(viewLifecycleOwner, { session ->
@@ -106,32 +103,16 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
 
     private fun setupUI() {
         if (Utils.isTablet(requireContext())) {
-            val height = fragmentBinding.discoverNowPlayingRecyclerView.layoutParams.height
-            fragmentBinding.discoverNowPlayingRecyclerView.layoutParams.height =
+            val height = fragmentBinding.discoverMainRecyclerView.layoutParams.height
+            fragmentBinding.discoverMainRecyclerView.layoutParams.height =
                 (height * 1.1).toInt()
-            fragmentBinding.discoverTopRatedRecyclerView.layoutParams.height =
-                (height * 1.1).toInt()
-            fragmentBinding.discoverPopularRecyclerView.layoutParams.height = (height * 1.1).toInt()
         }
-        fragmentBinding.discoverNowPlayingRecyclerView.layoutManager =
-            GridLayoutManager(context, SPAN_COUNT)
-        fragmentBinding.discoverTopRatedRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        fragmentBinding.discoverPopularRecyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        topRatedAdapter = DiscoverAdapter(this, getString(R.string.top_rated))
-        fragmentBinding.discoverTopRatedRecyclerView.adapter = topRatedAdapter
-        nowPlayingAdapter = DiscoverAdapter(this, getString(R.string.now_playing))
-        fragmentBinding.discoverNowPlayingRecyclerView.adapter = nowPlayingAdapter
-        mostPopularAdapter = DiscoverAdapter(this, getString(R.string.most_popular))
-        fragmentBinding.discoverPopularRecyclerView.adapter = mostPopularAdapter
-
-        fragmentBinding.discoverNowPlayingRecyclerView.addOnScrollListener(object :
+        /*(fragmentBinding.discoverMainRecyclerView.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val layoutManager =
-                    fragmentBinding.discoverNowPlayingRecyclerView.layoutManager as GridLayoutManager
+                    fragmentBinding.discoverMainRecyclerView.layoutManager as GridLayoutManager
                 val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
                 if (lastVisiblePosition == nowPlayingResultList.size - 1 && enableToRequest) {
                     discoverViewModel.getNowPlayingMovieList()
@@ -139,7 +120,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
                     enableToRequest = false
                 }
             }
-        })
+        })*/
     }
 
     override fun onMovieClicked(resultMovie: ResultMovie) {

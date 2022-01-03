@@ -44,62 +44,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/discoverNestedLinear">
-                <TextView
-                    android:id="@+id/mostPopularCategoryText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/movieList_mostPopularCategoryText_marginStart"
-                    android:layout_marginTop="@dimen/movieList_mostPopularCategoryText_marginTop"
-                    android:layout_marginEnd="@dimen/movieList_mostPopularCategoryText_marginEnd"
-                    android:text="@string/most_popular"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/movieList_mostPopularCategoryText_size" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/discoverPopularRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/discover_recycler_view_height"
-                    android:layout_marginTop="@dimen/movieList_popularRecyclerView_marginTop"
-                    android:layout_marginEnd="@dimen/movie_list_recycler_view_margin_end"
-                    android:scrollbars="horizontal" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/discoverMainRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/discover_mainRecyclerView_marginTop"
+                android:layout_marginEnd="@dimen/discover_mainRecyclerView_marginEnd"
+                android:scrollbars="horizontal" />
 
-                <TextView
-                    android:id="@+id/topRatedText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/movieList_topRatedText_marginStart"
-                    android:layout_marginTop="@dimen/movieList_topRatedText_marginTop"
-                    android:layout_marginEnd="@dimen/movieList_topRatedText_marginEnd"
-                    android:text="@string/top_rated"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/movieList_topRatedText_size" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/discoverTopRatedRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/discover_recycler_view_height"
-                    android:layout_marginTop="@dimen/movieList_topRated_recyclerView_marginTop"
-                    android:layout_marginEnd="@dimen/movieList_topRated_recyclerView_marginEnd"
-                    android:scrollbars="horizontal" />
-
-                <TextView
-                    android:id="@+id/nowPlayingRecyclerViewText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/movieList_topRatedText_marginStart"
-                    android:layout_marginTop="@dimen/movieList_topRatedText_marginTop"
-                    android:layout_marginEnd="@dimen/movieList_topRatedText_marginEnd"
-                    android:text="@string/now_playing"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/movieList_topRatedText_size" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/discoverNowPlayingRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/discover_recycler_view_height"
-                    android:layout_marginTop="@dimen/movieList_topRated_recyclerView_marginTop"
-                    android:layout_marginEnd="@dimen/movieList_topRated_recyclerView_marginEnd"
-                    android:scrollbars="horizontal" />
             </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
