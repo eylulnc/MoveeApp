@@ -19,7 +19,7 @@ class ArtistDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentArtistDetailBinding
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
-    private val tabNames = arrayOf("Summary","Movies", "More")
+    private val tabNames = arrayOf("Summary", "Movies", "More")
     private var photoAlbum: ArtistAlbum? = null
 
     override fun onCreateView(
@@ -39,15 +39,8 @@ class ArtistDetailFragment : Fragment() {
         artistDetailViewModel.getArtistAlbum(selectedPopularPersonID)
         artistDetailViewModel.getArtistDetail(selectedPopularPersonID)
         artistDetailViewModel.getArtistMovieCredits(selectedPopularPersonID)
-        binding.albumCoverLayout.setOnClickListener {
-            photoAlbum?.let { album ->
-                val albumDataBundle = bundleOf((getString(R.string.photo_album) to album))
-                findNavController().navigate(
-                    R.id.action_artistDetailFragment_to_albumFragment,
-                    albumDataBundle
-                )
-            }
-        }
+
+
     }
 
     private fun observeViewModel() {
@@ -62,6 +55,17 @@ class ArtistDetailFragment : Fragment() {
 
         artistDetailViewModel.artistAlbum.observe(viewLifecycleOwner, { album ->
             val albumSize = album.artistProfileImages?.size
+            if (albumSize != null && albumSize > 0) {
+                binding.albumCoverLayout.setOnClickListener {
+                    photoAlbum?.let { album ->
+                        val albumDataBundle = bundleOf((getString(R.string.photo_album) to album))
+                        findNavController().navigate(
+                            R.id.action_artistDetailFragment_to_albumFragment,
+                            albumDataBundle
+                        )
+                    }
+                }
+            }
             photoAlbum = album
             val profileImage = album.artistProfileImages
 
@@ -81,6 +85,16 @@ class ArtistDetailFragment : Fragment() {
                                 .into(binding.albumPreviewElement4)
                             4 -> Glide.with(this).load(setImageUrl(imagePath))
                                 .into(binding.albumPreviewElement5)
+                        }
+                    }
+                } else {
+                    for (i in 0..5) {
+                        when (i) {
+                            0 -> binding.albumPreviewElement1.setImageResource(R.color.grey)
+                            1 -> binding.albumPreviewElement2.setImageResource(R.color.grey)
+                            2 -> binding.albumPreviewElement3.setImageResource(R.color.grey)
+                            3 -> binding.albumPreviewElement4.setImageResource(R.color.grey)
+                            4 -> binding.albumPreviewElement5.setImageResource(R.color.grey)
                         }
                     }
                 }

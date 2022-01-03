@@ -82,18 +82,19 @@
                 <LinearLayout
                     android:id="@+id/albumCoverLayout"
                     android:layout_width="@dimen/artist_detail_albumCoverLayout_width"
-                    android:layout_height="match_parent"
+                    android:layout_height="@dimen/artist_detail_previewImages1_height"
                     android:background="@color/purple_mountain"
                     android:orientation="vertical"
+                    android:gravity="center"
                     android:padding="@dimen/artist_detail_albumCoverLayout_padding">
 
                     <TextView
                         android:id="@+id/albumSizeText"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/artist_detail_albumSize_height"
+                        android:layout_height="wrap_content"
                         android:background="@color/purple_mountain"
                         android:fontFamily="@font/lato_regular"
-                        android:gravity="bottom|center"
+                        android:gravity="center"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="@dimen/artist_detail_albumSize_text_size"
@@ -102,7 +103,7 @@
                     <TextView
                         android:id="@+id/photosTextView"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@color/purple_mountain"
                         android:fontFamily="@font/lato_regular"
@@ -114,36 +115,41 @@
                         tools:ignore="TextContrastCheck" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/albumPreviewElement1"
-                    android:layout_width="@dimen/artist_detail_previewImages1_width"
-                    android:layout_height="@dimen/artist_detail_previewImages1_height"
-                    android:contentDescription="@string/preview_image"
-                    android:scaleType="centerCrop"
-                    tools:src="@tools:sample/avatars" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/tr15_greylight">
+                    android:background="@color/tr15_greylight"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <ImageView
+                        android:id="@+id/albumPreviewElement1"
+                        android:layout_width="@dimen/artist_detail_previewImages_width"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/tr15_greylight"
+                        android:contentDescription="@string/preview_image"
+                        android:scaleType="centerCrop"
+                        tools:src="@tools:sample/avatars" />
 
                     <ImageView
                         android:id="@+id/albumPreviewElement2"
                         android:layout_width="@dimen/artist_detail_previewImages_width"
-                        android:layout_height="@dimen/artist_detail_previewImages_height"
-                        android:scaleType="centerCrop"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:contentDescription="@string/preview_image"
+                        android:scaleType="centerCrop"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@tools:sample/avatars"
-                        />
+                        tools:src="@tools:sample/avatars" />
 
                     <ImageView
                         android:id="@+id/albumPreviewElement3"
                         android:layout_width="@dimen/artist_detail_previewImages_width"
-                        android:layout_height="@dimen/artist_detail_previewImages_height"
-                        android:scaleType="centerCrop"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:contentDescription="@string/preview_image"
+                        android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/albumPreviewElement2"
                         app:layout_constraintTop_toTopOf="parent"
@@ -152,26 +158,28 @@
                     <ImageView
                         android:id="@+id/albumPreviewElement4"
                         android:layout_width="@dimen/artist_detail_previewImages_width"
-                        android:layout_height="@dimen/artist_detail_previewImages_height"
-                        android:scaleType="centerCrop"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:contentDescription="@string/preview_image"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement2"
+                        app:layout_constraintStart_toEndOf="@+id/albumPreviewElement2"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:src="@tools:sample/avatars" />
 
                     <ImageView
                         android:id="@+id/albumPreviewElement5"
                         android:layout_width="@dimen/artist_detail_previewImages_width"
-                        android:layout_height="@dimen/artist_detail_previewImages_height"
-                        android:scaleType="centerCrop"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:contentDescription="@string/preview_image"
+                        android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/albumPreviewElement4"
                         app:layout_constraintTop_toBottomOf="@+id/albumPreviewElement3"
                         tools:src="@tools:sample/avatars" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
