@@ -30,7 +30,7 @@ class MovieDetailFragment : Fragment() {
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
     private var genreNames: String = ""
     private var movieLanguages: String = ""
-    private var placeholderNeeded = emptyList<Int>()
+    private var placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
 
     override fun onCreateView(
@@ -144,11 +144,10 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setPlaceholders() {
-        placeholderNeeded =
-            arrayListOf(R.id.detailImagePoster, R.id.detailDurationText, R.id.detailReleaseDateText,
-                R.id.detailMovieNameText, R.id.languageText, R.id.detailRatingBar, R.id.detailGenreNameText,
-                R.id.expandable_text)
-        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded, activity as MainActivity)
+        placeholderNeeded.addAll( arrayListOf(fragmentBinding.detailImagePoster, fragmentBinding.detailDurationText, fragmentBinding.detailReleaseDateText,
+                fragmentBinding.detailMovieNameText, fragmentBinding.languageText, fragmentBinding.detailRatingBar, fragmentBinding.detailGenreNameText,
+                fragmentBinding.expandableText))
+        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
     }
 
 }

@@ -14,7 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
@@ -23,7 +25,7 @@ import com.eylulcan.moviefragment.util.Utils
 import com.google.firebase.auth.FirebaseAuth
 import me.samlss.broccoli.Broccoli
 
-class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener {
+class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener,RecyclerViewListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by activityViewModels()
@@ -34,8 +36,9 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
-    private var placeholderNeeded = emptyList<Int>()
+    private var placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
+    private lateinit var recyclerViewAdapter: FlexibleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +53,8 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_discover, container, false)
-        setPlaceholders()
         fragmentBinding = FragmentDiscoverBinding.bind(view)
+        setPlaceholders()
         setToolbarMenu()
         return view
     }
@@ -92,17 +95,16 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
                         movie.results
                     }
                 nowPlayingResultList.addAll(lastLoadedPageItems ?: arrayListOf())
+                fragmentBinding.discoverMainRecyclerView.layoutManager = LinearLayoutManager(
+                    this@DiscoverFragment.context,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+                recyclerViewAdapter = FlexibleAdapter(allListItems, this, this)
+                fragmentBinding.discoverMainRecyclerView.adapter = recyclerViewAdapter
+                recyclerViewAdapter.movieResults = nowPlayingResultList
                 enableToRequest = true
                 allListItems.add(movie.results as java.util.ArrayList<ResultMovie>)
-
-                fragmentBinding.discoverMainRecyclerView.apply {
-                    layoutManager = LinearLayoutManager(
-                        this@DiscoverFragment.context,
-                        LinearLayoutManager.VERTICAL,
-                        false
-                    )
-                    adapter = FlexibleAdapter(allListItems, this@DiscoverFragment)
-                }
             }
         })
         discoverViewModel.sessionId.observe(viewLifecycleOwner, { session ->
@@ -112,26 +114,13 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
 
     }
 
+
     private fun setupUI() {
         if (Utils.isTablet(requireContext())) {
             val height = fragmentBinding.discoverMainRecyclerView.layoutParams.height
             fragmentBinding.discoverMainRecyclerView.layoutParams.height =
                 (height * 1.1).toInt()
         }
-        /*(fragmentBinding.discoverMainRecyclerView.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager =
-                    fragmentBinding.discoverMainRecyclerView.layoutManager as GridLayoutManager
-                val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
-                if (lastVisiblePosition == nowPlayingResultList.size - 1 && enableToRequest) {
-                    discoverViewModel.getNowPlayingMovieList()
-                    discoverViewModel.lastLoadedPage++
-                    enableToRequest = false
-                }
-            }
-        })*/
     }
 
     override fun onMovieClicked(resultMovie: ResultMovie) {
@@ -140,6 +129,21 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
             R.id.action_dashboardFragment_to_movieDetailFragment,
             movieDataBundle, null, null
         )
+    }
+
+    override fun recyclerScrollListener(recyclerView: RecyclerView) {
+
+        if (recyclerView.layoutManager is GridLayoutManager) {
+            val layoutManager =
+                recyclerView.layoutManager as GridLayoutManager
+            val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
+            if (lastVisiblePosition == nowPlayingResultList.size - 1 && enableToRequest) {
+                discoverViewModel.getNowPlayingMovieList()
+                discoverViewModel.lastLoadedPage++
+                enableToRequest = false
+            }
+        }
+
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -165,9 +169,14 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     }
 
     private fun setPlaceholders() {
-        placeholderNeeded =
-            arrayListOf(R.id.movieListRecyclerViewImage, R.id.movieListRecyclerViewName)
-        Utils.addPlaceholders(broccoli = broccoli, itemList = placeholderNeeded, activity as MainActivity)
+        placeholderNeeded.addAll(arrayListOf(
+            fragmentBinding.discoverMainRecyclerView
+        ))
+
+        Utils.addPlaceholders(
+            broccoli = broccoli,
+            itemList = placeholderNeeded
+        )
     }
 
 }

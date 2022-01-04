@@ -10,6 +10,7 @@ import com.eylulcan.moviefragment.model.ArtistMovieCredits
 import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -34,6 +35,7 @@ class ArtistDetailViewModel : ViewModel() {
 
     fun getArtistDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
+            delay(2000)
             val response = retrofit?.getArtistDetail(personId = id)
                 response?.let {
                     if (response.isSuccessful) {

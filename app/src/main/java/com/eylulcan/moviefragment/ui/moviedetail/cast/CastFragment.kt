@@ -24,20 +24,21 @@ class CastFragment : Fragment(), ArtistListener {
     private lateinit var binding: FragmentCastBinding
     private lateinit var castAdapter: CastAdapter
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
-    private var placeholderNeeded = emptyList<Int>()
+    private var placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setPlaceholders()
+
         return inflater.inflate(R.layout.fragment_cast, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCastBinding.bind(view)
+        setPlaceholders()
         binding.castRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
         observeViewModel()
 
@@ -59,12 +60,10 @@ class CastFragment : Fragment(), ArtistListener {
     }
 
     private fun setPlaceholders() {
-        placeholderNeeded =
-            arrayListOf(
-                (R.id.castArtistImage),
-                (R.id.castArtistName)
-            )
-        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded, activity as MainActivity )
+        placeholderNeeded.addAll(arrayListOf(
+            binding.castRecyclerView,
+        ))
+        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded )
 
     }
 }

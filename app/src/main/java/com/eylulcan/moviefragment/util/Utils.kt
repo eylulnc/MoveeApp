@@ -25,11 +25,11 @@ object Utils {
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE)
     }
 
-    fun addPlaceholders(broccoli: Broccoli, itemList: List<Int> , activity:Activity) {
+    fun addPlaceholders(broccoli: Broccoli, itemList: List<View>) {
         itemList.forEach { item ->
             broccoli.addPlaceholder(
                 PlaceholderParameter.Builder()
-                    .setView(activity.findViewById(item))
+                    .setView(item)
                     .setDrawable(
                         BroccoliGradientDrawable(
                             Color.parseColor("#DDDDDD"),

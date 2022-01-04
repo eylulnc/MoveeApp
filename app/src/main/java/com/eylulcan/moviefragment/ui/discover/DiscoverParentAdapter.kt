@@ -1,19 +1,14 @@
 package com.eylulcan.moviefragment.ui.discover
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.eylulcan.moviefragment.R
-import com.eylulcan.moviefragment.databinding.DiscoverChildRecyclerRowBinding
 import com.eylulcan.moviefragment.databinding.DiscoverParentFragmentBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 
 class FlexibleAdapter
-    (private val parents: List<List<ResultMovie>>, private val listener: MovieListener) :
+    (private val parents: List<List<ResultMovie>>, private val listener: MovieListener, private val recyclerViewListener: RecyclerViewListener) :
     RecyclerView.Adapter<FlexibleAdapter.ViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -49,9 +44,18 @@ class FlexibleAdapter
             childLayoutManager.initialPrefetchItemCount = 3
             holder.binding.discoverRecyclerView.apply {
                 layoutManager = childLayoutManager
-                adapter = DiscoverChildAdapter(parent, listener)
+                adapter = DiscoverChildAdapter(movieResults, listener)
                 setRecycledViewPool(viewPool)
             }
+            holder.binding.discoverRecyclerView.addOnScrollListener(object :
+                RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    recyclerViewListener.recyclerScrollListener(recyclerView)
+
+                }
+            })
+
         } else {
             if (position == 0) {
                 holder.binding.categoryText.text =
@@ -74,5 +78,29 @@ class FlexibleAdapter
             }
         }
     }
+
+    private val diffUtil = object : DiffUtil.ItemCallback<ResultMovie>() {
+        override fun areItemsTheSame(
+            oldItem: ResultMovie,
+            newItem: ResultMovie
+        ): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: ResultMovie,
+            newItem: ResultMovie
+        ): Boolean {
+            return oldItem.equals(newItem)
+        }
+
+    }
+
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
+
+    var movieResults: List<ResultMovie>
+        get() = recyclerListDiffer.currentList
+        set(value) = recyclerListDiffer.submitList(value)
+
 
 }

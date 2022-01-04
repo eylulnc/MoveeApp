@@ -23,9 +23,7 @@ class ArtistDetailFragment : Fragment() {
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
     private val tabNames = arrayOf("Summary", "Movies", "More")
     private var photoAlbum: ArtistAlbum? = null
-    private var placeholderNeededData = emptyList<Int>()
-    private var placeholderNeededImages = emptyList<Int>()
-    private var broccoliData = Broccoli()
+    private val placeholderNeededImages = arrayListOf<View>()
     private var broccoliImages = Broccoli()
 
     override fun onCreateView(
@@ -33,13 +31,13 @@ class ArtistDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_artist_detail, container, false)
-        setPlaceholders()
         binding = FragmentArtistDetailBinding.bind(view)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setPlaceholders()
         val selectedPopularPersonID = arguments?.get(getString(R.string.artistId)) as Int
         tabAdapterSetup()
         observeViewModel()
@@ -50,7 +48,7 @@ class ArtistDetailFragment : Fragment() {
 
     private fun observeViewModel() {
         artistDetailViewModel.artistDetail.observe(viewLifecycleOwner, { detail ->
-            broccoliData.removeAllPlaceholders()
+            broccoliImages.clearAllPlaceholders()
             binding.artistName.text = detail.name
             val knownForDepartment = detail.knownForDepartment ?: getString(R.string.unknown)
             val birthDate = detail.birthday ?: getString(R.string.unknown)
@@ -61,7 +59,6 @@ class ArtistDetailFragment : Fragment() {
 
         artistDetailViewModel.artistAlbum.observe(viewLifecycleOwner, { album ->
             val albumSize = album.artistProfileImages?.size
-            broccoliImages.removeAllPlaceholders()
             if (albumSize != null && albumSize > 0) {
                 binding.albumCoverLayout.setOnClickListener {
                     photoAlbum?.let { album ->
@@ -121,13 +118,11 @@ class ArtistDetailFragment : Fragment() {
     }
 
     private fun setPlaceholders() {
-        placeholderNeededData =
-            arrayListOf(R.id.artistDetailCoverImage, R.id.artistName, R.id.artistShortInfo,
-                R.id.albumSizeText, R.id.photosTextView )
-        placeholderNeededImages = arrayListOf(R.id.albumPreviewElement1, R.id.albumPreviewElement2,
-            R.id.albumPreviewElement3, R.id.albumPreviewElement4, R.id.albumPreviewElement5)
-        Utils.addPlaceholders(broccoli = broccoliData, placeholderNeededData, activity as MainActivity)
-        Utils.addPlaceholders(broccoli = broccoliImages, placeholderNeededImages, activity as MainActivity)
+        placeholderNeededImages.addAll(arrayListOf(binding.albumPreviewElement1, binding.albumPreviewElement2,
+            binding.albumPreviewElement3, binding.albumPreviewElement4, binding.albumPreviewElement5,binding.artistDetailCoverImage,
+            binding.artistName, binding.artistShortInfo,
+            binding.albumSizeText, binding.photosTextView))
+        Utils.addPlaceholders(broccoli = broccoliImages, placeholderNeededImages)
     }
 
 }

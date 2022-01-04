@@ -10,10 +10,7 @@ import com.eylulcan.moviefragment.model.MovieCredits
 import com.eylulcan.moviefragment.model.ReviewList
 import com.eylulcan.moviefragment.model.VideoList
 import com.eylulcan.moviefragment.util.Utils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -41,6 +38,7 @@ class DetailViewModel : ViewModel() {
 
     fun getMovieCast(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
+            delay(2000)
             val response = retrofit?.getMovieCredits(movieId = id)
             response?.let {
                 if (response.isSuccessful) {
@@ -93,6 +91,7 @@ class DetailViewModel : ViewModel() {
 
     fun getMovieDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
+            delay(2000)
             val response = retrofit?.getMovieDetail(genreId = id)
             response?.let {
                 if (response.isSuccessful) {

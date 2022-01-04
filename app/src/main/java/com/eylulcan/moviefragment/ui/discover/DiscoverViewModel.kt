@@ -9,6 +9,7 @@ import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -36,6 +37,7 @@ class DiscoverViewModel : ViewModel() {
 
     fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
+            delay(2000)
             val response = retrofit?.getPopularData()
             response?.let {
                 if (response.isSuccessful) {
@@ -49,6 +51,7 @@ class DiscoverViewModel : ViewModel() {
 
     fun getTopRatedMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
+            delay(2000)
             val response = retrofit?.getTopRatedData()
             response?.let {
                 if (response.isSuccessful) {
