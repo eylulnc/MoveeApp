@@ -204,12 +204,12 @@
     <dimen name="castRecyclerRow_castConstraintLayout_marginLeft">8dp</dimen>
     <dimen name="castRecyclerRow_castConstraintLayout_marginRight">8dp</dimen>
     <dimen name="castRecyclerRow_castArtistImage_width">100dp</dimen>
-    <dimen name="castRecyclerRow_castArtistImage_height">150dp</dimen>
+    <dimen name="castRecyclerRow_castArtistImage_height">140dp</dimen>
     <dimen name="castRecyclerRow_castArtistImage_width_tablet">200dp</dimen>
     <dimen name="castRecyclerRow_castArtistImage_height_tablet">200dp</dimen>
-    <dimen name="castRecyclerRow_castArtistName_marginBottom">8dp</dimen>
+    <dimen name="castRecyclerRow_castConstraintLayout_marginTop">12dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_minHeight">40dp</dimen>
-    <dimen name="castRecyclerRow_castArtistName_padding">8dp</dimen>
+    <dimen name="castRecyclerRow_castArtistName_padding">20dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_textSize">14sp</dimen>
 
     <dimen name="search_recycler_row_text_width">100dp</dimen>

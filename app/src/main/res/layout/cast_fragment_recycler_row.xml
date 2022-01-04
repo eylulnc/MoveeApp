@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/castRecyclerRow_castConstraintLayout_marginLeft"
     android:layout_marginRight="@dimen/castRecyclerRow_castConstraintLayout_marginRight"
+    android:layout_marginTop="@dimen/castRecyclerRow_castConstraintLayout_marginTop"
     android:id="@+id/castConstraintLayout">
 
     <ImageView
@@ -24,15 +25,14 @@
         android:id="@+id/castArtistName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/castRecyclerRow_castArtistName_marginBottom"
         android:background="@color/white"
         android:ellipsize="end"
         android:fontFamily="@font/lato_regular"
         android:gravity="center"
         android:maxLines="2"
         android:minHeight="@dimen/castRecyclerRow_castArtistName_minHeight"
-        android:minLines="2"
-        android:padding="@dimen/castRecyclerRow_castArtistName_padding"
+        android:paddingEnd="@dimen/castRecyclerRow_castArtistName_padding"
+        android:paddingStart="@dimen/castRecyclerRow_castArtistName_padding"
         android:singleLine="false"
         android:textAlignment="center"
         android:textColor="@color/black"
