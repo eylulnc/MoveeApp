@@ -20,6 +20,7 @@ import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
 import com.google.firebase.auth.FirebaseAuth
+import me.samlss.broccoli.Broccoli
 
 class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener {
 
@@ -32,12 +33,15 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
+    private var placeholderNeeded = emptyList<View>()
+    private var broccoli = Broccoli()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferenceForSessionID = requireContext().getSharedPreferences(
             getString(R.string.app_package_name), Context.MODE_PRIVATE
         )
+
     }
 
     override fun onCreateView(
@@ -45,6 +49,9 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_discover, container, false)
+        placeholderNeeded =
+            arrayListOf(requireActivity().findViewById(R.id.movieListRecyclerViewImage),requireActivity().findViewById(R.id.movieListRecyclerViewName))
+        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded as ArrayList<View>)
         fragmentBinding = FragmentDiscoverBinding.bind(view)
         setToolbarMenu()
         return view
@@ -78,6 +85,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         })
         discoverViewModel.nowPlaying.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
+                broccoli.removeAllPlaceholders()
                 lastLoadedPageItems =
                     if (movie.results?.let { lastLoadedPageItems?.containsAll(it) } == true) {
                         emptyList()
@@ -89,8 +97,12 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
                 allListItems.add(movie.results as java.util.ArrayList<ResultMovie>)
 
                 fragmentBinding.discoverMainRecyclerView.apply {
-                    layoutManager = LinearLayoutManager(this@DiscoverFragment.context, LinearLayoutManager.VERTICAL, false )
-                    adapter = FlexibleAdapter(allListItems,this@DiscoverFragment)
+                    layoutManager = LinearLayoutManager(
+                        this@DiscoverFragment.context,
+                        LinearLayoutManager.VERTICAL,
+                        false
+                    )
+                    adapter = FlexibleAdapter(allListItems, this@DiscoverFragment)
                 }
             }
         })
