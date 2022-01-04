@@ -9,10 +9,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentCastBinding
 import com.eylulcan.moviefragment.ui.artist.ArtistListener
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
+import com.eylulcan.moviefragment.util.Utils
+import me.samlss.broccoli.Broccoli
 
 private const val SPAN_COUNT = 4
 
@@ -21,10 +24,14 @@ class CastFragment : Fragment(), ArtistListener {
     private lateinit var binding: FragmentCastBinding
     private lateinit var castAdapter: CastAdapter
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
+    private var placeholderNeeded = emptyList<Int>()
+    private var broccoli = Broccoli()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setPlaceholders()
         return inflater.inflate(R.layout.fragment_cast, container, false)
     }
 
@@ -38,6 +45,7 @@ class CastFragment : Fragment(), ArtistListener {
 
     private fun observeViewModel() {
         movieDetailViewModel.cast.observe(viewLifecycleOwner, { movieCredits ->
+            broccoli.removeAllPlaceholders()
             castAdapter = CastAdapter(movieCredits, this)
             binding.castRecyclerView.adapter = castAdapter
         })
@@ -48,5 +56,15 @@ class CastFragment : Fragment(), ArtistListener {
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_movieDetailFragment_to_artistDetailFragment, artistIdBundle, null, null
         )
+    }
+
+    private fun setPlaceholders() {
+        placeholderNeeded =
+            arrayListOf(
+                (R.id.castArtistImage),
+                (R.id.castArtistName)
+            )
+        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded, activity as MainActivity )
+
     }
 }

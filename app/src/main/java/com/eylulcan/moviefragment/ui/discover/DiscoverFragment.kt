@@ -15,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.model.ResultMovie
@@ -33,7 +34,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
-    private var placeholderNeeded = emptyList<View>()
+    private var placeholderNeeded = emptyList<Int>()
     private var broccoli = Broccoli()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +50,7 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_discover, container, false)
-        placeholderNeeded =
-            arrayListOf(requireActivity().findViewById(R.id.movieListRecyclerViewImage),requireActivity().findViewById(R.id.movieListRecyclerViewName))
-        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded as ArrayList<View>)
+        setPlaceholders()
         fragmentBinding = FragmentDiscoverBinding.bind(view)
         setToolbarMenu()
         return view
@@ -163,6 +162,12 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         val toolbar = fragmentBinding.toolbar
         toolbar.inflateMenu(R.menu.menu)
         toolbar.setOnMenuItemClickListener(this)
+    }
+
+    private fun setPlaceholders() {
+        placeholderNeeded =
+            arrayListOf(R.id.movieListRecyclerViewImage, R.id.movieListRecyclerViewName)
+        Utils.addPlaceholders(broccoli = broccoli, itemList = placeholderNeeded, activity as MainActivity)
     }
 
 }

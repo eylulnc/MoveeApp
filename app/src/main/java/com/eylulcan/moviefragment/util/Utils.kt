@@ -1,11 +1,12 @@
 package com.eylulcan.moviefragment.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.view.View
-import android.view.ViewParent
 import android.view.animation.LinearInterpolator
+import androidx.fragment.app.FragmentActivity
 import com.eylulcan.moviefragment.MainActivity
 import me.samlss.broccoli.Broccoli
 import me.samlss.broccoli.BroccoliGradientDrawable
@@ -24,11 +25,11 @@ object Utils {
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE)
     }
 
-    fun addPlaceholders(broccoli: Broccoli, itemList: ArrayList<View>) {
+    fun addPlaceholders(broccoli: Broccoli, itemList: List<Int> , activity:Activity) {
         itemList.forEach { item ->
             broccoli.addPlaceholder(
                 PlaceholderParameter.Builder()
-                    .setView(item)
+                    .setView(activity.findViewById(item))
                     .setDrawable(
                         BroccoliGradientDrawable(
                             Color.parseColor("#DDDDDD"),

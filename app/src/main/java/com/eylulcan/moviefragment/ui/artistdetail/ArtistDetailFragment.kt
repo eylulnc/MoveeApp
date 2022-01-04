@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistDetailBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
 import com.eylulcan.moviefragment.util.Utils
 import com.google.android.material.tabs.TabLayoutMediator
+import me.samlss.broccoli.Broccoli
 
 class ArtistDetailFragment : Fragment() {
 
@@ -21,12 +23,17 @@ class ArtistDetailFragment : Fragment() {
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
     private val tabNames = arrayOf("Summary", "Movies", "More")
     private var photoAlbum: ArtistAlbum? = null
+    private var placeholderNeededData = emptyList<Int>()
+    private var placeholderNeededImages = emptyList<Int>()
+    private var broccoliData = Broccoli()
+    private var broccoliImages = Broccoli()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_artist_detail, container, false)
+        setPlaceholders()
         binding = FragmentArtistDetailBinding.bind(view)
         return view
     }
@@ -39,12 +46,11 @@ class ArtistDetailFragment : Fragment() {
         artistDetailViewModel.getArtistAlbum(selectedPopularPersonID)
         artistDetailViewModel.getArtistDetail(selectedPopularPersonID)
         artistDetailViewModel.getArtistMovieCredits(selectedPopularPersonID)
-
-
     }
 
     private fun observeViewModel() {
         artistDetailViewModel.artistDetail.observe(viewLifecycleOwner, { detail ->
+            broccoliData.removeAllPlaceholders()
             binding.artistName.text = detail.name
             val knownForDepartment = detail.knownForDepartment ?: getString(R.string.unknown)
             val birthDate = detail.birthday ?: getString(R.string.unknown)
@@ -55,6 +61,7 @@ class ArtistDetailFragment : Fragment() {
 
         artistDetailViewModel.artistAlbum.observe(viewLifecycleOwner, { album ->
             val albumSize = album.artistProfileImages?.size
+            broccoliImages.removeAllPlaceholders()
             if (albumSize != null && albumSize > 0) {
                 binding.albumCoverLayout.setOnClickListener {
                     photoAlbum?.let { album ->
@@ -111,6 +118,16 @@ class ArtistDetailFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.artistsFragmentViewPager) { tab, position ->
             tab.text = tabNames[position]
         }.attach()
+    }
+
+    private fun setPlaceholders() {
+        placeholderNeededData =
+            arrayListOf(R.id.artistDetailCoverImage, R.id.artistName, R.id.artistShortInfo,
+                R.id.albumSizeText, R.id.photosTextView )
+        placeholderNeededImages = arrayListOf(R.id.albumPreviewElement1, R.id.albumPreviewElement2,
+            R.id.albumPreviewElement3, R.id.albumPreviewElement4, R.id.albumPreviewElement5)
+        Utils.addPlaceholders(broccoli = broccoliData, placeholderNeededData, activity as MainActivity)
+        Utils.addPlaceholders(broccoli = broccoliImages, placeholderNeededImages, activity as MainActivity)
     }
 
 }

@@ -8,7 +8,7 @@ import javax.annotation.Generated
 class SpokenLanguage {
     @SerializedName("english_name")
     @Expose
-    private val englishName: String? = null
+    val englishName: String? = null
 
     @SerializedName("iso_639_1")
     @Expose

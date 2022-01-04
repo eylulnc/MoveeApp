@@ -9,12 +9,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
 import com.eylulcan.moviefragment.model.MovieDetail
 import com.eylulcan.moviefragment.ui.moviedetail.popup.CustomPopUpDialogFragment
 import com.eylulcan.moviefragment.util.Utils
 import com.google.android.material.tabs.TabLayoutMediator
+import me.samlss.broccoli.Broccoli
+import me.samlss.broccoli.PlaceholderParameter
 
 private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
 private const val VIMEO_LINK = "https://vimeo.com/"
@@ -27,12 +30,16 @@ class MovieDetailFragment : Fragment() {
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
     private var genreNames: String = ""
     private var movieLanguages: String = ""
+    private var placeholderNeeded = emptyList<Int>()
+    private var broccoli = Broccoli()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_movie_detail, container, false)
+        val view = inflater.inflate(R.layout.fragment_movie_detail, container, false)
+        setPlaceholders()
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,6 +88,7 @@ class MovieDetailFragment : Fragment() {
             }
         })
         movieDetailViewModel.detail.observe(viewLifecycleOwner, { movie ->
+            broccoli.removeAllPlaceholders()
             setupUI(movie)
         })
     }
@@ -103,7 +111,6 @@ class MovieDetailFragment : Fragment() {
 
     private fun setupUI(movieDetails: MovieDetail?) {
         movieDetails?.let { selectedMovie ->
-
             Glide.with(this).load(setImageUrl(selectedMovie.posterPath))
                 .into(fragmentBinding.detailImagePoster)
             fragmentBinding.detailMovieNameText.text = selectedMovie.title
@@ -111,8 +118,9 @@ class MovieDetailFragment : Fragment() {
             fragmentBinding.detailReleaseDateText.text = selectedMovie.releaseDate
             fragmentBinding.detailRatingBar.rating =
                 (selectedMovie.voteAverage?.toFloat()?.div(2) ?: 0f)
+            movieLanguages = ""
             selectedMovie.spokenLanguages?.forEach { language ->
-                movieLanguages = movieLanguages.plus(language.name).plus(" | ")
+                movieLanguages = movieLanguages.plus(language.englishName).plus(" | ")
             }
             fragmentBinding.languageText.text = getString(R.string.language, movieLanguages)
             genreNames = ""
@@ -134,4 +142,13 @@ class MovieDetailFragment : Fragment() {
             }
         }
     }
+
+    private fun setPlaceholders() {
+        placeholderNeeded =
+            arrayListOf(R.id.detailImagePoster, R.id.detailDurationText, R.id.detailReleaseDateText,
+                R.id.detailMovieNameText, R.id.languageText, R.id.detailRatingBar, R.id.detailGenreNameText,
+                R.id.expandable_text)
+        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded, activity as MainActivity)
+    }
+
 }
