@@ -18,6 +18,17 @@
             app:layout_scrollFlags="scroll"
             tools:context=".ui.moviedetail.MovieDetailFragment">
 
+            <View
+                android:id="@+id/templateConstraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <ImageView
                 android:id="@+id/detailImagePoster"
                 android:layout_width="@dimen/detail_movie_detailImagePosterTablet_width"
@@ -201,6 +212,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/detail_movie_nestedScrollView_margin_top"
@@ -239,6 +251,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/more" />
             </com.google.android.material.tabs.TabLayout>
+
+            <View
+                android:id="@+id/templateViewPagerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/movieDetailViewPager"

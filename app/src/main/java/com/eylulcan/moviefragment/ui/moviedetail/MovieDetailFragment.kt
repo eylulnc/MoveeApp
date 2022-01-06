@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
 import com.eylulcan.moviefragment.model.MovieDetail
@@ -17,7 +17,6 @@ import com.eylulcan.moviefragment.ui.moviedetail.popup.CustomPopUpDialogFragment
 import com.eylulcan.moviefragment.util.Utils
 import com.google.android.material.tabs.TabLayoutMediator
 import me.samlss.broccoli.Broccoli
-import me.samlss.broccoli.PlaceholderParameter
 
 private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
 private const val VIMEO_LINK = "https://vimeo.com/"
@@ -37,14 +36,13 @@ class MovieDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_movie_detail, container, false)
-        setPlaceholders()
-        return view
+        return inflater.inflate(R.layout.fragment_movie_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentBinding = FragmentMovieDetailBinding.bind(view)
+        setPlaceholders()
         val selectedMovieDataArgument =
             arguments?.get(getString(R.string.movieId)) as Int
         observeViewModel()
@@ -88,7 +86,7 @@ class MovieDetailFragment : Fragment() {
             }
         })
         movieDetailViewModel.detail.observe(viewLifecycleOwner, { movie ->
-            broccoli.removeAllPlaceholders()
+            removePlaceholders()
             setupUI(movie)
         })
     }
@@ -144,10 +142,29 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setPlaceholders() {
-        placeholderNeeded.addAll( arrayListOf(fragmentBinding.detailImagePoster, fragmentBinding.detailDurationText, fragmentBinding.detailReleaseDateText,
-                fragmentBinding.detailMovieNameText, fragmentBinding.languageText, fragmentBinding.detailRatingBar, fragmentBinding.detailGenreNameText,
-                fragmentBinding.expandableText))
+        fragmentBinding.languageText.isVisible = false
+        placeholderNeeded.addAll(
+            arrayListOf(
+                fragmentBinding.templateConstraintLayout,
+                fragmentBinding.templateViewPagerView,
+            )
+        )
         Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
+    }
+
+    private fun removePlaceholders() {
+        fragmentBinding.languageText.isVisible = true
+        placeholderNeeded.forEach { view ->
+            view.apply {
+                broccoli.clearPlaceholder(this)
+                this.isVisible = false
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().viewModelStore.clear()
     }
 
 }

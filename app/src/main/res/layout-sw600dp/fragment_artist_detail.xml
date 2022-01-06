@@ -23,6 +23,15 @@
             app:layout_scrollFlags="scroll"
             tools:context=".ui.artistdetail.ArtistDetailFragment">
 
+            <View
+                android:id="@+id/templateArtistCoverView"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height_tablet"
+                app:layout_constraintDimensionRatio=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/artistDetailCoverImage"
                 android:layout_width="0dp"
@@ -87,6 +96,15 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:padding="@dimen/artist_detail_albumCoverLayout_padding">
+
+                    <View
+                        android:id="@+id/templateUserImagesView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/templateArtistInfoView"/>
 
                     <TextView
                         android:id="@+id/albumSizeText"
@@ -224,6 +242,11 @@
                     android:text="@string/more" />
 
             </com.google.android.material.tabs.TabLayout>
+
+            <View
+                android:id="@+id/templateViewPagerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/artistsFragmentViewPager"

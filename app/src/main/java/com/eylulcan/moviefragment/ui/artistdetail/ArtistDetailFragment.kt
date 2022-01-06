@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistDetailBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
@@ -23,8 +23,8 @@ class ArtistDetailFragment : Fragment() {
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
     private val tabNames = arrayOf("Summary", "Movies", "More")
     private var photoAlbum: ArtistAlbum? = null
-    private val placeholderNeededImages = arrayListOf<View>()
-    private var broccoliImages = Broccoli()
+    private val placeholderNeeded = arrayListOf<View>()
+    private var broccoli = Broccoli()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +48,7 @@ class ArtistDetailFragment : Fragment() {
 
     private fun observeViewModel() {
         artistDetailViewModel.artistDetail.observe(viewLifecycleOwner, { detail ->
-            broccoliImages.clearAllPlaceholders()
+            removePlaceholders()
             binding.artistName.text = detail.name
             val knownForDepartment = detail.knownForDepartment ?: getString(R.string.unknown)
             val birthDate = detail.birthday ?: getString(R.string.unknown)
@@ -118,11 +118,28 @@ class ArtistDetailFragment : Fragment() {
     }
 
     private fun setPlaceholders() {
-        placeholderNeededImages.addAll(arrayListOf(binding.albumPreviewElement1, binding.albumPreviewElement2,
-            binding.albumPreviewElement3, binding.albumPreviewElement4, binding.albumPreviewElement5,binding.artistDetailCoverImage,
-            binding.artistName, binding.artistShortInfo,
-            binding.albumSizeText, binding.photosTextView))
-        Utils.addPlaceholders(broccoli = broccoliImages, placeholderNeededImages)
+        placeholderNeeded.addAll(
+            arrayListOf(
+                binding.templateArtistCoverView,
+                binding.templateViewPagerView,
+                binding.templateUserImagesView
+            )
+        )
+        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
+    }
+
+    private fun removePlaceholders() {
+        placeholderNeeded.forEach { view ->
+            view.apply {
+                broccoli.clearPlaceholder(this)
+                this.isVisible = false
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().viewModelStore.clear()
     }
 
 }
