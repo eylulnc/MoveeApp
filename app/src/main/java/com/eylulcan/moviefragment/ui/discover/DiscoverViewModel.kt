@@ -37,7 +37,6 @@ class DiscoverViewModel : ViewModel() {
 
     fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            delay(2000)
             val response = retrofit?.getPopularData()
             response?.let {
                 if (response.isSuccessful) {
@@ -51,7 +50,6 @@ class DiscoverViewModel : ViewModel() {
 
     fun getTopRatedMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            delay(2000)
             val response = retrofit?.getTopRatedData()
             response?.let {
                 if (response.isSuccessful) {
@@ -65,6 +63,7 @@ class DiscoverViewModel : ViewModel() {
 
     fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
+            delay(2000)
             val response = retrofit?.getNowPlayingData(pageNo = lastLoadedPage)
             response?.let {
                 if (response.isSuccessful) {

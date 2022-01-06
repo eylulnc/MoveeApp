@@ -38,7 +38,6 @@ class DetailViewModel : ViewModel() {
 
     fun getMovieCast(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            delay(2000)
             val response = retrofit?.getMovieCredits(movieId = id)
             response?.let {
                 if (response.isSuccessful) {
@@ -91,7 +90,6 @@ class DetailViewModel : ViewModel() {
 
     fun getMovieDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            delay(2000)
             val response = retrofit?.getMovieDetail(genreId = id)
             response?.let {
                 if (response.isSuccessful) {
