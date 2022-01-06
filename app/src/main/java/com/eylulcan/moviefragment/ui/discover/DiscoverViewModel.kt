@@ -9,7 +9,6 @@ import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -63,7 +62,6 @@ class DiscoverViewModel : ViewModel() {
 
     fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            delay(2000)
             val response = retrofit?.getNowPlayingData(pageNo = lastLoadedPage)
             response?.let {
                 if (response.isSuccessful) {

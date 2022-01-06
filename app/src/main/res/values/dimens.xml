@@ -22,7 +22,7 @@
     <dimen name="discover_parent_categoryText_marginEnd">8dp</dimen>
 
     <dimen name="discover_mainRecyclerView_marginTop">4dp</dimen>
-    <dimen name="discover_mainRecyclerView_marginEnd">8dp</dimen>
+    <dimen name="discover_mainRecyclerView_marginEnd">4dp</dimen>
 
     <dimen name="detail_movie_detailImagePoster_height">200dp</dimen>
     <dimen name="detail_movie_detailImagePoster_width">150dp</dimen>

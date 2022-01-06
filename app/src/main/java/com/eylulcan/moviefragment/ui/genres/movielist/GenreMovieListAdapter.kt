@@ -1,9 +1,7 @@
 package com.eylulcan.moviefragment.ui.genres.movielist
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -12,18 +10,13 @@ import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.GenreMovieListRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
 import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 import com.eylulcan.moviefragment.util.Utils
-import me.samlss.broccoli.Broccoli
 
 class GenreMovieListAdapter(
     private val movieDetailListener: MovieDetailListener
 ) :
     RecyclerView.Adapter<GenreMovieListAdapter.ViewHolder>() {
-
-    private val broccoli = Broccoli()
-    private val placeholderNeeded = arrayListOf<View>()
 
     private var genreNames: String = ""
     class ViewHolder(val binding: GenreMovieListRecyclerRowBinding) :
@@ -40,7 +33,6 @@ class GenreMovieListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        setPlaceholders(holder)
         val movie = movieResult[position]
         holder.binding.movieNameMore.text = movie.title
         Glide.with(holder.binding.root).load(setImageUrl(movie.backdropPath))
@@ -57,7 +49,6 @@ class GenreMovieListAdapter(
         holder.itemView.setOnClickListener {
             movie.id?.let { movieDetailListener.onMovieClicked(it) }
         }
-        removePlaceholders()
     }
 
     override fun getItemCount(): Int = movieResult.size
@@ -87,21 +78,4 @@ class GenreMovieListAdapter(
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
-    private fun setPlaceholders(holder: ViewHolder) {
-        placeholderNeeded.addAll(
-            arrayListOf(
-                holder.binding.genreListTemplate
-            )
-        )
-        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
-    }
-
-    private fun removePlaceholders() {
-        placeholderNeeded.forEach { view ->
-            view.apply {
-                broccoli.clearPlaceholder(this)
-                this.isVisible = false
-            }
-        }
-    }
 }

@@ -14,30 +14,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.eylulcan.moviefragment.MainActivity
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
 import com.google.firebase.auth.FirebaseAuth
-import me.samlss.broccoli.Broccoli
 
-class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener,RecyclerViewListener {
+private const val  GRID_COUNT = 3
+
+class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by activityViewModels()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var lastLoadedPageItems: List<ResultMovie>? = emptyList()
-    private var nowPlayingResultList: ArrayList<ResultMovie> = arrayListOf()
-    private var enableToRequest: Boolean = false
+    private var nowPlayingList: ArrayList<ResultMovie> = arrayListOf()
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
-    private var placeholderNeeded = arrayListOf<View>()
-    private var broccoli = Broccoli()
     private lateinit var recyclerViewAdapter: FlexibleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +39,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         sharedPreferenceForSessionID = requireContext().getSharedPreferences(
             getString(R.string.app_package_name), Context.MODE_PRIVATE
         )
-
     }
 
     override fun onCreateView(
@@ -54,7 +47,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
     ): View? {
         val view = inflater.inflate(R.layout.fragment_discover, container, false)
         fragmentBinding = FragmentDiscoverBinding.bind(view)
-        setPlaceholders()
         setToolbarMenu()
         return view
     }
@@ -87,24 +79,19 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         })
         discoverViewModel.nowPlaying.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                broccoli.removeAllPlaceholders()
-                lastLoadedPageItems =
-                    if (movie.results?.let { lastLoadedPageItems?.containsAll(it) } == true) {
-                        emptyList()
-                    } else {
-                        movie.results
-                    }
-                nowPlayingResultList.addAll(lastLoadedPageItems ?: arrayListOf())
-                fragmentBinding.discoverMainRecyclerView.layoutManager = LinearLayoutManager(
-                    this@DiscoverFragment.context,
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-                recyclerViewAdapter = FlexibleAdapter(allListItems, this, this)
-                fragmentBinding.discoverMainRecyclerView.adapter = recyclerViewAdapter
-                recyclerViewAdapter.movieResults = nowPlayingResultList
-                enableToRequest = true
-                allListItems.add(movie.results as java.util.ArrayList<ResultMovie>)
+                val results = movie.results
+                val restValue : Int = movie.results?.size?.mod(GRID_COUNT) ?: 0
+                restValue.let {
+                    nowPlayingList = results?.dropLast(it)  as ArrayList<ResultMovie>
+                }
+                allListItems.add(nowPlayingList)
+                fragmentBinding.discoverMainRecyclerView.apply {
+                    layoutManager = LinearLayoutManager(this@DiscoverFragment.context, LinearLayoutManager.VERTICAL, false )
+                    recyclerViewAdapter = FlexibleAdapter( this@DiscoverFragment)
+                    adapter = recyclerViewAdapter
+                    recyclerViewAdapter.movieResults = allListItems
+                    recyclerViewAdapter.notifyDataSetChanged()
+                }
             }
         })
         discoverViewModel.sessionId.observe(viewLifecycleOwner, { session ->
@@ -113,7 +100,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         })
 
     }
-
 
     private fun setupUI() {
         if (Utils.isTablet(requireContext())) {
@@ -129,21 +115,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
             R.id.action_dashboardFragment_to_movieDetailFragment,
             movieDataBundle, null, null
         )
-    }
-
-    override fun recyclerScrollListener(recyclerView: RecyclerView) {
-
-        if (recyclerView.layoutManager is GridLayoutManager) {
-            val layoutManager =
-                recyclerView.layoutManager as GridLayoutManager
-            val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
-            if (lastVisiblePosition == nowPlayingResultList.size - 1 && enableToRequest) {
-                discoverViewModel.getNowPlayingMovieList()
-                discoverViewModel.lastLoadedPage++
-                enableToRequest = false
-            }
-        }
-
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
@@ -166,17 +137,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         val toolbar = fragmentBinding.toolbar
         toolbar.inflateMenu(R.menu.menu)
         toolbar.setOnMenuItemClickListener(this)
-    }
-
-    private fun setPlaceholders() {
-        placeholderNeeded.addAll(arrayListOf(
-            fragmentBinding.discoverMainRecyclerView
-        ))
-
-        Utils.addPlaceholders(
-            broccoli = broccoli,
-            itemList = placeholderNeeded
-        )
     }
 
 }
