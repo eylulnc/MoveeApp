@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistBinding
 import com.eylulcan.moviefragment.model.PeopleResult
@@ -18,7 +19,7 @@ import com.eylulcan.moviefragment.util.Utils
 private const val SPAN_COUNT_PHONE = 3
 private const val SPAN_COUNT_TABLET = 4
 
-class ArtistFragment : Fragment(), ArtistListener {
+class ArtistFragment : Fragment(), ItemListener {
 
     private val artistViewModel: ArtistViewModel by viewModels()
     private lateinit var binding: FragmentArtistBinding
@@ -72,13 +73,6 @@ class ArtistFragment : Fragment(), ArtistListener {
         artistViewModel.popularPeople.removeObservers(this)
     }
 
-    override fun onArtistClicked(id: Int) {
-        val artistIdBundle = bundleOf(getString(R.string.artistId) to id)
-        this.parentFragment?.parentFragment?.findNavController()?.navigate(
-            R.id.action_dashboardFragment_to_artistDetailFragment, artistIdBundle, null, null
-        )
-    }
-
     private fun setupUI() {
         binding.artistRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -93,4 +87,12 @@ class ArtistFragment : Fragment(), ArtistListener {
             }
         })
     }
+
+    override fun onItemClicked(id: Int) {
+        val artistIdBundle = bundleOf(getString(R.string.artistId) to id)
+        this.parentFragment?.parentFragment?.findNavController()?.navigate(
+            R.id.action_dashboardFragment_to_artistDetailFragment, artistIdBundle, null, null
+        )
+    }
+
 }

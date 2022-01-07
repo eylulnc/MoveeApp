@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSliderBinding
 import com.eylulcan.moviefragment.util.Utils
 
-class SliderFragment(private val movieInfo: Pair<Int,String>): Fragment(), MovieListener {
+class SliderFragment(private val movieInfo: Pair<Int,String>): Fragment(), ItemListener {
 
     private lateinit var binding: FragmentSliderBinding
 
@@ -30,13 +30,13 @@ class SliderFragment(private val movieInfo: Pair<Int,String>): Fragment(), Movie
         super.onViewCreated(view, savedInstanceState)
         Glide.with(binding.root).load(setImageUrl(movieInfo.second)).into(binding.sliderImageView)
         binding.sliderLayout.setOnClickListener {
-            onMovieClicked(movieInfo.first)
+            onItemClicked(movieInfo.first)
         }
 
     }
 
-    override fun onMovieClicked(resultMovieId: Int) {
-        val movieDataBundle = bundleOf((getString(R.string.movieId)) to resultMovieId)
+    override fun onItemClicked(id: Int) {
+        val movieDataBundle = bundleOf((getString(R.string.movieId)) to id)
         this.parentFragment?.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_dashboardFragment_to_movieDetailFragment,
             movieDataBundle, null, null

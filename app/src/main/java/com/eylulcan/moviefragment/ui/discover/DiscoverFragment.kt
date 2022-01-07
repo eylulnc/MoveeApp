@@ -1,11 +1,9 @@
 package com.eylulcan.moviefragment.ui.discover
 
-import android.R.attr
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -19,21 +17,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.ui.onboard.OnboardAdapter
 import com.eylulcan.moviefragment.util.Utils
 import com.google.firebase.auth.FirebaseAuth
 import me.samlss.broccoli.Broccoli
-import android.R.attr.delay
-import android.R.attr.fragment
-
 
 private const val GRID_COUNT = 3
 
-class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListener {
+class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by activityViewModels()
@@ -133,13 +127,6 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         }
     }
 
-    override fun onMovieClicked(resultMovieId: Int) {
-        val movieDataBundle = bundleOf((getString(R.string.movieId)) to resultMovieId)
-        this.parentFragment?.parentFragment?.findNavController()?.navigate(
-            R.id.action_dashboardFragment_to_movieDetailFragment,
-            movieDataBundle, null, null
-        )
-    }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.logout) {
@@ -216,6 +203,14 @@ class DiscoverFragment : Fragment(), MovieListener, Toolbar.OnMenuItemClickListe
         }
 
         handler.post(runnable)
+    }
+
+    override fun onItemClicked(id: Int) {
+        val movieDataBundle = bundleOf((getString(R.string.movieId)) to id)
+        this.parentFragment?.parentFragment?.findNavController()?.navigate(
+            R.id.action_dashboardFragment_to_movieDetailFragment,
+            movieDataBundle, null, null
+        )
     }
 
 }

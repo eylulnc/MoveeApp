@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.Genres
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistMovieFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ArtistMovieCredits
@@ -12,7 +13,7 @@ import com.eylulcan.moviefragment.util.Utils
 
 class ArtistMovieAdapter(
     private val movieCredits: ArtistMovieCredits,
-    private val artistMovieClickListener: ArtistMovieClickListener
+    private val artistMovieClickListener: ItemListener
 ) :
     RecyclerView.Adapter<ArtistMovieAdapter.ViewHolder>() {
 
@@ -45,7 +46,7 @@ class ArtistMovieAdapter(
         holder.binding.ratingBarArtistMovie.rating =
             (movie?.voteAverage?.toFloat()?.div(2) ?: 0f)
         holder.itemView.setOnClickListener {
-            movie?.id?.let { id -> artistMovieClickListener.onMovieClick(id) }
+            movie?.id?.let { id -> artistMovieClickListener.onItemClicked(id) }
         }
     }
 

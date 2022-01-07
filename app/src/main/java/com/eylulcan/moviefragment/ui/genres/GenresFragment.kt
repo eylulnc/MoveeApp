@@ -10,11 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenresBinding
 import com.eylulcan.moviefragment.util.Utils
 
-class GenresFragment : Fragment(), GenreListener {
+class GenresFragment : Fragment(), ItemListener {
 
     private val genreViewModel: GenresViewModel by viewModels()
     private lateinit var binding: FragmentGenresBinding
@@ -52,7 +53,7 @@ class GenresFragment : Fragment(), GenreListener {
         })
     }
 
-    override fun onGenreClicked(id: Int) {
+    override fun onItemClicked(id: Int) {
         val genreIdBundle = bundleOf(getString(R.string.genreId) to id)
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_dashboardFragment_to_genreMovieListFragment,

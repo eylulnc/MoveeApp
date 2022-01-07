@@ -3,11 +3,12 @@ package com.eylulcan.moviefragment.ui.discover
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.DiscoverParentFragmentBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 
-class FlexibleAdapter(private val listener: MovieListener) :
+class FlexibleAdapter(private val listener: ItemListener) :
     RecyclerView.Adapter<FlexibleAdapter.ViewHolder>() {
     private val viewPool = RecyclerView.RecycledViewPool()
 

@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.PeopleResult
 import com.eylulcan.moviefragment.util.Utils
 
 class ArtistAdapter(
-    private val artistListener: ArtistListener
+    private val artistListener: ItemListener
 ) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
@@ -39,7 +40,7 @@ class ArtistAdapter(
         }
         holder.itemView.setOnClickListener {
             peopleResult[position].id?.let { artistId ->
-                artistListener.onArtistClicked(artistId)
+                artistListener.onItemClicked(artistId)
             }
         }
     }

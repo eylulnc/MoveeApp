@@ -9,12 +9,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMoreBinding
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
-import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 
-class MoreFragment : Fragment(), MovieDetailListener {
+class MoreFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentMoreBinding
     private lateinit var moreAdapter: MoreAdapter
@@ -42,7 +42,7 @@ class MoreFragment : Fragment(), MovieDetailListener {
         })
     }
 
-    override fun onMovieClicked(id: Int) {
+    override fun onItemClicked(id: Int) {
         val movieIdBundle = bundleOf(getString(R.string.movieId) to id)
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_movieDetailFragment_self, movieIdBundle, null, null

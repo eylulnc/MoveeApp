@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.CastFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.MovieCredits
-import com.eylulcan.moviefragment.ui.artist.ArtistListener
 import com.eylulcan.moviefragment.util.Utils
 
 class CastAdapter(
     private val movieCredits: MovieCredits,
-    private val artistListener: ArtistListener
+    private val artistListener: ItemListener
 ) :
     RecyclerView.Adapter<CastAdapter.ViewHolder>() {
 
@@ -35,7 +35,7 @@ class CastAdapter(
         Glide.with(holder.binding.root).load(setImageUrl(artist?.profilePath))
             .placeholder(R.color.greylight).into(holder.binding.castArtistImage)
         holder.itemView.setOnClickListener {
-            artist?.id?.let { artistListener.onArtistClicked(it) }
+            artist?.id?.let { artistListener.onItemClicked(it) }
         }
     }
 

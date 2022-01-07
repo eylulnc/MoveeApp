@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.Genres
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.databinding.GenresFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.GenreList
 
-class GenresAdapter(private val genreList: GenreList, private val genresListener: GenreListener) :
+class GenresAdapter(private val genreList: GenreList, private val genresListener: ItemListener) :
     RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: GenresFragmentRecyclerRowBinding) :
@@ -31,7 +32,7 @@ class GenresAdapter(private val genreList: GenreList, private val genresListener
                 Genres.valueOfInt(id)?.movieGenreImage()
                     ?.let { holder.binding.genresFragmentImageView.setImageResource(it) }
                 holder.itemView.setOnClickListener {
-                    genresListener.onGenreClicked(id)
+                    genresListener.onItemClicked(id)
                 }
             }
         }

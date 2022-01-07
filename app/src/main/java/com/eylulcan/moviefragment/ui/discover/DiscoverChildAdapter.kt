@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.databinding.DiscoverChildRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.HashMap
 
-class DiscoverChildAdapter(private val listener: MovieListener)
-    : RecyclerView.Adapter<DiscoverChildAdapter.ViewHolder>(){
+class DiscoverChildAdapter(private val listener: ItemListener) :
+    RecyclerView.Adapter<DiscoverChildAdapter.ViewHolder>() {
 
     private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
     private val mTaskManager: HashMap<View, Runnable> = HashMap<View, Runnable>()
@@ -53,17 +54,17 @@ class DiscoverChildAdapter(private val listener: MovieListener)
             .into(holder.binding.movieListRecyclerViewImage)
         holder.binding.movieListRecyclerViewName.text = child.title
         holder.itemView.setOnClickListener {
-            child.id?.let { id -> listener.onMovieClicked(id) }
+            child.id?.let { id -> listener.onItemClicked(id) }
         }
         var task: Runnable? = mTaskManager[holder.itemView]
-        if (task == null){
+        if (task == null) {
             task = Runnable {
-                run{
+                run {
                     removePlaceholders()
                 }
             }
             mTaskManager[holder.itemView] = task
-        } else{
+        } else {
             holder.itemView.removeCallbacks(task)
         }
         holder.itemView.postDelayed(task, 2000)

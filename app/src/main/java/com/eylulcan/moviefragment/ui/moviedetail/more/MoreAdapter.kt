@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.Genres
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.MoreFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Movie
-import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 import com.eylulcan.moviefragment.util.Utils
 
-class MoreAdapter(private val movie: Movie, private val movieListener: MovieDetailListener) :
+class MoreAdapter(private val movie: Movie, private val movieListener: ItemListener) :
     RecyclerView.Adapter<MoreAdapter.ViewHolder>() {
 
     private var genreNames: String = ""
@@ -44,7 +44,7 @@ class MoreAdapter(private val movie: Movie, private val movieListener: MovieDeta
         holder.binding.genresMore.text = genreNames
         holder.binding.ratingBarMore.rating = (movie?.voteAverage?.toFloat()?.div(2) ?: 0f)
         holder.itemView.setOnClickListener {
-            movie?.id?.let { movieListener.onMovieClicked(it) }
+            movie?.id?.let { movieListener.onItemClicked(it) }
         }
     }
 

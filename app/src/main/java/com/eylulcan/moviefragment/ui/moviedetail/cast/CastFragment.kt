@@ -9,17 +9,16 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.eylulcan.moviefragment.MainActivity
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentCastBinding
-import com.eylulcan.moviefragment.ui.artist.ArtistListener
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 
 private const val SPAN_COUNT = 4
 
-class CastFragment : Fragment(), ArtistListener {
+class CastFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentCastBinding
     private lateinit var castAdapter: CastAdapter
@@ -52,7 +51,7 @@ class CastFragment : Fragment(), ArtistListener {
         })
     }
 
-    override fun onArtistClicked(id: Int) {
+    override fun onItemClicked(id: Int) {
         val artistIdBundle = bundleOf(getString(R.string.artistId) to id)
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_movieDetailFragment_to_artistDetailFragment, artistIdBundle, null, null

@@ -10,12 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenreMovieListBinding
 import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 
-class GenreMovieListFragment : Fragment(), MovieDetailListener {
+class GenreMovieListFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentGenreMovieListBinding
     private lateinit var genreMovieListAdapter: GenreMovieListAdapter
@@ -60,7 +60,7 @@ class GenreMovieListFragment : Fragment(), MovieDetailListener {
         })
     }
 
-    override fun onMovieClicked(id: Int) {
+    override fun onItemClicked(id: Int) {
         val movieIdBundle = bundleOf(getString(R.string.movieId) to id)
         findNavController().navigate(
             R.id.action_genreMovieListFragment_to_movieDetailFragment,

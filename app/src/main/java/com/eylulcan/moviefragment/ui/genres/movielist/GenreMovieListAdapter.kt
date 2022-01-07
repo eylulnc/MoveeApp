@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.Genres
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.GenreMovieListRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.ui.moviedetail.MovieDetailListener
 import com.eylulcan.moviefragment.util.Utils
 
 class GenreMovieListAdapter(
-    private val movieDetailListener: MovieDetailListener
+    private val movieDetailListener: ItemListener
 ) :
     RecyclerView.Adapter<GenreMovieListAdapter.ViewHolder>() {
 
@@ -47,7 +47,7 @@ class GenreMovieListAdapter(
         holder.binding.genresMore.text = genreNames
         holder.binding.ratingBarMore.rating = (movie.voteAverage?.toFloat()?.div(2) ?: 0f)
         holder.itemView.setOnClickListener {
-            movie.id?.let { movieDetailListener.onMovieClicked(it) }
+            movie.id?.let { movieDetailListener.onItemClicked(it) }
         }
     }
 
