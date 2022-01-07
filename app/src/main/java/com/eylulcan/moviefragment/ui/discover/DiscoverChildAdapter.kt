@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.databinding.DiscoverChildRecyclerRowBinding
@@ -12,7 +14,7 @@ import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.HashMap
 
-class DiscoverChildAdapter(private val children : List<ResultMovie>, private val listener: MovieListener)
+class DiscoverChildAdapter(private val listener: MovieListener)
     : RecyclerView.Adapter<DiscoverChildAdapter.ViewHolder>(){
 
     private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
@@ -35,7 +37,7 @@ class DiscoverChildAdapter(private val children : List<ResultMovie>, private val
     }
 
     override fun getItemCount(): Int {
-        return children.size
+        return movieResults.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -45,26 +47,26 @@ class DiscoverChildAdapter(private val children : List<ResultMovie>, private val
             mViewPlaceholderManager[holder.itemView] = broccoli
         }
         setPlaceholders(holder)
+        val child = movieResults[position]
+        setPlaceholders(holder)
+        Glide.with(holder.binding.movieListRecyclerViewImage).load(setImageUrl(child.posterPath))
+            .into(holder.binding.movieListRecyclerViewImage)
+        holder.binding.movieListRecyclerViewName.text = child.title
+        holder.itemView.setOnClickListener {
+            child.id?.let { id -> listener.onMovieClicked(id) }
+        }
         var task: Runnable? = mTaskManager[holder.itemView]
         if (task == null){
             task = Runnable {
                 run{
                     removePlaceholders()
-                    val child = children[position]
-                    setPlaceholders(holder)
-                    Glide.with(holder.binding.movieListRecyclerViewImage).load(setImageUrl(child.posterPath))
-                        .into(holder.binding.movieListRecyclerViewImage)
-                    holder.binding.movieListRecyclerViewName.text = child.title
-                    holder.itemView.setOnClickListener {
-                        listener.onMovieClicked(child)
-                    }
                 }
             }
             mTaskManager[holder.itemView] = task
         } else{
             holder.itemView.removeCallbacks(task)
         }
-        holder.itemView.postDelayed(task, 1000)
+        holder.itemView.postDelayed(task, 2000)
     }
 
 
@@ -88,5 +90,28 @@ class DiscoverChildAdapter(private val children : List<ResultMovie>, private val
             }
         }
     }
+
+    private val diffUtil = object : DiffUtil.ItemCallback<ResultMovie>() {
+        override fun areItemsTheSame(
+            oldItem: ResultMovie,
+            newItem: ResultMovie
+        ): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: ResultMovie,
+            newItem: ResultMovie
+        ): Boolean {
+            return oldItem.equals(newItem)
+        }
+
+    }
+
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
+
+    var movieResults: List<ResultMovie>
+        get() = recyclerListDiffer.currentList
+        set(value) = recyclerListDiffer.submitList(value)
 
 }

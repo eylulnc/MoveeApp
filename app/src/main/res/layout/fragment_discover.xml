@@ -45,6 +45,47 @@
             android:orientation="vertical"
             android:id="@+id/discoverNestedLinear">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/discoverSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/sliderTemplate"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/dots_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    app:dotsColor="@color/white"
+                    app:dotsCornerRadius="@dimen/onboard_pager_dot_indicator_cornerRadius"
+                    app:dotsSize="@dimen/onboard_pager_dot_indicator_dotSize"
+                    app:dotsSpacing="@dimen/onboard_pager_dot_indicator_dotSpacing"
+                    app:dotsWidthFactor="2.5"
+                    app:layout_constraintBottom_toBottomOf="@id/discoverSlider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:progressMode="true"
+                    app:selectedDotColor="@color/purple_mountain" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/discoverMainRecyclerView"
                 android:layout_width="match_parent"
@@ -52,6 +93,7 @@
                 android:layout_marginTop="@dimen/discover_mainRecyclerView_marginTop"
                 android:scrollbars="horizontal" />
 
-            </LinearLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

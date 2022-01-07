@@ -42,7 +42,9 @@ class FlexibleAdapter(private val listener: MovieListener) :
             childLayoutManager.initialPrefetchItemCount = 3
             holder.binding.discoverRecyclerView.apply {
                 layoutManager = childLayoutManager
-                adapter = DiscoverChildAdapter(parent, listener)
+                val childAdapter = DiscoverChildAdapter(listener)
+                adapter = childAdapter
+                childAdapter.movieResults = parent
                 setRecycledViewPool(viewPool)
             }
         } else {
@@ -62,7 +64,9 @@ class FlexibleAdapter(private val listener: MovieListener) :
             childLayoutManager.initialPrefetchItemCount = 3
             holder.binding.discoverRecyclerView.apply {
                 layoutManager = childLayoutManager
-                adapter = DiscoverChildAdapter(parent, listener)
+                val childAdapter = DiscoverChildAdapter(listener)
+                adapter = childAdapter
+                childAdapter.movieResults = parent
                 setRecycledViewPool(viewPool)
             }
         }

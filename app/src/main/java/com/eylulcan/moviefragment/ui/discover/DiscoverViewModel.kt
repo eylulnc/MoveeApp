@@ -24,7 +24,8 @@ class DiscoverViewModel : ViewModel() {
     val nowPlaying: LiveData<Movie> get() = nowPlayingMovieList
     private val userSession = MutableLiveData<GuestSession>()
     val sessionId: LiveData<GuestSession> get() = userSession
-    var lastLoadedPage: Int = 1
+    private val upcoming = MutableLiveData<Movie>()
+    val upcomingMovies: LiveData<Movie> get() = upcoming
 
     init {
         retrofit = Retrofit.Builder()
@@ -62,7 +63,7 @@ class DiscoverViewModel : ViewModel() {
 
     fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getNowPlayingData(pageNo = lastLoadedPage)
+            val response = retrofit?.getNowPlayingData()
             response?.let {
                 if (response.isSuccessful) {
                     response.body()?.let {
@@ -80,6 +81,18 @@ class DiscoverViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         userSession.postValue(it)
+                    }
+                }
+            }
+        }
+    }
+    fun getUpcomingMovieList() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = retrofit?.getUpcomingData()
+            response?.let {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        upcoming.postValue(it)
                     }
                 }
             }

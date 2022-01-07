@@ -16,7 +16,11 @@ interface MovieAPI {
     @GET("movie/now_playing")
     suspend fun getNowPlayingData(
         @Query("api_key") apiKey: String = Utils.API_KEY,
-        @Query("page") pageNo: Int
+    ): Response<Movie>
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingData(
+        @Query("api_key") apiKey: String = Utils.API_KEY,
     ): Response<Movie>
 
     @GET("genre/movie/list")
