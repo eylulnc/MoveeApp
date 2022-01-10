@@ -143,6 +143,7 @@ class MovieDetailFragment : Fragment() {
 
     private fun setPlaceholders() {
         fragmentBinding.languageText.isVisible = false
+        fragmentBinding.detailRatingBar.isVisible = false
         placeholderNeeded.addAll(
             arrayListOf(
                 fragmentBinding.templateConstraintLayout,
@@ -154,17 +155,13 @@ class MovieDetailFragment : Fragment() {
 
     private fun removePlaceholders() {
         fragmentBinding.languageText.isVisible = true
+        fragmentBinding.detailRatingBar.isVisible = true
         placeholderNeeded.forEach { view ->
             view.apply {
                 broccoli.clearPlaceholder(this)
                 this.isVisible = false
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        requireActivity().viewModelStore.clear()
     }
 
 }
