@@ -139,7 +139,7 @@ class ArtistDetailFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        requireActivity().viewModelStore.clear()
+        artistDetailViewModel.setListsToDefault()
     }
 
 }

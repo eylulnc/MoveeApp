@@ -10,7 +10,6 @@ import com.eylulcan.moviefragment.model.ArtistMovieCredits
 import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,11 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ArtistDetailViewModel : ViewModel() {
 
     private var retrofit: MovieAPI? = null
-    private val artistDetailInfo = MutableLiveData<ArtistDetail>()
+    private var artistDetailInfo = MutableLiveData<ArtistDetail>()
     val artistDetail: LiveData<ArtistDetail> get() = artistDetailInfo
-    private val artistAlbumInfo = MutableLiveData<ArtistAlbum>()
+    private var artistAlbumInfo = MutableLiveData<ArtistAlbum>()
     val artistAlbum: LiveData<ArtistAlbum> get() = artistAlbumInfo
-    private val artistMovieCreditsInfo = MutableLiveData<ArtistMovieCredits>()
+    private var artistMovieCreditsInfo = MutableLiveData<ArtistMovieCredits>()
     val artistMovieCredits: LiveData<ArtistMovieCredits> get() = artistMovieCreditsInfo
 
     init {
@@ -70,6 +69,12 @@ class ArtistDetailViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun setListsToDefault(){
+        artistDetailInfo = MutableLiveData<ArtistDetail>()
+        artistAlbumInfo = MutableLiveData<ArtistAlbum>()
+        artistMovieCreditsInfo = MutableLiveData<ArtistMovieCredits>()
     }
 
 }
