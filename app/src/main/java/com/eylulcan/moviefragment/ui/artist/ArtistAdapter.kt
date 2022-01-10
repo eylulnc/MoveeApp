@@ -1,7 +1,9 @@
 package com.eylulcan.moviefragment.ui.artist
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,12 +12,21 @@ import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.PeopleResult
+import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
 import com.eylulcan.moviefragment.util.Utils
+import me.samlss.broccoli.Broccoli
+import java.util.HashMap
 
 class ArtistAdapter(
     private val artistListener: ItemListener
 ) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
+
+    private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
+    private val mTaskManager: HashMap<View, Runnable> = HashMap<View, Runnable>()
+
+    private val broccoli = Broccoli()
+    private val placeholderNeeded = arrayListOf<View>()
 
     class ViewHolder(val binding: ArtistFragmentRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -31,6 +42,13 @@ class ArtistAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var broccoli = mViewPlaceholderManager[holder.itemView]
+        if (broccoli == null) {
+            broccoli = Broccoli()
+            mViewPlaceholderManager[holder.itemView] = broccoli
+        }
+        setPlaceholders(holder)
+
         peopleResult[position].let { artist ->
             holder.binding.artistRecyclerPersonName.text = artist.name
             Glide.with(holder.binding.root).load(setImageUrl(artist.profilePath))
@@ -42,6 +60,18 @@ class ArtistAdapter(
             peopleResult[position].id?.let { artistId ->
                 artistListener.onItemClicked(artistId)
             }
+            var task: Runnable? = mTaskManager[holder.itemView]
+            if (task == null) {
+                task = Runnable {
+                    run {
+                        removePlaceholders()
+                    }
+                }
+                mTaskManager[holder.itemView] = task
+            } else {
+                holder.itemView.removeCallbacks(task)
+            }
+            holder.itemView.postDelayed(task, 1000)
         }
     }
 
@@ -67,9 +97,29 @@ class ArtistAdapter(
 
     }
 
+        private fun setPlaceholders(holder: ViewHolder) {
+            placeholderNeeded.addAll(
+                arrayListOf(
+                    holder.binding.artistRowTemplate
+                )
+            )
+            Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
+        }
+
+        private fun removePlaceholders() {
+            placeholderNeeded.forEach { view ->
+                view.apply {
+                    broccoli.clearPlaceholder(this)
+                    this.isVisible = false
+                }
+            }
+        }
+
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
     var peopleResult: List<PeopleResult>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
+
+
 }
