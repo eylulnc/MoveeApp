@@ -33,10 +33,12 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
     private val discoverViewModel: DiscoverViewModel by activityViewModels()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var nowPlayingList: ArrayList<ResultMovie> = arrayListOf()
+    private var topRatedList: ArrayList<ResultMovie> = arrayListOf()
+    private var mostPopularList: ArrayList<ResultMovie> = arrayListOf()
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
-    private lateinit var recyclerViewAdapter: FlexibleAdapter
+    private lateinit var recyclerViewAdapter: DiscoverParentAdapter
     private val placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
 
@@ -62,6 +64,7 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
         super.onViewCreated(view, savedInstanceState)
         setupUI()
         observeViewModel()
+        allListItems.clear()
         discoverViewModel.getPopularMovieList()
         discoverViewModel.getUpcomingMovieList()
         sessionID = sharedPreferenceForSessionID.getString(getString(R.string.sessionId), null)
@@ -73,14 +76,17 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
     private fun observeViewModel() {
         discoverViewModel.popularMovies.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                allListItems.clear()
-                allListItems.add(movie.results as java.util.ArrayList<ResultMovie>)
+                mostPopularList.clear()
+                mostPopularList.addAll(movie.results as ArrayList<ResultMovie>)
+                allListItems.add(mostPopularList)
                 discoverViewModel.getTopRatedMovieList()
             }
         })
         discoverViewModel.topRatedMovies.observe(viewLifecycleOwner, { movieData ->
             movieData?.let { movie ->
-                allListItems.add(movie.results as java.util.ArrayList<ResultMovie>)
+                topRatedList.clear()
+                topRatedList.addAll(movie.results as ArrayList<ResultMovie>)
+                allListItems.add(topRatedList)
                 discoverViewModel.getNowPlayingMovieList()
             }
         })
@@ -89,7 +95,8 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
                 val results = movie.results
                 val restValue: Int = movie.results?.size?.mod(GRID_COUNT) ?: 0
                 restValue.let {
-                    nowPlayingList = results?.dropLast(it) as ArrayList<ResultMovie>
+                    nowPlayingList.clear()
+                    nowPlayingList.addAll(results?.dropLast(it) as ArrayList<ResultMovie>)
                 }
                 allListItems.add(nowPlayingList)
                 fragmentBinding.discoverMainRecyclerView.apply {
@@ -98,7 +105,7 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
                         LinearLayoutManager.VERTICAL,
                         false
                     )
-                    recyclerViewAdapter = FlexibleAdapter(this@DiscoverFragment)
+                    recyclerViewAdapter = DiscoverParentAdapter(this@DiscoverFragment)
                     adapter = recyclerViewAdapter
                     recyclerViewAdapter.movieResults = allListItems
                 }
@@ -126,7 +133,6 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
                 (height * 1.1).toInt()
         }
     }
-
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.logout) {
@@ -157,7 +163,6 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
             item.let {
                 pairList.add(Pair(item.id, item.backdropPath) as Pair<Int, String>)
             }
-
         }
         return pairList
     }
@@ -180,25 +185,20 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        requireActivity().viewModelStore.clear()
-    }
-
     private fun sliderScroll() {
         val handler = Handler()
         val startPosition = 0
 
         val runnable = object : Runnable {
-
             override fun run() {
                 val count = fragmentBinding.discoverSlider.adapter?.itemCount ?: 0
                 if (fragmentBinding.discoverSlider.currentItem == count - 1 ) {
+                    handler.postDelayed(this, 10000)
                     fragmentBinding.discoverSlider.setCurrentItem(startPosition, true)
                 } else {
                     fragmentBinding.discoverSlider.setCurrentItem(fragmentBinding.discoverSlider.currentItem + 1, true)
+                    handler.postDelayed(this, 10000)
                 }
-                handler.postDelayed(this, 7000)
             }
         }
 
@@ -211,6 +211,11 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
             R.id.action_dashboardFragment_to_movieDetailFragment,
             movieDataBundle, null, null
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        discoverViewModel.setListsToDefault()
     }
 
 }

@@ -59,6 +59,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/artistShortInfo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="TextContrastCheck"
                 tools:text="TextView" />
 
             <TextView
@@ -77,6 +78,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/artistDetailCoverImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="TextContrastCheck"
                 tools:text="TextView" />
 
             <LinearLayout

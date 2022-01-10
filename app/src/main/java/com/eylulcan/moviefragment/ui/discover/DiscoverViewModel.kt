@@ -16,11 +16,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class DiscoverViewModel : ViewModel() {
 
     private var retrofit: MovieAPI? = null
-    private val popularMovieList = MutableLiveData<Movie>()
+    private var popularMovieList = MutableLiveData<Movie>()
     val popularMovies: LiveData<Movie> get() = popularMovieList
-    private val topRatedMovieList = MutableLiveData<Movie>()
+    private var topRatedMovieList = MutableLiveData<Movie>()
     val topRatedMovies: LiveData<Movie> get() = topRatedMovieList
-    private val nowPlayingMovieList = MutableLiveData<Movie>()
+    private var nowPlayingMovieList = MutableLiveData<Movie>()
     val nowPlaying: LiveData<Movie> get() = nowPlayingMovieList
     private val userSession = MutableLiveData<GuestSession>()
     val sessionId: LiveData<GuestSession> get() = userSession
@@ -97,6 +97,12 @@ class DiscoverViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun setListsToDefault(){
+        popularMovieList = MutableLiveData<Movie>()
+        topRatedMovieList = MutableLiveData<Movie>()
+        nowPlayingMovieList = MutableLiveData<Movie>()
     }
 
 }

@@ -8,8 +8,8 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.DiscoverParentFragmentBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 
-class FlexibleAdapter(private val listener: ItemListener) :
-    RecyclerView.Adapter<FlexibleAdapter.ViewHolder>() {
+class DiscoverParentAdapter(private val listener: ItemListener) :
+    RecyclerView.Adapter<DiscoverParentAdapter.ViewHolder>() {
     private val viewPool = RecyclerView.RecycledViewPool()
 
     class ViewHolder(val binding: DiscoverParentFragmentBinding) :

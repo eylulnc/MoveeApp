@@ -49,17 +49,16 @@ class DiscoverChildAdapter(private val listener: ItemListener) :
         }
         setPlaceholders(holder)
         val child = movieResults[position]
-        setPlaceholders(holder)
-        Glide.with(holder.binding.movieListRecyclerViewImage).load(setImageUrl(child.posterPath))
-            .into(holder.binding.movieListRecyclerViewImage)
-        holder.binding.movieListRecyclerViewName.text = child.title
-        holder.itemView.setOnClickListener {
-            child.id?.let { id -> listener.onItemClicked(id) }
-        }
         var task: Runnable? = mTaskManager[holder.itemView]
         if (task == null) {
             task = Runnable {
                 run {
+                    Glide.with(holder.binding.movieListRecyclerViewImage).load(setImageUrl(child.posterPath))
+                        .into(holder.binding.movieListRecyclerViewImage)
+                    holder.binding.movieListRecyclerViewName.text = child.title
+                    holder.itemView.setOnClickListener {
+                        child.id?.let { id -> listener.onItemClicked(id) }
+                    }
                     removePlaceholders()
                 }
             }
