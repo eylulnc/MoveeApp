@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    tools:context=".ui.discover.DiscoverFragment">
+    tools:context=".ui.discover.DiscoverFragment"
+    android:background="@color/black_gray">
 
     <TextView
         android:id="@+id/categoryText"
@@ -14,14 +16,15 @@
         android:layout_marginTop="@dimen/discover_parent_categoryText_marginTop"
         android:layout_marginEnd="@dimen/discover_parent_categoryText_marginEnd"
         android:text="@string/most_popular"
-        android:textColor="@color/black"
-        android:textSize="@dimen/discover_parent_categoryText_size" />
+        android:textColor="@color/white_light_grey"
+        android:textSize="@dimen/discover_parent_categoryText_size"
+        app:drawableLeftCompat="@drawable/vertical_line"
+        android:drawablePadding="@dimen/discover_parent_categoryText_iconPadding"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/discoverRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/discover_parent_discoverRecyclerView_marginTop"
-        android:scrollbars="horizontal" />
+        android:layout_marginTop="@dimen/discover_parent_discoverRecyclerView_marginTop" />
 
 </LinearLayout>

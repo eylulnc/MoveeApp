@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.discover.DiscoverFragment">
+    tools:context=".ui.discover.DiscoverFragment"
+    android:backgroundTint="@color/black_gray">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="@color/purple_mountain"
+            android:background="@color/orange"
             android:minHeight="?attr/actionBarSize"
             android:orientation="vertical"
             android:theme="@style/ToolbarTheme"
@@ -36,23 +37,26 @@
         android:clipToPadding="false"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:background="@color/tr15_greylight"
+        android:background="@color/black_gray"
         android:id="@+id/discoverNestedScrollView">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/black_gray"
             android:id="@+id/discoverNestedLinear">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/black_gray">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/discoverSlider"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:background="@color/black_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +68,7 @@
                     android:layout_height="200dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@color/black_gray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
@@ -71,20 +76,18 @@
                     android:id="@+id/dots_indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:dotsColor="@color/white"
-                    app:dotsCornerRadius="@dimen/onboard_pager_dot_indicator_cornerRadius"
-                    app:dotsSize="@dimen/onboard_pager_dot_indicator_dotSize"
-                    app:dotsSpacing="@dimen/onboard_pager_dot_indicator_dotSpacing"
+                    android:layout_marginBottom="@dimen/discover_dot_indicator_marginBottom"
+                    app:dotsColor="@color/white_light_grey"
+                    app:dotsCornerRadius="@dimen/discover_dot_indicator_cornerRadius"
+                    app:dotsSize="@dimen/discover_dot_indicator_dotSize"
+                    app:dotsSpacing="@dimen/discover_dot_indicator_dotSpacing"
                     app:dotsWidthFactor="2.5"
                     app:layout_constraintBottom_toBottomOf="@id/discoverSlider"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:progressMode="true"
-                    app:selectedDotColor="@color/purple_mountain" />
+                    app:selectedDotColor="@color/orange" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/discoverMainRecyclerView"

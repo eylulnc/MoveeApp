@@ -18,11 +18,16 @@
     <dimen name="discover_parent_discoverRecyclerView_marginEnd">8dp</dimen>
     <dimen name="discover_parent_categoryText_size">16sp</dimen>
     <dimen name="discover_parent_categoryText_marginStart">8dp</dimen>
+    <dimen name="discover_parent_categoryText_iconPadding">4dp</dimen>
     <dimen name="discover_parent_categoryText_marginTop">16dp</dimen>
     <dimen name="discover_parent_categoryText_marginEnd">8dp</dimen>
 
     <dimen name="discover_mainRecyclerView_marginTop">4dp</dimen>
     <dimen name="discover_mainRecyclerView_marginEnd">4dp</dimen>
+    <dimen name="discover_dot_indicator_cornerRadius">8dp</dimen>
+    <dimen name="discover_dot_indicator_dotSize">8dp</dimen>
+    <dimen name="discover_dot_indicator_marginBottom">24dp</dimen>
+    <dimen name="discover_dot_indicator_dotSpacing">4dp</dimen>
 
     <dimen name="detail_movie_detailImagePoster_height">270dp</dimen>
     <dimen name="detail_movie_posterConstraintLayout_height">350dp</dimen>
