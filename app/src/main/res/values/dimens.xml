@@ -71,9 +71,8 @@
     <dimen name="detail_movie_expandCollapseButton_padding">4dp</dimen>
     <dimen name="detail_movie_detailTabLayout_margin_start">16dp</dimen>
     <dimen name="detail_movie_detailTabLayout_margin_end">16dp</dimen>
-    <dimen name="detail_movie_detailTabLayout_margin_top">8dp</dimen>
+    <dimen name="detail_movie_detailTabLayout_margin_top">16dp</dimen>
     <dimen name="detail_movie_movieDetailViewPager_marginTop">8dp</dimen>
-
 
     <dimen name="movie_detail_popup_rateMovieText_marginStart">16dp</dimen>
     <dimen name="movie_detail_popup_rateMovieText_marginEnd">16dp</dimen>
@@ -213,14 +212,26 @@
 
     <dimen name="castRecyclerRow_castConstraintLayout_marginLeft">8dp</dimen>
     <dimen name="castRecyclerRow_castConstraintLayout_marginRight">8dp</dimen>
+    <dimen name="castRecyclerRow_castConstraintLayout_marginTop">12dp</dimen>
+    <dimen name="castRecyclerRow_castArtistImage_marginStart">8dp</dimen>
+    <dimen name="castRecyclerRow_castArtistImage_marginBottom">8dp</dimen>
+    <dimen name="castRecyclerRow_castArtistImage_marginTop">8dp</dimen>
     <dimen name="castRecyclerRow_castArtistImage_width">100dp</dimen>
     <dimen name="castRecyclerRow_castArtistImage_height">140dp</dimen>
-    <dimen name="castRecyclerRow_castArtistImage_width_tablet">200dp</dimen>
-    <dimen name="castRecyclerRow_castArtistImage_height_tablet">200dp</dimen>
-    <dimen name="castRecyclerRow_castConstraintLayout_marginTop">12dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_minHeight">40dp</dimen>
-    <dimen name="castRecyclerRow_castArtistName_padding">20dp</dimen>
-    <dimen name="castRecyclerRow_castArtistName_textSize">12sp</dimen>
+    <dimen name="castRecyclerRow_castArtistName_padding">16dp</dimen>
+    <dimen name="castRecyclerRow_castArtistName_textSize">16sp</dimen>
+    <dimen name="castRecyclerRow_castArtistName_marginTop">16dp</dimen>
+    <dimen name="castRecyclerRow_asText_marginTop">16dp</dimen>
+    <dimen name="castRecyclerRow_asText_textSize">18sp</dimen>
+    <dimen name="castRecyclerRow_cardView_cornerRadius">15dp</dimen>
+    <dimen name="castRecyclerRow_layout_margin">16dp</dimen>
+    <dimen name="castRecyclerRow_layout_margin_tablet">16dp</dimen>
+    <dimen name="castRecyclerRow_characterName_padding">16dp</dimen>
+    <dimen name="castRecyclerRow_characterName_minHeight">40dp</dimen>
+    <dimen name="castRecyclerRow_characterName_textSize">16sp</dimen>
+    <dimen name="castRecyclerRow_characterName_marginTop">16dp</dimen>
+    <dimen name="castRecyclerRow_characterName_marginBottom">16dp</dimen>
 
     <dimen name="search_recycler_row_text_width">100dp</dimen>
     <dimen name="search_recycler_row_text_height">40dp</dimen>

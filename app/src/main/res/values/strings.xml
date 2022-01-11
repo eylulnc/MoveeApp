@@ -170,5 +170,6 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="vote">Vote</string>
+    <string name="as">as</string>
 
 </resources>

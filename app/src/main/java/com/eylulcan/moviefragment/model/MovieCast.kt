@@ -44,7 +44,7 @@ class MovieCast {
 
     @SerializedName("character")
     @Expose
-    private val character: String? = null
+    val character: String? = null
 
     @SerializedName("credit_id")
     @Expose

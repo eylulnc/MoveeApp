@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentCastBinding
@@ -16,15 +17,13 @@ import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 
-private const val SPAN_COUNT = 4
+private const val SPAN_COUNT_TABLET = 2
 
 class CastFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentCastBinding
     private lateinit var castAdapter: CastAdapter
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
-    private var placeholderNeeded = arrayListOf<View>()
-    private var broccoli = Broccoli()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,15 +36,21 @@ class CastFragment : Fragment(), ItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCastBinding.bind(view)
-        setPlaceholders()
-        binding.castRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+        setupUI()
+
         observeViewModel()
 
+    }
+    private fun setupUI(){
+        if ( Utils.isTablet(requireContext()) ) {
+            binding.castRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
+        } else {
+            binding.castRecyclerView.layoutManager = LinearLayoutManager( requireContext(),LinearLayoutManager.VERTICAL, false)
+        }
     }
 
     private fun observeViewModel() {
         movieDetailViewModel.cast.observe(viewLifecycleOwner, { movieCredits ->
-            broccoli.removeAllPlaceholders()
             castAdapter = CastAdapter(movieCredits, this)
             binding.castRecyclerView.adapter = castAdapter
         })
@@ -58,11 +63,4 @@ class CastFragment : Fragment(), ItemListener {
         )
     }
 
-    private fun setPlaceholders() {
-        placeholderNeeded.addAll(arrayListOf(
-            binding.castRecyclerView,
-        ))
-        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded )
-
-    }
 }

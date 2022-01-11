@@ -32,6 +32,7 @@ class CastAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val artist = movieCredits.cast?.get(position)
         holder.binding.castArtistName.text = artist?.name
+        holder.binding.characterName.text = artist?.character
         Glide.with(holder.binding.root).load(setImageUrl(artist?.profilePath))
             .placeholder(R.color.grey_light).into(holder.binding.castArtistImage)
         holder.itemView.setOnClickListener {
