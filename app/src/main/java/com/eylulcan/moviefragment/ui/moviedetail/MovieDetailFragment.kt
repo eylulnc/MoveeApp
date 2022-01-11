@@ -27,8 +27,6 @@ class MovieDetailFragment : Fragment() {
     private lateinit var fragmentBinding: FragmentMovieDetailBinding
     private val tabNames = arrayOf("Cast", "Reviews", "More")
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
-    private var genreNames: String = ""
-    private var movieLanguages: String = ""
     private var placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
 
@@ -57,7 +55,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setImageUrl(poster_path: String?): String =
-        Utils.BASE_IMAGE_URL_185.plus(poster_path)
+        Utils.BASE_IMAGE_URL_ORIGINAL.plus(poster_path)
 
     private fun tabAdapterSetup() {
         val adapter = DetailTabAdapter(childFragmentManager, lifecycle)
@@ -109,23 +107,12 @@ class MovieDetailFragment : Fragment() {
 
     private fun setupUI(movieDetails: MovieDetail?) {
         movieDetails?.let { selectedMovie ->
-            Glide.with(this).load(setImageUrl(selectedMovie.posterPath))
+            Glide.with(this).load(setImageUrl(selectedMovie.backdropPath))
                 .into(fragmentBinding.detailImagePoster)
             fragmentBinding.detailMovieNameText.text = selectedMovie.title
             fragmentBinding.expandTextView.text = selectedMovie.overview
             fragmentBinding.detailReleaseDateText.text = selectedMovie.releaseDate
-            fragmentBinding.detailRatingBar.rating =
-                (selectedMovie.voteAverage?.toFloat()?.div(2) ?: 0f)
-            movieLanguages = ""
-            selectedMovie.spokenLanguages?.forEach { language ->
-                movieLanguages = movieLanguages.plus(language.englishName).plus(" | ")
-            }
-            fragmentBinding.languageText.text = getString(R.string.language, movieLanguages)
-            genreNames = ""
-            selectedMovie.genres?.forEach { genre ->
-                genreNames = genreNames.plus(genre.name).plus(" | ")
-            }
-            fragmentBinding.detailGenreNameText.text = genreNames
+            fragmentBinding.movieRateText.text = selectedMovie.voteAverage?.toString()
             selectedMovie.runtime?.let { runtime ->
                 fragmentBinding.detailDurationText.text = calculateDuration(runtime)
             }
@@ -142,20 +129,14 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setPlaceholders() {
-        fragmentBinding.languageText.isVisible = false
-        fragmentBinding.detailRatingBar.isVisible = false
-        placeholderNeeded.addAll(
-            arrayListOf(
-                fragmentBinding.templateConstraintLayout,
-                fragmentBinding.templateViewPagerView,
-            )
-        )
+        arrayListOf(
+            fragmentBinding.templateConstraintLayout,
+            fragmentBinding.templateViewPagerView,
+            fragmentBinding.templateCardView)
         Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
     }
 
     private fun removePlaceholders() {
-        fragmentBinding.languageText.isVisible = true
-        fragmentBinding.detailRatingBar.isVisible = true
         placeholderNeeded.forEach { view ->
             view.apply {
                 broccoli.clearPlaceholder(this)

@@ -7,6 +7,7 @@
     android:layout_marginLeft="@dimen/castRecyclerRow_castConstraintLayout_marginLeft"
     android:layout_marginRight="@dimen/castRecyclerRow_castConstraintLayout_marginRight"
     android:layout_marginTop="@dimen/castRecyclerRow_castConstraintLayout_marginTop"
+    android:background="@color/black_gray"
     android:id="@+id/castConstraintLayout">
 
     <ImageView
@@ -25,7 +26,7 @@
         android:id="@+id/castArtistName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/white_light_grey"
         android:ellipsize="end"
         android:fontFamily="@font/lato_regular"
         android:gravity="center"

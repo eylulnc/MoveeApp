@@ -53,7 +53,7 @@ class ArtistDetailFragment : Fragment() {
             val knownForDepartment = detail.knownForDepartment ?: getString(R.string.unknown)
             val birthDate = detail.birthday ?: getString(R.string.unknown)
             binding.artistShortInfo.text = knownForDepartment.plus(" | ").plus(birthDate)
-            Glide.with(this).load(setImageUrl(detail.profilePath)).placeholder(R.color.greylight)
+            Glide.with(this).load(setImageUrl(detail.profilePath)).placeholder(R.color.grey_light)
                 .into(binding.artistDetailCoverImage)
         })
 

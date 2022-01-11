@@ -12,7 +12,7 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
     class PersonViewHolder(private val binding: SearchFragmentRecyclerRowBinding) : SearchRecyclerViewHolder(binding){
 
         fun bind(person: SearchResult?, listener: SearchListener){
-            Glide.with(binding.root).load(setImageUrl(person?.profilePath)).placeholder(R.color.greylight).into(binding.searchItemImage)
+            Glide.with(binding.root).load(setImageUrl(person?.profilePath)).placeholder(R.color.grey_light).into(binding.searchItemImage)
             binding.searchItemName.text = person?.name
             itemView.setOnClickListener {
                 person?.id?.let { listener.onPersonClicked(it) }
@@ -26,7 +26,7 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
     class MovieViewHolder(private val binding: SearchFragmentRecyclerRowBinding) : SearchRecyclerViewHolder(binding){
 
         fun bind(movie: SearchResult?,listener: SearchListener){
-            Glide.with(binding.root).load(setImageUrl(movie?.posterPath)).placeholder(R.color.greylight).into(binding.searchItemImage)
+            Glide.with(binding.root).load(setImageUrl(movie?.posterPath)).placeholder(R.color.grey_light).into(binding.searchItemImage)
             binding.searchItemName.text = movie?.title
             itemView.setOnClickListener {
                 movie?.id?.let { listener.onMovieClicked(it) }
@@ -41,7 +41,7 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
     class TvShowViewHolder(private val binding: SearchFragmentRecyclerRowBinding) : SearchRecyclerViewHolder(binding){
 
         fun bind(tvShow: SearchResult?){
-            Glide.with(binding.root).load(setImageUrl(tvShow?.posterPath)).placeholder(R.color.greylight).into(binding.searchItemImage)
+            Glide.with(binding.root).load(setImageUrl(tvShow?.posterPath)).placeholder(R.color.grey_light).into(binding.searchItemImage)
             binding.searchItemName.text = tvShow?.name
         }
 

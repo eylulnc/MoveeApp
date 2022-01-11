@@ -5,185 +5,211 @@
     xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1F1F1F"
     >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/black_gray">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/posterConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/detail_movie_posterConstraintLayout_height"
+            android:backgroundTint="@color/black_gray"
             app:layout_scrollFlags="scroll"
             tools:context=".ui.moviedetail.MovieDetailFragment">
 
             <View
                 android:id="@+id/templateConstraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
-                app:layout_constraintDimensionRatio=""
+                android:layout_width="wrap_content"
+                android:layout_height="270dp"
+                app:layout_constraintBottom_toTopOf="@+id/cardView"
+                app:layout_constraintDimensionRatio="16:9"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.015" />
 
             <ImageView
                 android:id="@+id/detailImagePoster"
-                android:layout_width="@dimen/detail_movie_detailImagePoster_width"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/detail_movie_detailImagePoster_height"
-                android:layout_marginStart="@dimen/detail_movie_detailImagePoster_margin_start"
-                android:layout_marginTop="@dimen/detail_movie_detailImagePoster_margin_top"
-                android:contentDescription="@string/movie_poster"
+                android:scaleType="center"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintDimensionRatio=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                android:contentDescription="@string/movie_backdrop"
+                app:layout_constraintVertical_bias="0.015"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <LinearLayout
-                android:id="@+id/linearLayoutForButtons"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detail_movie_linearLayoutForButtons_marginStart"
-                android:layout_marginTop="@dimen/detail_movie_linearLayoutForButtons_marginTop"
-                android:layout_marginEnd="@dimen/detail_movie_linearLayoutForButtons_marginEnd"
-                android:orientation="horizontal"
-                android:weightSum="3"
+            <Button
+                android:id="@+id/rateButton"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="@dimen/detail_movie_rateButton_width"
+                android:layout_height="@dimen/detail_movie_rateButton_height"
+                android:layout_marginTop="@dimen/detail_movie_rateButton_margin_top"
+                android:layout_weight="1"
+                android:backgroundTint="@color/orange"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/vote"
+                android:textColor="@color/white"
+                android:textSize="@dimen/detail_movie_rateButton_textSize"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.044"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailImagePoster">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/watchButton"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/detail_movie_watchButton_marginEnd"
-                    android:layout_weight="2"
-                    android:backgroundTint="@color/purple_mountain"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="@string/watch_trailer"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/detail_movie_watchButton_textSize"
-                    android:visibility="visible" />
+            <ImageButton
+                android:id="@+id/watchButton"
+                android:layout_width="@dimen/detail_movie_watchButton_width"
+                android:layout_height="@dimen/detail_movie_watchButton_height"
+                android:layout_marginBottom="@dimen/detail_movie_watchButton_marginBottom"
+                android:background="@drawable/round_button"
+                android:src="@drawable/ic_baseline_play_arrow_24"
+                android:translationZ="@dimen/detail_movie_watchButton_translationZ"
+                app:layout_constraintBottom_toTopOf="@+id/templateCardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/imageButton"/>
 
-                <Button
-                    android:id="@+id/rateButton"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/purple_mountain"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="@string/rate_movie"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/detail_movie_watchButton_textSize" />
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/textRatingBarConstraintLayout"
+            <View
+                android:id="@+id/templateCardView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/detail_movie_textRatingBarConstraintLayout_margin_start"
-                android:layout_marginEnd="@dimen/detail_movie_textRatingBarConstraintLayout_margin_end"
-                app:layout_constraintBottom_toBottomOf="@+id/detailImagePoster"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/detailImagePoster"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cardView" />
 
-                <TextView
-                    android:id="@+id/detailDurationText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/detail_movie_detailDurationText_margin_start"
-                    android:layout_marginTop="@dimen/detail_movie_detailDurationText_margin_top"
-                    android:fontFamily="@font/lato_regular"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/detail_movie_detailDurationText_textSize"
-                    app:layout_constraintStart_toEndOf="@+id/detailReleaseDateText"
-                    app:layout_constraintTop_toBottomOf="@+id/languageText"
-                    tools:text="TextView" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/detail_movie_cardView_margin_bottom"
+                android:background="@drawable/top_rounded_card"
+                android:backgroundTint="@color/black_gray"
+                app:cardCornerRadius="@dimen/detail_movie_cardView_cornerRadius"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/detailReleaseDateText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/detail_movie_detailReleaseDate_margin_top"
-                    android:fontFamily="@font/lato_regular"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/detail_movie_detailReleaseDate_textSize"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/languageText"
-                    tools:text="TextView" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/detailMovieNameText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/detail_movie_detailMovieNameText_margin_top"
-                    android:fontFamily="@font/lato_bold"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/detail_movie_detailMovieNameText_textSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="MovieName" />
+                    <TextView
+                        android:id="@+id/detailMovieNameText"
+                        android:layout_width="@dimen/detail_movie_detailMovieNameText_width"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_movie_detailMovieNameText_margin_top"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center|start"
+                        android:lines="2"
+                        android:textColor="@color/white_light_grey"
+                        android:textSize="@dimen/detail_movie_detailMovieNameText_textSize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Movie Name" />
 
-                <TextView
-                    android:id="@+id/languageText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/detail_movie_languageStringText_margin_top"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/lato_regular"
-                    android:maxLines="1"
-                    android:text="@string/language"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/detail_movie_languageStringText_textSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detailRatingBar" />
+                    <LinearLayout
+                        android:id="@+id/movieInfoLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/detail_movie_movieInfoLayout_marginStart"
+                        android:layout_marginTop="@dimen/detail_movie_movieInfoLayout_marginTop"
+                        android:layout_marginEnd="@dimen/detail_movie_movieInfoLayout_marginEnd"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/detailMovieNameText"
+                        app:layout_constraintVertical_bias="0.0">
 
-                <RatingBar
-                    android:id="@+id/detailRatingBar"
-                    style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/detail_movie_ratingBar_margin_top"
-                    android:numStars="5"
-                    android:theme="@style/RatingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detailGenreNameText" />
+                        <TextView
+                            android:id="@+id/detailReleaseDateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/detail_movie_detailReleaseDate_margin_start"
+                            android:layout_marginTop="@dimen/detail_movie_detailReleaseDate_margin_top"
+                            android:layout_weight="1"
+                            android:textColor="@color/white_light_grey"
+                            android:textSize="@dimen/detail_movie_detailReleaseDate_textSize"
+                            app:drawableLeftCompat="@drawable/ic_baseline_calendar_today_24"
+                            tools:text="Publication Date" />
 
-                <TextView
-                    android:id="@+id/detailGenreNameText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/detail_movie_detailGenreNameText_margin_top"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/lato_regular"
-                    android:maxLines="1"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/detail_movie_detailGenreNameText_textSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detailMovieNameText"
-                    tools:text="Genres" />
+                        <TextView
+                            android:id="@+id/detailDurationText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/detail_movie_detailDurationText_margin_start"
+                            android:layout_marginTop="@dimen/detail_movie_detailDurationText_margin_top"
+                            android:layout_weight="1"
+                            android:textColor="@color/white_light_grey"
+                            android:textSize="@dimen/detail_movie_detailDurationText_textSize"
+                            app:drawableLeftCompat="@drawable/ic_baseline_access_time_24"
+                            tools:text="Rate" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/movieRateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/detail_movie_movieRateText_margin_start"
+                            android:layout_marginTop="@dimen/detail_movie_movieRateText_margin_top"
+                            android:layout_marginBottom="@dimen/detail_movie_movieRateText_margin_bottom"
+                            android:layout_weight="1"
+                            android:textColor="@color/white_light_grey"
+                            android:textSize="@dimen/detail_movie_movieRateText_textSize"
+                            app:drawableLeftCompat="@drawable/ic_baseline_star_24"
+                            tools:text="Duration" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/detail_movie_nestedScrollView_margin_top"
+        android:clipToPadding="false"
+        android:background="@color/white"
+        android:fillViewport="true"
+        android:backgroundTint="@color/black_gray"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/relativeLayout"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/detail_movie_relativeLayout_marginStart"
                 android:layout_marginTop="@dimen/detail_movie_relativeLayout_marginTop"
                 android:layout_marginEnd="@dimen/detail_movie_relativeLayout_marginEnd"
-                android:minHeight="@dimen/detail_movie_relativeLayout_minHeight"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons">
+                android:minHeight="@dimen/detail_movie_relativeLayout_minHeight">
 
                 <com.ms.square.android.expandabletextview.ExpandableTextView
                     android:id="@+id/expand_text_view"
@@ -198,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/detail_movie_expandableText_marginLeft"
                         android:layout_marginEnd="@dimen/detail_movie_expandableText_marginRight"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white_light_grey"
                         android:textSize="@dimen/detail_movie_expandableText_size" />
 
                     <ImageButton
@@ -207,40 +233,32 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|bottom"
                         android:background="@android:color/transparent"
-                        android:padding="@dimen/detail_movie_expandCollapseButton_padding"
-                        android:contentDescription="@string/imageButton"/>
+                        android:contentDescription="@string/imageButton"
+                        android:padding="@dimen/detail_movie_expandCollapseButton_padding" />
 
                 </com.ms.square.android.expandabletextview.ExpandableTextView>
 
             </RelativeLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/detail_movie_nestedScrollView_margin_top"
-        android:clipToPadding="false"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/detailTabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/detail_movie_detailTabLayout_margin_start"
+                android:layout_marginTop="@dimen/detail_movie_detailTabLayout_margin_end"
+                android:layout_marginEnd="@dimen/detail_movie_detailTabLayout_margin_top"
+                android:background="@drawable/tab_layout_custom"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+                app:layout_constraintTop_toBottomOf="@+id/movieInfoLayout"
                 app:tabGravity="fill"
-                app:tabMode="fixed">
+                app:tabIndicatorColor="@android:color/transparent"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="fixed"
+                app:tabRippleColor="@null"
+                app:tabSelectedTextColor="@color/orange">
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
@@ -261,16 +279,21 @@
             <View
                 android:id="@+id/templateViewPagerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/black_gray"/>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/movieDetailViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/detail_movie_movieDetailViewPager_marginTop"
+                android:background="@color/black_gray"
+                android:backgroundTint="@color/black_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailTabLayout" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

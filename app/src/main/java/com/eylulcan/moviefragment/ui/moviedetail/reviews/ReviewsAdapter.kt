@@ -42,7 +42,7 @@ class ReviewsAdapter :
                 holder.binding.postDateText.text = output
             }
             Glide.with(holder.binding.root).load(setImageUrl(review.authorDetails?.avatarPath))
-                .placeholder(R.color.greylight).into(holder.binding.authorProfileImage)
+                .placeholder(R.color.grey_light).into(holder.binding.authorProfileImage)
         }
     }
 

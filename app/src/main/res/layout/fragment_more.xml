@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.moviedetail.more.MoreFragment"
-    android:background="@color/tr60_purple_mountain">
+    android:background="@color/black_gray">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moreRecyclerView"

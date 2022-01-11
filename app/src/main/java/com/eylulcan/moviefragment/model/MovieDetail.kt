@@ -12,7 +12,7 @@ class MovieDetail {
 
     @SerializedName("backdrop_path")
     @Expose
-    private val backdropPath: String? = null
+    val backdropPath: String? = null
 
     @SerializedName("belongs_to_collection")
     @Expose

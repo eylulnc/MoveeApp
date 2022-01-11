@@ -12,7 +12,6 @@ import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.PeopleResult
-import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.HashMap
@@ -52,7 +51,7 @@ class ArtistAdapter(
         peopleResult[position].let { artist ->
             holder.binding.artistRecyclerPersonName.text = artist.name
             Glide.with(holder.binding.root).load(setImageUrl(artist.profilePath))
-                .placeholder(R.color.greylight)
+                .placeholder(R.color.grey_light)
                 .into(holder.binding.artistRecyclerRowImage)
             holder.binding.artistRecyclerPersonName.text = artist.name
         }

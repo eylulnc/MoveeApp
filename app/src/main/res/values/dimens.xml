@@ -24,24 +24,35 @@
     <dimen name="discover_mainRecyclerView_marginTop">4dp</dimen>
     <dimen name="discover_mainRecyclerView_marginEnd">4dp</dimen>
 
-    <dimen name="detail_movie_detailImagePoster_height">200dp</dimen>
-    <dimen name="detail_movie_detailImagePoster_width">150dp</dimen>
-    <dimen name="detail_movie_detailImagePosterTablet_height">400dp</dimen>
-    <dimen name="detail_movie_detailImagePosterTablet_width">300dp</dimen>
-    <dimen name="detail_movie_playerView_height">200dp</dimen>
-    <dimen name="detail_movie_detailImagePoster_margin_start">4dp</dimen>
-    <dimen name="detail_movie_detailImagePoster_margin_top">4dp</dimen>
-    <dimen name="detail_movie_textRatingBarConstraintLayout_margin_end">16dp</dimen>
-    <dimen name="detail_movie_textRatingBarConstraintLayout_margin_start">16dp</dimen>
-    <dimen name="detail_movie_textRatingBarConstraintLayout_margin_top">8dp</dimen>
-    <dimen name="detail_movie_textRatingBarConstraintLayout_margin_bottom">8dp</dimen>
+    <dimen name="detail_movie_detailImagePoster_height">270dp</dimen>
+    <dimen name="detail_movie_posterConstraintLayout_height">350dp</dimen>
+    <dimen name="detail_movie_rateButton_margin_top">16dp</dimen>
+    <dimen name="detail_movie_rateButton_height">50dp</dimen>
+    <dimen name="detail_movie_rateButton_width">50dp</dimen>
+    <dimen name="detail_movie_rateButton_textSize">11sp</dimen>
+    <dimen name="detail_movie_watchButton_marginBottom">-25dp</dimen>
+    <dimen name="detail_movie_watchButton_height">50dp</dimen>
+    <dimen name="detail_movie_watchButton_width">50dp</dimen>
+    <dimen name="detail_movie_watchButton_textSize">11sp</dimen>
+    <dimen name="detail_movie_watchButton_translationZ">90dp</dimen>
+    <dimen name="detail_movie_cardView_margin_bottom">8dp</dimen>
+    <dimen name="detail_movie_cardView_cornerRadius">25dp</dimen>
+    <dimen name="detail_movie_detailMovieNameText_margin_top">8dp</dimen>
+    <dimen name="detail_movie_detailMovieNameText_textSize">20sp</dimen>
+    <dimen name="detail_movie_detailMovieNameText_width">300dp</dimen>
+    <dimen name="detail_movie_movieInfoLayout_marginStart">16dp</dimen>
+    <dimen name="detail_movie_movieInfoLayout_marginEnd">16dp</dimen>
+    <dimen name="detail_movie_movieInfoLayout_marginTop">8dp</dimen>
+    <dimen name="detail_movie_detailReleaseDate_margin_top">8dp</dimen>
+    <dimen name="detail_movie_detailReleaseDate_margin_start">8dp</dimen>
+    <dimen name="detail_movie_detailReleaseDate_textSize">16sp</dimen>
     <dimen name="detail_movie_detailDurationText_margin_start">8dp</dimen>
     <dimen name="detail_movie_detailDurationText_margin_top">8dp</dimen>
     <dimen name="detail_movie_detailDurationText_textSize">16sp</dimen>
-    <dimen name="detail_movie_detailReleaseDate_margin_top">8dp</dimen>
-    <dimen name="detail_movie_detailReleaseDate_textSize">16sp</dimen>
-    <dimen name="detail_movie_detailMovieNameText_margin_top">8dp</dimen>
-    <dimen name="detail_movie_detailMovieNameText_textSize">20sp</dimen>
+    <dimen name="detail_movie_movieRateText_margin_start">8dp</dimen>
+    <dimen name="detail_movie_movieRateText_margin_bottom">8dp</dimen>
+    <dimen name="detail_movie_movieRateText_margin_top">8dp</dimen>
+    <dimen name="detail_movie_movieRateText_textSize">16sp</dimen>
     <dimen name="detail_movie_languageStringText_margin_top">8dp</dimen>
     <dimen name="detail_movie_languageStringText_textSize">16sp</dimen>
     <dimen name="detail_movie_detailLanguageText_margin_start">4dp</dimen>
@@ -58,12 +69,11 @@
     <dimen name="detail_movie_expandableText_marginLeft">8dp</dimen>
     <dimen name="detail_movie_expandableText_marginRight">8dp</dimen>
     <dimen name="detail_movie_expandCollapseButton_padding">4dp</dimen>
-    <dimen name="detail_movie_watchButton_marginStart">16dp</dimen>
-    <dimen name="detail_movie_watchButton_marginEnd">16dp</dimen>
-    <dimen name="detail_movie_watchButton_textSize">11sp</dimen>
-    <dimen name="detail_movie_linearLayoutForButtons_marginStart">16dp</dimen>
-    <dimen name="detail_movie_linearLayoutForButtons_marginEnd">16dp</dimen>
-    <dimen name="detail_movie_linearLayoutForButtons_marginTop">8dp</dimen>
+    <dimen name="detail_movie_detailTabLayout_margin_start">16dp</dimen>
+    <dimen name="detail_movie_detailTabLayout_margin_end">16dp</dimen>
+    <dimen name="detail_movie_detailTabLayout_margin_top">8dp</dimen>
+    <dimen name="detail_movie_movieDetailViewPager_marginTop">8dp</dimen>
+
 
     <dimen name="movie_detail_popup_rateMovieText_marginStart">16dp</dimen>
     <dimen name="movie_detail_popup_rateMovieText_marginEnd">16dp</dimen>
@@ -210,7 +220,7 @@
     <dimen name="castRecyclerRow_castConstraintLayout_marginTop">12dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_minHeight">40dp</dimen>
     <dimen name="castRecyclerRow_castArtistName_padding">20dp</dimen>
-    <dimen name="castRecyclerRow_castArtistName_textSize">14sp</dimen>
+    <dimen name="castRecyclerRow_castArtistName_textSize">12sp</dimen>
 
     <dimen name="search_recycler_row_text_width">100dp</dimen>
     <dimen name="search_recycler_row_text_height">40dp</dimen>
@@ -224,4 +234,5 @@
 
     <dimen name="image_fragment_recyclerRow_artistImage_height">500dp</dimen>
     <dimen name="image_fragment_recyclerRow_artistImage_width">350dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
