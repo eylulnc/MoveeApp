@@ -5,7 +5,8 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.artist.ArtistFragment">
+    tools:context=".ui.artist.ArtistFragment"
+    android:background="@color/black_gray">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/artistRecyclerView"
@@ -15,5 +16,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/black_gray"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

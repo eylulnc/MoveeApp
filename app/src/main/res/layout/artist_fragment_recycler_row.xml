@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/black_gray"
     android:layout_margin="@dimen/artist_recycler_view_margin">
 
     <View
         android:id="@+id/artistRowTemplate"
         android:layout_width="0dp"
+        android:background="@color/black_gray"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/artistRecyclerPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +31,7 @@
         android:id="@+id/artistRecyclerPersonName"
         android:layout_width="0dp"
         android:layout_height="@dimen/artist_recycler_row_text_height"
-        android:background="@color/light_lavender"
+        android:background="@color/black_gray"
         android:ellipsize="end"
         android:fontFamily="@font/lato_regular"
         android:gravity="center"
@@ -38,7 +40,7 @@
         android:paddingEnd="@dimen/artist_recycler_row_text_paddingRight"
         android:singleLine="false"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white_light_grey"
         android:textSize="@dimen/artist_recycler_row_text_size"
         app:layout_constraintEnd_toEndOf="@+id/artistRecyclerRowImage"
         app:layout_constraintHorizontal_bias="0.0"
