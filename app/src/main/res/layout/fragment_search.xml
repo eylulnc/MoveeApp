@@ -5,11 +5,12 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search.SearchFragment">
+    tools:context=".ui.search.SearchFragment"
+    android:background="@color/black_gray">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/tr60_purple_mountain"
+        android:background="@color/black_gray"
         android:id="@+id/searchRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -22,6 +23,8 @@
     <SearchView
         android:id="@+id/searchBar"
         android:layout_width="0dp"
+        android:background="@color/orange"
+        android:theme="@style/SearchView"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

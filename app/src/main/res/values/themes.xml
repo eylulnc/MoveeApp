@@ -22,4 +22,11 @@
         <item name="colorControlHighlight">@color/grey</item>
     </style>
 
+    <style name="SearchView" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/orange</item>
+        <item name="android:textColor">@color/white_light_grey</item>
+        <item name="colorControlNormal">@color/white_light_grey</item>
+        <item name="colorControlHighlight">@color/white_light_grey</item>
+    </style>
+
 </resources>
