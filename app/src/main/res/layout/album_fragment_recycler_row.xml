@@ -5,14 +5,17 @@
     android:id="@+id/albumFragmentConstraintLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/black_gray"
     android:layout_marginStart="@dimen/album_fragment_albumConstraintLayout_marginStart"
-    android:layout_marginEnd="@dimen/album_fragment_albumConstraintLayout_marginEnd">
+    android:layout_marginEnd="@dimen/album_fragment_albumConstraintLayout_marginEnd"
+    android:layout_marginBottom="@dimen/album_fragment_albumConstraintLayout_marginBottom">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="@dimen/album_fragment_imageView_height"
         android:contentDescription="@string/artist_image"
+        android:scaleType="center"
         app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

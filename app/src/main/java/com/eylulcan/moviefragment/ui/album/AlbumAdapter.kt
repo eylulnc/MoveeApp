@@ -35,6 +35,6 @@ class AlbumAdapter(private val artistAlbum: ArtistAlbum, private val imageListen
 
     override fun getItemCount(): Int = artistAlbum.artistProfileImages?.size ?: 0
 
-    private fun setImageUrl(file_path: String?): String = Utils.BASE_IMAGE_URL_185.plus(file_path)
+    private fun setImageUrl(file_path: String?): String = Utils.BASE_IMAGE_URL_300.plus(file_path)
 
 }

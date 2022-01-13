@@ -13,7 +13,7 @@ import com.eylulcan.moviefragment.databinding.FragmentAlbumBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
 import com.eylulcan.moviefragment.model.ProfileImage
 
-private const val SPAN_COUNT = 4
+private const val SPAN_COUNT = 3
 
 class AlbumFragment : Fragment(), ImageListener {
 
