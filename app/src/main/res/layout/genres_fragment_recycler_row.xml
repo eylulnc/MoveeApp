@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/genresRowConstraintLayout"
+    android:background="@color/black_gray"
     android:layout_margin="@dimen/genres_recyclerView_row_genresRowConstraintLayout_margin">
 
 
@@ -25,7 +26,7 @@
         android:id="@+id/genresRowText"
         android:layout_width="0dp"
         android:layout_height="@dimen/genres_recyclerView_row_text_height"
-        android:background="@color/purple_mountain"
+        android:background="@color/orange"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"

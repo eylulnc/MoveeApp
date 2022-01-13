@@ -27,14 +27,8 @@ class GenresFragment : Fragment(), ItemListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_genres, container, false)
         binding = FragmentGenresBinding.bind(view)
-        if (Utils.isTablet(requireContext())) {
             binding.genresFragmentRecyclerView.layoutManager =
                 GridLayoutManager(context, 2)
-        } else {
-            binding.genresFragmentRecyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        }
-
         return view
     }
 

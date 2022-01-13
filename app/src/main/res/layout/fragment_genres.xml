@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.genres.GenresFragment"
-    android:background="@color/tr15_greylight">
+    android:background="@color/black_gray">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/genresFragmentRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/black_gray"
         android:layout_marginTop="@dimen/genres_recyclerView_marginTop"
         android:layout_marginBottom="@dimen/genres_recyclerView_marginBottom"
         app:layout_constraintBottom_toBottomOf="parent"
