@@ -25,7 +25,7 @@ class ArtistDetail {
 
     @SerializedName("deathday")
     @Expose
-    private val deathday: Any? = null
+    val deathday: String? = null
 
     @SerializedName("gender")
     @Expose

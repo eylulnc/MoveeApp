@@ -4,27 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
+import com.eylulcan.moviefragment.databinding.BottomSheetFragmentBinding
 import com.eylulcan.moviefragment.databinding.FragmentArtistDetailBinding
-import com.eylulcan.moviefragment.model.ArtistAlbum
+import com.eylulcan.moviefragment.model.ArtistDetail
+import com.eylulcan.moviefragment.model.ProfileImage
 import com.eylulcan.moviefragment.util.Utils
-import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import me.samlss.broccoli.Broccoli
 
-class ArtistDetailFragment : Fragment() {
+private const val SPAN_COUNT = 3
+class ArtistDetailFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentArtistDetailBinding
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
-    private val tabNames = arrayOf("Summary", "Movies", "More")
-    private var photoAlbum: ArtistAlbum? = null
     private val placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
+    private lateinit var includeBinding: BottomSheetFragmentBinding
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private lateinit var artistMovieAdapter: ArtistMovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,14 +40,16 @@ class ArtistDetailFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_artist_detail, container, false)
         binding = FragmentArtistDetailBinding.bind(view)
+        includeBinding = binding.bottomSheetFragment
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPlaceholders()
+        val bottomSheet: LinearLayout = binding.linearLayout
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         val selectedPopularPersonID = arguments?.get(getString(R.string.artistId)) as Int
-        tabAdapterSetup()
         observeViewModel()
         artistDetailViewModel.getArtistAlbum(selectedPopularPersonID)
         artistDetailViewModel.getArtistDetail(selectedPopularPersonID)
@@ -48,81 +58,55 @@ class ArtistDetailFragment : Fragment() {
 
     private fun observeViewModel() {
         artistDetailViewModel.artistDetail.observe(viewLifecycleOwner, { detail ->
+            setupUIBottomSheet(detail)
             removePlaceholders()
             binding.artistName.text = detail.name
             val knownForDepartment = detail.knownForDepartment ?: getString(R.string.unknown)
-            val birthDate = detail.birthday ?: getString(R.string.unknown)
-            binding.artistShortInfo.text = knownForDepartment.plus(" | ").plus(birthDate)
-            Glide.with(this).load(setImageUrl(detail.profilePath)).placeholder(R.color.grey_light)
-                .into(binding.artistDetailCoverImage)
+            binding.knownWithText.text = knownForDepartment
+            binding.artistDetailCoverImage.let {
+                Glide.with(this).load(setImageUrl(detail.profilePath)).circleCrop()
+                    .placeholder(R.color.grey_light)
+                    .into(it)
+            }
         })
 
         artistDetailViewModel.artistAlbum.observe(viewLifecycleOwner, { album ->
-            val albumSize = album.artistProfileImages?.size
-            if (albumSize != null && albumSize > 0) {
-                binding.albumCoverLayout.setOnClickListener {
-                    photoAlbum?.let { album ->
-                        val albumDataBundle = bundleOf((getString(R.string.photo_album) to album))
-                        findNavController().navigate(
-                            R.id.action_artistDetailFragment_to_albumFragment,
-                            albumDataBundle
-                        )
-                    }
+            val albumSize = album.artistProfileImages?.size ?: 0
+            includeBinding.albumPreviewRecyclerView.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            if (albumSize > 5) {
+                val albumTemp: List<ProfileImage>? = album.artistProfileImages?.subList(0, 4)
+                includeBinding.albumPreviewRecyclerView.adapter = albumTemp?.let {
+                    AlbumRecyclerAdapter(it)
                 }
+            } else {
+                includeBinding.albumPreviewRecyclerView.adapter =
+                    album.artistProfileImages?.let { AlbumRecyclerAdapter(it) }
             }
-            photoAlbum = album
-            val profileImage = album.artistProfileImages
-
-            binding.albumSizeText.text = albumSize.toString()
-            albumSize?.let { size ->
-                if (size > 0) {
-                    for (i in 0..5) {
-                        val imagePath = profileImage?.getOrNull(i)?.filePath
-                        when (i) {
-                            0 -> Glide.with(this).load(setImageUrl(imagePath))
-                                .into(binding.albumPreviewElement1)
-                            1 -> Glide.with(this).load(setImageUrl(imagePath))
-                                .into(binding.albumPreviewElement2)
-                            2 -> Glide.with(this).load(setImageUrl(imagePath))
-                                .into(binding.albumPreviewElement3)
-                            3 -> Glide.with(this).load(setImageUrl(imagePath))
-                                .into(binding.albumPreviewElement4)
-                            4 -> Glide.with(this).load(setImageUrl(imagePath))
-                                .into(binding.albumPreviewElement5)
-                        }
-                    }
-                } else {
-                    for (i in 0..5) {
-                        when (i) {
-                            0 -> binding.albumPreviewElement1.setImageResource(R.color.grey)
-                            1 -> binding.albumPreviewElement2.setImageResource(R.color.grey)
-                            2 -> binding.albumPreviewElement3.setImageResource(R.color.grey)
-                            3 -> binding.albumPreviewElement4.setImageResource(R.color.grey)
-                            4 -> binding.albumPreviewElement5.setImageResource(R.color.grey)
-                        }
-                    }
-                }
+            binding.bottomSheetFragment.photosTextView.setOnClickListener {
+                val albumDataBundle = bundleOf((getString(R.string.photo_album) to album))
+                this.parentFragment?.findNavController()?.navigate(R.id.action_artistDetailFragment_to_albumFragment, albumDataBundle)
             }
         })
+
+        artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner, { movieCredits ->
+            binding.artistMovieRecycler.layoutManager = GridLayoutManager(context,SPAN_COUNT)
+            artistMovieAdapter = ArtistMovieAdapter(movieCredits, artistMovieClickListener = this)
+            binding.artistMovieRecycler.adapter = artistMovieAdapter
+        })
+
+
     }
 
     private fun setImageUrl(profile_path: String?): String =
         Utils.BASE_IMAGE_URL_ORIGINAL.plus(profile_path)
 
-    private fun tabAdapterSetup() {
-        val adapter = TabAdapter(childFragmentManager, lifecycle)
-        binding.artistsFragmentViewPager.adapter = adapter
-        TabLayoutMediator(binding.tabLayout, binding.artistsFragmentViewPager) { tab, position ->
-            tab.text = tabNames[position]
-        }.attach()
-    }
-
     private fun setPlaceholders() {
         placeholderNeeded.addAll(
             arrayListOf(
-                binding.templateArtistCoverView,
-                binding.templateViewPagerView,
-                binding.templateUserImagesView
+                binding.templateArtistCoverView
+                //binding.templateViewPagerView,
+                // binding.templateUserImagesView
             )
         )
         Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
@@ -142,5 +126,46 @@ class ArtistDetailFragment : Fragment() {
         artistDetailViewModel.setListsToDefault()
     }
 
+    private fun setupUIBottomSheet(detail: ArtistDetail) {
+        includeBinding.expandTextView.text = detail.biography
+        includeBinding.artistBirthdayText.text = detail.birthday
+        if (detail.deathday.isNullOrEmpty()) {
+            includeBinding.artistDeathDayText.isVisible = false
+            includeBinding.deathText.isVisible = false
+        } else {
+            includeBinding.artistDeathDayText.text = detail.deathday.toString()
+        }
+
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        binding.bottomSheetFragment.arrowImage.setImageResource(R.drawable.down_arrow)
+                    }
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        binding.bottomSheetFragment.arrowImage.setImageResource(R.drawable.up_arrow)
+                    }
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    }
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+        })
+    }
+
+    override fun onItemClicked(id: Int) {
+        val movieDataBundle = bundleOf((getString(R.string.movieId)) to id)
+        findNavController().navigate(
+            R.id.action_artistDetailFragment_to_movieDetailFragment,
+            movieDataBundle, null, null
+        )
+    }
+
 }
+
 

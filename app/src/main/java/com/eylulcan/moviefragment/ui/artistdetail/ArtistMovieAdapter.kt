@@ -1,10 +1,9 @@
-package com.eylulcan.moviefragment.ui.artistdetail.artistmovie
+package com.eylulcan.moviefragment.ui.artistdetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistMovieFragmentRecyclerRowBinding
@@ -16,8 +15,6 @@ class ArtistMovieAdapter(
     private val artistMovieClickListener: ItemListener
 ) :
     RecyclerView.Adapter<ArtistMovieAdapter.ViewHolder>() {
-
-    private var genreNames: String = ""
 
     class ViewHolder(val binding: ArtistMovieFragmentRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -35,16 +32,9 @@ class ArtistMovieAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movieCredits.cast?.get(position)
         holder.binding.movieNameArtistMovie.text = movie?.title
-        Glide.with(holder.binding.root).load(setImageUrl(movie?.backdropPath))
+        Glide.with(holder.binding.root).load(setImageUrl(movie?.posterPath))
             .placeholder(R.color.grey)
-            .into(holder.binding.movieBackdropImage)
-        genreNames = ""
-        movie?.genreIds?.forEach { genreId ->
-            genreNames = genreNames.plus(Genres.valueOfInt(genreId)?.movieGenreName()).plus(" | ")
-        }
-        holder.binding.genresArtistMovie.text = genreNames
-        holder.binding.ratingBarArtistMovie.rating =
-            (movie?.voteAverage?.toFloat()?.div(2) ?: 0f)
+            .into(holder.binding.movieImage)
         holder.itemView.setOnClickListener {
             movie?.id?.let { id -> artistMovieClickListener.onItemClicked(id) }
         }
@@ -53,6 +43,6 @@ class ArtistMovieAdapter(
     override fun getItemCount(): Int = movieCredits.cast?.size ?: 0
 
     private fun setImageUrl(poster_path: String?): String =
-        Utils.BASE_IMAGE_URL_300.plus(poster_path)
+        Utils.BASE_IMAGE_URL_ORIGINAL.plus(poster_path)
 
 }

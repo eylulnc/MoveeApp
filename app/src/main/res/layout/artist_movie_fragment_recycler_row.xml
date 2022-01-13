@@ -2,69 +2,47 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/artistMovieMainConstraintLayout"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/white"
     android:layout_margin="@dimen/artist_movie_recycler_row_artistMovieMainConstraintLayout_margin"
-    android:id="@+id/artistMovieMainConstraintLayout">
+    android:background="@color/black_gray">
 
     <ImageView
-        android:id="@+id/movieBackdropImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="16:9"
+        android:id="@+id/movieImage"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:contentDescription="@string/movieImage"
+        app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="@string/movie_backdrop"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/artistMovieLinearLayout"
+    <TextView
+        android:id="@+id/movieNameArtistMovie"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/artist_movie_recycler_row_linear_layout_paddingTop"
-        android:layout_marginStart="@dimen/artist_movie_recycler_row_linear_layout_marginStart"
-        android:layout_marginEnd="@dimen/artist_movie_recycler_row_linear_layout_marginEnd"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/ratingBarArtistMovie"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieBackdropImage"
-        android:minHeight="@dimen/artist_movie_recycler_row_linearLayout_minHeight">
+        android:layout_marginStart="@dimen/discover_child_recycler_row_text_margin"
+        android:layout_marginEnd="@dimen/discover_child_recycler_row_text_margin"
+        android:layout_marginBottom="@dimen/discover_child_recycler_row_text_margin"
+        android:background="@color/black_gray"
+        android:ellipsize="end"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="center"
+        android:maxLines="2"
+        android:minHeight="@dimen/discover_child_recycler_view_name_min_height"
+        android:paddingLeft="@dimen/discover_child_recycler_row_text_padding"
+        android:paddingRight="@dimen/discover_child_recycler_row_text_padding"
+        android:singleLine="false"
+        android:text="@string/movie_name"
+        android:textAlignment="center"
+        android:textColor="@color/white_light_grey"
+        android:textSize="@dimen/discover_child_recycler_view_name_font_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/movieImage"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/movieImage"
+        app:layout_constraintTop_toBottomOf="@+id/movieImage"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/movieNameArtistMovie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/lato_bold"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="@dimen/artist_movie_recycler_row_text_movie_name_size"
-            tools:text="Movie Name" />
-
-        <TextView
-            android:id="@+id/genresArtistMovie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/lato_regular"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="@dimen/artist_movie_recycler_row_text_genres_name_size"
-            tools:text="Movie Genres" />
-    </LinearLayout>
-
-    <RatingBar
-        android:id="@+id/ratingBarArtistMovie"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/artist_movie_recycler_row_ratingBar_marginEnd"
-        android:numStars="5"
-        android:rating="3"
-        android:theme="@style/RatingBar"
-        app:layout_constraintBottom_toBottomOf="@+id/artistMovieLinearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieBackdropImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

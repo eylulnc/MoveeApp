@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheetLinearLayout"
+    android:fontFamily="@font/lato_bold"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black_gray"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white_light_grey"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/moreDetailText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:height="50dp"
+                    android:background="@color/white_light_grey"
+                    android:gravity="center|start"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/more_detail"
+                    android:textColor="@color/black_gray"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/arrowImage"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/orange"
+                    android:src="@drawable/up_arrow"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/biographyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/biography"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/moreDetailText" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:minHeight="@dimen/review_fragment_relativeLayout_minHeight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/authorProfileImage">
+
+                <com.ms.square.android.expandabletextview.ExpandableTextView
+                    android:id="@+id/expand_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    expandableTextView:animDuration="200"
+                    expandableTextView:maxCollapsedLines="3">
+
+                    <TextView
+                        android:id="@id/expandable_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white_light_grey"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/lato_regular"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/biographyText"
+                        tools:text="TextView" />
+
+                    <ImageButton
+                        android:id="@id/expand_collapse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/expand_button"
+                        android:padding="@dimen/review_fragment_expandCollapseButton_padding" />
+
+                </com.ms.square.android.expandabletextview.ExpandableTextView>
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/bornText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/born"
+                android:textColor="@color/orange"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artistBiographyText" />
+
+            <TextView
+                android:id="@+id/artistBirthdayText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white_light_grey"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bornText"
+                tools:text="TextView" />
+
+            <TextView
+                android:id="@+id/deathText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/lato_bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/death"
+                android:textColor="@color/orange"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artistBirthdayText" />
+
+            <TextView
+                android:id="@+id/artistDeathDayText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white_light_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deathText"
+                tools:text="TextView" />
+
+            <TextView
+                android:id="@+id/photosTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/photos"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artistDeathDayText"
+                app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/albumPreviewRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/photosTextView" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+
+

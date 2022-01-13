@@ -10,4 +10,7 @@
     <item android:id="@+id/artistsFragment"
         android:icon="@drawable/ic_artists"
         android:title="@string/artists" />
+    <item android:id="@+id/searchFragment"
+    android:icon="@drawable/ic_baseline_search_24"
+    android:title="@string/search" />
 </menu>
