@@ -143,9 +143,6 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
                 NavOptions.Builder().setPopUpTo(R.id.dashboardFragment, true).build()
             )
             return true
-        } else if (item?.itemId == R.id.search_button) {
-            this.parentFragment?.parentFragment?.findNavController()
-                ?.navigate(R.id.action_dashboardFragment_to_searchFragment)
         }
         return false
     }
