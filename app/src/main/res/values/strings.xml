@@ -171,5 +171,10 @@
     </string>
     <string name="vote">Vote</string>
     <string name="as">as</string>
+    <string name="known_for">Known For</string>
+    <string name="more_detail">More Detail</string>
+    <string name="biography">Biography</string>
+    <string name="born">Born</string>
+    <string name="death">Death</string>
 
 </resources>

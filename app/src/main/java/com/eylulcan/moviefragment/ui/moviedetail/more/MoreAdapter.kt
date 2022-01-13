@@ -34,7 +34,7 @@ class MoreAdapter(private val movie: Movie, private val movieListener: ItemListe
         holder.binding.movieNameMore.text = movie?.title
         Glide.with(holder.binding.root).load(setImageUrl(movie?.backdropPath))
             .placeholder(R.color.grey)
-            .into(holder.binding.movieBackdropImage)
+            .into(holder.binding.movieImage)
         genreNames = ""
         movie?.genreIds?.forEach { genreId ->
             genreNames =
