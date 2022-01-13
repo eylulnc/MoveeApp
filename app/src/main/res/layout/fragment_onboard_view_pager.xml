@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:progressMode="true"
-        app:selectedDotColor="@color/purple_mountain" />
+        app:selectedDotColor="@color/orange" />
 
     <Button
         android:id="@+id/onboardButton"
@@ -41,7 +41,7 @@
         android:layout_marginStart="@dimen/onboard_pager_button_marginStart"
         android:layout_marginEnd="@dimen/onboard_pager_button_marginEnd"
         android:layout_marginBottom="@dimen/onboard_pager_button_marginBottom"
-        android:backgroundTint="@color/purple_mountain"
+        android:backgroundTint="@color/orange"
         android:text="@string/explore_collection"
         android:fontFamily="@font/lato_bold"
         android:textColor="@color/white"
