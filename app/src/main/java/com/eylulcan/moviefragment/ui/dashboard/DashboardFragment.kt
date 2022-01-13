@@ -39,7 +39,8 @@ class DashboardFragment : Fragment() {
             setOf(
                 R.id.discoverFragment,
                 R.id.genresFragment,
-                R.id.artistsFragment
+                R.id.artistsFragment,
+                R.id.searchFragment
             )
         )
         binding.bottomNavigationView.setupWithNavController(navController)
