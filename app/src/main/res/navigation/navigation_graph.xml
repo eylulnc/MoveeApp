@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/dashboardFragment">
 
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -26,29 +26,6 @@
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_right"/>
-    </fragment>
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.eylulcan.moviefragment.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@animator/slide_in_right"
-            app:exitAnim="@animator/slide_out_left"
-            app:popEnterAnim="@animator/slide_in_left"
-            app:popExitAnim="@animator/slide_out_right"/>
-        <action
-            android:id="@+id/action_splashFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment"
-            app:enterAnim="@animator/slide_in_right"
-            app:exitAnim="@animator/slide_out_left"
-            app:popEnterAnim="@animator/slide_in_left"
-            app:popExitAnim="@animator/slide_out_right"/>
-        <action
-            android:id="@+id/action_splashFragment_to_onBoardViewPagerFragment"
-            app:destination="@id/onBoardViewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

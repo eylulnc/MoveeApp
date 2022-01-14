@@ -14,4 +14,9 @@
         <item name="colorAccent">@color/purple_mountain</item>
     </style>
 
+    <!-- Launcher theme. -->
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
 </resources>
