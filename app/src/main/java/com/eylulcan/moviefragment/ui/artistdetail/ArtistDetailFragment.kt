@@ -24,6 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import me.samlss.broccoli.Broccoli
 
 private const val SPAN_COUNT = 3
+
 class ArtistDetailFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentArtistDetailBinding
@@ -85,16 +86,18 @@ class ArtistDetailFragment : Fragment(), ItemListener {
             }
             binding.bottomSheetFragment.photosTextView.setOnClickListener {
                 val albumDataBundle = bundleOf((getString(R.string.photo_album) to album))
-                this.parentFragment?.findNavController()?.navigate(R.id.action_artistDetailFragment_to_albumFragment, albumDataBundle)
+                this.parentFragment?.findNavController()
+                    ?.navigate(R.id.action_artistDetailFragment_to_albumFragment, albumDataBundle)
             }
         })
 
         artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner, { movieCredits ->
-            binding.artistMovieRecycler.layoutManager = GridLayoutManager(context,SPAN_COUNT)
+            binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+           // binding.artistMovieRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
             artistMovieAdapter = ArtistMovieAdapter(movieCredits, artistMovieClickListener = this)
             binding.artistMovieRecycler.adapter = artistMovieAdapter
-        })
 
+        })
 
     }
 
@@ -105,8 +108,6 @@ class ArtistDetailFragment : Fragment(), ItemListener {
         placeholderNeeded.addAll(
             arrayListOf(
                 binding.templateArtistCoverView
-                //binding.templateViewPagerView,
-                // binding.templateUserImagesView
             )
         )
         Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
@@ -152,9 +153,7 @@ class ArtistDetailFragment : Fragment(), ItemListener {
                 }
             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
     }
 

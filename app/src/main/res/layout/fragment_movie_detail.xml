@@ -50,7 +50,6 @@
 
             <Button
                 android:id="@+id/rateButton"
-                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="@dimen/detail_movie_rateButton_width"
                 android:layout_height="@dimen/detail_movie_rateButton_height"
                 android:layout_marginTop="@dimen/detail_movie_rateButton_margin_top"
