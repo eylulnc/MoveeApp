@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_gray"
     tools:context=".ui.login.LoginFragment">
 
     <EditText
@@ -13,6 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/login_user_email_margin_start"
         android:layout_marginTop="@dimen/login_user_email_margin_top"
+        android:textColor="@color/white_light_grey"
+        android:textColorHint="@color/white_light_grey"
+        android:backgroundTint="@color/white_light_grey"
         android:layout_marginEnd="@dimen/login_user_email_margin_end"
         android:ems="10"
         android:hint="@string/enter_e_mail"
@@ -40,6 +44,9 @@
         android:id="@+id/userPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/white_light_grey"
+        android:textColorHint="@color/white_light_grey"
+        android:backgroundTint="@color/white_light_grey"
         android:layout_marginTop="@dimen/login_user_password_margin_top"
         android:ems="10"
         android:hint="@string/enter_password"
@@ -89,6 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/or"
+        android:textColor="@color/white_light_grey"
         app:layout_constraintBottom_toTopOf="@+id/googleSignInButton"
         app:layout_constraintEnd_toEndOf="@+id/signUpButton"
         app:layout_constraintStart_toStartOf="@+id/signInButton"
