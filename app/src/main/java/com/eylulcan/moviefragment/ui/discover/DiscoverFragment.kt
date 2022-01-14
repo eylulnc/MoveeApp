@@ -189,11 +189,14 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
         val runnable = object : Runnable {
             override fun run() {
                 val count = fragmentBinding.discoverSlider.adapter?.itemCount ?: 0
-                if (fragmentBinding.discoverSlider.currentItem == count - 1 ) {
+                if (fragmentBinding.discoverSlider.currentItem == count - 1) {
                     handler.postDelayed(this, 10000)
                     fragmentBinding.discoverSlider.setCurrentItem(startPosition, true)
                 } else {
-                    fragmentBinding.discoverSlider.setCurrentItem(fragmentBinding.discoverSlider.currentItem + 1, true)
+                    fragmentBinding.discoverSlider.setCurrentItem(
+                        fragmentBinding.discoverSlider.currentItem + 1,
+                        true
+                    )
                     handler.postDelayed(this, 10000)
                 }
             }

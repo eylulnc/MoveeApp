@@ -13,14 +13,14 @@
         android:id="@+id/genresFragmentImageView"
         android:layout_width="0dp"
         android:layout_height="@dimen/genres_recyclerView_row_genresFragmentImageView_height"
-        android:scaleType="fitXY"
+        android:contentDescription="@string/movie_backdrop"
+        android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/action_image"
-        android:contentDescription="@string/movie_backdrop"/>
+        app:srcCompat="@drawable/action_image" />
 
     <TextView
         android:id="@+id/genresRowText"
@@ -28,15 +28,16 @@
         android:layout_height="@dimen/genres_recyclerView_row_text_height"
         android:background="@color/orange"
         android:ellipsize="end"
+        android:fontFamily="@font/lato_regular"
         android:gravity="center"
         android:maxLines="2"
         android:singleLine="false"
         android:textColor="@color/white"
         android:textSize="@dimen/genres_recyclerView_row_text_size"
-        android:fontFamily="@font/lato_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genresFragmentImageView"
+        tools:ignore="TextContrastCheck"
         tools:text="TextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

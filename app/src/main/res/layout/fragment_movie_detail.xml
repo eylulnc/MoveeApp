@@ -24,7 +24,7 @@
             <View
                 android:id="@+id/templateConstraintLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="270dp"
+                android:layout_height="@dimen/detail_movie_detailImagePoster_height"
                 app:layout_constraintBottom_toTopOf="@+id/cardView"
                 app:layout_constraintDimensionRatio="16:9"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -150,6 +150,7 @@
                             android:textColor="@color/white_light_grey"
                             android:textSize="@dimen/detail_movie_detailReleaseDate_textSize"
                             app:drawableLeftCompat="@drawable/ic_baseline_calendar_today_24"
+                            android:drawablePadding="@dimen/detail_movie_drawable_padding"
                             tools:text="Publication Date" />
 
                         <TextView
@@ -161,6 +162,7 @@
                             android:layout_weight="1"
                             android:textColor="@color/white_light_grey"
                             android:textSize="@dimen/detail_movie_detailDurationText_textSize"
+                            android:drawablePadding="@dimen/detail_movie_drawable_padding"
                             app:drawableLeftCompat="@drawable/ic_baseline_access_time_24"
                             tools:text="Rate" />
 
@@ -171,6 +173,7 @@
                             android:layout_marginStart="@dimen/detail_movie_movieRateText_margin_start"
                             android:layout_marginTop="@dimen/detail_movie_movieRateText_margin_top"
                             android:layout_marginBottom="@dimen/detail_movie_movieRateText_margin_bottom"
+                            android:drawablePadding="@dimen/detail_movie_drawable_padding"
                             android:layout_weight="1"
                             android:textColor="@color/white_light_grey"
                             android:textSize="@dimen/detail_movie_movieRateText_textSize"

@@ -12,7 +12,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/album_fragment_imageView_width"
         android:layout_height="@dimen/album_fragment_imageView_height"
         android:contentDescription="@string/artist_image"
         android:scaleType="center"

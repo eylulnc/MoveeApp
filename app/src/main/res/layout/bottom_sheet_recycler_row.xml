@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/artistImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/movie_detail_bottom_sheet_recycler_row_artistImage_width"
+        android:layout_height="@dimen/movie_detail_bottom_sheet_recycler_row_artistImage_height"
+        android:layout_marginTop="@dimen/movie_detail_bottom_sheet_recycler_row_artistImage_marginTop"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

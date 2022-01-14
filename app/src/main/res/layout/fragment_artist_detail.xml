@@ -18,7 +18,7 @@
         <View
             android:id="@+id/templateArtistCoverView"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
             <ImageView
                 android:id="@+id/artistDetailCoverImage"
                 android:layout_width="0dp"
-                android:layout_height="250dp"
+                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
                 android:background="@color/black_gray"
                 android:contentDescription="@string/artist_cover_image"
                 android:scaleType="center"
@@ -48,15 +48,14 @@
                 android:id="@+id/artistName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginStart="@dimen/artist_detail_artistName_marginStart"
+                android:layout_marginEnd="@dimen/artist_detail_artistName_marginEnd"
                 android:ellipsize="end"
                 android:fontFamily="@font/lato_bold"
                 android:gravity="center"
                 android:lines="2"
-                android:maxLines="3"
                 android:textColor="@color/white_light_grey"
-                android:textSize="20sp"
+                android:textSize="@dimen/artist_detail_artistName_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/artistDetailCoverImage"
@@ -66,13 +65,13 @@
                 android:id="@+id/knownForText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:drawablePadding="4dp"
+                android:layout_marginTop="@dimen/artist_detail_knownForText_text_marginTop"
+                android:drawablePadding="@dimen/artist_detail_knownForText_text_drawablePadding"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/known_for"
                 android:textColor="@color/white_light_grey"
-                android:textSize="15sp"
+                android:textSize="@dimen/artist_detail_knownForText_text_text_size"
                 app:drawableLeftCompat="@drawable/vertical_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -83,12 +82,12 @@
                 android:id="@+id/knownWithText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginStart="@dimen/artist_detail_knownWithText_marginStart"
+                android:layout_marginEnd="@dimen/artist_detail_knownWithText_marginEnd"
                 android:fontFamily="@font/lato_italic"
                 android:gravity="center"
                 android:textColor="@color/orange"
-                android:textSize="18sp"
+                android:textSize="@dimen/artist_detail_knownWithText_textSize"
                 app:layout_constraintEnd_toEndOf="@+id/artistName"
                 app:layout_constraintStart_toStartOf="@+id/artistName"
                 app:layout_constraintTop_toBottomOf="@+id/artistName"
@@ -98,8 +97,8 @@
                 android:id="@+id/artistMovieRecycler"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginTop="@dimen/artist_detail_artistMovieRecycler_marginTop"
+                android:layout_marginBottom="@dimen/artist_detail_linearLayout_peekHeight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,16 +108,15 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/artist_detail_linearLayout_marginBottom"
         app:behavior_hideable="true"
-        app:behavior_peekHeight="50dp"
+        app:behavior_peekHeight="@dimen/artist_detail_linearLayout_peekHeight"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <include
@@ -132,6 +130,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

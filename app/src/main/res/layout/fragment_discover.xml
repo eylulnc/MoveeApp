@@ -55,7 +55,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/discoverSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="@dimen/discover_discoverSlider_height"
                     android:background="@color/black_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
                 <View
                     android:id="@+id/sliderTemplate"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="@dimen/discover_discoverSlider_height"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@color/black_gray"
