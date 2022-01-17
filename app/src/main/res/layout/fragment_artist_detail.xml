@@ -44,18 +44,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <TextView
+            <com.eylulcan.moviefragment.CustomTitleTextView
                 android:id="@+id/artistName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/artist_detail_artistName_marginStart"
                 android:layout_marginEnd="@dimen/artist_detail_artistName_marginEnd"
-                android:ellipsize="end"
-                android:fontFamily="@font/lato_bold"
                 android:gravity="center"
-                android:lines="2"
-                android:textColor="@color/white_light_grey"
-                android:textSize="@dimen/artist_detail_artistName_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/artistDetailCoverImage"

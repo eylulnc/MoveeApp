@@ -108,16 +108,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
+                    <com.eylulcan.moviefragment.CustomTitleTextView
                         android:id="@+id/detailMovieNameText"
                         android:layout_width="@dimen/detail_movie_detailMovieNameText_width"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="@dimen/detail_movie_detailMovieNameText_margin_top"
-                        android:fontFamily="@font/lato_bold"
                         android:gravity="center|start"
-                        android:lines="2"
-                        android:textColor="@color/white_light_grey"
-                        android:textSize="@dimen/detail_movie_detailMovieNameText_textSize"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.2"
                         app:layout_constraintStart_toStartOf="parent"
