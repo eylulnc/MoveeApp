@@ -8,6 +8,16 @@
     android:layout_margin="@dimen/artist_movie_recycler_row_artistMovieMainConstraintLayout_margin"
     android:background="@color/black_gray">
 
+    <View
+        android:id="@+id/artistMovieRowTemplate"
+        android:layout_width="0dp"
+        android:background="@color/black_gray"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/movieNameArtistMovie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/movieImage" />
+
     <ImageView
         android:id="@+id/movieImage"
         android:layout_width="@dimen/artist_movie_recycler_row_movieImage_width"
