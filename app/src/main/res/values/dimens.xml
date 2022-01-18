@@ -139,7 +139,7 @@
 
     <dimen name="onboard_pager_dot_indicator_cornerRadius">8dp</dimen>
     <dimen name="onboard_pager_dot_indicator_dotSize">8dp</dimen>
-    <dimen name="onboard_pager_dot_indicator_marginBottom">8dp</dimen>
+    <dimen name="onboard_pager_dot_indicator_marginBottom">16dp</dimen>
     <dimen name="onboard_pager_dot_indicator_dotSpacing">4dp</dimen>
 
     <dimen name="artist_movie_recycler_row_text_movie_name_size">14sp</dimen>
