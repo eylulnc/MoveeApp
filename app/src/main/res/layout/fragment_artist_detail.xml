@@ -19,6 +19,7 @@
             android:id="@+id/templateArtistCoverView"
             android:layout_width="0dp"
             android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
+            android:layout_marginTop="@dimen/artist_detail_artistDetailCoverImage_marginTop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,12 +37,14 @@
                 android:id="@+id/artistDetailCoverImage"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
+                android:layout_marginTop="@dimen/artist_detail_artistDetailCoverImage_marginTop"
                 android:background="@color/black_gray"
                 android:contentDescription="@string/artist_cover_image"
                 android:scaleType="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <com.eylulcan.moviefragment.CustomTitleTextView
@@ -54,6 +57,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/artistDetailCoverImage"
+                tools:ignore="TextContrastCheck"
                 tools:text="Artist Name" />
 
             <TextView
@@ -86,6 +90,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/artistName"
                 app:layout_constraintStart_toStartOf="@+id/artistName"
                 app:layout_constraintTop_toBottomOf="@+id/artistName"
+                tools:ignore="TextContrastCheck"
                 tools:text="TextView" />
 
             <androidx.recyclerview.widget.RecyclerView

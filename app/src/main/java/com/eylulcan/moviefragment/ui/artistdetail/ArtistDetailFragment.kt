@@ -92,8 +92,12 @@ class ArtistDetailFragment : Fragment(), ItemListener {
         })
 
         artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner, { movieCredits ->
-            binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
-           // binding.artistMovieRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+            if(Utils.isTablet(requireContext())){
+                binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+            } else {
+                binding.artistMovieRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+            }
+
             artistMovieAdapter = ArtistMovieAdapter(movieCredits, artistMovieClickListener = this)
             binding.artistMovieRecycler.adapter = artistMovieAdapter
 

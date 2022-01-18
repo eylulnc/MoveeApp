@@ -23,6 +23,7 @@
         android:layout_width="@dimen/artist_movie_recycler_row_movieImage_width"
         android:layout_height="@dimen/artist_movie_recycler_row_movieImage_height"
         android:contentDescription="@string/movieImage"
+        android:scaleType="center"
         app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,11 +31,8 @@
 
     <TextView
         android:id="@+id/movieNameArtistMovie"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/artist_movie_recycler_row_movieImage_width"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/discover_child_recycler_row_text_margin"
-        android:layout_marginEnd="@dimen/discover_child_recycler_row_text_margin"
-        android:layout_marginBottom="@dimen/discover_child_recycler_row_text_margin"
         android:background="@color/black_gray"
         android:ellipsize="end"
         android:fontFamily="@font/lato_regular"

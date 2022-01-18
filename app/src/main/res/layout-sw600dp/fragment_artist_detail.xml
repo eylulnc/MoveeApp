@@ -18,7 +18,8 @@
         <View
             android:id="@+id/templateArtistCoverView"
             android:layout_width="0dp"
-            android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
+            android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height_tablet"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +36,8 @@
             <ImageView
                 android:id="@+id/artistDetailCoverImage"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
+                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height_tablet"
+                android:layout_marginTop="@dimen/artist_detail_artistDetailCoverImage_marginTop_tablet"
                 android:background="@color/black_gray"
                 android:contentDescription="@string/artist_cover_image"
                 android:scaleType="center"
@@ -111,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/artist_detail_linearLayout_marginBottom"
         app:behavior_hideable="true"
-        app:behavior_peekHeight="@dimen/artist_detail_linearLayout_peekHeight"
+        app:behavior_peekHeight="@dimen/artist_detail_linearLayout_peekHeight_Tablet"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <include
