@@ -9,7 +9,9 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentOnboardViewPagerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnboardViewPagerFragment : Fragment() {
 
     private lateinit var binding: FragmentOnboardViewPagerBinding

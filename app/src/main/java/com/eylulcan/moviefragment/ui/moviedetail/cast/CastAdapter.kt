@@ -9,8 +9,9 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.CastFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.MovieCredits
 import com.eylulcan.moviefragment.util.Utils
+import javax.inject.Inject
 
-class CastAdapter(
+class CastAdapter @Inject constructor(
     private val movieCredits: MovieCredits,
     private val artistListener: ItemListener
 ) :

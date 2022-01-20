@@ -13,8 +13,9 @@ import com.eylulcan.moviefragment.model.ArtistMovieCredits
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.HashMap
+import javax.inject.Inject
 
-class ArtistMovieAdapter(
+class ArtistMovieAdapter @Inject constructor(
     private val movieCredits: ArtistMovieCredits,
     private val artistMovieClickListener: ItemListener
 ) :

@@ -7,8 +7,9 @@ import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.databinding.AlbumFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
 import com.eylulcan.moviefragment.util.Utils
+import javax.inject.Inject
 
-class AlbumAdapter(private val artistAlbum: ArtistAlbum, private val imageListener: ImageListener) :
+class AlbumAdapter @Inject constructor(private val artistAlbum: ArtistAlbum, private val imageListener: ImageListener) :
     RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: AlbumFragmentRecyclerRowBinding) :

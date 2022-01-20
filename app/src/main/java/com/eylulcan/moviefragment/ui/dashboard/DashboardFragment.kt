@@ -10,8 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDashboardBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class DashboardFragment : Fragment() {
+@AndroidEntryPoint
+class DashboardFragment @Inject constructor(): Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
 

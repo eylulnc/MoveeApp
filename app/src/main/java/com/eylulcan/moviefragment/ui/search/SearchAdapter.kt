@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.databinding.SearchFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.SearchResult
+import javax.inject.Inject
 
 private const val PERSON_SEARCH = 0
 private const val MOVIE_SEARCH = 1
 private const val TV_SHOW_SEARCH = 2
 
-class SearchAdapter(
+class SearchAdapter @Inject constructor(
     private val searchListener: SearchListener
 ) :
     RecyclerView.Adapter<SearchRecyclerViewHolder>() {

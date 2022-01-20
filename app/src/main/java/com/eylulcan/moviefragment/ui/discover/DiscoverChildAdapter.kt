@@ -14,8 +14,9 @@ import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.HashMap
+import javax.inject.Inject
 
-class DiscoverChildAdapter(private val listener: ItemListener) :
+class DiscoverChildAdapter @Inject constructor(private val listener: ItemListener) :
     RecyclerView.Adapter<DiscoverChildAdapter.ViewHolder>() {
 
     private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()

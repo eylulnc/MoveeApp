@@ -14,12 +14,15 @@ import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenresBinding
 import com.eylulcan.moviefragment.util.Utils
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class GenresFragment : Fragment(), ItemListener {
 
     private val genreViewModel: GenresViewModel by viewModels()
     private lateinit var binding: FragmentGenresBinding
-    private lateinit var genreListAdapter: GenresAdapter
+    lateinit var genreListAdapter: GenresAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +44,9 @@ class GenresFragment : Fragment(), ItemListener {
     private fun observeViewModel() {
         genreViewModel.genres.observe(viewLifecycleOwner, { genreData ->
             genreData?.let { genreList ->
-                genreListAdapter = GenresAdapter(genreList, this)
+                val list = genreList.genres ?: emptyList()
+                genreListAdapter = GenresAdapter( this)
+                genreListAdapter.genreList  = list
                 binding.genresFragmentRecyclerView.adapter = genreListAdapter
             }
         })

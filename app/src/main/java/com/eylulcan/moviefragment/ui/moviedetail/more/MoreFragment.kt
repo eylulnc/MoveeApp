@@ -13,7 +13,9 @@ import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMoreBinding
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MoreFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentMoreBinding

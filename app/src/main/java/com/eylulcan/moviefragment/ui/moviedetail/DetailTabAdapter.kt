@@ -7,10 +7,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.eylulcan.moviefragment.ui.moviedetail.cast.CastFragment
 import com.eylulcan.moviefragment.ui.moviedetail.more.MoreFragment
 import com.eylulcan.moviefragment.ui.moviedetail.reviews.ReviewsFragment
+import javax.inject.Inject
 
 private const val NUM_TABS = 3
 
-class DetailTabAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
+class DetailTabAdapter @Inject constructor(manager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(manager, lifecycle) {
 
     override fun getItemCount(): Int {

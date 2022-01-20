@@ -12,9 +12,11 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentAlbumBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
 import com.eylulcan.moviefragment.model.ProfileImage
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val SPAN_COUNT = 3
 
+@AndroidEntryPoint
 class AlbumFragment : Fragment(), ImageListener {
 
     private lateinit var binding: FragmentAlbumBinding

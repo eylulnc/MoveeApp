@@ -14,7 +14,9 @@ import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenreMovieListBinding
 import com.eylulcan.moviefragment.model.ResultMovie
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GenreMovieListFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentGenreMovieListBinding

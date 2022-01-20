@@ -12,8 +12,9 @@ import com.eylulcan.moviefragment.model.Review
 import com.eylulcan.moviefragment.util.Utils
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class ReviewsAdapter :
+class ReviewsAdapter @Inject constructor() :
     RecyclerView.Adapter<ReviewsAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ReviewFragmentRecyclerRowBinding) :

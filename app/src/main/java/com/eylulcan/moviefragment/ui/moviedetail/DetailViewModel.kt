@@ -13,8 +13,9 @@ import com.eylulcan.moviefragment.util.Utils
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel @Inject constructor(): ViewModel() {
 
     private var retrofit: MovieAPI? = null
     private val movieCast = MutableLiveData<MovieCredits>()

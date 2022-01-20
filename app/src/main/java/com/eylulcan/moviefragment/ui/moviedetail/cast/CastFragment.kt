@@ -15,10 +15,12 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentCastBinding
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import com.eylulcan.moviefragment.util.Utils
+import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
 
 private const val SPAN_COUNT_TABLET = 2
 
+@AndroidEntryPoint
 class CastFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentCastBinding

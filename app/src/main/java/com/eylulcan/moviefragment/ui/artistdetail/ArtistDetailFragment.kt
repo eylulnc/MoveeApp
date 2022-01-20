@@ -21,10 +21,12 @@ import com.eylulcan.moviefragment.model.ArtistDetail
 import com.eylulcan.moviefragment.model.ProfileImage
 import com.eylulcan.moviefragment.util.Utils
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
 
 private const val SPAN_COUNT = 3
 
+@AndroidEntryPoint
 class ArtistDetailFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentArtistDetailBinding

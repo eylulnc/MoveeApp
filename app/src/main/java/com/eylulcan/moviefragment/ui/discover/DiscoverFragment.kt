@@ -23,11 +23,14 @@ import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
+import javax.inject.Inject
 
 private const val GRID_COUNT = 3
 
-class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
+@AndroidEntryPoint
+class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by activityViewModels()
@@ -119,7 +122,9 @@ class DiscoverFragment : Fragment(), ItemListener, Toolbar.OnMenuItemClickListen
             removePlaceholders()
             val moviesInfo: ArrayList<Pair<Int, String>> =
                 setMoviesInfo(movies.results as java.util.ArrayList<ResultMovie>)
-            fragmentBinding.discoverSlider.adapter = SliderAdapter(this, moviesInfo)
+            val sliderAdapter = SliderAdapter(this.requireActivity())
+            fragmentBinding.discoverSlider.adapter = sliderAdapter
+            sliderAdapter.updateList(moviesInfo)
             fragmentBinding.dotsIndicator.setViewPager2(fragmentBinding.discoverSlider)
             sliderScroll()
             removePlaceholders()

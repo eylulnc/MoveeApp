@@ -10,8 +10,9 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.MoreFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Movie
 import com.eylulcan.moviefragment.util.Utils
+import javax.inject.Inject
 
-class MoreAdapter(private val movie: Movie, private val movieListener: ItemListener) :
+class MoreAdapter @Inject constructor(private val movie: Movie, private val movieListener: ItemListener) :
     RecyclerView.Adapter<MoreAdapter.ViewHolder>() {
 
     private var genreNames: String = ""

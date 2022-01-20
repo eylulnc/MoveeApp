@@ -1,11 +1,16 @@
 package com.eylulcan.moviefragment.ui.discover
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import javax.inject.Inject
 
 private const val FRAGMENT_COUNT = 5
 
-class SliderAdapter(activity: DiscoverFragment, private val moviesInfo: ArrayList<Pair<Int,String>>) : FragmentStateAdapter(activity) {
+class SliderAdapter @Inject constructor(  context: FragmentActivity) :
+    FragmentStateAdapter(context) {
+
+    private val moviesList : ArrayList<Pair<Int,String>> = arrayListOf()
 
     override fun getItemCount(): Int {
         return FRAGMENT_COUNT
@@ -13,13 +18,19 @@ class SliderAdapter(activity: DiscoverFragment, private val moviesInfo: ArrayLis
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> SliderFragment(moviesInfo[position])
-            1 -> SliderFragment(moviesInfo[position])
-            2 -> SliderFragment(moviesInfo[position])
-            3 -> SliderFragment(moviesInfo[position])
-            4 -> SliderFragment(moviesInfo[position])
-            else -> SliderFragment(moviesInfo[position])
+            0 -> SliderFragment(moviesList[position])
+            1 -> SliderFragment(moviesList[position])
+            2 -> SliderFragment(moviesList[position])
+            3 -> SliderFragment(moviesList[position])
+            4 -> SliderFragment(moviesList[position])
+            else -> SliderFragment(moviesList[position])
         }
+    }
+
+    fun updateList(moviesInfo: ArrayList<Pair<Int,String>>){
+        moviesList.clear()
+        moviesList.addAll(moviesInfo)
+        notifyDataSetChanged()
     }
 
 }

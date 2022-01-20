@@ -11,8 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class ArtistViewModel : ViewModel() {
+class ArtistViewModel @Inject constructor(): ViewModel() {
 
     private var retrofit: MovieAPI? = null
     private val popularPeopleList = MutableLiveData<PopularPeopleList>()

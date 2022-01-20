@@ -15,10 +15,12 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSearchBinding
 import com.eylulcan.moviefragment.model.SearchResult
 import com.eylulcan.moviefragment.util.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val SPAN_COUNT_PHONE = 3
 private const val SPAN_COUNT_TABLET = 4
 
+@AndroidEntryPoint
 class SearchFragment : Fragment(), SearchListener {
 
     private lateinit var binding: FragmentSearchBinding

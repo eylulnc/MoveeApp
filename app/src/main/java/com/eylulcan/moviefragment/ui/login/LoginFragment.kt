@@ -20,10 +20,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG: String = "SignInGoogle"
 private const val RC_SIGN_IN: Int = 7777
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()

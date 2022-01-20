@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentOnboardBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnboardFragment(private val imageId: Int) : Fragment() {
 
     private lateinit var binding: FragmentOnboardBinding

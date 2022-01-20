@@ -11,8 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class GenresViewModel : ViewModel() {
+class GenresViewModel @Inject constructor(): ViewModel() {
 
     private var retrofit: MovieAPI? = null
     private val genreList = MutableLiveData<GenreList>()

@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentImageBinding
 import com.eylulcan.moviefragment.model.ProfileImage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ImageFragment : Fragment() {
 
     private lateinit var binding: FragmentImageBinding

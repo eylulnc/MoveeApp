@@ -12,8 +12,9 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.GenreMovieListRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
+import javax.inject.Inject
 
-class GenreMovieListAdapter(
+class GenreMovieListAdapter @Inject constructor(
     private val movieDetailListener: ItemListener
 ) :
     RecyclerView.Adapter<GenreMovieListAdapter.ViewHolder>() {

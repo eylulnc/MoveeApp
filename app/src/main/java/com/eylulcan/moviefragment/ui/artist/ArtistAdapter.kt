@@ -15,8 +15,9 @@ import com.eylulcan.moviefragment.model.PeopleResult
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.HashMap
+import javax.inject.Inject
 
-class ArtistAdapter(
+class ArtistAdapter @Inject constructor(
     private val artistListener: ItemListener
 ) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {

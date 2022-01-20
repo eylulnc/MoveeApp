@@ -2,13 +2,18 @@ package com.eylulcan.moviefragment.ui.genres
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.databinding.GenresFragmentRecyclerRowBinding
+import com.eylulcan.moviefragment.model.Genre
 import com.eylulcan.moviefragment.model.GenreList
+import com.eylulcan.moviefragment.model.ResultMovie
+import javax.inject.Inject
 
-class GenresAdapter(private val genreList: GenreList, private val genresListener: ItemListener) :
+class GenresAdapter @Inject constructor(private val genresListener: ItemListener) :
     RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: GenresFragmentRecyclerRowBinding) :
@@ -25,8 +30,7 @@ class GenresAdapter(private val genreList: GenreList, private val genresListener
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val genres = genreList.genres
-        genres?.get(position)?.let { genre ->
+        genreList[position].let { genre ->
             holder.binding.genresRowText.text = genre.name
             genre.id?.let { id ->
                 Genres.valueOfInt(id)?.movieGenreImage()
@@ -38,6 +42,29 @@ class GenresAdapter(private val genreList: GenreList, private val genresListener
         }
     }
 
-    override fun getItemCount(): Int = genreList.genres?.size ?: 0
+    override fun getItemCount(): Int = genreList.size
 
+
+    private val diffUtil = object : DiffUtil.ItemCallback<Genre>() {
+        override fun areItemsTheSame(
+            oldItem: Genre,
+            newItem: Genre
+        ): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: Genre,
+            newItem: Genre
+        ): Boolean {
+            return oldItem.equals(newItem)
+        }
+
+    }
+
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
+
+    var genreList: List<Genre>
+        get() = recyclerListDiffer.currentList
+        set(value) = recyclerListDiffer.submitList(value)
 }

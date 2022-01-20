@@ -9,7 +9,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.MovieDetailPopupRatingScreenBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CustomPopUpDialogFragment : DialogFragment() {
 
     private var movieID: Int = -1

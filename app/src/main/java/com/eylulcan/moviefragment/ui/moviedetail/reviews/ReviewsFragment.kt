@@ -12,7 +12,9 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentReviewsBinding
 import com.eylulcan.moviefragment.model.Review
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReviewsFragment : Fragment() {
 
     private lateinit var binding: FragmentReviewsBinding
