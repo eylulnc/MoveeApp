@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieFragment</string>
+    <string name="app_name">Movee Time</string>
     <string name="app_package_name">com.eylulcan.moviefragment</string>
     <string name="list_to_detail_transition">ListDetailTransition</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
