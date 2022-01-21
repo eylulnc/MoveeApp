@@ -10,6 +10,7 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentImageBinding
 import com.eylulcan.moviefragment.model.ProfileImage
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ImageFragment : Fragment() {
@@ -32,7 +33,9 @@ class ImageFragment : Fragment() {
         val albumInformation = arguments?.get(getString(R.string.image_url)) as Pair<*, *>
         val album = albumInformation.first as List<ProfileImage>?
         val position = albumInformation.second as Int
-        binding.imageFragmentRecyclerView.adapter = ImageAdapter(album)
+        val adapterImage = ImageAdapter()
+        binding.imageFragmentRecyclerView.adapter = adapterImage
+        adapterImage.album = album ?: emptyList()
         binding.imageFragmentRecyclerView.scrollToPosition(position)
 
     }

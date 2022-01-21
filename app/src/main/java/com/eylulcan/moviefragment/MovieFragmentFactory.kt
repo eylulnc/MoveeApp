@@ -2,6 +2,10 @@ package com.eylulcan.moviefragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
+import com.eylulcan.moviefragment.ui.album.AlbumAdapter
+import com.eylulcan.moviefragment.ui.album.AlbumFragment
+import com.eylulcan.moviefragment.ui.album.image.ImageAdapter
+import com.eylulcan.moviefragment.ui.album.image.ImageFragment
 import com.eylulcan.moviefragment.ui.discover.DiscoverFragment
 import com.eylulcan.moviefragment.ui.discover.SliderAdapter
 import com.eylulcan.moviefragment.ui.onboard.OnboardAdapter

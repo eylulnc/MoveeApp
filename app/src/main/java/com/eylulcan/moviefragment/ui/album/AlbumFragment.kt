@@ -13,14 +13,17 @@ import com.eylulcan.moviefragment.databinding.FragmentAlbumBinding
 import com.eylulcan.moviefragment.model.ArtistAlbum
 import com.eylulcan.moviefragment.model.ProfileImage
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 private const val SPAN_COUNT = 3
 
 @AndroidEntryPoint
-class AlbumFragment : Fragment(), ImageListener {
+class AlbumFragment @Inject constructor(): Fragment(), ImageListener {
 
     private lateinit var binding: FragmentAlbumBinding
-    private lateinit var albumAdapter: AlbumAdapter
+    @Inject
+    lateinit var albumAdapter: AlbumAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,8 +37,9 @@ class AlbumFragment : Fragment(), ImageListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val selectedArtistAlbum = arguments?.get(getString(R.string.photo_album)) as ArtistAlbum
-        albumAdapter = AlbumAdapter(selectedArtistAlbum, this)
+        val artistAlbum = selectedArtistAlbum.artistProfileImages ?: emptyList()
         binding.albumRecyclerView.adapter = albumAdapter
+        albumAdapter.album = artistAlbum
     }
 
     override fun onImageClicked(album: List<ProfileImage>?, position: Int) {
