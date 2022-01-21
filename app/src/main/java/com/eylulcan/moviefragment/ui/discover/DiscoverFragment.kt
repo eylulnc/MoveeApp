@@ -30,7 +30,7 @@ import javax.inject.Inject
 private const val GRID_COUNT = 3
 
 @AndroidEntryPoint
-class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
+class DiscoverFragment @Inject constructor(private val sliderAdapter: SliderAdapter): Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by activityViewModels()
@@ -122,7 +122,6 @@ class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.
             removePlaceholders()
             val moviesInfo: ArrayList<Pair<Int, String>> =
                 setMoviesInfo(movies.results as java.util.ArrayList<ResultMovie>)
-            val sliderAdapter = SliderAdapter(this.requireActivity())
             fragmentBinding.discoverSlider.adapter = sliderAdapter
             sliderAdapter.updateList(moviesInfo)
             fragmentBinding.dotsIndicator.setViewPager2(fragmentBinding.discoverSlider)

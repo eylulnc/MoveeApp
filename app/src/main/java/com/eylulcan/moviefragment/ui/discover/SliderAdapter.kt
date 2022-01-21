@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 private const val FRAGMENT_COUNT = 5
 
-class SliderAdapter @Inject constructor(  context: FragmentActivity) :
+class SliderAdapter @Inject constructor(context: FragmentActivity) :
     FragmentStateAdapter(context) {
 
     private val moviesList : ArrayList<Pair<Int,String>> = arrayListOf()

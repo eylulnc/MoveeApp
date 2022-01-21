@@ -24,10 +24,13 @@ class MainActivity @Inject constructor(): AppCompatActivity() {
     private var firstTimeOpened: Boolean? = null
     private lateinit var navGraph: NavGraph
     private lateinit var navController: NavController
+    @Inject
+    lateinit var fragmentFactory: MovieFragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.SplashScreen)
         super.onCreate(savedInstanceState)
+        supportFragmentManager.fragmentFactory = fragmentFactory
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sharedPreferences = this.getSharedPreferences(

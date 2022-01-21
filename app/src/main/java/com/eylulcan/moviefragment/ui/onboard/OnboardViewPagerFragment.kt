@@ -10,9 +10,10 @@ import androidx.navigation.fragment.findNavController
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentOnboardViewPagerBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class OnboardViewPagerFragment : Fragment() {
+class OnboardViewPagerFragment @Inject constructor(private val onboardAdapter:OnboardAdapter): Fragment() {
 
     private lateinit var binding: FragmentOnboardViewPagerBinding
     override fun onCreateView(
@@ -25,7 +26,7 @@ class OnboardViewPagerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentOnboardViewPagerBinding.bind(view)
-        binding.onboardingViewPager.adapter = OnboardAdapter(this)
+        binding.onboardingViewPager.adapter = onboardAdapter
         binding.dotsIndicator.setViewPager2(binding.onboardingViewPager)
         binding.onboardButton.setOnClickListener {
             findNavController().navigate(

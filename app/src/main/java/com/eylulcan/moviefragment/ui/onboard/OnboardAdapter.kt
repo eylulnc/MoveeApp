@@ -1,12 +1,14 @@
 package com.eylulcan.moviefragment.ui.onboard
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.eylulcan.moviefragment.R
+import javax.inject.Inject
 
 private const val FRAGMENT_COUNT = 3
 
-class OnboardAdapter(activity: OnboardViewPagerFragment) : FragmentStateAdapter(activity) {
+class OnboardAdapter @Inject constructor(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 
     override fun getItemCount(): Int {
         return FRAGMENT_COUNT

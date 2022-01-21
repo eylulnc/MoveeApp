@@ -36,6 +36,7 @@ class SliderFragment(private val movieInfo: Pair<Int,String>): Fragment(), ItemL
     }
 
     override fun onItemClicked(id: Int) {
+        println("encenc")
         val movieDataBundle = bundleOf((getString(R.string.movieId)) to id)
         this.parentFragment?.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_dashboardFragment_to_movieDetailFragment,

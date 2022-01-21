@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentOnboardBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class OnboardFragment(private val imageId: Int) : Fragment() {
+class OnboardFragment @Inject constructor(private val imageId: Int) : Fragment() {
 
     private lateinit var binding: FragmentOnboardBinding
 

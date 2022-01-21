@@ -22,13 +22,12 @@ class DashboardFragment @Inject constructor(): Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        binding = FragmentDashboardBinding.bind(view)
-        return view
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentDashboardBinding.bind(view)
         val navController = findNavController(requireActivity(), R.id.fragmentDashboard)
         AppBarConfiguration(
             setOf(
