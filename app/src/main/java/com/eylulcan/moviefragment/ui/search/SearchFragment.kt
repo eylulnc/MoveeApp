@@ -16,6 +16,7 @@ import com.eylulcan.moviefragment.databinding.FragmentSearchBinding
 import com.eylulcan.moviefragment.model.SearchResult
 import com.eylulcan.moviefragment.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 private const val SPAN_COUNT_PHONE = 3
 private const val SPAN_COUNT_TABLET = 4
@@ -26,7 +27,8 @@ class SearchFragment : Fragment(), SearchListener {
     private lateinit var binding: FragmentSearchBinding
     private val searchViewModel: SearchViewModel by viewModels()
     private var searchQuery: String = ""
-    private lateinit var searchAdapter: SearchAdapter
+    @Inject
+    lateinit var searchAdapter: SearchAdapter
     private var searchResultList: ArrayList<SearchResult> = arrayListOf()
     private var searchItemsInAPage: List<SearchResult>? = emptyList()
 
@@ -46,8 +48,8 @@ class SearchFragment : Fragment(), SearchListener {
         else {
             binding.searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_PHONE)
         }
-        searchAdapter = SearchAdapter(this)
         binding.searchRecyclerView.adapter = searchAdapter
+        searchAdapter.setOnItemClickListener(this)
         observeViewModel()
         setupUI()
     }
@@ -68,16 +70,16 @@ class SearchFragment : Fragment(), SearchListener {
 
     override fun onMovieClicked(id: Int) {
         val movieDataBundle = bundleOf((getString(R.string.movieId)) to id)
-        this.parentFragment?.findNavController()?.navigate(
-            R.id.action_searchFragment_to_movieDetailFragment,
+        this.parentFragment?.parentFragment?.findNavController()?.navigate(
+            R.id.action_dashboardFragment_to_movieDetailFragment,
             movieDataBundle, null, null
         )
     }
 
     override fun onPersonClicked(id: Int) {
         val artistIdBundle = bundleOf(getString(R.string.artistId) to id)
-        findNavController().navigate(
-            R.id.action_searchFragment_to_artistDetailFragment, artistIdBundle, null, null
+        this.parentFragment?.parentFragment?.findNavController()?.navigate(
+            R.id.action_dashboardFragment_to_artistDetailFragment, artistIdBundle, null, null
         )
     }
 

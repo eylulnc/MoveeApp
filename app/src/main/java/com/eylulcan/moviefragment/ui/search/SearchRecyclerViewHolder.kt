@@ -49,4 +49,5 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding): 
             Utils.BASE_IMAGE_URL_185.plus(poster_path)
     }
 
+
 }

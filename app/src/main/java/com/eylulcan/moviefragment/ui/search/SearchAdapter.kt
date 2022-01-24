@@ -13,11 +13,10 @@ private const val PERSON_SEARCH = 0
 private const val MOVIE_SEARCH = 1
 private const val TV_SHOW_SEARCH = 2
 
-class SearchAdapter @Inject constructor(
-    private val searchListener: SearchListener
-) :
+class SearchAdapter @Inject constructor() :
     RecyclerView.Adapter<SearchRecyclerViewHolder>() {
 
+    private lateinit var onItemClickListener: SearchListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchRecyclerViewHolder {
         return when (viewType) {
             PERSON_SEARCH -> SearchRecyclerViewHolder.PersonViewHolder(
@@ -56,13 +55,14 @@ class SearchAdapter @Inject constructor(
             PERSON_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.PersonViewHolder)
-                    holder.bind(searchResult[position],searchListener)
+                    holder.bind(searchResult[position],onItemClickListener)
+
                 }
             }
             MOVIE_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.MovieViewHolder)
-                    holder.bind(searchResult[position],searchListener)
+                    holder.bind(searchResult[position],onItemClickListener)
                 }
             }
             TV_SHOW_SEARCH -> {
@@ -120,6 +120,9 @@ class SearchAdapter @Inject constructor(
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
+    fun setOnItemClickListener(listener: SearchListener) {
+        onItemClickListener = listener
+    }
 }
 
 
