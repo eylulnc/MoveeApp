@@ -6,15 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.Genres
-import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.databinding.GenresFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Genre
-import com.eylulcan.moviefragment.model.GenreList
-import com.eylulcan.moviefragment.model.ResultMovie
 import javax.inject.Inject
 
-class GenresAdapter @Inject constructor(private val genresListener: ItemListener) :
+class GenresAdapter @Inject constructor() :
     RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
+
+    private var onItemClickListener: ((id: Int) -> Unit)? = null
 
     class ViewHolder(val binding: GenresFragmentRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -36,7 +35,7 @@ class GenresAdapter @Inject constructor(private val genresListener: ItemListener
                 Genres.valueOfInt(id)?.movieGenreImage()
                     ?.let { holder.binding.genresFragmentImageView.setImageResource(it) }
                 holder.itemView.setOnClickListener {
-                    genresListener.onItemClicked(id)
+                    onItemClickListener?.let { it1 -> it1(id) }
                 }
             }
         }
@@ -67,4 +66,8 @@ class GenresAdapter @Inject constructor(private val genresListener: ItemListener
     var genreList: List<Genre>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
+
+    fun setOnItemClickListener(listener: (id: Int) -> Unit) {
+        onItemClickListener = listener
+    }
 }

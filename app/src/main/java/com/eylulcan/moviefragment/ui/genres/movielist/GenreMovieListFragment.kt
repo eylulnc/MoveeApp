@@ -15,11 +15,13 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenreMovieListBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class GenreMovieListFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentGenreMovieListBinding
+    @Inject
     private lateinit var genreMovieListAdapter: GenreMovieListAdapter
     private val genresListViewModel: GenreMovieListViewModel by viewModels()
     private var movieList: ArrayList<ResultMovie> = arrayListOf()
@@ -75,8 +77,10 @@ class GenreMovieListFragment : Fragment(), ItemListener {
     private fun setUI() {
         binding.genreMovieListRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        genreMovieListAdapter = GenreMovieListAdapter(this)
         binding.genreMovieListRecyclerView.adapter = genreMovieListAdapter
+        genreMovieListAdapter.setOnItemClickListener { id ->
+            onItemClicked(id)
+        }
 
         binding.genreMovieListRecyclerView.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {

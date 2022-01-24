@@ -9,11 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenresBinding
-import com.eylulcan.moviefragment.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,6 +20,7 @@ class GenresFragment : Fragment(), ItemListener {
 
     private val genreViewModel: GenresViewModel by viewModels()
     private lateinit var binding: FragmentGenresBinding
+    @Inject
     lateinit var genreListAdapter: GenresAdapter
 
     override fun onCreateView(
@@ -45,9 +44,11 @@ class GenresFragment : Fragment(), ItemListener {
         genreViewModel.genres.observe(viewLifecycleOwner, { genreData ->
             genreData?.let { genreList ->
                 val list = genreList.genres ?: emptyList()
-                genreListAdapter = GenresAdapter( this)
-                genreListAdapter.genreList  = list
                 binding.genresFragmentRecyclerView.adapter = genreListAdapter
+                genreListAdapter.setOnItemClickListener { id ->
+                    onItemClicked(id)
+                }
+                genreListAdapter.genreList  = list
             }
         })
     }

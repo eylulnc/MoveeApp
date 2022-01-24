@@ -15,11 +15,11 @@ import com.eylulcan.moviefragment.util.Utils
 import javax.inject.Inject
 
 class GenreMovieListAdapter @Inject constructor(
-    private val movieDetailListener: ItemListener
-) :
-    RecyclerView.Adapter<GenreMovieListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<GenreMovieListAdapter.ViewHolder>() {
 
+    private var onItemClickListener: ((id: Int) -> Unit)? = null
     private var genreNames: String = ""
+
     class ViewHolder(val binding: GenreMovieListRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -48,7 +48,7 @@ class GenreMovieListAdapter @Inject constructor(
         holder.binding.genresMore.text = genreNames
         holder.binding.ratingBarMore.rating = (movie.voteAverage?.toFloat()?.div(2) ?: 0f)
         holder.itemView.setOnClickListener {
-            movie.id?.let { movieDetailListener.onItemClicked(it) }
+            movie.id?.let { onItemClickListener?.let { it1 -> it1(it) } }
         }
     }
 
@@ -78,5 +78,9 @@ class GenreMovieListAdapter @Inject constructor(
     var movieResult: List<ResultMovie>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
+
+    fun setOnItemClickListener(listener: (id: Int) -> Unit) {
+        onItemClickListener = listener
+    }
 
 }
