@@ -14,12 +14,14 @@ import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMoreBinding
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MoreFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentMoreBinding
-    private lateinit var moreAdapter: MoreAdapter
+    @Inject
+    lateinit var moreAdapter: MoreAdapter
     private val detailViewModel: DetailViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -39,8 +41,11 @@ class MoreFragment : Fragment(), ItemListener {
 
     private fun observeViewModel() {
         detailViewModel.more.observe(viewLifecycleOwner, { movie ->
-            moreAdapter = MoreAdapter(movie, this)
             binding.moreRecyclerView.adapter = moreAdapter
+            moreAdapter.setOnItemClickListener {
+                onItemClicked(it)
+            }
+            moreAdapter.movies = movie.results ?: emptyList()
         })
     }
 
