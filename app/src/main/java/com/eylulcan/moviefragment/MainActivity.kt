@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.eylulcan.moviefragment.databinding.ActivityMainBinding
+import com.eylulcan.moviefragment.di.MovieFragmentFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

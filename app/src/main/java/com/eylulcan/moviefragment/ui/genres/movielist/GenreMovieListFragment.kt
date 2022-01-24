@@ -22,7 +22,7 @@ class GenreMovieListFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentGenreMovieListBinding
     @Inject
-    private lateinit var genreMovieListAdapter: GenreMovieListAdapter
+    lateinit var genreMovieListAdapter: GenreMovieListAdapter
     private val genresListViewModel: GenreMovieListViewModel by viewModels()
     private var movieList: ArrayList<ResultMovie> = arrayListOf()
     private var selectedGenreId: Int = 0

@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment
+package com.eylulcan.moviefragment.di
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
@@ -8,7 +8,9 @@ import com.eylulcan.moviefragment.ui.album.image.ImageAdapter
 import com.eylulcan.moviefragment.ui.album.image.ImageFragment
 import com.eylulcan.moviefragment.ui.artist.ArtistAdapter
 import com.eylulcan.moviefragment.ui.artist.ArtistFragment
+import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
 import com.eylulcan.moviefragment.ui.discover.DiscoverFragment
+import com.eylulcan.moviefragment.ui.discover.DiscoverParentAdapter
 import com.eylulcan.moviefragment.ui.discover.SliderAdapter
 import com.eylulcan.moviefragment.ui.onboard.OnboardAdapter
 import com.eylulcan.moviefragment.ui.onboard.OnboardViewPagerFragment
@@ -19,7 +21,7 @@ open class MovieFragmentFactory @Inject constructor(
     private val onboardAdapter: OnboardAdapter,
     private val albumAdapter: AlbumAdapter,
     private val imageAdapter: ImageAdapter,
-    private val artistAdapter: ArtistAdapter
+    private val artistAdapter: ArtistAdapter,
 ) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {

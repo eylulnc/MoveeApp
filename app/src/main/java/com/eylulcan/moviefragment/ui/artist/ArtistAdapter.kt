@@ -96,29 +96,29 @@ class ArtistAdapter @Inject constructor() :
 
     }
 
-        private fun setPlaceholders(holder: ViewHolder) {
-            placeholderNeeded.addAll(
-                arrayListOf(
-                    holder.binding.artistRowTemplate
-                )
-            )
-            Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
-        }
-
-        private fun removePlaceholders() {
-            placeholderNeeded.forEach { view ->
-                view.apply {
-                    broccoli.clearPlaceholder(this)
-                    this.isVisible = false
-                }
-            }
-        }
-
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
     var peopleResult: List<PeopleResult>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
+
+    private fun setPlaceholders(holder: ViewHolder) {
+        placeholderNeeded.addAll(
+            arrayListOf(
+                holder.binding.artistRowTemplate
+            )
+        )
+        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
+    }
+
+    private fun removePlaceholders() {
+        placeholderNeeded.forEach { view ->
+            view.apply {
+                broccoli.clearPlaceholder(this)
+                this.isVisible = false
+            }
+        }
+    }
 
     fun setOnItemClickListener(listener: (id: Int) -> Unit) {
         onItemClickListener = listener
