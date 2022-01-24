@@ -7,9 +7,12 @@
 
     <ImageView
         android:id="@+id/artistImage"
+        android:contentDescription="@string/artist_image"
         android:layout_width="@dimen/movie_detail_bottom_sheet_recycler_row_artistImage_width"
         android:layout_height="@dimen/movie_detail_bottom_sheet_recycler_row_artistImage_height"
         android:layout_marginTop="@dimen/movie_detail_bottom_sheet_recycler_row_artistImage_marginTop"
+        android:layout_marginEnd="@dimen/movie_detail_bottom_sheet_recycler_row_artistImage_marginEnc"
+        android:background="@color/black_gray"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

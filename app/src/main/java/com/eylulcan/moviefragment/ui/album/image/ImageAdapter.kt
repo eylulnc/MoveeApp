@@ -28,7 +28,7 @@ class ImageAdapter @Inject constructor() :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val imagePath = album.get(position).filePath
+        val imagePath = album[position].filePath
         Glide.with(holder.binding.root).load(setImageUrl(imagePath))
             .into(holder.binding.artistImageView)
 

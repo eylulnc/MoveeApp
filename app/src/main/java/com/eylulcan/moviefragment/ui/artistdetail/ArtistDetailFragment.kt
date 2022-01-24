@@ -134,8 +134,8 @@ class ArtistDetailFragment : Fragment(), ItemListener {
     }
 
     private fun setupUIBottomSheet(detail: ArtistDetail) {
-        includeBinding.expandTextView.text = detail.biography
-        includeBinding.artistBirthdayText.text = detail.birthday
+        includeBinding.expandTextView.text = detail.biography ?: getString(R.string.unknown)
+        includeBinding.artistBirthdayText.text = detail.birthday ?: getString(R.string.unknown)
         if (detail.deathday.isNullOrEmpty()) {
             includeBinding.artistDeathDayText.isVisible = false
             includeBinding.deathText.isVisible = false
@@ -158,7 +158,6 @@ class ArtistDetailFragment : Fragment(), ItemListener {
                     }
                 }
             }
-
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
     }

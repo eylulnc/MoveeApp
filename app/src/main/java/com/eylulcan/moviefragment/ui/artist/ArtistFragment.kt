@@ -16,16 +16,16 @@ import com.eylulcan.moviefragment.databinding.FragmentArtistBinding
 import com.eylulcan.moviefragment.model.PeopleResult
 import com.eylulcan.moviefragment.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 private const val SPAN_COUNT_PHONE = 3
 private const val SPAN_COUNT_TABLET = 4
 
 @AndroidEntryPoint
-class ArtistFragment : Fragment(), ItemListener {
+class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapter): Fragment(), ItemListener {
 
     private val artistViewModel: ArtistViewModel by viewModels()
     private lateinit var binding: FragmentArtistBinding
-    private lateinit var artistAdapter: ArtistAdapter
     private var artistList: ArrayList<PeopleResult> = arrayListOf()
     private var enableToRequest: Boolean = false
     private var moviesInAPage: List<PeopleResult>? = emptyList()
@@ -41,9 +41,8 @@ class ArtistFragment : Fragment(), ItemListener {
         } else {
             binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_PHONE)
         }
-
-        artistAdapter = ArtistAdapter(this)
         binding.artistRecyclerView.adapter = artistAdapter
+        artistAdapter.setOnItemClickListener { id -> onItemClicked(id) }
         return view
     }
 

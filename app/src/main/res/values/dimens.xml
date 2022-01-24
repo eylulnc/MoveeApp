@@ -277,8 +277,9 @@
     <dimen name="movie_detail_bottom_sheet_albumPreview_recycler_margin">16dp</dimen>
     <dimen name="movie_detail_bottom_sheet_albumPreview_recycler_marginBottom">32dp</dimen>
 
-    <dimen name="movie_detail_bottom_sheet_recycler_row_artistImage_width">120dp</dimen>
-    <dimen name="movie_detail_bottom_sheet_recycler_row_artistImage_height">120dp</dimen>
+    <dimen name="movie_detail_bottom_sheet_recycler_row_artistImage_width">110dp</dimen>
+    <dimen name="movie_detail_bottom_sheet_recycler_row_artistImage_height">150dp</dimen>
     <dimen name="movie_detail_bottom_sheet_recycler_row_artistImage_marginTop">8dp</dimen>
+    <dimen name="movie_detail_bottom_sheet_recycler_row_artistImage_marginEnc">12dp</dimen>
 
 </resources>

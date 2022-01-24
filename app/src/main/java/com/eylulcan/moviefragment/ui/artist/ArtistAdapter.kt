@@ -12,19 +12,18 @@ import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.PeopleResult
+import com.eylulcan.moviefragment.model.ProfileImage
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.HashMap
 import javax.inject.Inject
 
-class ArtistAdapter @Inject constructor(
-    private val artistListener: ItemListener
-) :
+class ArtistAdapter @Inject constructor() :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
+    private var onItemClickListener: ((id: Int) -> Unit)? = null
     private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
     private val mTaskManager: HashMap<View, Runnable> = HashMap<View, Runnable>()
-
     private val broccoli = Broccoli()
     private val placeholderNeeded = arrayListOf<View>()
 
@@ -58,7 +57,7 @@ class ArtistAdapter @Inject constructor(
         }
         holder.itemView.setOnClickListener {
             peopleResult[position].id?.let { artistId ->
-                artistListener.onItemClicked(artistId)
+                onItemClickListener?.let { it1 -> it1(artistId) }
             }
             var task: Runnable? = mTaskManager[holder.itemView]
             if (task == null) {
@@ -121,5 +120,8 @@ class ArtistAdapter @Inject constructor(
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
+    fun setOnItemClickListener(listener: (id: Int) -> Unit) {
+        onItemClickListener = listener
+    }
 
 }

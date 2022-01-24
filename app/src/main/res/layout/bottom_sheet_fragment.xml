@@ -44,6 +44,7 @@
 
                 <ImageView
                     android:id="@+id/arrowImage"
+                    android:contentDescription="@string/imageButton"
                     android:layout_width="@dimen/movie_detail_bottom_sheet_arrowImage_width"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/movie_detail_bottom_sheet_arrowImage_marginEnd"
@@ -194,9 +195,7 @@
                 android:id="@+id/albumPreviewRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/movie_detail_bottom_sheet_albumPreview_recycler_margin"
                 android:layout_marginTop="@dimen/movie_detail_bottom_sheet_albumPreview_recycler_margin"
-                android:layout_marginEnd="@dimen/movie_detail_bottom_sheet_albumPreview_recycler_margin"
                 android:layout_marginBottom="@dimen/movie_detail_bottom_sheet_albumPreview_recycler_marginBottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
