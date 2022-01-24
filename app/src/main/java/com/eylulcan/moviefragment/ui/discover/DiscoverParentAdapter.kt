@@ -3,15 +3,17 @@ package com.eylulcan.moviefragment.ui.discover
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
-import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.DiscoverParentFragmentBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import javax.inject.Inject
+import javax.inject.Named
 
-class DiscoverParentAdapter @Inject constructor(private val listener: ItemListener) :
+class DiscoverParentAdapter @Inject constructor() :
     RecyclerView.Adapter<DiscoverParentAdapter.ViewHolder>() {
+
     private val viewPool = RecyclerView.RecycledViewPool()
+    private var parentOnItemClickListener: ((id: Int) -> Unit)? = null
 
     class ViewHolder(val binding: DiscoverParentFragmentBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -44,8 +46,11 @@ class DiscoverParentAdapter @Inject constructor(private val listener: ItemListen
             childLayoutManager.initialPrefetchItemCount = 3
             holder.binding.discoverRecyclerView.apply {
                 layoutManager = childLayoutManager
-                val childAdapter = DiscoverChildAdapter(listener)
+                val childAdapter = DiscoverChildAdapter()
                 adapter = childAdapter
+                childAdapter.setOnItemClickListener {
+                    parentOnItemClickListener?.let { it1 -> it1(it) }
+                }
                 childAdapter.movieResults = parent
                 setRecycledViewPool(viewPool)
             }
@@ -66,7 +71,10 @@ class DiscoverParentAdapter @Inject constructor(private val listener: ItemListen
             childLayoutManager.initialPrefetchItemCount = 3
             holder.binding.discoverRecyclerView.apply {
                 layoutManager = childLayoutManager
-                val childAdapter = DiscoverChildAdapter(listener)
+                val childAdapter = DiscoverChildAdapter()
+                childAdapter.setOnItemClickListener {
+                    parentOnItemClickListener?.let { it1 -> it1(it) }
+                }
                 adapter = childAdapter
                 childAdapter.movieResults = parent
                 setRecycledViewPool(viewPool)
@@ -96,5 +104,9 @@ class DiscoverParentAdapter @Inject constructor(private val listener: ItemListen
     var movieResults: List<ArrayList<ResultMovie>>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
+
+    fun setOnItemClickListener(listener: (id: Int) -> Unit) {
+        parentOnItemClickListener = listener
+    }
 
 }

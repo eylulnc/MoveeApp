@@ -16,9 +16,10 @@ import me.samlss.broccoli.Broccoli
 import java.util.HashMap
 import javax.inject.Inject
 
-class DiscoverChildAdapter @Inject constructor(private val listener: ItemListener) :
+class DiscoverChildAdapter @Inject constructor() :
     RecyclerView.Adapter<DiscoverChildAdapter.ViewHolder>() {
 
+    private var childOnItemClickListener: ((id: Int) -> Unit)? = null
     private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
     private val mTaskManager: HashMap<View, Runnable> = HashMap<View, Runnable>()
 
@@ -54,7 +55,7 @@ class DiscoverChildAdapter @Inject constructor(private val listener: ItemListene
             .into(holder.binding.movieListRecyclerViewImage)
         holder.binding.movieListRecyclerViewName.text = child.title
         holder.itemView.setOnClickListener {
-            child.id?.let { id -> listener.onItemClicked(id) }
+            child.id?.let { id -> childOnItemClickListener?.let { it1 -> it1(id) } }
         }
         var task: Runnable? = mTaskManager[holder.itemView]
         if (task == null) {
@@ -115,4 +116,7 @@ class DiscoverChildAdapter @Inject constructor(private val listener: ItemListene
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
+    fun setOnItemClickListener(listener: (id: Int) -> Unit) {
+        childOnItemClickListener = listener
+    }
 }

@@ -41,7 +41,8 @@ class DiscoverFragment @Inject constructor(private val sliderAdapter: SliderAdap
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
-    private lateinit var recyclerViewAdapter: DiscoverParentAdapter
+    @Inject
+    lateinit var recyclerViewAdapter: DiscoverParentAdapter
     private val placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
 
@@ -108,8 +109,10 @@ class DiscoverFragment @Inject constructor(private val sliderAdapter: SliderAdap
                         LinearLayoutManager.VERTICAL,
                         false
                     )
-                    recyclerViewAdapter = DiscoverParentAdapter(this@DiscoverFragment)
                     adapter = recyclerViewAdapter
+                    recyclerViewAdapter.setOnItemClickListener {
+                        onItemClicked(it)
+                    }
                     recyclerViewAdapter.movieResults = allListItems
                 }
             }
