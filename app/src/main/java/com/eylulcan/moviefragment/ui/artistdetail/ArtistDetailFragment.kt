@@ -23,6 +23,7 @@ import com.eylulcan.moviefragment.util.Utils
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
+import javax.inject.Inject
 
 private const val SPAN_COUNT = 3
 
@@ -35,7 +36,12 @@ class ArtistDetailFragment : Fragment(), ItemListener {
     private var broccoli = Broccoli()
     private lateinit var includeBinding: BottomSheetFragmentBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
-    private lateinit var artistMovieAdapter: ArtistMovieAdapter
+
+    @Inject
+    lateinit var artistMovieAdapter: ArtistMovieAdapter
+
+    @Inject
+    lateinit var albumRecyclerAdapter: AlbumRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,13 +84,13 @@ class ArtistDetailFragment : Fragment(), ItemListener {
             includeBinding.albumPreviewRecyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             if (albumSize > 5) {
-                val albumTemp: List<ProfileImage>? = album.artistProfileImages?.subList(0, 4)
-                includeBinding.albumPreviewRecyclerView.adapter = albumTemp?.let {
-                    AlbumRecyclerAdapter(it)
-                }
+                val albumTemp: List<ProfileImage> =
+                    album.artistProfileImages?.subList(0, 4) ?: emptyList()
+                includeBinding.albumPreviewRecyclerView.adapter = albumRecyclerAdapter
+                albumRecyclerAdapter.artistAlbum = albumTemp
             } else {
-                includeBinding.albumPreviewRecyclerView.adapter =
-                    album.artistProfileImages?.let { AlbumRecyclerAdapter(it) }
+                includeBinding.albumPreviewRecyclerView.adapter = albumRecyclerAdapter
+                albumRecyclerAdapter.artistAlbum = album.artistProfileImages ?: emptyList()
             }
             binding.bottomSheetFragment.photosTextView.setOnClickListener {
                 val albumDataBundle = bundleOf((getString(R.string.photo_album) to album))
@@ -94,14 +100,16 @@ class ArtistDetailFragment : Fragment(), ItemListener {
         })
 
         artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner, { movieCredits ->
-            if(Utils.isTablet(requireContext())){
+            if (Utils.isTablet(requireContext())) {
                 binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
             } else {
-                binding.artistMovieRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+                binding.artistMovieRecycler.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             }
 
-            artistMovieAdapter = ArtistMovieAdapter(movieCredits, artistMovieClickListener = this)
             binding.artistMovieRecycler.adapter = artistMovieAdapter
+            artistMovieAdapter.setOnItemClickListener { id -> onItemClicked(id) }
+            artistMovieAdapter.artistMovieCredits = movieCredits.cast ?: emptyList()
 
         })
 
@@ -134,13 +142,20 @@ class ArtistDetailFragment : Fragment(), ItemListener {
     }
 
     private fun setupUIBottomSheet(detail: ArtistDetail) {
-        includeBinding.expandTextView.text = detail.biography ?: getString(R.string.unknown)
-        includeBinding.artistBirthdayText.text = detail.birthday ?: getString(R.string.unknown)
+        includeBinding.expandTextView.text = detail.biography
+        includeBinding.artistBirthdayText.text = detail.birthday
+        includeBinding.artistDeathDayText.text = detail.deathday
+        if (detail.biography.isNullOrEmpty()) {
+            includeBinding.expandableText.isVisible = false
+            includeBinding.biographyText.isVisible = false
+        }
+        if (detail.birthday.isNullOrEmpty()) {
+            includeBinding.bornText.isVisible = false
+            includeBinding.artistBirthdayText.isVisible = false
+        }
         if (detail.deathday.isNullOrEmpty()) {
             includeBinding.artistDeathDayText.isVisible = false
             includeBinding.deathText.isVisible = false
-        } else {
-            includeBinding.artistDeathDayText.text = detail.deathday.toString()
         }
 
         bottomSheetBehavior.addBottomSheetCallback(object :
@@ -158,6 +173,7 @@ class ArtistDetailFragment : Fragment(), ItemListener {
                     }
                 }
             }
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
         })
     }

@@ -4,26 +4,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistMovieFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.ArtistMovieCredits
+import com.eylulcan.moviefragment.model.Cast
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
-import java.util.HashMap
+import java.util.*
 import javax.inject.Inject
 
-class ArtistMovieAdapter @Inject constructor(
-    private val movieCredits: ArtistMovieCredits,
-    private val artistMovieClickListener: ItemListener
-) :
+class ArtistMovieAdapter @Inject constructor() :
     RecyclerView.Adapter<ArtistMovieAdapter.ViewHolder>() {
 
     private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
     private val mTaskManager: HashMap<View, Runnable> = HashMap<View, Runnable>()
-
+    private var onItemClickListener: ((id: Int) -> Unit)? = null
     private val broccoli = Broccoli()
     private val placeholderNeeded = arrayListOf<View>()
 
@@ -47,13 +45,13 @@ class ArtistMovieAdapter @Inject constructor(
             mViewPlaceholderManager[holder.itemView] = broccoli
         }
         setPlaceholders(holder)
-        val movie = movieCredits.cast?.get(position)
-        holder.binding.movieNameArtistMovie.text = movie?.title
-        Glide.with(holder.binding.root).load(setImageUrl(movie?.posterPath))
+        val movie = artistMovieCredits[position]
+        holder.binding.movieNameArtistMovie.text = movie.title
+        Glide.with(holder.binding.root).load(setImageUrl(movie.posterPath))
             .placeholder(R.color.grey)
             .into(holder.binding.movieImage)
         holder.itemView.setOnClickListener {
-            movie?.id?.let { id -> artistMovieClickListener.onItemClicked(id) }
+            movie.id?.let { id -> onItemClickListener?.let { it1 -> it1(id) } }
             var task: Runnable? = mTaskManager[holder.itemView]
             if (task == null) {
                 task = Runnable {
@@ -69,7 +67,11 @@ class ArtistMovieAdapter @Inject constructor(
         }
     }
 
-    override fun getItemCount(): Int = movieCredits.cast?.size ?: 0
+    override fun getItemCount(): Int = artistMovieCredits.size
+
+    fun setOnItemClickListener(listener: (id: Int) -> Unit) {
+        onItemClickListener = listener
+    }
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_ORIGINAL.plus(poster_path)
@@ -91,6 +93,29 @@ class ArtistMovieAdapter @Inject constructor(
             }
         }
     }
+
+    private val diffUtil = object : DiffUtil.ItemCallback<Cast>() {
+        override fun areItemsTheSame(
+            oldItem: Cast,
+            newItem: Cast
+        ): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: Cast,
+            newItem: Cast
+        ): Boolean {
+            return oldItem.equals(newItem)
+        }
+
+    }
+
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
+
+    var artistMovieCredits: List<Cast>
+        get() = recyclerListDiffer.currentList
+        set(value) = recyclerListDiffer.submitList(value)
 
 
 }
