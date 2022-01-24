@@ -13,13 +13,15 @@ import com.eylulcan.moviefragment.databinding.FragmentReviewsBinding
 import com.eylulcan.moviefragment.model.Review
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ReviewsFragment : Fragment() {
 
     private lateinit var binding: FragmentReviewsBinding
     private val detailViewModel: DetailViewModel by activityViewModels()
-    private lateinit var reviewsAdapter: ReviewsAdapter
+    @Inject
+    lateinit var reviewsAdapter: ReviewsAdapter
     private var lastLoadedPage: Int = 1
     private var reviewResultList: ArrayList<Review> = arrayListOf()
 
@@ -35,7 +37,6 @@ class ReviewsFragment : Fragment() {
         binding = FragmentReviewsBinding.bind(view)
         binding.reviewFragmentRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        reviewsAdapter = ReviewsAdapter()
         binding.reviewFragmentRecyclerView.adapter = reviewsAdapter
         observeViewModel()
         binding.reviewFragmentRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
