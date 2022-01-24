@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ImageFragment : Fragment() {
+class ImageFragment @Inject constructor(private val imageAdapter:ImageAdapter): Fragment() {
 
     private lateinit var binding: FragmentImageBinding
 
@@ -33,7 +33,7 @@ class ImageFragment : Fragment() {
         val albumInformation = arguments?.get(getString(R.string.image_url)) as Pair<*, *>
         val album = albumInformation.first as List<ProfileImage>?
         val position = albumInformation.second as Int
-        val adapterImage = ImageAdapter()
+        val adapterImage = imageAdapter
         binding.imageFragmentRecyclerView.adapter = adapterImage
         adapterImage.album = album ?: emptyList()
         binding.imageFragmentRecyclerView.scrollToPosition(position)

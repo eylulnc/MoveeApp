@@ -1,18 +1,34 @@
 package com.eylulcan.moviefragment.ui.album
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eylulcan.moviefragment.databinding.AlbumFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ProfileImage
+import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
 import com.eylulcan.moviefragment.util.Utils
+import me.samlss.broccoli.Broccoli
+import java.util.HashMap
 import javax.inject.Inject
 
-class AlbumAdapter @Inject constructor(private val imageListener: ImageListener) :
+class AlbumAdapter @Inject constructor() :
     RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
+
+    private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
+    private val mTaskManager: HashMap<View, Runnable> = HashMap<View, Runnable>()
+    private val broccoli = Broccoli()
+    private val placeholderNeeded = arrayListOf<View>()
+
+    private var onItemClickListener: ((album: List<ProfileImage>?, position: Int) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (album: List<ProfileImage>?, position: Int) -> Unit) {
+        onItemClickListener = listener
+    }
 
     class ViewHolder(val binding: AlbumFragmentRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -28,11 +44,29 @@ class AlbumAdapter @Inject constructor(private val imageListener: ImageListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var broccoli = mViewPlaceholderManager[holder.itemView]
+        if (broccoli == null) {
+            broccoli = Broccoli()
+            mViewPlaceholderManager[holder.itemView] = broccoli
+        }
+        setPlaceholders(holder)
         val url = setImageUrl(album[position].filePath)
         Glide.with(holder.binding.root).load(url).into(holder.binding.imageView)
         holder.itemView.setOnClickListener {
-            imageListener.onImageClicked(album, position)
+            onItemClickListener?.let { it1 -> it1(album, position) }
         }
+        var task: Runnable? = mTaskManager[holder.itemView]
+        if (task == null) {
+            task = Runnable {
+                run {
+                    removePlaceholders()
+                }
+            }
+            mTaskManager[holder.itemView] = task
+        } else {
+            holder.itemView.removeCallbacks(task)
+        }
+        holder.itemView.postDelayed(task, 2000)
     }
 
     override fun getItemCount(): Int = album.size
@@ -62,5 +96,23 @@ class AlbumAdapter @Inject constructor(private val imageListener: ImageListener)
     var album: List<ProfileImage>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
+
+    private fun setPlaceholders(holder: ViewHolder) {
+        placeholderNeeded.addAll(
+            arrayListOf(
+                holder.binding.templateImageView
+            )
+        )
+        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
+    }
+
+    private fun removePlaceholders() {
+        placeholderNeeded.forEach { view ->
+            view.apply {
+                broccoli.clearPlaceholder(this)
+                this.isVisible = false
+            }
+        }
+    }
 
 }

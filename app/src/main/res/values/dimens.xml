@@ -210,9 +210,11 @@
 
     <dimen name="album_fragment_albumConstraintLayout_marginStart">8dp</dimen>
     <dimen name="album_fragment_albumConstraintLayout_marginEnd">8dp</dimen>
-    <dimen name="album_fragment_albumConstraintLayout_marginBottom">8dp</dimen>
+    <dimen name="album_fragment_albumConstraintLayout_marginBottom">16dp</dimen>
     <dimen name="album_fragment_imageView_height">200dp</dimen>
     <dimen name="album_fragment_imageView_width">150dp</dimen>
+
+    <dimen name="album_fragment_recyclerView_marginTop">8dp</dimen>
 
     <dimen name="castRecyclerRow_castConstraintLayout_marginLeft">8dp</dimen>
     <dimen name="castRecyclerRow_castConstraintLayout_marginRight">8dp</dimen>
@@ -246,6 +248,7 @@
     <dimen name="search_recycler_view_margin">4dp</dimen>
     <dimen name="search_recyclerRow_image_width">150dp</dimen>
     <dimen name="search_recyclerRow_image_height">200dp</dimen>
+
 
     <dimen name="image_fragment_recyclerRow_artistImage_height">500dp</dimen>
     <dimen name="image_fragment_recyclerRow_artistImage_width">350dp</dimen>

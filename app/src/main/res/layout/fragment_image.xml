@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.album.image.ImageFragment">
+    tools:context=".ui.album.image.ImageFragment"
+    android:background="@color/black_gray">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imageFragmentRecyclerView"
+        android:background="@color/black_gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

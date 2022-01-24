@@ -8,6 +8,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/albumRecyclerView"
+        android:layout_marginTop="@dimen/album_fragment_recyclerView_marginTop"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

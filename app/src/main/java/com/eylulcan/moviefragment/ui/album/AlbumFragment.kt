@@ -18,11 +18,9 @@ import javax.inject.Inject
 private const val SPAN_COUNT = 3
 
 @AndroidEntryPoint
-class AlbumFragment @Inject constructor(): Fragment(), ImageListener {
+class AlbumFragment @Inject constructor(private val albumAdapter: AlbumAdapter): Fragment(), ImageListener {
 
     private lateinit var binding: FragmentAlbumBinding
-    @Inject
-    lateinit var albumAdapter: AlbumAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +37,9 @@ class AlbumFragment @Inject constructor(): Fragment(), ImageListener {
         val selectedArtistAlbum = arguments?.get(getString(R.string.photo_album)) as ArtistAlbum
         val artistAlbum = selectedArtistAlbum.artistProfileImages ?: emptyList()
         binding.albumRecyclerView.adapter = albumAdapter
+        albumAdapter.setOnItemClickListener { album, position ->
+            onImageClicked(album,position)
+        }
         albumAdapter.album = artistAlbum
     }
 
