@@ -1,11 +1,11 @@
 package com.eylulcan.moviefragment.ui.moviedetail.cast
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,7 +16,7 @@ import com.eylulcan.moviefragment.databinding.FragmentCastBinding
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import com.eylulcan.moviefragment.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import me.samlss.broccoli.Broccoli
+import javax.inject.Inject
 
 private const val SPAN_COUNT_TABLET = 2
 
@@ -24,7 +24,8 @@ private const val SPAN_COUNT_TABLET = 2
 class CastFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentCastBinding
-    private lateinit var castAdapter: CastAdapter
+    @Inject
+    lateinit var castAdapter: CastAdapter
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -53,8 +54,11 @@ class CastFragment : Fragment(), ItemListener {
 
     private fun observeViewModel() {
         movieDetailViewModel.cast.observe(viewLifecycleOwner, { movieCredits ->
-            castAdapter = CastAdapter(movieCredits, this)
             binding.castRecyclerView.adapter = castAdapter
+            castAdapter.movieCredits = movieCredits.cast ?: emptyList()
+            castAdapter.setOnItemClickListener {
+                onItemClicked(it)
+            }
         })
     }
 
