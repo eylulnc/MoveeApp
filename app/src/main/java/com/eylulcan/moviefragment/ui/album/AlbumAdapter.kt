@@ -7,14 +7,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.AlbumFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ProfileImage
-import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
-import java.util.HashMap
+import java.util.*
 import javax.inject.Inject
 
 class AlbumAdapter @Inject constructor(private var glide: RequestManager) :

@@ -5,14 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import com.eylulcan.moviefragment.ItemListener
-import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.CastFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.MovieCast
-import com.eylulcan.moviefragment.model.MovieCredits
-import com.eylulcan.moviefragment.model.PeopleResult
 import com.eylulcan.moviefragment.util.Utils
 import javax.inject.Inject
 

@@ -38,8 +38,8 @@ object ProviderModule {
 
     @Singleton
     @Provides
-    fun provideGlide(@ApplicationContext context: Context): RequestManager = Glide
-        .with(context).setDefaultRequestOptions(
+    fun provideGlide(@ApplicationContext context: Context): RequestManager =
+        Glide.with(context).setDefaultRequestOptions(
             RequestOptions().placeholder(R.color.grey_light)
                 .error(R.color.grey_light)
         )
