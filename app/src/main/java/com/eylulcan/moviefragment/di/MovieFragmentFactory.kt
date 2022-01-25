@@ -17,7 +17,6 @@ import com.eylulcan.moviefragment.ui.onboard.OnboardViewPagerFragment
 import javax.inject.Inject
 
 open class MovieFragmentFactory @Inject constructor(
-    private val sliderAdapter: SliderAdapter,
     private val onboardAdapter: OnboardAdapter,
     private val albumAdapter: AlbumAdapter,
     private val imageAdapter: ImageAdapter,
@@ -26,7 +25,7 @@ open class MovieFragmentFactory @Inject constructor(
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (className) {
-            DiscoverFragment::class.java.name -> DiscoverFragment(sliderAdapter)
+            DiscoverFragment::class.java.name -> DiscoverFragment()
             OnboardViewPagerFragment::class.java.name -> OnboardViewPagerFragment(onboardAdapter)
             AlbumFragment::class.java.name -> AlbumFragment(albumAdapter)
             ImageFragment::class.java.name -> ImageFragment(imageAdapter)

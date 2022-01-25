@@ -9,7 +9,11 @@ import com.eylulcan.moviefragment.model.ResultMovie
 import javax.inject.Inject
 import javax.inject.Named
 
-class DiscoverParentAdapter @Inject constructor() :
+class DiscoverParentAdapter @Inject constructor(
+    @Named("Adapter1") private val childAdapter1: DiscoverChildAdapter,
+    @Named("Adapter2") private val childAdapter2: DiscoverChildAdapter,
+    @Named("Adapter3") private val childAdapter3: DiscoverChildAdapter
+) :
     RecyclerView.Adapter<DiscoverParentAdapter.ViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -46,38 +50,53 @@ class DiscoverParentAdapter @Inject constructor() :
             childLayoutManager.initialPrefetchItemCount = 3
             holder.binding.discoverRecyclerView.apply {
                 layoutManager = childLayoutManager
-                val childAdapter = DiscoverChildAdapter()
-                adapter = childAdapter
-                childAdapter.setOnItemClickListener {
+                adapter = childAdapter1
+                childAdapter1.setOnItemClickListener {
                     parentOnItemClickListener?.let { it1 -> it1(it) }
                 }
-                childAdapter.movieResults = parent
+                childAdapter1.movieResults = parent
                 setRecycledViewPool(viewPool)
             }
         } else {
             if (position == 0) {
                 holder.binding.categoryText.text =
                     holder.itemView.context.getString(R.string.most_popular)
+                val childLayoutManager =
+                    LinearLayoutManager(
+                        holder.binding.discoverRecyclerView.context,
+                        RecyclerView.HORIZONTAL,
+                        false
+                    )
+                childLayoutManager.initialPrefetchItemCount = 3
+                holder.binding.discoverRecyclerView.apply {
+                    layoutManager = childLayoutManager
+                    adapter = childAdapter2
+                    childAdapter2.setOnItemClickListener {
+                        parentOnItemClickListener?.let { it1 -> it1(it) }
+                    }
+                    childAdapter2.movieResults = parent
+                    setRecycledViewPool(viewPool)
+                }
+
             } else if (position == 1) {
                 holder.binding.categoryText.text =
                     holder.itemView.context.getString(R.string.top_rated)
-            }
-            val childLayoutManager =
-                LinearLayoutManager(
-                    holder.binding.discoverRecyclerView.context,
-                    RecyclerView.HORIZONTAL,
-                    false
-                )
-            childLayoutManager.initialPrefetchItemCount = 3
-            holder.binding.discoverRecyclerView.apply {
-                layoutManager = childLayoutManager
-                val childAdapter = DiscoverChildAdapter()
-                childAdapter.setOnItemClickListener {
-                    parentOnItemClickListener?.let { it1 -> it1(it) }
+                val childLayoutManager =
+                    LinearLayoutManager(
+                        holder.binding.discoverRecyclerView.context,
+                        RecyclerView.HORIZONTAL,
+                        false
+                    )
+                childLayoutManager.initialPrefetchItemCount = 3
+                holder.binding.discoverRecyclerView.apply {
+                    layoutManager = childLayoutManager
+                    adapter = childAdapter3
+                    childAdapter3.setOnItemClickListener {
+                        parentOnItemClickListener?.let { it1 -> it1(it) }
+                    }
+                    childAdapter3.movieResults = parent
+                    setRecycledViewPool(viewPool)
                 }
-                adapter = childAdapter
-                childAdapter.movieResults = parent
-                setRecycledViewPool(viewPool)
             }
         }
     }

@@ -30,7 +30,7 @@ import javax.inject.Inject
 private const val GRID_COUNT = 3
 
 @AndroidEntryPoint
-class DiscoverFragment @Inject constructor(private val sliderAdapter: SliderAdapter): Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
+class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by activityViewModels()
@@ -43,6 +43,8 @@ class DiscoverFragment @Inject constructor(private val sliderAdapter: SliderAdap
     private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
     @Inject
     lateinit var recyclerViewAdapter: DiscoverParentAdapter
+    @Inject
+    lateinit var sliderAdapter: SliderAdapter
     private val placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
 
@@ -125,6 +127,7 @@ class DiscoverFragment @Inject constructor(private val sliderAdapter: SliderAdap
             removePlaceholders()
             val moviesInfo: ArrayList<Pair<Int, String>> =
                 setMoviesInfo(movies.results as java.util.ArrayList<ResultMovie>)
+            println("encenc $sliderAdapter -- ${fragmentBinding.discoverSlider.adapter}")
             fragmentBinding.discoverSlider.adapter = sliderAdapter
             sliderAdapter.updateList(moviesInfo)
             fragmentBinding.dotsIndicator.setViewPager2(fragmentBinding.discoverSlider)
@@ -225,4 +228,8 @@ class DiscoverFragment @Inject constructor(private val sliderAdapter: SliderAdap
         discoverViewModel.setListsToDefault()
     }
 
+    override fun onStop() {
+        super.onStop()
+        fragmentBinding.discoverSlider.adapter = null
+    }
 }
