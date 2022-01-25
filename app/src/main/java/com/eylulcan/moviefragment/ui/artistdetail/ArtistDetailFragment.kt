@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.BottomSheetFragmentBinding
@@ -28,8 +28,9 @@ import javax.inject.Inject
 private const val SPAN_COUNT = 3
 
 @AndroidEntryPoint
-class ArtistDetailFragment : Fragment(), ItemListener {
-
+class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
+    @Inject
+    lateinit var glide: RequestManager
     private lateinit var binding: FragmentArtistDetailBinding
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
     private val placeholderNeeded = arrayListOf<View>()
@@ -73,9 +74,7 @@ class ArtistDetailFragment : Fragment(), ItemListener {
             val knownForDepartment = detail.knownForDepartment ?: getString(R.string.unknown)
             binding.knownWithText.text = knownForDepartment
             binding.artistDetailCoverImage.let {
-                Glide.with(this).load(setImageUrl(detail.profilePath)).circleCrop()
-                    .placeholder(R.color.grey_light)
-                    .into(it)
+                glide.load(setImageUrl(detail.profilePath)).circleCrop().into(it)
             }
         })
 
