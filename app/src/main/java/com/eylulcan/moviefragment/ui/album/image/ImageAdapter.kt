@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.ImageFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ProfileImage
 import com.eylulcan.moviefragment.util.Utils
 import javax.inject.Inject
 
-class ImageAdapter @Inject constructor() :
+class ImageAdapter @Inject constructor(private var glide: RequestManager) :
     RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ImageFragmentRecyclerRowBinding) :
@@ -29,8 +30,7 @@ class ImageAdapter @Inject constructor() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val imagePath = album[position].filePath
-        Glide.with(holder.binding.root).load(setImageUrl(imagePath))
-            .into(holder.binding.artistImageView)
+        glide.load(setImageUrl(imagePath)).into(holder.binding.artistImageView)
 
     }
 

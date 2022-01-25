@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.AlbumFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ProfileImage
 import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
@@ -16,7 +17,7 @@ import me.samlss.broccoli.Broccoli
 import java.util.HashMap
 import javax.inject.Inject
 
-class AlbumAdapter @Inject constructor() :
+class AlbumAdapter @Inject constructor(private var glide: RequestManager) :
     RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
 
     private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
@@ -51,7 +52,7 @@ class AlbumAdapter @Inject constructor() :
         }
         setPlaceholders(holder)
         val url = setImageUrl(album[position].filePath)
-        Glide.with(holder.binding.root).load(url).into(holder.binding.imageView)
+        glide.load(url).into(holder.binding.imageView)
         holder.itemView.setOnClickListener {
             onItemClickListener?.let { it1 -> it1(album, position) }
         }
