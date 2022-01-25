@@ -14,6 +14,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +34,7 @@ private const val GRID_COUNT = 3
 class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
-    private val discoverViewModel: DiscoverViewModel by activityViewModels()
+    val discoverViewModel: DiscoverViewModel by viewModels()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var nowPlayingList: ArrayList<ResultMovie> = arrayListOf()
     private var topRatedList: ArrayList<ResultMovie> = arrayListOf()

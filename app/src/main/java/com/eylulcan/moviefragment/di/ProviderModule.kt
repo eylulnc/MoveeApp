@@ -1,37 +1,45 @@
 package com.eylulcan.moviefragment.di
 
 import android.content.Context
-import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
-import com.eylulcan.moviefragment.ui.discover.SliderAdapter
-import com.eylulcan.moviefragment.util.Utils.BASE_URL
+import com.eylulcan.moviefragment.util.Utils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
+import javax.inject.Singleton
 
-@InstallIn(ActivityComponent::class)
 @Module
+@InstallIn(SingletonComponent::class)
+
 object ProviderModule {
 
+    @Singleton
     @Provides
-    fun injectAdapter(@ActivityContext context:Context ):SliderAdapter = SliderAdapter(context as FragmentActivity)
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(Utils.BASE_URL)
+            .build()
+    }
 
+    @Singleton
     @Provides
-    @Named("Adapter1") fun injectChildAdapter1 ():DiscoverChildAdapter = DiscoverChildAdapter()
+    fun provideMovieAPI(retrofit: Retrofit): MovieAPI {
+        return retrofit.create(MovieAPI::class.java)
+    }
 
+    @Singleton
     @Provides
-    @Named("Adapter2") fun injectChildAdapter2 ():DiscoverChildAdapter = DiscoverChildAdapter()
-
-    @Provides
-    @Named("Adapter3") fun injectChildAdapter3 ():DiscoverChildAdapter = DiscoverChildAdapter()
+    fun provideGlide(@ApplicationContext context: Context) = Glide
+        .with(context).setDefaultRequestOptions(
+            RequestOptions().placeholder(R.color.grey_light)
+                .error(R.color.grey_light)
+        )
 }

@@ -4,20 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.model.Movie
-import com.eylulcan.moviefragment.model.MovieDetail
-import com.eylulcan.moviefragment.model.MovieCredits
-import com.eylulcan.moviefragment.model.ReviewList
-import com.eylulcan.moviefragment.model.VideoList
-import com.eylulcan.moviefragment.util.Utils
-import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.eylulcan.moviefragment.model.*
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailViewModel @Inject constructor(): ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(private var retrofit: MovieAPI): ViewModel() {
 
-    private var retrofit: MovieAPI? = null
     private val movieCast = MutableLiveData<MovieCredits>()
     val cast: LiveData<MovieCredits> get() = movieCast
     private val movieReviews = MutableLiveData<ReviewList>()
@@ -29,18 +25,10 @@ class DetailViewModel @Inject constructor(): ViewModel() {
     private val movieDetails = MutableLiveData<MovieDetail>()
     val detail: LiveData<MovieDetail> get() = movieDetails
 
-    init {
-        retrofit = Retrofit.Builder()
-            .baseUrl(Utils.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(MovieAPI::class.java)
-    }
-
     fun getMovieCast(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieCredits(movieId = id)
-            response?.let {
+            val response = retrofit.getMovieCredits(movieId = id)
+            response.let {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         movieCast.postValue(it)
@@ -52,8 +40,8 @@ class DetailViewModel @Inject constructor(): ViewModel() {
 
     fun getReviews(movieId: Int, pageNo: Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieReviews(movieId = movieId, pageNo = pageNo)
-            response?.let {
+            val response = retrofit.getMovieReviews(movieId = movieId, pageNo = pageNo)
+            response.let {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         movieReviews.postValue(it)
@@ -65,8 +53,8 @@ class DetailViewModel @Inject constructor(): ViewModel() {
 
     fun getMovieMore(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMoreMovie(movieId = id)
-            response?.let {
+            val response = retrofit.getMoreMovie(movieId = id)
+            response.let {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         movieMore.postValue(it)
@@ -78,8 +66,8 @@ class DetailViewModel @Inject constructor(): ViewModel() {
 
     fun getVideoClips(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieVideoClips(movieId = id)
-            response?.let {
+            val response = retrofit.getMovieVideoClips(movieId = id)
+            response.let {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         videoList.postValue(it)
@@ -91,8 +79,8 @@ class DetailViewModel @Inject constructor(): ViewModel() {
 
     fun getMovieDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit?.getMovieDetail(genreId = id)
-            response?.let {
+            val response = retrofit.getMovieDetail(genreId = id)
+            response.let {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         movieDetails.postValue(it)

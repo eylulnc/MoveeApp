@@ -18,13 +18,14 @@ import com.eylulcan.moviefragment.util.Utils
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
+import javax.inject.Inject
 
 private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
 private const val VIMEO_LINK = "https://vimeo.com/"
 private const val MINUTES_IN_HOUR = 60
 
 @AndroidEntryPoint
-class MovieDetailFragment : Fragment() {
+class MovieDetailFragment @Inject constructor(): Fragment() {
 
     private lateinit var fragmentBinding: FragmentMovieDetailBinding
     private val tabNames = arrayOf("Cast", "Reviews", "More")
