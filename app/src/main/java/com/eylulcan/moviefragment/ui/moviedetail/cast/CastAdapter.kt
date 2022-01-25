@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.CastFragmentRecyclerRowBinding
@@ -15,8 +16,7 @@ import com.eylulcan.moviefragment.model.PeopleResult
 import com.eylulcan.moviefragment.util.Utils
 import javax.inject.Inject
 
-class CastAdapter @Inject constructor(
-) :
+class CastAdapter @Inject constructor( private val glide : RequestManager) :
     RecyclerView.Adapter<CastAdapter.ViewHolder>() {
 
     private var onItemClickListener: ((id: Int) -> Unit)? = null
@@ -37,8 +37,7 @@ class CastAdapter @Inject constructor(
         val artist = movieCredits[position]
         holder.binding.castArtistName.text = artist.name
         holder.binding.characterName.text = artist.character
-        Glide.with(holder.binding.root).load(setImageUrl(artist.profilePath))
-            .placeholder(R.color.grey_light).into(holder.binding.castArtistImage)
+        glide.load(setImageUrl(artist.profilePath)).into(holder.binding.castArtistImage)
         holder.itemView.setOnClickListener {
             artist.id?.let { onItemClickListener?.let { it1 -> it1(it) } }
         }

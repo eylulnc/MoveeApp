@@ -21,7 +21,7 @@ import javax.inject.Inject
 private const val SPAN_COUNT_TABLET = 2
 
 @AndroidEntryPoint
-class CastFragment : Fragment(), ItemListener {
+class CastFragment @Inject constructor(): Fragment(), ItemListener {
 
     private lateinit var binding: FragmentCastBinding
     @Inject
