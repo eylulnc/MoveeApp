@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
 import com.eylulcan.moviefragment.model.MovieDetail
@@ -27,6 +27,8 @@ private const val MINUTES_IN_HOUR = 60
 @AndroidEntryPoint
 class MovieDetailFragment @Inject constructor(): Fragment() {
 
+    @Inject
+    lateinit var glide: RequestManager
     private lateinit var fragmentBinding: FragmentMovieDetailBinding
     private val tabNames = arrayOf("Cast", "Reviews", "More")
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
@@ -110,7 +112,7 @@ class MovieDetailFragment @Inject constructor(): Fragment() {
 
     private fun setupUI(movieDetails: MovieDetail?) {
         movieDetails?.let { selectedMovie ->
-            Glide.with(this).load(setImageUrl(selectedMovie.backdropPath))
+            glide.load(setImageUrl(selectedMovie.backdropPath))
                 .into(fragmentBinding.detailImagePoster)
             fragmentBinding.detailMovieNameText.text = selectedMovie.title
             fragmentBinding.expandTextView.text = selectedMovie.overview
