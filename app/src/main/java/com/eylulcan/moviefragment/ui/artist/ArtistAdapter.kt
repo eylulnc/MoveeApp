@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
@@ -18,7 +19,7 @@ import me.samlss.broccoli.Broccoli
 import java.util.HashMap
 import javax.inject.Inject
 
-class ArtistAdapter @Inject constructor() :
+class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
     RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
     private var onItemClickListener: ((id: Int) -> Unit)? = null
@@ -50,9 +51,7 @@ class ArtistAdapter @Inject constructor() :
 
         peopleResult[position].let { artist ->
             holder.binding.artistRecyclerPersonName.text = artist.name
-            Glide.with(holder.binding.root).load(setImageUrl(artist.profilePath))
-                .placeholder(R.color.grey_light)
-                .into(holder.binding.artistRecyclerRowImage)
+            glide.load(setImageUrl(artist.profilePath)).into(holder.binding.artistRecyclerRowImage)
             holder.binding.artistRecyclerPersonName.text = artist.name
         }
         holder.itemView.setOnClickListener {
