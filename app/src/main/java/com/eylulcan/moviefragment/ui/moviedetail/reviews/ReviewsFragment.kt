@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ReviewsFragment : Fragment() {
+class ReviewsFragment @Inject constructor(): Fragment() {
 
     private lateinit var binding: FragmentReviewsBinding
     private val detailViewModel: DetailViewModel by activityViewModels()

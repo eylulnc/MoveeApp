@@ -2,6 +2,7 @@ package com.eylulcan.moviefragment.di
 
 import android.content.Context
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.api.MovieAPI
@@ -37,7 +38,7 @@ object ProviderModule {
 
     @Singleton
     @Provides
-    fun provideGlide(@ApplicationContext context: Context) = Glide
+    fun provideGlide(@ApplicationContext context: Context): RequestManager = Glide
         .with(context).setDefaultRequestOptions(
             RequestOptions().placeholder(R.color.grey_light)
                 .error(R.color.grey_light)

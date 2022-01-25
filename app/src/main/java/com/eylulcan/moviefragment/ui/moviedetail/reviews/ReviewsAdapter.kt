@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ReviewFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.Review
@@ -14,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class ReviewsAdapter @Inject constructor() :
+class ReviewsAdapter @Inject constructor(private var glide:RequestManager) :
     RecyclerView.Adapter<ReviewsAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ReviewFragmentRecyclerRowBinding) :
@@ -42,8 +43,7 @@ class ReviewsAdapter @Inject constructor() :
                 val output = formatter.format(parser.parse(it))
                 holder.binding.postDateText.text = output
             }
-            Glide.with(holder.binding.root).load(setImageUrl(review.authorDetails?.avatarPath))
-                .placeholder(R.color.grey_light).into(holder.binding.authorProfileImage)
+            glide.load(setImageUrl(review.authorDetails?.avatarPath)).into(holder.binding.authorProfileImage)
         }
     }
 
