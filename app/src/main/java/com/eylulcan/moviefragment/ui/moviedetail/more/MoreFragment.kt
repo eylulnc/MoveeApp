@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MoreFragment : Fragment(), ItemListener {
+class MoreFragment @Inject constructor(): Fragment(), ItemListener {
 
     private lateinit var binding: FragmentMoreBinding
     @Inject
