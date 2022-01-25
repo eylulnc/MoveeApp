@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
@@ -14,7 +15,7 @@ import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
 import javax.inject.Inject
 
-class GenreMovieListAdapter @Inject constructor(
+class GenreMovieListAdapter @Inject constructor( private val glide: RequestManager
 ) : RecyclerView.Adapter<GenreMovieListAdapter.ViewHolder>() {
 
     private var onItemClickListener: ((id: Int) -> Unit)? = null
@@ -36,9 +37,7 @@ class GenreMovieListAdapter @Inject constructor(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movieResult[position]
         holder.binding.movieNameMore.text = movie.title
-        Glide.with(holder.binding.root).load(setImageUrl(movie.backdropPath))
-            .placeholder(R.color.grey)
-            .into(holder.binding.movieImage)
+        glide.load(setImageUrl(movie.backdropPath)).into(holder.binding.movieImage)
         genreNames = ""
         movie.genreIds?.forEach { genreId ->
             genreNames =
