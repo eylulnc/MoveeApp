@@ -49,7 +49,7 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
         glide.load(setImageUrl(movie.posterPath))
             .into(holder.binding.movieImage)
         holder.itemView.setOnClickListener {
-            movie.id?.let { id -> onItemClickListener?.let { it1 -> it1(id) } }
+            movie.id?.let { id -> onItemClickListener?.let { it1 -> it1(id) } } }
             var task: Runnable? = mTaskManager[holder.itemView]
             if (task == null) {
                 task = Runnable {
@@ -62,7 +62,7 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
                 holder.itemView.removeCallbacks(task)
             }
             holder.itemView.postDelayed(task, 2000)
-        }
+
     }
 
     override fun getItemCount(): Int = artistMovieCredits.size
