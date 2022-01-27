@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.eylulcan.moviefragment.ItemListener
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.DiscoverChildRecyclerRowBinding
 import com.eylulcan.moviefragment.model.ResultMovie
 import com.eylulcan.moviefragment.util.Utils
 import me.samlss.broccoli.Broccoli
-import java.util.HashMap
+import java.util.*
 import javax.inject.Inject
 
-class DiscoverChildAdapter @Inject constructor() :
+class DiscoverChildAdapter @Inject constructor(private val glide: RequestManager) :
     RecyclerView.Adapter<DiscoverChildAdapter.ViewHolder>() {
 
     private var childOnItemClickListener: ((id: Int) -> Unit)? = null
@@ -51,7 +51,7 @@ class DiscoverChildAdapter @Inject constructor() :
         }
         setPlaceholders(holder)
         val child = movieResults[position]
-        Glide.with(holder.binding.movieListRecyclerViewImage).load(setImageUrl(child.posterPath))
+        glide.load(setImageUrl(child.posterPath))
             .into(holder.binding.movieListRecyclerViewImage)
         holder.binding.movieListRecyclerViewName.text = child.title
         holder.itemView.setOnClickListener {

@@ -8,10 +8,7 @@ import com.eylulcan.moviefragment.ui.album.image.ImageAdapter
 import com.eylulcan.moviefragment.ui.album.image.ImageFragment
 import com.eylulcan.moviefragment.ui.artist.ArtistAdapter
 import com.eylulcan.moviefragment.ui.artist.ArtistFragment
-import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
 import com.eylulcan.moviefragment.ui.discover.DiscoverFragment
-import com.eylulcan.moviefragment.ui.discover.DiscoverParentAdapter
-import com.eylulcan.moviefragment.ui.discover.SliderAdapter
 import com.eylulcan.moviefragment.ui.onboard.OnboardAdapter
 import com.eylulcan.moviefragment.ui.onboard.OnboardViewPagerFragment
 import javax.inject.Inject

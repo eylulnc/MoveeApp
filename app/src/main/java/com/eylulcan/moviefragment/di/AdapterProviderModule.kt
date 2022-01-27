@@ -2,6 +2,7 @@ package com.eylulcan.moviefragment.di
 
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.ui.discover.DiscoverChildAdapter
 import com.eylulcan.moviefragment.ui.discover.SliderAdapter
 import dagger.Module
@@ -19,11 +20,11 @@ object AdapterProviderModule {
     fun injectAdapter(@ActivityContext context:Context ):SliderAdapter = SliderAdapter(context as FragmentActivity)
 
     @Provides
-    @Named("Adapter1") fun injectChildAdapter1 ():DiscoverChildAdapter = DiscoverChildAdapter()
+    @Named("Adapter1") fun injectChildAdapter1 (glide:RequestManager):DiscoverChildAdapter = DiscoverChildAdapter(glide)
 
     @Provides
-    @Named("Adapter2") fun injectChildAdapter2 ():DiscoverChildAdapter = DiscoverChildAdapter()
+    @Named("Adapter2") fun injectChildAdapter2 (glide:RequestManager):DiscoverChildAdapter = DiscoverChildAdapter(glide)
 
     @Provides
-    @Named("Adapter3") fun injectChildAdapter3 ():DiscoverChildAdapter = DiscoverChildAdapter()
+    @Named("Adapter3") fun injectChildAdapter3 (glide:RequestManager):DiscoverChildAdapter = DiscoverChildAdapter(glide)
 }
