@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.SearchFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.model.SearchResult
 import javax.inject.Inject
@@ -13,7 +14,7 @@ private const val PERSON_SEARCH = 0
 private const val MOVIE_SEARCH = 1
 private const val TV_SHOW_SEARCH = 2
 
-class SearchAdapter @Inject constructor() :
+class SearchAdapter @Inject constructor(private val glide: RequestManager) :
     RecyclerView.Adapter<SearchRecyclerViewHolder>() {
 
     private lateinit var onItemClickListener: SearchListener
@@ -55,20 +56,20 @@ class SearchAdapter @Inject constructor() :
             PERSON_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.PersonViewHolder)
-                    holder.bind(searchResult[position],onItemClickListener)
+                    holder.bind(searchResult[position], onItemClickListener, glide)
 
                 }
             }
             MOVIE_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.MovieViewHolder)
-                    holder.bind(searchResult[position],onItemClickListener)
+                    holder.bind(searchResult[position], onItemClickListener, glide)
                 }
             }
             TV_SHOW_SEARCH -> {
                 holder.apply {
                     (holder as SearchRecyclerViewHolder.TvShowViewHolder)
-                    holder.bind(searchResult[position])
+                    holder.bind(searchResult[position], glide)
                 }
             }
         }
