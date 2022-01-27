@@ -17,7 +17,7 @@ import javax.inject.Named
 object AdapterProviderModule {
 
     @Provides
-    fun injectAdapter(@ActivityContext context:Context ):SliderAdapter = SliderAdapter(context as FragmentActivity)
+    fun injectAdapter(@ActivityContext context:Context, glide: RequestManager):SliderAdapter = SliderAdapter(context as FragmentActivity, glide)
 
     @Provides
     @Named("Adapter1") fun injectChildAdapter1 (glide:RequestManager):DiscoverChildAdapter = DiscoverChildAdapter(glide)

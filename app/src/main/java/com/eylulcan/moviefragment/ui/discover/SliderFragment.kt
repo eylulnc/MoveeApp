@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSliderBinding
 import com.eylulcan.moviefragment.util.Utils
 
-class SliderFragment(private val movieInfo: Pair<Int,String>): Fragment(), ItemListener {
+class SliderFragment(private val movieInfo: Pair<Int,String>, private val glide :RequestManager): Fragment(), ItemListener {
 
     private lateinit var binding: FragmentSliderBinding
 
@@ -28,7 +28,7 @@ class SliderFragment(private val movieInfo: Pair<Int,String>): Fragment(), ItemL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Glide.with(binding.root).load(setImageUrl(movieInfo.second)).into(binding.sliderImageView)
+        glide.load(setImageUrl(movieInfo.second)).into(binding.sliderImageView)
         binding.sliderLayout.setOnClickListener {
             onItemClicked(movieInfo.first)
         }
