@@ -19,7 +19,7 @@ class SliderAdapter @Inject constructor(context: FragmentActivity, private val g
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> SliderFragment(moviesList[position],glide)
+            0 -> SliderFragment(moviesList[position], glide)
             1 -> SliderFragment(moviesList[position], glide)
             2 -> SliderFragment(moviesList[position], glide)
             3 -> SliderFragment(moviesList[position], glide)
