@@ -9,4 +9,5 @@ interface MovieRepository {
     suspend fun getNowPlayingData(): MovieEntity?
     suspend fun getUpcomingData(): MovieEntity?
     suspend fun getGuestSessionId() : GuestSessionEntity?
+    suspend fun getGenreMovieList(genreId: Int, pageNo: Int): MovieEntity?
 }

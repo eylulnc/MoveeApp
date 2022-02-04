@@ -28,4 +28,8 @@ class MovieRepositoryImpl @Inject constructor(private val dataSource: MovieDataS
         return dataSource.getGuestSessionId()
     }
 
+    override suspend fun getGenreMovieList(genreId: Int, pageNo: Int): MovieEntity? {
+        return dataSource.getGenreMovieList(genreId, pageNo)
+    }
+
 }

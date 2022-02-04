@@ -3,8 +3,8 @@ package com.eylulcan.moviefragment.ui.genres
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.model.GenreList
+import com.eylulcan.moviefragment.domain.entity.GenreListEntity
+import com.eylulcan.moviefragment.domain.usecase.GenreListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,20 +12,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class GenresViewModel @Inject constructor(private var retrofit: MovieAPI): ViewModel() {
+class GenresViewModel @Inject constructor(private val genreListUseCase: GenreListUseCase) :
+    ViewModel() {
 
-    private val genreList = MutableLiveData<GenreList>()
-    val genres: LiveData<GenreList> get() = genreList
+    private val genreList = MutableLiveData<GenreListEntity>()
+    val genres: LiveData<GenreListEntity> get() = genreList
 
     fun getGenreList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getGenresData()
+            val response = genreListUseCase.invoke()
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        genreList.postValue(it)
-                    }
-                }
+                genreList.postValue(it)
             }
         }
     }
