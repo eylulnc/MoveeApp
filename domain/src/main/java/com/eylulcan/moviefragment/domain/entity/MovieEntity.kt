@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class MovieEntity(
     val page: Int,
-    val resultEntities: List<ResultMovieEntity>,
+    val results: List<ResultMovieEntity>,
     val totalPages: Int,
     val totalResults: Int
 ) : Serializable

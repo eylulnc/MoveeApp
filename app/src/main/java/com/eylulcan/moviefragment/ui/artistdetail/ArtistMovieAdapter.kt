@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.ArtistMovieFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.Cast
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.CastEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.*
 import javax.inject.Inject
@@ -92,17 +92,17 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
         }
     }
 
-    private val diffUtil = object : DiffUtil.ItemCallback<Cast>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<CastEntity>() {
         override fun areItemsTheSame(
-            oldItem: Cast,
-            newItem: Cast
+            oldItem: CastEntity,
+            newItem: CastEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: Cast,
-            newItem: Cast
+            oldItem: CastEntity,
+            newItem: CastEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -111,7 +111,7 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var artistMovieCredits: List<Cast>
+    var artistMovieCredits: List<CastEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

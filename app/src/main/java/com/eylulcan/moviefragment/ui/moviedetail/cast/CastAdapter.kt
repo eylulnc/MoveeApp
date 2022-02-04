@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.CastFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.MovieCast
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.MovieCastEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import javax.inject.Inject
 
 class CastAdapter @Inject constructor( private val glide : RequestManager) :
@@ -29,7 +29,7 @@ class CastAdapter @Inject constructor( private val glide : RequestManager) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val artist = movieCredits[position]
+        val artist = movieCreditEntities[position]
         holder.binding.castArtistName.text = artist.name
         holder.binding.characterName.text = artist.character
         glide.load(setImageUrl(artist.profilePath)).into(holder.binding.castArtistImage)
@@ -38,17 +38,17 @@ class CastAdapter @Inject constructor( private val glide : RequestManager) :
         }
     }
 
-    private val diffUtil = object : DiffUtil.ItemCallback<MovieCast>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<MovieCastEntity>() {
         override fun areItemsTheSame(
-            oldItem: MovieCast,
-            newItem: MovieCast
+            oldItem: MovieCastEntity,
+            newItem: MovieCastEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: MovieCast,
-            newItem: MovieCast
+            oldItem: MovieCastEntity,
+            newItem: MovieCastEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -57,12 +57,12 @@ class CastAdapter @Inject constructor( private val glide : RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var movieCredits: List<MovieCast>
+    var movieCreditEntities: List<MovieCastEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
 
-    override fun getItemCount(): Int = movieCredits.size
+    override fun getItemCount(): Int = movieCreditEntities.size
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_185.plus(poster_path)

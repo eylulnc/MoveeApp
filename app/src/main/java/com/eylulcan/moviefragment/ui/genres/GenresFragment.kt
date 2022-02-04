@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.eylulcan.moviefragment.ItemListener
+import com.eylulcan.moviefragment.ui.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenresBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,16 +41,16 @@ class GenresFragment : Fragment(), ItemListener {
     }
 
     private fun observeViewModel() {
-        genreViewModel.genres.observe(viewLifecycleOwner, { genreData ->
+        genreViewModel.genres.observe(viewLifecycleOwner) { genreData ->
             genreData?.let { genreList ->
                 val list = genreList.genres ?: emptyList()
                 binding.genresFragmentRecyclerView.adapter = genreListAdapter
                 genreListAdapter.setOnItemClickListener { id ->
                     onItemClicked(id)
                 }
-                genreListAdapter.genreList  = list
+                genreListAdapter.genreList = list
             }
-        })
+        }
     }
 
     override fun onItemClicked(id: Int) {

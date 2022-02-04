@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.databinding.GenresFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.Genre
+import com.eylulcan.moviefragment.domain.entity.GenreEntity
 import javax.inject.Inject
 
 class GenresAdapter @Inject constructor() :
@@ -44,17 +44,17 @@ class GenresAdapter @Inject constructor() :
     override fun getItemCount(): Int = genreList.size
 
 
-    private val diffUtil = object : DiffUtil.ItemCallback<Genre>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<GenreEntity>() {
         override fun areItemsTheSame(
-            oldItem: Genre,
-            newItem: Genre
+            oldItem: GenreEntity,
+            newItem: GenreEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: Genre,
-            newItem: Genre
+            oldItem: GenreEntity,
+            newItem: GenreEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -63,7 +63,7 @@ class GenresAdapter @Inject constructor() :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var genreList: List<Genre>
+    var genreList: List<GenreEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

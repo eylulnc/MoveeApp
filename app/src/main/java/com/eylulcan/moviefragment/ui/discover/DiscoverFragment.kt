@@ -17,11 +17,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eylulcan.moviefragment.ItemListener
+import com.eylulcan.moviefragment.ui.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
-import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
@@ -35,12 +35,12 @@ class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by viewModels()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var nowPlayingList: ArrayList<ResultMovie> = arrayListOf()
-    private var topRatedList: ArrayList<ResultMovie> = arrayListOf()
-    private var mostPopularList: ArrayList<ResultMovie> = arrayListOf()
+    private var nowPlayingList: ArrayList<ResultMovieEntity> = arrayListOf()
+    private var topRatedList: ArrayList<ResultMovieEntity> = arrayListOf()
+    private var mostPopularList: ArrayList<ResultMovieEntity> = arrayListOf()
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
-    private val allListItems: ArrayList<ArrayList<ResultMovie>> = arrayListOf()
+    private val allListItems: ArrayList<ArrayList<ResultMovieEntity>> = arrayListOf()
     @Inject
     lateinit var recyclerViewAdapter: DiscoverParentAdapter
     @Inject
@@ -80,29 +80,29 @@ class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.
     }
 
     private fun observeViewModel() {
-        discoverViewModel.popularMovies.observe(viewLifecycleOwner, { movieData ->
+        discoverViewModel.popularMovies.observe(viewLifecycleOwner) { movieData ->
             movieData?.let { movie ->
                 mostPopularList.clear()
-                mostPopularList.addAll(movie.results as ArrayList<ResultMovie>)
+                mostPopularList.addAll(movie.results as ArrayList<ResultMovieEntity>)
                 allListItems.add(mostPopularList)
                 discoverViewModel.getTopRatedMovieList()
             }
-        })
-        discoverViewModel.topRatedMovies.observe(viewLifecycleOwner, { movieData ->
+        }
+        discoverViewModel.topRatedMovies.observe(viewLifecycleOwner) { movieData ->
             movieData?.let { movie ->
                 topRatedList.clear()
-                topRatedList.addAll(movie.results as ArrayList<ResultMovie>)
+                topRatedList.addAll(movie.results as ArrayList<ResultMovieEntity>)
                 allListItems.add(topRatedList)
                 discoverViewModel.getNowPlayingMovieList()
             }
-        })
-        discoverViewModel.nowPlaying.observe(viewLifecycleOwner, { movieData ->
+        }
+        discoverViewModel.nowPlaying.observe(viewLifecycleOwner) { movieData ->
             movieData?.let { movie ->
                 val results = movie.results
-                val restValue: Int = movie.results?.size?.mod(GRID_COUNT) ?: 0
+                val restValue: Int = results?.size?.mod(GRID_COUNT) ?: 0
                 restValue.let {
                     nowPlayingList.clear()
-                    nowPlayingList.addAll(results?.dropLast(it) as ArrayList<ResultMovie>)
+                    nowPlayingList.addAll(results?.dropLast(it) as ArrayList<ResultMovieEntity>)
                 }
                 allListItems.add(nowPlayingList)
                 fragmentBinding.discoverMainRecyclerView.apply {
@@ -118,21 +118,21 @@ class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.
                     recyclerViewAdapter.movieResults = allListItems
                 }
             }
-        })
-        discoverViewModel.sessionId.observe(viewLifecycleOwner, { session ->
+        }
+        discoverViewModel.sessionEntityId.observe(viewLifecycleOwner) { session ->
             sharedPreferenceForSessionID.edit()
                 .putString(getString(R.string.sessionId), session.sessionID).commit()
-        })
-        discoverViewModel.upcomingMovies.observe(viewLifecycleOwner, { movies ->
+        }
+        discoverViewModel.upcomingMovies.observe(viewLifecycleOwner) { movies ->
             removePlaceholders()
             val moviesInfo: ArrayList<Pair<Int, String>> =
-                setMoviesInfo(movies.results as java.util.ArrayList<ResultMovie>)
+                setMoviesInfo(movies.results as java.util.ArrayList<ResultMovieEntity>)
             fragmentBinding.discoverSlider.adapter = sliderAdapter
             sliderAdapter.updateList(moviesInfo)
             fragmentBinding.dotsIndicator.setViewPager2(fragmentBinding.discoverSlider)
             sliderScroll()
             removePlaceholders()
-        })
+        }
     }
 
     private fun setupUI() {
@@ -162,10 +162,10 @@ class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.
         toolbar.setOnMenuItemClickListener(this)
     }
 
-    private fun setMoviesInfo(movieResults: ArrayList<ResultMovie>): ArrayList<Pair<Int, String>> {
+    private fun setMoviesInfo(movieResultEntities: ArrayList<ResultMovieEntity>): ArrayList<Pair<Int, String>> {
         val pairList: ArrayList<Pair<Int, String>> = arrayListOf()
         for (i in 0..5) {
-            val item = movieResults[i]
+            val item = movieResultEntities[i]
             item.let {
                 pairList.add(Pair(item.id, item.backdropPath) as Pair<Int, String>)
             }

@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.ImageFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.ProfileImage
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.ProfileImageEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import javax.inject.Inject
 
 class ImageAdapter @Inject constructor(private var glide: RequestManager) :
@@ -38,17 +38,17 @@ class ImageAdapter @Inject constructor(private var glide: RequestManager) :
     private fun setImageUrl(profile_path: String?): String =
         Utils.BASE_IMAGE_URL_ORIGINAL.plus(profile_path)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<ProfileImage>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<ProfileImageEntity>() {
         override fun areItemsTheSame(
-            oldItem: ProfileImage,
-            newItem: ProfileImage
+            oldItem: ProfileImageEntity,
+            newItem: ProfileImageEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ProfileImage,
-            newItem: ProfileImage
+            oldItem: ProfileImageEntity,
+            newItem: ProfileImageEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -57,7 +57,7 @@ class ImageAdapter @Inject constructor(private var glide: RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var album: List<ProfileImage>
+    var album: List<ProfileImageEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

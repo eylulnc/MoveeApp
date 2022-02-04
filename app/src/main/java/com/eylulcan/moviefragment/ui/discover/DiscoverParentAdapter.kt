@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.DiscoverParentFragmentBinding
-import com.eylulcan.moviefragment.model.ResultMovie
+import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -101,17 +101,17 @@ class DiscoverParentAdapter @Inject constructor(
         }
     }
 
-    private val diffUtil = object : DiffUtil.ItemCallback<ArrayList<ResultMovie>>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<ArrayList<ResultMovieEntity>>() {
         override fun areItemsTheSame(
-            oldItem: ArrayList<ResultMovie>,
-            newItem: ArrayList<ResultMovie>
+            oldItem: ArrayList<ResultMovieEntity>,
+            newItem: ArrayList<ResultMovieEntity>
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ArrayList<ResultMovie>,
-            newItem: ArrayList<ResultMovie>
+            oldItem: ArrayList<ResultMovieEntity>,
+            newItem: ArrayList<ResultMovieEntity>
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -120,7 +120,7 @@ class DiscoverParentAdapter @Inject constructor(
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var movieResults: List<ArrayList<ResultMovie>>
+    var movieResults: List<ArrayList<ResultMovieEntity>>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

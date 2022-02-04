@@ -12,9 +12,9 @@ import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
-import com.eylulcan.moviefragment.model.MovieDetail
+import com.eylulcan.moviefragment.domain.entity.MovieDetailEntity
 import com.eylulcan.moviefragment.ui.moviedetail.popup.CustomPopUpDialogFragment
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.util.Utils
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
@@ -74,11 +74,11 @@ class MovieDetailFragment @Inject constructor(): Fragment() {
     }
 
     private fun observeViewModel() {
-        movieDetailViewModel.videos.observe(viewLifecycleOwner, { videoList ->
+        movieDetailViewModel.videos.observe(viewLifecycleOwner) { videoList ->
             if (videoList.results?.isNotEmpty() == true) {
                 fragmentBinding.watchButton.visibility = View.VISIBLE
                 fragmentBinding.watchButton.setOnClickListener {
-                    videoList?.results.first().site?.let { videoSite ->
+                    videoList?.results?.first()?.site?.let { videoSite ->
                         videoList.results.first().key?.let { key ->
                             val intent = Intent(Intent.ACTION_VIEW)
                             intent.data = Uri.parse(setVideoUri(videoSite, key))
@@ -87,11 +87,11 @@ class MovieDetailFragment @Inject constructor(): Fragment() {
                     }
                 }
             }
-        })
-        movieDetailViewModel.detail.observe(viewLifecycleOwner, { movie ->
+        }
+        movieDetailViewModel.detailEntity.observe(viewLifecycleOwner) { movie ->
             removePlaceholders()
             setupUI(movie)
-        })
+        }
     }
 
     private fun setVideoUri(videoSite: String, key: String): String {
@@ -110,8 +110,8 @@ class MovieDetailFragment @Inject constructor(): Fragment() {
         return getString(R.string.duration, durationHour, durationMinute)
     }
 
-    private fun setupUI(movieDetails: MovieDetail?) {
-        movieDetails?.let { selectedMovie ->
+    private fun setupUI(movieDetailsEntity: MovieDetailEntity?) {
+        movieDetailsEntity?.let { selectedMovie ->
             glide.load(setImageUrl(selectedMovie.backdropPath))
                 .into(fragmentBinding.detailImagePoster)
             fragmentBinding.detailMovieNameText.text = selectedMovie.title

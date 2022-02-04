@@ -8,12 +8,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.RequestManager
-import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSliderBinding
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.util.Utils
+import com.eylulcan.moviefragment.ui.ItemListener
 
-class SliderFragment(private val movieInfo: Pair<Int,String>, private val glide :RequestManager): Fragment(), ItemListener {
+class SliderFragment(private val movieInfo: Pair<Int,String>, private val glide :RequestManager): Fragment(),
+    ItemListener {
 
     private lateinit var binding: FragmentSliderBinding
 

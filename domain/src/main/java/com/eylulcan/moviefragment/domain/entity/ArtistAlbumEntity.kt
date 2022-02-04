@@ -4,5 +4,5 @@ import java.io.Serializable
 
 data class ArtistAlbumEntity(
     val id: Int,
-    val artistProfileImageEntities: List<ProfileImageEntity>
+    val artistProfileImages: List<ProfileImageEntity>
 ) : Serializable

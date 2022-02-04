@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.databinding.MoreFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import javax.inject.Inject
 
 class MoreAdapter @Inject constructor(private var glide: RequestManager) :
@@ -32,7 +32,7 @@ class MoreAdapter @Inject constructor(private var glide: RequestManager) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = movies[position]
+        val movie = movieEntities[position]
         holder.binding.movieNameMore.text = movie.title
         glide.load(setImageUrl(movie.backdropPath)).into(holder.binding.movieImage)
         genreNames = ""
@@ -48,22 +48,22 @@ class MoreAdapter @Inject constructor(private var glide: RequestManager) :
         }
     }
 
-    override fun getItemCount(): Int = movies.size
+    override fun getItemCount(): Int = movieEntities.size
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_300.plus(poster_path)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<ResultMovie>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<ResultMovieEntity>() {
         override fun areItemsTheSame(
-            oldItem: ResultMovie,
-            newItem: ResultMovie
+            oldItem: ResultMovieEntity,
+            newItem: ResultMovieEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ResultMovie,
-            newItem: ResultMovie
+            oldItem: ResultMovieEntity,
+            newItem: ResultMovieEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -72,7 +72,7 @@ class MoreAdapter @Inject constructor(private var glide: RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var movies: List<ResultMovie>
+    var movieEntities: List<ResultMovieEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

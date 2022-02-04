@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.DiscoverChildRecyclerRowBinding
-import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import javax.inject.Inject
 
 class DiscoverChildAdapter @Inject constructor(private val glide: RequestManager) :
@@ -48,17 +48,17 @@ class DiscoverChildAdapter @Inject constructor(private val glide: RequestManager
         Utils.BASE_IMAGE_URL_185.plus(poster_path)
 
 
-    private val diffUtil = object : DiffUtil.ItemCallback<ResultMovie>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<ResultMovieEntity>() {
         override fun areItemsTheSame(
-            oldItem: ResultMovie,
-            newItem: ResultMovie
+            oldItem: ResultMovieEntity,
+            newItem: ResultMovieEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ResultMovie,
-            newItem: ResultMovie
+            oldItem: ResultMovieEntity,
+            newItem: ResultMovieEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -67,7 +67,7 @@ class DiscoverChildAdapter @Inject constructor(private val glide: RequestManager
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var movieResults: List<ResultMovie>
+    var movieResults: List<ResultMovieEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

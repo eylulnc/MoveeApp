@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.Genres
 import com.eylulcan.moviefragment.databinding.GenreMovieListRecyclerRowBinding
-import com.eylulcan.moviefragment.model.ResultMovie
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import javax.inject.Inject
 
 class GenreMovieListAdapter @Inject constructor( private val glide: RequestManager
@@ -53,17 +53,17 @@ class GenreMovieListAdapter @Inject constructor( private val glide: RequestManag
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_300.plus(poster_path)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<ResultMovie>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<ResultMovieEntity>() {
         override fun areItemsTheSame(
-            oldItem: ResultMovie,
-            newItem: ResultMovie
+            oldItem: ResultMovieEntity,
+            newItem: ResultMovieEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ResultMovie,
-            newItem: ResultMovie
+            oldItem: ResultMovieEntity,
+            newItem: ResultMovieEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -71,7 +71,7 @@ class GenreMovieListAdapter @Inject constructor( private val glide: RequestManag
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var movieResult: List<ResultMovie>
+    var movieResult: List<ResultMovieEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

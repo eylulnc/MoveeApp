@@ -10,8 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentAlbumBinding
-import com.eylulcan.moviefragment.model.ArtistAlbum
-import com.eylulcan.moviefragment.model.ProfileImage
+import com.eylulcan.moviefragment.domain.entity.ArtistAlbumEntity
+import com.eylulcan.moviefragment.domain.entity.ProfileImageEntity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,7 +34,7 @@ class AlbumFragment @Inject constructor(private val albumAdapter: AlbumAdapter):
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val selectedArtistAlbum = arguments?.get(getString(R.string.photo_album)) as ArtistAlbum
+        val selectedArtistAlbum = arguments?.get(getString(R.string.photo_album)) as ArtistAlbumEntity
         val artistAlbum = selectedArtistAlbum.artistProfileImages ?: emptyList()
         binding.albumRecyclerView.adapter = albumAdapter
         albumAdapter.setOnItemClickListener { album, position ->
@@ -43,8 +43,8 @@ class AlbumFragment @Inject constructor(private val albumAdapter: AlbumAdapter):
         albumAdapter.album = artistAlbum
     }
 
-    override fun onImageClicked(album: List<ProfileImage>?, position: Int) {
-        val albumPositionPair: Pair<List<ProfileImage>?, Int> = Pair(album, position)
+    override fun onImageClicked(album: List<ProfileImageEntity>?, position: Int) {
+        val albumPositionPair: Pair<List<ProfileImageEntity>?, Int> = Pair(album, position)
         val imageAlbumDataBundle = bundleOf((getString(R.string.image_url) to albumPositionPair))
         findNavController().navigate(
             R.id.action_albumFragment_to_imageFragment,

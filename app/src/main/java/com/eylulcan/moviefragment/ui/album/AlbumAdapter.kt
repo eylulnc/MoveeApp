@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.AlbumFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.ProfileImage
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.ProfileImageEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.*
 import javax.inject.Inject
@@ -23,9 +23,9 @@ class AlbumAdapter @Inject constructor(private var glide: RequestManager) :
     private val broccoli = Broccoli()
     private val placeholderNeeded = arrayListOf<View>()
 
-    private var onItemClickListener: ((album: List<ProfileImage>?, position: Int) -> Unit)? = null
+    private var onItemClickListener: ((album: List<ProfileImageEntity>?, position: Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (album: List<ProfileImage>?, position: Int) -> Unit) {
+    fun setOnItemClickListener(listener: (album: List<ProfileImageEntity>?, position: Int) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -73,17 +73,17 @@ class AlbumAdapter @Inject constructor(private var glide: RequestManager) :
     private fun setImageUrl(file_path: String?): String = Utils.BASE_IMAGE_URL_300.plus(file_path)
 
 
-    private val diffUtil = object : DiffUtil.ItemCallback<ProfileImage>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<ProfileImageEntity>() {
         override fun areItemsTheSame(
-            oldItem: ProfileImage,
-            newItem: ProfileImage
+            oldItem: ProfileImageEntity,
+            newItem: ProfileImageEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: ProfileImage,
-            newItem: ProfileImage
+            oldItem: ProfileImageEntity,
+            newItem: ProfileImageEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -92,7 +92,7 @@ class AlbumAdapter @Inject constructor(private var glide: RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var album: List<ProfileImage>
+    var album: List<ProfileImageEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

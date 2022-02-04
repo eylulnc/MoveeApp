@@ -10,10 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentGenreMovieListBinding
-import com.eylulcan.moviefragment.model.ResultMovie
+import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
+import com.eylulcan.moviefragment.ui.ItemListener
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,10 +24,10 @@ class GenreMovieListFragment : Fragment(), ItemListener {
     @Inject
     lateinit var genreMovieListAdapter: GenreMovieListAdapter
     private val genresListViewModel: GenreMovieListViewModel by viewModels()
-    private var movieList: ArrayList<ResultMovie> = arrayListOf()
+    private var movieList: ArrayList<ResultMovieEntity> = arrayListOf()
     private var selectedGenreId: Int = 0
     private var enableToRequest: Boolean = false
-    private var moviesInAPage: List<ResultMovie>? = emptyList()
+    private var moviesInAPage: List<ResultMovieEntity>? = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +50,7 @@ class GenreMovieListFragment : Fragment(), ItemListener {
     }
 
     private fun observeViewModel() {
-        genresListViewModel.movies.observe(viewLifecycleOwner, { movie ->
+        genresListViewModel.movies.observe(viewLifecycleOwner) { movie ->
             moviesInAPage =
                 if (movie.results?.let { moviesInAPage?.containsAll(it) } == true) {
                     emptyList()
@@ -61,7 +61,7 @@ class GenreMovieListFragment : Fragment(), ItemListener {
             genreMovieListAdapter.movieResult = movieList
             enableToRequest = true
             genreMovieListAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     override fun onItemClicked(id: Int) {

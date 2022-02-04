@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.SearchFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.SearchResult
+import com.eylulcan.moviefragment.domain.entity.SearchResultEntity
 import javax.inject.Inject
 
 private const val PERSON_SEARCH = 0
@@ -98,17 +98,17 @@ class SearchAdapter @Inject constructor(private val glide: RequestManager) :
         return searchResult[position].mediaType == "tv"
     }
 
-    private val diffUtil = object : DiffUtil.ItemCallback<SearchResult>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<SearchResultEntity>() {
         override fun areItemsTheSame(
-            oldItem: SearchResult,
-            newItem: SearchResult
+            oldItem: SearchResultEntity,
+            newItem: SearchResultEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: SearchResult,
-            newItem: SearchResult
+            oldItem: SearchResultEntity,
+            newItem: SearchResultEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -117,7 +117,7 @@ class SearchAdapter @Inject constructor(private val glide: RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var searchResult: List<SearchResult>
+    var searchResult: List<SearchResultEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

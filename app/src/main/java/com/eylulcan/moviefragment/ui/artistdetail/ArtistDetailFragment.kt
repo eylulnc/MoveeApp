@@ -13,13 +13,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
-import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.BottomSheetFragmentBinding
 import com.eylulcan.moviefragment.databinding.FragmentArtistDetailBinding
-import com.eylulcan.moviefragment.model.ArtistDetail
-import com.eylulcan.moviefragment.model.ProfileImage
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.ArtistDetailEntity
+import com.eylulcan.moviefragment.domain.entity.ProfileImageEntity
+import com.eylulcan.moviefragment.domain.util.Utils
+import com.eylulcan.moviefragment.ui.ItemListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
@@ -67,7 +67,7 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
     }
 
     private fun observeViewModel() {
-        artistDetailViewModel.artistDetail.observe(viewLifecycleOwner, { detail ->
+        artistDetailViewModel.artistDetail.observe(viewLifecycleOwner) { detail ->
             setupUIBottomSheet(detail)
             removePlaceholders()
             binding.artistName.text = detail.name
@@ -76,14 +76,14 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
             binding.artistDetailCoverImage.let {
                 glide.load(setImageUrl(detail.profilePath)).circleCrop().into(it)
             }
-        })
+        }
 
-        artistDetailViewModel.artistAlbum.observe(viewLifecycleOwner, { album ->
+        artistDetailViewModel.artistAlbum.observe(viewLifecycleOwner) { album ->
             val albumSize = album.artistProfileImages?.size ?: 0
             includeBinding.albumPreviewRecyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             if (albumSize > 5) {
-                val albumTemp: List<ProfileImage> =
+                val albumTemp: List<ProfileImageEntity> =
                     album.artistProfileImages?.subList(0, 4) ?: emptyList()
                 includeBinding.albumPreviewRecyclerView.adapter = albumRecyclerAdapter
                 albumRecyclerAdapter.artistAlbum = albumTemp
@@ -96,9 +96,9 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
                 this.parentFragment?.findNavController()
                     ?.navigate(R.id.action_artistDetailFragment_to_albumFragment, albumDataBundle)
             }
-        })
+        }
 
-        artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner, { movieCredits ->
+        artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner) { movieCredits ->
             if (Utils.isTablet(requireContext())) {
                 binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
             } else {
@@ -110,7 +110,7 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
             artistMovieAdapter.setOnItemClickListener { id -> onItemClicked(id) }
             artistMovieAdapter.artistMovieCredits = movieCredits.cast ?: emptyList()
 
-        })
+        }
 
     }
 
@@ -140,7 +140,7 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
         artistDetailViewModel.setListsToDefault()
     }
 
-    private fun setupUIBottomSheet(detail: ArtistDetail) {
+    private fun setupUIBottomSheet(detail: ArtistDetailEntity) {
         includeBinding.expandTextView.text = detail.biography
         includeBinding.artistBirthdayText.text = detail.birthday
         includeBinding.artistDeathDayText.text = detail.deathday

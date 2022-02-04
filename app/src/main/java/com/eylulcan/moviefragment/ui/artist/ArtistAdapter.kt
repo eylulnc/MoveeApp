@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.PeopleResult
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.PeopleResultEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.*
 import javax.inject.Inject
@@ -74,17 +74,17 @@ class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_185.plus(poster_path)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<PeopleResult>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<PeopleResultEntity>() {
         override fun areItemsTheSame(
-            oldItem: PeopleResult,
-            newItem: PeopleResult
+            oldItem: PeopleResultEntity,
+            newItem: PeopleResultEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: PeopleResult,
-            newItem: PeopleResult
+            oldItem: PeopleResultEntity,
+            newItem: PeopleResultEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -93,7 +93,7 @@ class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var peopleResult: List<PeopleResult>
+    var peopleResult: List<PeopleResultEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

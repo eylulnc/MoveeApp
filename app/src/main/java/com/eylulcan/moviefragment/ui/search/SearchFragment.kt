@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentSearchBinding
-import com.eylulcan.moviefragment.model.SearchResult
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.SearchResultEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,8 +29,8 @@ class SearchFragment : Fragment(), SearchListener {
     private var searchQuery: String = ""
     @Inject
     lateinit var searchAdapter: SearchAdapter
-    private var searchResultList: ArrayList<SearchResult> = arrayListOf()
-    private var searchItemsInAPage: List<SearchResult>? = emptyList()
+    private var searchResultList: ArrayList<SearchResultEntity> = arrayListOf()
+    private var searchItemsInAPage: List<SearchResultEntity>? = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +55,7 @@ class SearchFragment : Fragment(), SearchListener {
     }
 
     private fun observeViewModel() {
-        searchViewModel.result.observe(viewLifecycleOwner, { results ->
+        searchViewModel.results.observe(viewLifecycleOwner) { results ->
             searchItemsInAPage =
                 if (results.searchResults?.let { searchItemsInAPage?.containsAll(it) } == true) {
                     emptyList()
@@ -65,7 +65,7 @@ class SearchFragment : Fragment(), SearchListener {
             searchResultList.addAll(searchItemsInAPage ?: arrayListOf())
             searchAdapter.searchResult = searchResultList
             searchAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     override fun onMovieClicked(id: Int) {
@@ -119,6 +119,6 @@ class SearchFragment : Fragment(), SearchListener {
 
     override fun onStop() {
         super.onStop()
-        searchViewModel.result.removeObservers(this)
+        searchViewModel.results.removeObservers(this)
     }
 }
