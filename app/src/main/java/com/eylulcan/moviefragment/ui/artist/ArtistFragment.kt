@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.ui.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentArtistBinding
-import com.eylulcan.moviefragment.domain.entity.PeopleResultEntity
+import com.eylulcan.moviefragment.domain.entity.ArtistResultEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,9 +27,9 @@ class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapte
 
     private val artistViewModel: ArtistViewModel by viewModels()
     private lateinit var binding: FragmentArtistBinding
-    private var artistList: ArrayList<PeopleResultEntity> = arrayListOf()
+    private var artistList: ArrayList<ArtistResultEntity> = arrayListOf()
     private var enableToRequest: Boolean = false
-    private var moviesInAPage: List<PeopleResultEntity>? = emptyList()
+    private var moviesInAPage: List<ArtistResultEntity>? = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,15 +56,15 @@ class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapte
     }
 
     private fun observeViewModel() {
-        artistViewModel.popularPeopleEntity.observe(viewLifecycleOwner) { popularPeopleList ->
+        artistViewModel.artistEntity.observe(viewLifecycleOwner) { popularPeopleList ->
             moviesInAPage =
-                if (popularPeopleList.results?.let { moviesInAPage?.containsAll(it) } == true) {
+                if (popularPeopleList.results.let { moviesInAPage?.containsAll(it) } == true) {
                     emptyList()
                 } else {
                     popularPeopleList.results
                 }
             artistList.addAll(moviesInAPage ?: arrayListOf())
-            artistAdapter.peopleResult = artistList
+            artistAdapter.artistResult = artistList
             enableToRequest = true
             artistAdapter.notifyDataSetChanged()
         }
@@ -72,7 +72,7 @@ class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapte
 
     override fun onStop() {
         super.onStop()
-        artistViewModel.popularPeopleEntity.removeObservers(this)
+        artistViewModel.artistEntity.removeObservers(this)
     }
 
     private fun setupUI() {

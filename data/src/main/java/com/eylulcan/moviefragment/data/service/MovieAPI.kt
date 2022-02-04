@@ -32,7 +32,7 @@ interface MovieAPI {
     suspend fun getPopularPeople(
         @Query("api_key") apiKey: String = Utils.API_KEY,
         @Query("page") pageNo: Int
-    ): Response<PopularPeopleList>
+    ): Response<ArtistList>
 
     @GET("person/{id}/movie_credits")
     suspend fun getArtistMovieCredits(

@@ -1,6 +1,6 @@
 package com.eylulcan.moviefragment.domain.entity
 
-data class PeopleResultEntity(
+data class ArtistResultEntity(
     val adult: Boolean? = null,
     val gender: Int? = null,
     val id: Int? = null,

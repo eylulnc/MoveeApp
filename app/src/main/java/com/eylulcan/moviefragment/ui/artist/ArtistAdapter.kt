@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.domain.entity.PeopleResultEntity
+import com.eylulcan.moviefragment.domain.entity.ArtistResultEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import me.samlss.broccoli.Broccoli
 import java.util.*
@@ -45,13 +45,13 @@ class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
         }
         setPlaceholders(holder)
 
-        peopleResult[position].let { artist ->
+        artistResult[position].let { artist ->
             holder.binding.artistRecyclerPersonName.text = artist.name
             glide.load(setImageUrl(artist.profilePath)).into(holder.binding.artistRecyclerRowImage)
             holder.binding.artistRecyclerPersonName.text = artist.name
         }
         holder.itemView.setOnClickListener {
-            peopleResult[position].id?.let { artistId ->
+            artistResult[position].id?.let { artistId ->
                 onItemClickListener?.let { it1 -> it1(artistId) }
             }
             var task: Runnable? = mTaskManager[holder.itemView]
@@ -69,22 +69,22 @@ class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
         }
     }
 
-    override fun getItemCount(): Int = peopleResult.size
+    override fun getItemCount(): Int = artistResult.size
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_185.plus(poster_path)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<PeopleResultEntity>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<ArtistResultEntity>() {
         override fun areItemsTheSame(
-            oldItem: PeopleResultEntity,
-            newItem: PeopleResultEntity
+            oldItem: ArtistResultEntity,
+            newItem: ArtistResultEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: PeopleResultEntity,
-            newItem: PeopleResultEntity
+            oldItem: ArtistResultEntity,
+            newItem: ArtistResultEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -93,7 +93,7 @@ class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var peopleResult: List<PeopleResultEntity>
+    var artistResult: List<ArtistResultEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
