@@ -12,7 +12,7 @@ class ArtistList {
 
     @SerializedName("results")
     @Expose
-    val resultEntities: List<ArtistResultEntity>? = null
+    val results: List<ArtistResultEntity>? = null
 
     @SerializedName("total_pages")
     @Expose

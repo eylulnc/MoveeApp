@@ -1,14 +1,11 @@
 package com.eylulcan.moviefragment.data.mapper
 
+import com.eylulcan.moviefragment.data.Utils
 import com.eylulcan.moviefragment.data.model.GuestSession
 import com.eylulcan.moviefragment.data.model.Movie
 import com.eylulcan.moviefragment.domain.entity.GuestSessionEntity
 import com.eylulcan.moviefragment.domain.entity.MovieEntity
 import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
-
-const val IF_INT_NULL = 0
-const val IF_STR_NULL = ""
-const val IF_BOOLEAN_NULL = false
 
 class MovieMapper {
 
@@ -18,17 +15,17 @@ class MovieMapper {
             list.add(it)
         }
         return MovieEntity(
-            page = movie.page ?: IF_INT_NULL,
+            page = movie.page ?: Utils.IF_INT_NULL,
             results = list,
-            totalPages = movie.totalPages ?: IF_INT_NULL ,
-            totalResults = movie.totalResults ?: IF_INT_NULL
+            totalPages = movie.totalPages ?: Utils.IF_INT_NULL ,
+            totalResults = movie.totalResults ?: Utils.IF_INT_NULL
         )
     }
 
     fun convertToGuestSessionEntity(guestSession: GuestSession): GuestSessionEntity {
         return GuestSessionEntity(
-            success = guestSession.success ?: IF_BOOLEAN_NULL,
-            sessionID = guestSession.sessionID ?: IF_STR_NULL
+            success = guestSession.success ?: Utils.IF_BOOLEAN_NULL,
+            sessionID = guestSession.sessionID ?: Utils.IF_STR_NULL
         )
     }
 
