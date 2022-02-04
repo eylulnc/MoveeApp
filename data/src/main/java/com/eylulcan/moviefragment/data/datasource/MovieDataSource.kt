@@ -31,4 +31,8 @@ class MovieDataSource @Inject constructor(
     override suspend fun getGuestSessionId(): GuestSessionEntity? {
         return api.getGuestSessionId().body()?.let { movieMapper.convertToGuestSessionEntity(it) }
     }
+
+    override suspend fun getGenreMovieList(genreId: Int, pageNo: Int): MovieEntity? {
+        return api.getMovieByGenreId(genreId = genreId, pageNo = pageNo).body()?.let { movieMapper.convertToMovieEntity(it) }
+    }
 }
