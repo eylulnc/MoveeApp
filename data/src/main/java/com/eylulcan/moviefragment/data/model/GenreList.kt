@@ -9,5 +9,5 @@ import javax.annotation.Generated
  class GenreList {
     @SerializedName("genres")
     @Expose
-    val genreEntities :List<GenreEntity>? = null
+    val genres :List<GenreEntity>? = null
 }

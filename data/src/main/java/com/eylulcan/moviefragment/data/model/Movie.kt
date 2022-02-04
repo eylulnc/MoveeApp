@@ -11,18 +11,18 @@ class Movie: Serializable {
 
     @SerializedName("page")
     @Expose
-    private val page: Int? = null
+    val page: Int? = null
 
     @SerializedName("results")
     @Expose
-    val resultEntities: List<ResultMovieEntity>? = null
+    val results: List<ResultMovieEntity>? = null
 
     @SerializedName("total_pages")
     @Expose
-    private val totalPages: Int? = null
+    val totalPages: Int? = null
 
     @SerializedName("total_results")
     @Expose
-    private val totalResults: Int? = null
+    val totalResults: Int? = null
 
 }
