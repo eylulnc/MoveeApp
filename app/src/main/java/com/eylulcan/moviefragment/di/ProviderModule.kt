@@ -5,8 +5,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.eylulcan.moviefragment.R
-import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.data.service.MovieAPI
+import com.eylulcan.moviefragment.domain.util.Utils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

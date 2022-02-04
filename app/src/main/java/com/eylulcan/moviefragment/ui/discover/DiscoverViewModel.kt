@@ -3,102 +3,88 @@ package com.eylulcan.moviefragment.ui.discover
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.model.GuestSession
-import com.eylulcan.moviefragment.model.Movie
+import com.eylulcan.moviefragment.domain.entity.GuestSessionEntity
+import com.eylulcan.moviefragment.domain.entity.MovieEntity
+import com.eylulcan.moviefragment.domain.usecase.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import androidx.hilt.lifecycle.ViewModelInject
-import com.eylulcan.moviefragment.util.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @HiltViewModel
-class DiscoverViewModel @Inject constructor(private var retrofit: MovieAPI) : ViewModel() {
+class DiscoverViewModel @Inject constructor(
+    private val topRatedMovieUseCase: TopRatedMovieUseCase,
+    private val popularMovieUseCase: PopularMovieUseCase,
+    private val upcomingDataUseCase: UpcomingDataUseCase,
+    private val nowPlayingDataUseCase: NowPlayingDataUseCase,
+    private val guestSessionUseCase : GuestSessionUseCase
+) : ViewModel() {
 
-    private var popularMovieList = MutableLiveData<Movie>()
-    val popularMovies: LiveData<Movie> get() = popularMovieList
-    private var topRatedMovieList = MutableLiveData<Movie>()
-    val topRatedMovies: LiveData<Movie> get() = topRatedMovieList
-    private var nowPlayingMovieList = MutableLiveData<Movie>()
-    val nowPlaying: LiveData<Movie> get() = nowPlayingMovieList
-    private val userSession = MutableLiveData<GuestSession>()
-    val sessionId: LiveData<GuestSession> get() = userSession
-    private val upcoming = MutableLiveData<Movie>()
-    val upcomingMovies: LiveData<Movie> get() = upcoming
+    private var popularMovieList = MutableLiveData<MovieEntity>()
+    val popularMovies: LiveData<MovieEntity> get() = popularMovieList
+    private var topRatedMovieList = MutableLiveData<MovieEntity>()
+    val topRatedMovies: LiveData<MovieEntity> get() = topRatedMovieList
+    private var nowPlayingMovieList = MutableLiveData<MovieEntity>()
+    val nowPlaying: LiveData<MovieEntity> get() = nowPlayingMovieList
+    private val userSession = MutableLiveData<GuestSessionEntity>()
+    val sessionEntityId: LiveData<GuestSessionEntity> get() = userSession
+    private val upcoming = MutableLiveData<MovieEntity>()
+    val upcomingMovies: LiveData<MovieEntity> get() = upcoming
 
-    fun getPopularMovieList() {
+
+    suspend fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getPopularData()
-            response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        popularMovieList.postValue(it)
-                    }
-                }
-            }
-        }
-    }
-
-    fun getTopRatedMovieList() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getTopRatedData()
-            response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
+            val result = popularMovieUseCase()
+            result.let {
                         topRatedMovieList.postValue(it)
                     }
                 }
             }
-        }
-    }
+
+    suspend fun getTopRatedMovieList() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = topRatedMovieUseCase.invoke()
+            result.let {
+                        topRatedMovieList.postValue(it)
+                    }
+                }
+            }
+
 
     fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getNowPlayingData()
-            response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        nowPlayingMovieList.postValue(it)
-                    }
-                }
+            val result = nowPlayingDataUseCase()
+            result.let {
+                nowPlayingMovieList.postValue(it)
             }
         }
     }
 
+
     fun getGuestSession() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getGuestSessionId()
+            val response = guestSessionUseCase()
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
                         userSession.postValue(it)
                     }
                 }
             }
-        }
-    }
 
     fun getUpcomingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getUpcomingData()
+            val response = upcomingDataUseCase()
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
                         upcoming.postValue(it)
                     }
                 }
             }
-        }
-    }
 
-    fun setListsToDefault(){
-        popularMovieList = MutableLiveData<Movie>()
-        topRatedMovieList = MutableLiveData<Movie>()
-        nowPlayingMovieList = MutableLiveData<Movie>()
+    fun setListsToDefault() {
+        popularMovieList = MutableLiveData<MovieEntity>()
+        topRatedMovieList = MutableLiveData<MovieEntity>()
+        nowPlayingMovieList = MutableLiveData<MovieEntity>()
     }
 
 }
+
