@@ -117,7 +117,7 @@
         tools:layout="@layout/fragment_album" >
     <argument
         android:name="selectedArtistAlbum"
-        app:argType="com.eylulcan.moviefragment.model.ArtistAlbum" />
+        app:argType="com.eylulcan.moviefragment.domain.entity.ArtistAlbumEntity" />
         <action
             android:id="@+id/action_albumFragment_to_imageFragment"
             app:destination="@id/imageFragment" />
