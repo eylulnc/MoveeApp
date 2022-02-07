@@ -1,11 +1,11 @@
 package com.eylulcan.moviefragment.data.repository
 
-import com.eylulcan.moviefragment.data.datasource.MovieDataSource
+import com.eylulcan.moviefragment.data.datasource.remote.MovieRemoteDataSource
 import com.eylulcan.moviefragment.domain.entity.*
 import com.eylulcan.moviefragment.domain.repository.MovieRepository
 import javax.inject.Inject
 
-class MovieRepositoryImpl @Inject constructor(private val dataSource: MovieDataSource) : MovieRepository {
+class MovieRepositoryImpl @Inject constructor(private val dataSource: MovieRemoteDataSource) : MovieRepository {
 
     override suspend fun getPopularData(): MovieEntity? {
         return dataSource.getPopularData()
