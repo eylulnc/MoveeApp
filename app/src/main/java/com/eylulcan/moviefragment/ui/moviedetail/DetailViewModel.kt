@@ -3,8 +3,8 @@ package com.eylulcan.moviefragment.ui.moviedetail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.model.*
+import com.eylulcan.moviefragment.domain.entity.*
+import com.eylulcan.moviefragment.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,80 +12,67 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private var retrofit: MovieAPI): ViewModel() {
+class DetailViewModel @Inject constructor(
+    private val moreMoviesUseCase: MoreMoviesUseCase,
+    private val movieCreditsUseCase: MovieCreditsUseCase,
+    private val movieDetailUseCase: MovieDetailUseCase,
+    private val movieReviewsUseCase: MovieReviewsUseCase,
+    private val videoListUseCase: VideoListUseCase
+) : ViewModel() {
 
-    private val movieCast = MutableLiveData<MovieCredits>()
-    val cast: LiveData<MovieCredits> get() = movieCast
-    private val movieReviews = MutableLiveData<ReviewList>()
-    val reviews: LiveData<ReviewList> get() = movieReviews
-    private val movieMore = MutableLiveData<Movie>()
-    val more: LiveData<Movie> get() = movieMore
-    private val videoList = MutableLiveData<VideoList>()
-    val videos: LiveData<VideoList> get() = videoList
-    private val movieDetails = MutableLiveData<MovieDetail>()
-    val detail: LiveData<MovieDetail> get() = movieDetails
+    private val movieCast = MutableLiveData<MovieCreditsEntity>()
+    val cast: LiveData<MovieCreditsEntity> get() = movieCast
+    private val movieReviews = MutableLiveData<ReviewListEntity>()
+    val reviews: LiveData<ReviewListEntity> get() = movieReviews
+    private val movieMore = MutableLiveData<MovieEntity>()
+    val more: LiveData<MovieEntity> get() = movieMore
+    private val videoList = MutableLiveData<VideoListEntity>()
+    val videos: LiveData<VideoListEntity> get() = videoList
+    private val movieDetails = MutableLiveData<MovieDetailEntity>()
+    val detailEntity: LiveData<MovieDetailEntity> get() = movieDetails
 
     fun getMovieCast(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getMovieCredits(movieId = id)
+            val response = movieCreditsUseCase.invoke(id)
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        movieCast.postValue(it)
-                    }
-                }
+                movieCast.postValue(it)
             }
         }
     }
 
+
     fun getReviews(movieId: Int, pageNo: Int = 1) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getMovieReviews(movieId = movieId, pageNo = pageNo)
+            val response = movieReviewsUseCase.invoke(movieId, pageNo)
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        movieReviews.postValue(it)
-                    }
-                }
+                movieReviews.postValue(it)
             }
         }
     }
 
     fun getMovieMore(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getMoreMovie(movieId = id)
+            val response = moreMoviesUseCase.invoke(id)
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        movieMore.postValue(it)
-                    }
-                }
+                movieMore.postValue(it)
             }
         }
     }
 
     fun getVideoClips(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getMovieVideoClips(movieId = id)
+            val response = videoListUseCase.invoke(id)
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        videoList.postValue(it)
-                    }
-                }
+                videoList.postValue(it)
             }
         }
     }
 
     fun getMovieDetail(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getMovieDetail(genreId = id)
+            val response = movieDetailUseCase.invoke(id)
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        movieDetails.postValue(it)
-                    }
-                }
+                movieDetails.postValue(it)
             }
         }
     }
