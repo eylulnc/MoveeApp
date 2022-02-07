@@ -6,7 +6,7 @@ import java.io.Serializable
 import javax.annotation.Generated
 
 @Generated("jsonschema2pojo")
-class Movie: Serializable {
+class Movie : Serializable {
 
     @SerializedName("page")
     @Expose

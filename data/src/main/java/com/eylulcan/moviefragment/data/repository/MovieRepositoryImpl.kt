@@ -5,7 +5,8 @@ import com.eylulcan.moviefragment.domain.entity.*
 import com.eylulcan.moviefragment.domain.repository.MovieRepository
 import javax.inject.Inject
 
-class MovieRepositoryImpl @Inject constructor(private val dataSource: MovieRemoteDataSource) : MovieRepository {
+class MovieRepositoryImpl @Inject constructor(private val dataSource: MovieRemoteDataSource) :
+    MovieRepository {
 
     override suspend fun getPopularData(): MovieEntity? {
         return dataSource.getPopularData()
@@ -36,7 +37,7 @@ class MovieRepositoryImpl @Inject constructor(private val dataSource: MovieRemot
         guestSessionId: String,
         postBody: PostRatingBodyEntity
     ): RatingPostResponseEntity? {
-        return dataSource.postRateMovie(movieId,guestSessionId,postBody)
+        return dataSource.postRateMovie(movieId, guestSessionId, postBody)
     }
 
     override suspend fun getMovieCredits(movieId: Int): MovieCreditsEntity? {

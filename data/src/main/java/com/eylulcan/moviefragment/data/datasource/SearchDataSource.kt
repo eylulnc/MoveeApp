@@ -12,6 +12,7 @@ class SearchDataSource @Inject constructor(
 ) : SearchRemoteDataSource {
 
     override suspend fun getSearchResult(query: String, pageNo: Int): SearchResultListEntity? {
-        return api.getSearchResult(query = query, pageNo = pageNo).body()?.let { searchMapper.convertSearchResultListEntity(it) }
+        return api.getSearchResult(query = query, pageNo = pageNo).body()
+            ?.let { searchMapper.convertSearchResultListEntity(it) }
     }
 }

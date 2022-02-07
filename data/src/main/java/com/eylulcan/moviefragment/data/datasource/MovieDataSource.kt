@@ -45,12 +45,13 @@ class MovieDataSource @Inject constructor(
             movieID = movieId,
             sessionId = guestSessionId,
             postRatingBodyEntity = postBody
-        ).body()?.let{ movieMapper.convertToRatingPostResponseEntity(it)}
+        ).body()?.let { movieMapper.convertToRatingPostResponseEntity(it) }
 
     }
 
     override suspend fun getMovieCredits(movieId: Int): MovieCreditsEntity? {
-       return api.getMovieCredits(movieId).body()?.let { movieMapper.convertToMovieCreditsEntity(it) }
+        return api.getMovieCredits(movieId).body()
+            ?.let { movieMapper.convertToMovieCreditsEntity(it) }
     }
 
     override suspend fun getMovieReviews(movieId: Int, pageNo: Int): ReviewListEntity? {
@@ -64,11 +65,13 @@ class MovieDataSource @Inject constructor(
     }
 
     override suspend fun getMovieVideo(movieId: Int): VideoListEntity? {
-        return api.getMovieVideoClips(movieId).body()?.let { movieMapper.convertToVideoListEntity(it) }
+        return api.getMovieVideoClips(movieId).body()
+            ?.let { movieMapper.convertToVideoListEntity(it) }
     }
 
     override suspend fun getMovieDetail(movieId: Int): MovieDetailEntity? {
-        return api.getMovieDetail(movieId).body()?.let { movieMapper.convertToMovieDetailEntity(it) }
+        return api.getMovieDetail(movieId).body()
+            ?.let { movieMapper.convertToMovieDetailEntity(it) }
     }
 
 

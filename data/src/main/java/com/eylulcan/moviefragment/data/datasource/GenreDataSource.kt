@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GenreDataSource @Inject constructor(
     private val api: MovieAPI,
     private val genreMapper: GenreMapper
-): GenreRemoteDataSource {
+) : GenreRemoteDataSource {
     override suspend fun getGenres(): GenreListEntity? {
         return api.getGenresData().body()?.let { genreMapper.convertToGenreEntity(it) }
     }

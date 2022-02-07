@@ -15,7 +15,8 @@ class ArtistDataSource @Inject constructor(
 ) : ArtistRemoteDataSource {
 
     override suspend fun getPopularPeople(pageNo: Int): ArtistListEntity? {
-        return api.getPopularPeople(pageNo = pageNo).body()?.let { artistMapper.convertToArtistListEntity(it) }
+        return api.getPopularPeople(pageNo = pageNo).body()
+            ?.let { artistMapper.convertToArtistListEntity(it) }
     }
 
     override suspend fun getArtistDetail(id: Int): ArtistDetailEntity? {
@@ -27,6 +28,7 @@ class ArtistDataSource @Inject constructor(
     }
 
     override suspend fun getArtistMovieCredits(id: Int): ArtistMovieCreditsEntity? {
-        return api.getArtistMovieCredits(id).body()?.let { artistMapper.convertToMovieCreditsEntity(it) }
+        return api.getArtistMovieCredits(id).body()
+            ?.let { artistMapper.convertToMovieCreditsEntity(it) }
     }
 }

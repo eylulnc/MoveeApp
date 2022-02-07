@@ -8,7 +8,8 @@ import com.eylulcan.moviefragment.domain.entity.ArtistMovieCreditsEntity
 import com.eylulcan.moviefragment.domain.repository.ArtistRepository
 import javax.inject.Inject
 
-class ArtistRepositoryImpl @Inject constructor(private val artistDataSource: ArtistRemoteDataSource) : ArtistRepository {
+class ArtistRepositoryImpl @Inject constructor(private val artistDataSource: ArtistRemoteDataSource) :
+    ArtistRepository {
     override suspend fun getPopularPeople(pageNo: Int): ArtistListEntity? {
         return artistDataSource.getPopularPeople(pageNo)
     }

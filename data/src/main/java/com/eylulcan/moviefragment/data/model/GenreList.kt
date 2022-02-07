@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName
 import javax.annotation.Generated
 
 @Generated("jsonschema2pojo")
- class GenreList {
+class GenreList {
     @SerializedName("genres")
     @Expose
-    val genres :List<Genre>? = null
+    val genres: List<Genre>? = null
 }

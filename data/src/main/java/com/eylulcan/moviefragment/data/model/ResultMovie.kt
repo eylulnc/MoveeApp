@@ -6,11 +6,11 @@ import java.io.Serializable
 import javax.annotation.Generated
 
 @Generated("jsonschema2pojo")
-class ResultMovie: Serializable {
+class ResultMovie : Serializable {
 
     @SerializedName("adult")
     @Expose
-     val adult: Boolean? = null
+    val adult: Boolean? = null
 
     @SerializedName("backdrop_path")
     @Expose

@@ -16,5 +16,5 @@ class ArtistMovieCredits {
 
     @SerializedName("id")
     @Expose
-     val id: Int? = null
+    val id: Int? = null
 }
