@@ -9,11 +9,11 @@ class ArtistDetail {
 
     @SerializedName("adult")
     @Expose
-    private val adult: Boolean? = null
+    val adult: Boolean? = null
 
     @SerializedName("also_known_as")
     @Expose
-    private val alsoKnownAs: List<String>? = null
+    val alsoKnownAs: List<String>? = null
 
     @SerializedName("biography")
     @Expose
@@ -29,19 +29,19 @@ class ArtistDetail {
 
     @SerializedName("gender")
     @Expose
-    private val gender: Int? = null
+    val gender: Int? = null
 
     @SerializedName("homepage")
     @Expose
-    private val homepage: Any? = null
+    val homepage: Any? = null
 
     @SerializedName("id")
     @Expose
-    private val id: Int? = null
+    val id: Int? = null
 
     @SerializedName("imdb_id")
     @Expose
-    private val imdbId: String? = null
+    val imdbId: String? = null
 
     @SerializedName("known_for_department")
     @Expose
@@ -53,11 +53,11 @@ class ArtistDetail {
 
     @SerializedName("place_of_birth")
     @Expose
-    private val placeOfBirth: String? = null
+    val placeOfBirth: String? = null
 
     @SerializedName("popularity")
     @Expose
-    private val popularity: Double? = null
+    val popularity: Double? = null
 
     @SerializedName("profile_path")
     @Expose

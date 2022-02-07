@@ -10,7 +10,7 @@ data class ArtistDetailEntity(
     val homepage: Any,
     val id: Int,
     val imdbId: String,
-    val knownForDepartment: String?,
+    val knownForDepartment: String,
     val name: String,
     val placeOfBirth: String,
     val popularity: Double,
