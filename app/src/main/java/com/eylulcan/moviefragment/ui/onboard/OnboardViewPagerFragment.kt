@@ -13,9 +13,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class OnboardViewPagerFragment @Inject constructor(private val onboardAdapter:OnboardAdapter): Fragment() {
+class OnboardViewPagerFragment @Inject constructor(private val onboardAdapter: OnboardAdapter) :
+    Fragment() {
 
     private lateinit var binding: FragmentOnboardViewPagerBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

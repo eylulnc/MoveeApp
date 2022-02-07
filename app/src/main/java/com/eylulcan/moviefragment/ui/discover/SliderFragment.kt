@@ -13,7 +13,8 @@ import com.eylulcan.moviefragment.databinding.FragmentSliderBinding
 import com.eylulcan.moviefragment.domain.util.Utils
 import com.eylulcan.moviefragment.ui.ItemListener
 
-class SliderFragment(private val movieInfo: Pair<Int,String>, private val glide :RequestManager): Fragment(),
+class SliderFragment(private val movieInfo: Pair<Int, String>, private val glide: RequestManager) :
+    Fragment(),
     ItemListener {
 
     private lateinit var binding: FragmentSliderBinding

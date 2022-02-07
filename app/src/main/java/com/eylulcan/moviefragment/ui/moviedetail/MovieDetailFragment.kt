@@ -25,7 +25,7 @@ private const val VIMEO_LINK = "https://vimeo.com/"
 private const val MINUTES_IN_HOUR = 60
 
 @AndroidEntryPoint
-class MovieDetailFragment @Inject constructor(): Fragment() {
+class MovieDetailFragment @Inject constructor() : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
@@ -75,11 +75,11 @@ class MovieDetailFragment @Inject constructor(): Fragment() {
 
     private fun observeViewModel() {
         movieDetailViewModel.videos.observe(viewLifecycleOwner) { videoList ->
-            if (videoList.results?.isNotEmpty() == true) {
+            if (videoList.results.isNotEmpty()) {
                 fragmentBinding.watchButton.visibility = View.VISIBLE
                 fragmentBinding.watchButton.setOnClickListener {
                     videoList?.results?.first()?.site?.let { videoSite ->
-                        videoList.results.first().key?.let { key ->
+                        videoList.results.first().key.let { key ->
                             val intent = Intent(Intent.ACTION_VIEW)
                             intent.data = Uri.parse(setVideoUri(videoSite, key))
                             startActivity(intent)
@@ -117,13 +117,13 @@ class MovieDetailFragment @Inject constructor(): Fragment() {
             fragmentBinding.detailMovieNameText.text = selectedMovie.title
             fragmentBinding.expandTextView.text = selectedMovie.overview
             fragmentBinding.detailReleaseDateText.text = selectedMovie.releaseDate
-            fragmentBinding.movieRateText.text = selectedMovie.voteAverage?.toString()
-            selectedMovie.runtime?.let { runtime ->
+            fragmentBinding.movieRateText.text = selectedMovie.voteAverage.toString()
+            selectedMovie.runtime.let { runtime ->
                 fragmentBinding.detailDurationText.text = calculateDuration(runtime)
             }
             fragmentBinding.rateButton.setOnClickListener {
                 val popUpDialog = CustomPopUpDialogFragment()
-                selectedMovie.id?.let { id ->
+                selectedMovie.id.let { id ->
                     popUpDialog.setMovieID(id)
                 }
                 fragmentManager?.let { manager ->
@@ -137,7 +137,8 @@ class MovieDetailFragment @Inject constructor(): Fragment() {
         arrayListOf(
             fragmentBinding.templateConstraintLayout,
             fragmentBinding.templateViewPagerView,
-            fragmentBinding.templateCardView)
+            fragmentBinding.templateCardView
+        )
         Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
     }
 

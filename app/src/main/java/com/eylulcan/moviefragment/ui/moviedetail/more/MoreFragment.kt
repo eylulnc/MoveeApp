@@ -17,12 +17,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MoreFragment @Inject constructor(): Fragment(), ItemListener {
+class MoreFragment @Inject constructor() : Fragment(), ItemListener {
 
-    private lateinit var binding: FragmentMoreBinding
     @Inject
     lateinit var moreAdapter: MoreAdapter
     private val detailViewModel: DetailViewModel by activityViewModels()
+    private lateinit var binding: FragmentMoreBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

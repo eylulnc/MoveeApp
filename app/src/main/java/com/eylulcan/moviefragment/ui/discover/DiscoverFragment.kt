@@ -31,7 +31,8 @@ import javax.inject.Inject
 private const val GRID_COUNT = 3
 
 @AndroidEntryPoint
-class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.OnMenuItemClickListener {
+class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
+    Toolbar.OnMenuItemClickListener {
 
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by viewModels()
@@ -42,8 +43,10 @@ class DiscoverFragment @Inject constructor(): Fragment(), ItemListener, Toolbar.
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovieEntity>> = arrayListOf()
+
     @Inject
     lateinit var recyclerViewAdapter: DiscoverParentAdapter
+
     @Inject
     lateinit var sliderAdapter: SliderAdapter
     private val placeholderNeeded = arrayListOf<View>()

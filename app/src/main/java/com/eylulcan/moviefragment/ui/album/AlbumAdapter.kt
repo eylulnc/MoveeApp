@@ -23,7 +23,8 @@ class AlbumAdapter @Inject constructor(private var glide: RequestManager) :
     private val broccoli = Broccoli()
     private val placeholderNeeded = arrayListOf<View>()
 
-    private var onItemClickListener: ((album: List<ProfileImageEntity>?, position: Int) -> Unit)? = null
+    private var onItemClickListener: ((album: List<ProfileImageEntity>?, position: Int) -> Unit)? =
+        null
 
     fun setOnItemClickListener(listener: (album: List<ProfileImageEntity>?, position: Int) -> Unit) {
         onItemClickListener = listener

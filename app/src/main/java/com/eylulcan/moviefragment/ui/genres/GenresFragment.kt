@@ -20,6 +20,7 @@ class GenresFragment : Fragment(), ItemListener {
 
     private val genreViewModel: GenresViewModel by viewModels()
     private lateinit var binding: FragmentGenresBinding
+
     @Inject
     lateinit var genreListAdapter: GenresAdapter
 
@@ -29,8 +30,8 @@ class GenresFragment : Fragment(), ItemListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_genres, container, false)
         binding = FragmentGenresBinding.bind(view)
-            binding.genresFragmentRecyclerView.layoutManager =
-                GridLayoutManager(context, 2)
+        binding.genresFragmentRecyclerView.layoutManager =
+            GridLayoutManager(context, 2)
         return view
     }
 

@@ -49,19 +49,20 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
         glide.load(setImageUrl(movie.posterPath))
             .into(holder.binding.movieImage)
         holder.itemView.setOnClickListener {
-            movie.id?.let { id -> onItemClickListener?.let { it1 -> it1(id) } } }
-            var task: Runnable? = mTaskManager[holder.itemView]
-            if (task == null) {
-                task = Runnable {
-                    run {
-                        removePlaceholders()
-                    }
+            movie.id.let { id -> onItemClickListener?.let { it1 -> it1(id) } }
+        }
+        var task: Runnable? = mTaskManager[holder.itemView]
+        if (task == null) {
+            task = Runnable {
+                run {
+                    removePlaceholders()
                 }
-                mTaskManager[holder.itemView] = task
-            } else {
-                holder.itemView.removeCallbacks(task)
             }
-            holder.itemView.postDelayed(task, 2000)
+            mTaskManager[holder.itemView] = task
+        } else {
+            holder.itemView.removeCallbacks(task)
+        }
+        holder.itemView.postDelayed(task, 2000)
 
     }
 
@@ -74,7 +75,7 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_ORIGINAL.plus(poster_path)
 
-    private fun setPlaceholders(holder:ViewHolder) {
+    private fun setPlaceholders(holder: ViewHolder) {
         placeholderNeeded.addAll(
             arrayListOf(
                 holder.binding.artistMovieRowTemplate

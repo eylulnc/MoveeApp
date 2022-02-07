@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class ReviewsAdapter @Inject constructor(private var glide:RequestManager) :
+class ReviewsAdapter @Inject constructor(private var glide: RequestManager) :
     RecyclerView.Adapter<ReviewsAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ReviewFragmentRecyclerRowBinding) :
@@ -34,14 +34,15 @@ class ReviewsAdapter @Inject constructor(private var glide:RequestManager) :
             holder.binding.authorName.text = review.author
             holder.binding.expandTextView.text = review.content
             holder.binding.reviewsRatingBar.rating =
-                review.authorDetails?.rating?.toFloat()?.div(2f) ?: 0f
-            review.updatedAt?.let { it ->
+                review.authorDetails.rating.toFloat().div(2f)  ?: 0F
+            review.updatedAt.let {
                 val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH)
                 val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH)
                 val output = formatter.format(parser.parse(it))
                 holder.binding.postDateText.text = output
             }
-            glide.load(setImageUrl(review.authorDetails?.avatarPath)).into(holder.binding.authorProfileImage)
+            glide.load(setImageUrl(review.authorDetails.avatarPath))
+                .into(holder.binding.authorProfileImage)
         }
     }
 

@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ImageFragment @Inject constructor(private val imageAdapter:ImageAdapter): Fragment() {
+class ImageFragment @Inject constructor(private val imageAdapter: ImageAdapter) : Fragment() {
 
     private lateinit var binding: FragmentImageBinding
 

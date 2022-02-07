@@ -18,7 +18,7 @@ class DiscoverViewModel @Inject constructor(
     private val popularMovieUseCase: PopularMovieUseCase,
     private val upcomingDataUseCase: UpcomingDataUseCase,
     private val nowPlayingDataUseCase: NowPlayingDataUseCase,
-    private val guestSessionUseCase : GuestSessionUseCase
+    private val guestSessionUseCase: GuestSessionUseCase
 ) : ViewModel() {
 
     private var popularMovieList = MutableLiveData<MovieEntity>()
@@ -32,25 +32,23 @@ class DiscoverViewModel @Inject constructor(
     private val upcoming = MutableLiveData<MovieEntity>()
     val upcomingMovies: LiveData<MovieEntity> get() = upcoming
 
-
     fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val result = popularMovieUseCase()
             result.let {
-                        topRatedMovieList.postValue(it)
-                    }
-                }
+                topRatedMovieList.postValue(it)
             }
+        }
+    }
 
     fun getTopRatedMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val result = topRatedMovieUseCase.invoke()
             result.let {
-                        topRatedMovieList.postValue(it)
-                    }
-                }
+                topRatedMovieList.postValue(it)
             }
-
+        }
+    }
 
     fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -61,24 +59,23 @@ class DiscoverViewModel @Inject constructor(
         }
     }
 
-
     fun getGuestSession() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = guestSessionUseCase()
             response.let {
-                        userSession.postValue(it)
-                    }
-                }
+                userSession.postValue(it)
             }
+        }
+    }
 
     fun getUpcomingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = upcomingDataUseCase()
             response.let {
-                        upcoming.postValue(it)
-                    }
-                }
+                upcoming.postValue(it)
             }
+        }
+    }
 
     fun setListsToDefault() {
         popularMovieList = MutableLiveData<MovieEntity>()

@@ -12,7 +12,8 @@ import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import javax.inject.Inject
 
-class GenreMovieListAdapter @Inject constructor( private val glide: RequestManager
+class GenreMovieListAdapter @Inject constructor(
+    private val glide: RequestManager
 ) : RecyclerView.Adapter<GenreMovieListAdapter.ViewHolder>() {
 
     private var onItemClickListener: ((id: Int) -> Unit)? = null

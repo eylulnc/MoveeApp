@@ -8,7 +8,8 @@ import javax.inject.Inject
 
 private const val FRAGMENT_COUNT = 3
 
-class OnboardAdapter @Inject constructor(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+class OnboardAdapter @Inject constructor(activity: FragmentActivity) :
+    FragmentStateAdapter(activity) {
 
     override fun getItemCount(): Int {
         return FRAGMENT_COUNT

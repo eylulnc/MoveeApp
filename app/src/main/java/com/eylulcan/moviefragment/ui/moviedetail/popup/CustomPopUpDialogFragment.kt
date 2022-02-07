@@ -24,11 +24,15 @@ class CustomPopUpDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View = inflater.inflate(R.layout.movie_detail_popup_rating_screen, container, false)
+        val rootView: View =
+            inflater.inflate(R.layout.movie_detail_popup_rating_screen, container, false)
         observeViewModel()
         binding = MovieDetailPopupRatingScreenBinding.bind(rootView)
         val sharedPref =
-            activity?.getSharedPreferences(getString(R.string.app_package_name), Context.MODE_PRIVATE)
+            activity?.getSharedPreferences(
+                getString(R.string.app_package_name),
+                Context.MODE_PRIVATE
+            )
         sessionID = sharedPref?.getString(getString(R.string.sessionId), null).toString()
 
         binding.cancelButton.setOnClickListener {
@@ -47,8 +51,8 @@ class CustomPopUpDialogFragment : DialogFragment() {
     }
 
     private fun observeViewModel() {
-        popUpViewModel.responseRating.observe(viewLifecycleOwner, {
+        popUpViewModel.responseRating.observe(viewLifecycleOwner) {
             // TODO ask
-        })
+        }
     }
 }

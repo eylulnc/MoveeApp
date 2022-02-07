@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DashboardFragment @Inject constructor(): Fragment() {
+class DashboardFragment @Inject constructor() : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
 

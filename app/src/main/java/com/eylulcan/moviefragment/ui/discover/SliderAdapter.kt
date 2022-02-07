@@ -8,10 +8,13 @@ import javax.inject.Inject
 
 private const val FRAGMENT_COUNT = 5
 
-class SliderAdapter @Inject constructor(context: FragmentActivity, private val glide: RequestManager) :
+class SliderAdapter @Inject constructor(
+    context: FragmentActivity,
+    private val glide: RequestManager
+) :
     FragmentStateAdapter(context) {
 
-    private val moviesList : ArrayList<Pair<Int,String>> = arrayListOf()
+    private val moviesList: ArrayList<Pair<Int, String>> = arrayListOf()
 
     override fun getItemCount(): Int {
         return FRAGMENT_COUNT
@@ -28,7 +31,7 @@ class SliderAdapter @Inject constructor(context: FragmentActivity, private val g
         }
     }
 
-    fun updateList(moviesInfo: ArrayList<Pair<Int,String>>){
+    fun updateList(moviesInfo: ArrayList<Pair<Int, String>>) {
         moviesList.clear()
         moviesList.addAll(moviesInfo)
         notifyDataSetChanged()

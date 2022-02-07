@@ -21,12 +21,12 @@ import javax.inject.Inject
 private const val SPAN_COUNT_TABLET = 2
 
 @AndroidEntryPoint
-class CastFragment @Inject constructor(): Fragment(), ItemListener {
+class CastFragment @Inject constructor() : Fragment(), ItemListener {
 
-    private lateinit var binding: FragmentCastBinding
     @Inject
     lateinit var castAdapter: CastAdapter
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
+    private lateinit var binding: FragmentCastBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,11 +44,13 @@ class CastFragment @Inject constructor(): Fragment(), ItemListener {
         observeViewModel()
 
     }
-    private fun setupUI(){
-        if ( Utils.isTablet(requireContext()) ) {
+
+    private fun setupUI() {
+        if (Utils.isTablet(requireContext())) {
             binding.castRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
         } else {
-            binding.castRecyclerView.layoutManager = LinearLayoutManager( requireContext(),LinearLayoutManager.VERTICAL, false)
+            binding.castRecyclerView.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
     }
 

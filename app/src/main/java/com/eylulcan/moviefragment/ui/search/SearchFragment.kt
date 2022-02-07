@@ -24,11 +24,11 @@ private const val SPAN_COUNT_TABLET = 4
 @AndroidEntryPoint
 class SearchFragment : Fragment(), SearchListener {
 
+    @Inject
+    lateinit var searchAdapter: SearchAdapter
     private lateinit var binding: FragmentSearchBinding
     private val searchViewModel: SearchViewModel by viewModels()
     private var searchQuery: String = ""
-    @Inject
-    lateinit var searchAdapter: SearchAdapter
     private var searchResultList: ArrayList<SearchResultEntity> = arrayListOf()
     private var searchItemsInAPage: List<SearchResultEntity>? = emptyList()
 
@@ -42,10 +42,9 @@ class SearchFragment : Fragment(), SearchListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchBinding.bind(view)
-        if(Utils.isTablet(requireContext())) {
+        if (Utils.isTablet(requireContext())) {
             binding.searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
-        }
-        else {
+        } else {
             binding.searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_PHONE)
         }
         binding.searchRecyclerView.adapter = searchAdapter
@@ -57,7 +56,7 @@ class SearchFragment : Fragment(), SearchListener {
     private fun observeViewModel() {
         searchViewModel.results.observe(viewLifecycleOwner) { results ->
             searchItemsInAPage =
-                if (results.searchResults?.let { searchItemsInAPage?.containsAll(it) } == true) {
+                if (results.searchResults.let { searchItemsInAPage?.containsAll(it) } == true) {
                     emptyList()
                 } else {
                     results.searchResults
@@ -92,7 +91,7 @@ class SearchFragment : Fragment(), SearchListener {
                 searchQuery = binding.searchBar.query.toString()
                 val size = searchResultList.size
                 searchResultList.clear()
-                searchAdapter.notifyItemRangeRemoved(0,size)
+                searchAdapter.notifyItemRangeRemoved(0, size)
                 searchViewModel.lastLoadedPage = 1
                 searchViewModel.getSearchResult(searchQuery)
                 return false

@@ -22,7 +22,7 @@ private const val SPAN_COUNT_PHONE = 3
 private const val SPAN_COUNT_TABLET = 4
 
 @AndroidEntryPoint
-class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapter): Fragment(),
+class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapter) : Fragment(),
     ItemListener {
 
     private val artistViewModel: ArtistViewModel by viewModels()
@@ -37,7 +37,7 @@ class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapte
     ): View? {
         val view = inflater.inflate(R.layout.fragment_artist, container, false)
         binding = FragmentArtistBinding.bind(view)
-        if(Utils.isTablet(requireContext())) {
+        if (Utils.isTablet(requireContext())) {
             binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
         } else {
             binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_PHONE)

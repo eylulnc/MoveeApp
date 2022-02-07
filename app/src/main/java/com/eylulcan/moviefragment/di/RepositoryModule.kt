@@ -39,8 +39,11 @@ object RepositoryModule {
     }
 
     @Provides
-    fun providesMovieDataSource(movieAPI: MovieAPI, movieMapper: MovieMapper): MovieRemoteDataSource {
-        return MovieDataSource(movieAPI , movieMapper)
+    fun providesMovieDataSource(
+        movieAPI: MovieAPI,
+        movieMapper: MovieMapper
+    ): MovieRemoteDataSource {
+        return MovieDataSource(movieAPI, movieMapper)
     }
 
     @Provides
@@ -58,7 +61,10 @@ object RepositoryModule {
     }
 
     @Provides
-    fun providesArtistDataSource(movieAPI: MovieAPI, artistMapper: ArtistMapper): ArtistRemoteDataSource {
+    fun providesArtistDataSource(
+        movieAPI: MovieAPI,
+        artistMapper: ArtistMapper
+    ): ArtistRemoteDataSource {
         return ArtistDataSource(movieAPI, artistMapper)
     }
 
@@ -77,7 +83,10 @@ object RepositoryModule {
     }
 
     @Provides
-    fun providesSearchDataSource(movieAPI: MovieAPI, searchMapper: SearchMapper): SearchRemoteDataSource {
+    fun providesSearchDataSource(
+        movieAPI: MovieAPI,
+        searchMapper: SearchMapper
+    ): SearchRemoteDataSource {
         return SearchDataSource(movieAPI, searchMapper)
     }
 
@@ -96,7 +105,10 @@ object RepositoryModule {
     }
 
     @Provides
-    fun providesGenreDataSource(movieAPI: MovieAPI, genreMapper: GenreMapper): GenreRemoteDataSource {
+    fun providesGenreDataSource(
+        movieAPI: MovieAPI,
+        genreMapper: GenreMapper
+    ): GenreRemoteDataSource {
         return GenreDataSource(movieAPI, genreMapper)
     }
 

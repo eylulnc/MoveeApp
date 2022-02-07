@@ -33,28 +33,28 @@ class ArtistDetailViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             val response = artistDetailUseCase.invoke(id)
             response.let {
-                        artistDetailInfo.postValue(it)
-                    }
-                }
+                artistDetailInfo.postValue(it)
             }
+        }
+    }
 
     fun getArtistAlbum(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = artistAlbumUseCase.invoke(id)
             response.let {
-                        artistAlbumInfo.postValue(it)
-                    }
-                }
+                artistAlbumInfo.postValue(it)
             }
+        }
+    }
 
     fun getArtistMovieCredits(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             val response = artistMovieCreditsUseCase.invoke(id)
             response.let {
-                        artistMovieCreditsInfo.postValue(it)
-                    }
-                }
+                artistMovieCreditsInfo.postValue(it)
             }
+        }
+    }
 
     fun setListsToDefault() {
         artistDetailInfo = MutableLiveData<ArtistDetailEntity>()

@@ -21,6 +21,7 @@ import javax.inject.Inject
 class GenreMovieListFragment : Fragment(), ItemListener {
 
     private lateinit var binding: FragmentGenreMovieListBinding
+
     @Inject
     lateinit var genreMovieListAdapter: GenreMovieListAdapter
     private val genresListViewModel: GenreMovieListViewModel by viewModels()

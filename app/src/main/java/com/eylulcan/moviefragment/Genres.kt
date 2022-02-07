@@ -1,7 +1,7 @@
 package com.eylulcan.moviefragment
 
-enum class Genres (val value:Int){
-    Action(28){
+enum class Genres(val value: Int) {
+    Action(28) {
         override fun movieGenreName(): String {
             return "Action"
         }
@@ -9,7 +9,6 @@ enum class Genres (val value:Int){
         override fun movieGenreImage(): Int {
             return R.drawable.action_image
         }
-
     },
     Adventure(12) {
         override fun movieGenreName(): String {
@@ -40,7 +39,7 @@ enum class Genres (val value:Int){
     },
     Crime(80) {
         override fun movieGenreName(): String {
-            return  "Crime"
+            return "Crime"
         }
 
         override fun movieGenreImage(): Int {
@@ -173,11 +172,12 @@ enum class Genres (val value:Int){
             return R.drawable.western_image
         }
     };
+
     abstract fun movieGenreName(): String
     abstract fun movieGenreImage(): Int
 
 
-    companion object{
+    companion object {
         fun valueOfInt(value: Int) = Genres.values().find { it.value == value }
     }
 }

@@ -11,10 +11,11 @@ import com.eylulcan.moviefragment.domain.entity.MovieCastEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import javax.inject.Inject
 
-class CastAdapter @Inject constructor( private val glide : RequestManager) :
+class CastAdapter @Inject constructor(private val glide: RequestManager) :
     RecyclerView.Adapter<CastAdapter.ViewHolder>() {
 
     private var onItemClickListener: ((id: Int) -> Unit)? = null
+
     class ViewHolder(val binding: CastFragmentRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -34,7 +35,7 @@ class CastAdapter @Inject constructor( private val glide : RequestManager) :
         holder.binding.characterName.text = artist.character
         glide.load(setImageUrl(artist.profilePath)).into(holder.binding.castArtistImage)
         holder.itemView.setOnClickListener {
-            artist.id?.let { onItemClickListener?.let { it1 -> it1(it) } }
+            artist.id.let { onItemClickListener?.let { it1 -> it1(it) } }
         }
     }
 

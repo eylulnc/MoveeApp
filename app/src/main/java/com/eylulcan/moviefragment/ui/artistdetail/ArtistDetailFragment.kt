@@ -28,7 +28,7 @@ import javax.inject.Inject
 private const val SPAN_COUNT = 3
 
 @AndroidEntryPoint
-class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
+class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener {
     @Inject
     lateinit var glide: RequestManager
     private lateinit var binding: FragmentArtistDetailBinding

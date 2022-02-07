@@ -31,7 +31,7 @@ class GenresAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         genreList[position].let { genre ->
             holder.binding.genresRowText.text = genre.name
-            genre.id?.let { id ->
+            genre.id.let { id ->
                 Genres.valueOfInt(id)?.movieGenreImage()
                     ?.let { holder.binding.genresFragmentImageView.setImageResource(it) }
                 holder.itemView.setOnClickListener {
