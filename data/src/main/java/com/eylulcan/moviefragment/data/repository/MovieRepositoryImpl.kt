@@ -1,10 +1,7 @@
 package com.eylulcan.moviefragment.data.repository
 
 import com.eylulcan.moviefragment.data.datasource.MovieDataSource
-import com.eylulcan.moviefragment.domain.entity.GuestSessionEntity
-import com.eylulcan.moviefragment.domain.entity.MovieEntity
-import com.eylulcan.moviefragment.domain.entity.PostRatingBodyEntity
-import com.eylulcan.moviefragment.domain.entity.RatingPostResponseEntity
+import com.eylulcan.moviefragment.domain.entity.*
 import com.eylulcan.moviefragment.domain.repository.MovieRepository
 import javax.inject.Inject
 
@@ -42,5 +39,23 @@ class MovieRepositoryImpl @Inject constructor(private val dataSource: MovieDataS
         return dataSource.postRateMovie(movieId,guestSessionId,postBody)
     }
 
+    override suspend fun getMovieCredits(movieId: Int): MovieCreditsEntity? {
+        return dataSource.getMovieCredits(movieId)
+    }
 
+    override suspend fun getMovieReviews(movieId: Int, pageNo: Int): ReviewListEntity? {
+        return dataSource.getMovieReviews(movieId, pageNo)
+    }
+
+    override suspend fun getMoreMovies(movieId: Int): MovieEntity? {
+        return dataSource.getMoreMovies(movieId)
+    }
+
+    override suspend fun getMovieVideo(movieId: Int): VideoListEntity? {
+        return dataSource.getMovieVideo(movieId)
+    }
+
+    override suspend fun getMovieDetail(movieId: Int): MovieDetailEntity? {
+        return dataSource.getMovieDetail(movieId)
+    }
 }

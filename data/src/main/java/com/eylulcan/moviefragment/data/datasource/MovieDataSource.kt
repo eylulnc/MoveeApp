@@ -3,10 +3,7 @@ package com.eylulcan.moviefragment.data.datasource
 import com.eylulcan.moviefragment.data.mapper.MovieMapper
 import com.eylulcan.moviefragment.data.model.PostRatingBody
 import com.eylulcan.moviefragment.data.service.MovieAPI
-import com.eylulcan.moviefragment.domain.entity.GuestSessionEntity
-import com.eylulcan.moviefragment.domain.entity.MovieEntity
-import com.eylulcan.moviefragment.domain.entity.PostRatingBodyEntity
-import com.eylulcan.moviefragment.domain.entity.RatingPostResponseEntity
+import com.eylulcan.moviefragment.domain.entity.*
 import com.eylulcan.moviefragment.domain.repository.MovieRepository
 import javax.inject.Inject
 
@@ -51,6 +48,28 @@ class MovieDataSource @Inject constructor(
             postRatingBodyEntity = postBody
         ).body()?.let{ movieMapper.convertToRatingPostResponseEntity(it)}
 
+    }
+
+    override suspend fun getMovieCredits(movieId: Int): MovieCreditsEntity? {
+       return api.getMovieCredits(movieId).body()?.let { movieMapper.convertToMovieCreditsEntity(it) }
+    }
+
+    override suspend fun getMovieReviews(movieId: Int, pageNo: Int): ReviewListEntity? {
+        return api.getMovieReviews(movieId = movieId, pageNo = pageNo).body()?.let {
+            movieMapper.convertToReviewListEntity(it)
+        }
+    }
+
+    override suspend fun getMoreMovies(movieId: Int): MovieEntity? {
+        return api.getMoreMovie(movieId).body()?.let { movieMapper.convertToMovieEntity(it) }
+    }
+
+    override suspend fun getMovieVideo(movieId: Int): VideoListEntity? {
+        return api.getMovieVideoClips(movieId).body()?.let { movieMapper.convertToVideoListEntity(it) }
+    }
+
+    override suspend fun getMovieDetail(movieId: Int): MovieDetailEntity? {
+        return api.getMovieDetail(movieId).body()?.let { movieMapper.convertToMovieDetailEntity(it) }
     }
 
 
