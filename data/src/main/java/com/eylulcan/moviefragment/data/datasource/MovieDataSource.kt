@@ -1,16 +1,15 @@
 package com.eylulcan.moviefragment.data.datasource
 
+import com.eylulcan.moviefragment.data.datasource.remote.MovieRemoteDataSource
 import com.eylulcan.moviefragment.data.mapper.MovieMapper
-import com.eylulcan.moviefragment.data.model.PostRatingBody
 import com.eylulcan.moviefragment.data.service.MovieAPI
 import com.eylulcan.moviefragment.domain.entity.*
-import com.eylulcan.moviefragment.domain.repository.MovieRepository
 import javax.inject.Inject
 
 class MovieDataSource @Inject constructor(
     private val api: MovieAPI,
     private val movieMapper: MovieMapper
-) : MovieRepository {
+) : MovieRemoteDataSource {
 
     override suspend fun getPopularData(): MovieEntity? {
         return api.getPopularData().body()?.let { movieMapper.convertToMovieEntity(it) }
