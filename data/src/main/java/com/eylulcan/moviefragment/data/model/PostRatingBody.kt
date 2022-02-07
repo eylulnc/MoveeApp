@@ -9,6 +9,6 @@ class PostRatingBody {
 
     @SerializedName("value")
     @Expose
-    val ratingValue: Double? = null
+    var ratingValue: Double? = null
 
 }

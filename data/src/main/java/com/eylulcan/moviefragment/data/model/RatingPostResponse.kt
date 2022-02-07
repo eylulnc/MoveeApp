@@ -9,11 +9,11 @@ class RatingPostResponse {
 
     @SerializedName("success")
     @Expose
-    private val success: Boolean? = null
+    val success: Boolean? = null
 
     @SerializedName("status_code")
     @Expose
-    private val statusCode: Int? = null
+    val statusCode: Int? = null
 
     @SerializedName("status_message")
     @Expose
