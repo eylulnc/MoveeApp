@@ -33,7 +33,7 @@ class DiscoverViewModel @Inject constructor(
     val upcomingMovies: LiveData<MovieEntity> get() = upcoming
 
 
-    suspend fun getPopularMovieList() {
+    fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val result = popularMovieUseCase()
             result.let {
@@ -42,7 +42,7 @@ class DiscoverViewModel @Inject constructor(
                 }
             }
 
-    suspend fun getTopRatedMovieList() {
+    fun getTopRatedMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val result = topRatedMovieUseCase.invoke()
             result.let {

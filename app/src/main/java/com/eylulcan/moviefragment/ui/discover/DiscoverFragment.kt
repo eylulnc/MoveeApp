@@ -24,6 +24,7 @@ import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.InternalCoroutinesApi
 import me.samlss.broccoli.Broccoli
 import javax.inject.Inject
 

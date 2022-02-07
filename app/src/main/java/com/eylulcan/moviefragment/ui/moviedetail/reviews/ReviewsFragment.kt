@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentReviewsBinding
-import com.eylulcan.moviefragment.model.Review
+import com.eylulcan.moviefragment.domain.entity.ReviewEntity
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -23,7 +23,7 @@ class ReviewsFragment @Inject constructor(): Fragment() {
     @Inject
     lateinit var reviewsAdapter: ReviewsAdapter
     private var lastLoadedPage: Int = 1
-    private var reviewResultList: ArrayList<Review> = arrayListOf()
+    private var reviewResultList: ArrayList<ReviewEntity> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.ReviewFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.Review
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.ReviewEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -49,17 +49,17 @@ class ReviewsAdapter @Inject constructor(private var glide:RequestManager) :
 
     private fun setImageUrl(poster_path: Any?): String = Utils.BASE_IMAGE_URL_185.plus(poster_path)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<Review>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<ReviewEntity>() {
         override fun areItemsTheSame(
-            oldItem: Review,
-            newItem: Review
+            oldItem: ReviewEntity,
+            newItem: ReviewEntity
         ): Boolean {
             return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: Review,
-            newItem: Review
+            oldItem: ReviewEntity,
+            newItem: ReviewEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -68,7 +68,7 @@ class ReviewsAdapter @Inject constructor(private var glide:RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var reviewResult: List<Review>
+    var reviewResult: List<ReviewEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

@@ -1,17 +1,17 @@
 package com.eylulcan.moviefragment.ui.moviedetail.more
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMoreBinding
+import com.eylulcan.moviefragment.ui.ItemListener
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -40,13 +40,13 @@ class MoreFragment @Inject constructor(): Fragment(), ItemListener {
     }
 
     private fun observeViewModel() {
-        detailViewModel.more.observe(viewLifecycleOwner, { movie ->
+        detailViewModel.more.observe(viewLifecycleOwner) { movie ->
             binding.moreRecyclerView.adapter = moreAdapter
             moreAdapter.setOnItemClickListener {
                 onItemClicked(it)
             }
             moreAdapter.movies = movie.results ?: emptyList()
-        })
+        }
     }
 
     override fun onItemClicked(id: Int) {

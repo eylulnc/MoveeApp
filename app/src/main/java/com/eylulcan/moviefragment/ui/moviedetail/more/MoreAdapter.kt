@@ -32,7 +32,7 @@ class MoreAdapter @Inject constructor(private var glide: RequestManager) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = movieEntities[position]
+        val movie = movies[position]
         holder.binding.movieNameMore.text = movie.title
         glide.load(setImageUrl(movie.backdropPath)).into(holder.binding.movieImage)
         genreNames = ""
@@ -48,7 +48,7 @@ class MoreAdapter @Inject constructor(private var glide: RequestManager) :
         }
     }
 
-    override fun getItemCount(): Int = movieEntities.size
+    override fun getItemCount(): Int = movies.size
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_300.plus(poster_path)
@@ -72,7 +72,7 @@ class MoreAdapter @Inject constructor(private var glide: RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var movieEntities: List<ResultMovieEntity>
+    var movies: List<ResultMovieEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 

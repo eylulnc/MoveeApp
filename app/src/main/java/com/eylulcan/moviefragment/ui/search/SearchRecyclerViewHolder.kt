@@ -3,8 +3,8 @@ package com.eylulcan.moviefragment.ui.search
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.SearchFragmentRecyclerRowBinding
-import com.eylulcan.moviefragment.model.SearchResult
-import com.eylulcan.moviefragment.util.Utils
+import com.eylulcan.moviefragment.domain.entity.SearchResultEntity
+import com.eylulcan.moviefragment.domain.util.Utils
 
 open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -12,7 +12,7 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding) :
     class PersonViewHolder(private val binding: SearchFragmentRecyclerRowBinding) :
         SearchRecyclerViewHolder(binding) {
 
-        fun bind(person: SearchResult?, listener: SearchListener, glide: RequestManager) {
+        fun bind(person: SearchResultEntity?, listener: SearchListener, glide: RequestManager) {
             glide.load(setImageUrl(person?.profilePath)).into(binding.searchItemImage)
             binding.searchItemName.text = person?.name
             itemView.setOnClickListener {
@@ -27,7 +27,7 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding) :
     class MovieViewHolder(private val binding: SearchFragmentRecyclerRowBinding) :
         SearchRecyclerViewHolder(binding) {
 
-        fun bind(movie: SearchResult?, listener: SearchListener, glide: RequestManager) {
+        fun bind(movie: SearchResultEntity, listener: SearchListener, glide: RequestManager) {
             glide.load(setImageUrl(movie?.posterPath)).into(binding.searchItemImage)
             binding.searchItemName.text = movie?.title
             itemView.setOnClickListener {
@@ -43,7 +43,7 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding) :
     class TvShowViewHolder(private val binding: SearchFragmentRecyclerRowBinding) :
         SearchRecyclerViewHolder(binding) {
 
-        fun bind(tvShow: SearchResult?, glide: RequestManager) {
+        fun bind(tvShow: SearchResultEntity, glide: RequestManager) {
             glide.load(setImageUrl(tvShow?.posterPath)).into(binding.searchItemImage)
             binding.searchItemName.text = tvShow?.name
         }

@@ -29,7 +29,7 @@ class CastAdapter @Inject constructor( private val glide : RequestManager) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val artist = movieCreditEntities[position]
+        val artist = movieCredits[position]
         holder.binding.castArtistName.text = artist.name
         holder.binding.characterName.text = artist.character
         glide.load(setImageUrl(artist.profilePath)).into(holder.binding.castArtistImage)
@@ -57,12 +57,12 @@ class CastAdapter @Inject constructor( private val glide : RequestManager) :
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var movieCreditEntities: List<MovieCastEntity>
+    var movieCredits: List<MovieCastEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
 
-    override fun getItemCount(): Int = movieCreditEntities.size
+    override fun getItemCount(): Int = movieCredits.size
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_185.plus(poster_path)

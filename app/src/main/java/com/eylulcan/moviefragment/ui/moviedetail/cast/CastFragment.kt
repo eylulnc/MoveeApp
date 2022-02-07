@@ -10,11 +10,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eylulcan.moviefragment.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentCastBinding
+import com.eylulcan.moviefragment.domain.util.Utils
+import com.eylulcan.moviefragment.ui.ItemListener
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
-import com.eylulcan.moviefragment.util.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -53,13 +53,13 @@ class CastFragment @Inject constructor(): Fragment(), ItemListener {
     }
 
     private fun observeViewModel() {
-        movieDetailViewModel.cast.observe(viewLifecycleOwner, { movieCredits ->
+        movieDetailViewModel.cast.observe(viewLifecycleOwner) { movieCredits ->
             binding.castRecyclerView.adapter = castAdapter
             castAdapter.movieCredits = movieCredits.cast ?: emptyList()
             castAdapter.setOnItemClickListener {
                 onItemClicked(it)
             }
-        })
+        }
     }
 
     override fun onItemClicked(id: Int) {
