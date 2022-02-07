@@ -5,10 +5,8 @@ import com.eylulcan.moviefragment.data.model.Genre
 import com.eylulcan.moviefragment.data.model.GenreList
 import com.eylulcan.moviefragment.domain.entity.GenreEntity
 import com.eylulcan.moviefragment.domain.entity.GenreListEntity
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class GenreMapper @Inject constructor() {
     fun convertToGenreEntity(genreList: GenreList): GenreListEntity {
         val genres = arrayListOf<GenreEntity>()

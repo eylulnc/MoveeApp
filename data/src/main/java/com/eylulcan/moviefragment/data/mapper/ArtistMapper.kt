@@ -1,15 +1,13 @@
 package com.eylulcan.moviefragment.data.mapper
 
 import com.eylulcan.moviefragment.data.Utils.IF_BOOLEAN_NULL
+import com.eylulcan.moviefragment.data.Utils.IF_DBL_NULL
 import com.eylulcan.moviefragment.data.Utils.IF_INT_NULL
 import com.eylulcan.moviefragment.data.Utils.IF_STR_NULL
-import com.eylulcan.moviefragment.data.Utils.IF_DBL_NULL
 import com.eylulcan.moviefragment.data.model.*
 import com.eylulcan.moviefragment.domain.entity.*
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class ArtistMapper @Inject constructor() {
 
     fun convertToArtistAlbumEntity(artistAlbum: ArtistAlbum): ArtistAlbumEntity {

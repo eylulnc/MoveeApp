@@ -7,10 +7,8 @@ import com.eylulcan.moviefragment.data.Utils.IF_LONG_NULL
 import com.eylulcan.moviefragment.data.Utils.IF_STR_NULL
 import com.eylulcan.moviefragment.data.model.*
 import com.eylulcan.moviefragment.domain.entity.*
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class MovieMapper @Inject constructor() {
 
     fun convertToMovieEntity(movie: Movie): MovieEntity {

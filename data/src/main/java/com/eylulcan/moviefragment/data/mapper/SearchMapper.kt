@@ -6,10 +6,8 @@ import com.eylulcan.moviefragment.data.model.SearchResult
 import com.eylulcan.moviefragment.data.model.SearchResultList
 import com.eylulcan.moviefragment.domain.entity.SearchResultEntity
 import com.eylulcan.moviefragment.domain.entity.SearchResultListEntity
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class SearchMapper @Inject constructor() {
     fun convertSearchResultListEntity(searchResultList: SearchResultList): SearchResultListEntity {
         val searchResults = arrayListOf<SearchResultEntity>()
