@@ -9,9 +9,9 @@ import com.google.gson.annotations.SerializedName
 class VideoList {
     @SerializedName("id")
     @Expose
-    private val id: Int? = null
+    val id: Int? = null
 
     @SerializedName("results")
     @Expose
-    val resultEntities: List<VideoResultEntity>? = null
+    val results: List<VideoResultEntity>? = null
 }

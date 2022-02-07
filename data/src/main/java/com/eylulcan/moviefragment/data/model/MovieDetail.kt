@@ -12,7 +12,7 @@ import javax.annotation.Generated
 class MovieDetail {
     @SerializedName("adult")
     @Expose
-    private val adult: Boolean? = null
+    val adult: Boolean? = null
 
     @SerializedName("backdrop_path")
     @Expose
@@ -20,19 +20,19 @@ class MovieDetail {
 
     @SerializedName("belongs_to_collection")
     @Expose
-    private val belongsToCollectionEntity: BelongsToCollectionEntity? = null
+    val belongsToCollection: BelongsToCollectionEntity? = null
 
     @SerializedName("budget")
     @Expose
-    private val budget: Long? = null
+    val budget: Long? = null
 
     @SerializedName("genres")
     @Expose
-    val genreEntities: List<GenreEntity>? = null
+    val genres: List<GenreEntity>? = null
 
     @SerializedName("homepage")
     @Expose
-    private val homepage: String? = null
+    val homepage: String? = null
 
     @SerializedName("id")
     @Expose
@@ -40,7 +40,7 @@ class MovieDetail {
 
     @SerializedName("imdb_id")
     @Expose
-    private val imdbId: String? = null
+    val imdbId: String? = null
 
     @SerializedName("original_language")
     @Expose
@@ -48,7 +48,7 @@ class MovieDetail {
 
     @SerializedName("original_title")
     @Expose
-    private val originalTitle: String? = null
+    val originalTitle: String? = null
 
     @SerializedName("overview")
     @Expose
@@ -56,7 +56,7 @@ class MovieDetail {
 
     @SerializedName("popularity")
     @Expose
-    private val popularity: Double? = null
+    val popularity: Double? = null
 
     @SerializedName("poster_path")
     @Expose
@@ -64,11 +64,11 @@ class MovieDetail {
 
     @SerializedName("production_companies")
     @Expose
-    private val productionCompanyEntities: List<ProductionCountryEntity>? = null
+    val productionCompany: List<ProductionCountryEntity>? = null
 
     @SerializedName("production_countries")
     @Expose
-    private val productionCountryEntities: List<ProductionCountryEntity>? = null
+    val productionCountry: List<ProductionCountryEntity>? = null
 
     @SerializedName("release_date")
     @Expose
@@ -76,7 +76,7 @@ class MovieDetail {
 
     @SerializedName("revenue")
     @Expose
-    private val revenue: Long? = null
+    val revenue: Long? = null
 
     @SerializedName("runtime")
     @Expose
@@ -84,15 +84,15 @@ class MovieDetail {
 
     @SerializedName("spoken_languages")
     @Expose
-    val spokenLanguageEntities: List<SpokenLanguageEntity>? = null
+    val spokenLanguages: List<SpokenLanguageEntity>? = null
 
     @SerializedName("status")
     @Expose
-    private val status: String? = null
+    val status: String? = null
 
     @SerializedName("tagline")
     @Expose
-    private val tagline: String? = null
+    val tagline: String? = null
 
     @SerializedName("title")
     @Expose
@@ -108,6 +108,6 @@ class MovieDetail {
 
     @SerializedName("vote_count")
     @Expose
-    private val voteCount: Long? = null
+    val voteCount: Long? = null
 
 }

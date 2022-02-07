@@ -10,9 +10,9 @@ class MovieCredits {
 
     @SerializedName("id")
     @Expose
-    private val id: Int? = null
+    val id: Int? = null
 
     @SerializedName("cast")
     @Expose
-    val castEntity: List<MovieCastEntity>? = null
+    val cast: List<MovieCastEntity>? = null
 }

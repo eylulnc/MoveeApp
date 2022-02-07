@@ -5,7 +5,7 @@ data class MovieDetailEntity (
     val backdropPath: String,
     val belongsToCollection: BelongsToCollectionEntity,
     val budget: Long,
-    val genreEntities: List<GenreEntity>,
+    val genres: List<GenreEntity>,
     val homepage: String,
     val id: Int,
     val imdbId: String,

@@ -10,11 +10,11 @@ import javax.annotation.Generated
 class ReviewList {
     @SerializedName("id")
     @Expose
-    private val id: Int? = null
+    val id: Int? = null
 
     @SerializedName("page")
     @Expose
-    private val page: Int? = null
+    val page: Int? = null
 
     @SerializedName("results")
     @Expose
@@ -22,9 +22,9 @@ class ReviewList {
 
     @SerializedName("total_pages")
     @Expose
-    private val totalPages: Int? = null
+    val totalPages: Int? = null
 
     @SerializedName("total_results")
     @Expose
-    private val totalResults: Int? = null
+    val totalResults: Int? = null
 }
