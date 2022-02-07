@@ -3,8 +3,8 @@ package com.eylulcan.moviefragment.ui.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.model.SearchResultList
+import com.eylulcan.moviefragment.domain.entity.SearchResultListEntity
+import com.eylulcan.moviefragment.domain.usecase.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,23 +12,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(private var retrofit: MovieAPI): ViewModel() {
+class SearchViewModel @Inject constructor(private val searchUseCase: SearchUseCase) : ViewModel() {
 
-    private val searchResults = MutableLiveData<SearchResultList>()
-    val result: LiveData<SearchResultList> get() = searchResults
+    private val searchResults = MutableLiveData<SearchResultListEntity>()
+    val results: LiveData<SearchResultListEntity> get() = searchResults
     var lastLoadedPage: Int = 1
 
     fun getSearchResult(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getSearchResult(query = query, pageNo = lastLoadedPage)
+            val response = searchUseCase.invoke(pageNo = lastLoadedPage, query = query)
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        searchResults.postValue(it)
-                    }
-                }
+                searchResults.postValue(it)
             }
         }
     }
-
 }
