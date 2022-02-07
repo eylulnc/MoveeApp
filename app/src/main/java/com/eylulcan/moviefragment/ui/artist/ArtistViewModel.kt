@@ -3,8 +3,8 @@ package com.eylulcan.moviefragment.ui.artist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.eylulcan.moviefragment.api.MovieAPI
-import com.eylulcan.moviefragment.model.PopularPeopleList
+import com.eylulcan.moviefragment.domain.entity.ArtistListEntity
+import com.eylulcan.moviefragment.domain.usecase.PopularPeopleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,23 +12,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ArtistViewModel @Inject constructor(private var retrofit: MovieAPI): ViewModel() {
+class ArtistViewModel @Inject constructor(private val popularPeopleUseCase: PopularPeopleUseCase) :
+    ViewModel() {
 
-    private val popularPeopleList = MutableLiveData<PopularPeopleList>()
-    val popularPeople: LiveData<PopularPeopleList> get() = popularPeopleList
+    private val popularPeopleList = MutableLiveData<ArtistListEntity>()
+    val artistEntity: LiveData<ArtistListEntity> get() = popularPeopleList
     var lastLoadedPage: Int = 1
 
-    fun getPopularPeople(pageNo:Int) {
+    fun getPopularPeople(pageNo: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofit.getPopularPeople(pageNo = pageNo)
+            val response = popularPeopleUseCase.invoke(pageNo)
             response.let {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        popularPeopleList.postValue(it)
-                    }
-                }
+                popularPeopleList.postValue(it)
             }
         }
     }
-
 }
