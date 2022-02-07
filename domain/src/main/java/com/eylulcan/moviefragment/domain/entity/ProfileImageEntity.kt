@@ -1,6 +1,6 @@
 package com.eylulcan.moviefragment.domain.entity
 
-data class ProfileImageEntity (
+data class ProfileImageEntity(
     val aspectRatio: Double,
     val height: Int,
     val iso6391: Int,

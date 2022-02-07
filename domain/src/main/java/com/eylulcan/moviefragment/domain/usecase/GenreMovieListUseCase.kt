@@ -5,7 +5,7 @@ import com.eylulcan.moviefragment.domain.repository.MovieRepository
 import javax.inject.Inject
 
 class GenreMovieListUseCase @Inject constructor(private val repository: MovieRepository) {
-    suspend operator fun invoke(genreId :Int, pageNo: Int): MovieEntity? {
-        return repository.getGenreMovieList(genreId,pageNo)
+    suspend operator fun invoke(genreId: Int, pageNo: Int): MovieEntity? {
+        return repository.getGenreMovieList(genreId, pageNo)
     }
 }

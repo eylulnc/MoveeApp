@@ -7,7 +7,7 @@ import javax.inject.Inject
 class MovieReviewsUseCase @Inject constructor(private val repository: MovieRepository) {
 
     suspend operator fun invoke(movieId: Int, pageNo: Int): ReviewListEntity? {
-        return repository.getMovieReviews(movieId,pageNo)
+        return repository.getMovieReviews(movieId, pageNo)
 
     }
 }

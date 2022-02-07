@@ -1,6 +1,6 @@
 package com.eylulcan.moviefragment.domain.entity
 
-data class ReviewEntity (
+data class ReviewEntity(
     val author: String,
     val authorDetails: AuthorDetailsEntity,
     val content: String,

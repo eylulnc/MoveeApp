@@ -1,6 +1,6 @@
 package com.eylulcan.moviefragment.domain.entity
 
-data class SearchResultEntity (
+data class SearchResultEntity(
     val id: Int,
     val name: String,
     val posterPath: String,

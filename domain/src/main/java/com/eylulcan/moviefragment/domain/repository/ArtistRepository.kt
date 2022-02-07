@@ -6,8 +6,8 @@ import com.eylulcan.moviefragment.domain.entity.ArtistListEntity
 import com.eylulcan.moviefragment.domain.entity.ArtistMovieCreditsEntity
 
 interface ArtistRepository {
-    suspend fun getPopularPeople(pageNo:Int): ArtistListEntity?
-    suspend fun getArtistDetail(id:Int): ArtistDetailEntity?
-    suspend fun getArtistAlbum(id:Int): ArtistAlbumEntity?
-    suspend fun getArtistMovieCredits(id:Int): ArtistMovieCreditsEntity?
+    suspend fun getPopularPeople(pageNo: Int): ArtistListEntity?
+    suspend fun getArtistDetail(id: Int): ArtistDetailEntity?
+    suspend fun getArtistAlbum(id: Int): ArtistAlbumEntity?
+    suspend fun getArtistMovieCredits(id: Int): ArtistMovieCreditsEntity?
 }

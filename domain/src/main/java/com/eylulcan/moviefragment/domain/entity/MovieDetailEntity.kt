@@ -1,6 +1,6 @@
 package com.eylulcan.moviefragment.domain.entity
 
-data class MovieDetailEntity (
+data class MovieDetailEntity(
     val adult: Boolean,
     val backdropPath: String,
     val belongsToCollection: BelongsToCollectionEntity,
