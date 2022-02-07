@@ -71,7 +71,7 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
             setupUIBottomSheet(detail)
             removePlaceholders()
             binding.artistName.text = detail.name
-            val knownForDepartment = detail.knownForDepartment ?: getString(R.string.unknown)
+            val knownForDepartment = detail.knownForDepartment
             binding.knownWithText.text = knownForDepartment
             binding.artistDetailCoverImage.let {
                 glide.load(setImageUrl(detail.profilePath)).circleCrop().into(it)
@@ -79,17 +79,17 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
         }
 
         artistDetailViewModel.artistAlbum.observe(viewLifecycleOwner) { album ->
-            val albumSize = album.artistProfileImages?.size ?: 0
+            val albumSize = album.artistProfileImages.size
             includeBinding.albumPreviewRecyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             if (albumSize > 5) {
                 val albumTemp: List<ProfileImageEntity> =
-                    album.artistProfileImages?.subList(0, 4) ?: emptyList()
+                    album.artistProfileImages.subList(0, 4)
                 includeBinding.albumPreviewRecyclerView.adapter = albumRecyclerAdapter
                 albumRecyclerAdapter.artistAlbum = albumTemp
             } else {
                 includeBinding.albumPreviewRecyclerView.adapter = albumRecyclerAdapter
-                albumRecyclerAdapter.artistAlbum = album.artistProfileImages ?: emptyList()
+                albumRecyclerAdapter.artistAlbum = album.artistProfileImages
             }
             binding.bottomSheetFragment.photosTextView.setOnClickListener {
                 val albumDataBundle = bundleOf((getString(R.string.photo_album) to album))
@@ -108,7 +108,7 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
 
             binding.artistMovieRecycler.adapter = artistMovieAdapter
             artistMovieAdapter.setOnItemClickListener { id -> onItemClicked(id) }
-            artistMovieAdapter.artistMovieCredits = movieCredits.cast ?: emptyList()
+            artistMovieAdapter.artistMovieCredits = movieCredits.cast
 
         }
 
@@ -144,15 +144,15 @@ class ArtistDetailFragment @Inject constructor(): Fragment(), ItemListener {
         includeBinding.expandTextView.text = detail.biography
         includeBinding.artistBirthdayText.text = detail.birthday
         includeBinding.artistDeathDayText.text = detail.deathday
-        if (detail.biography.isNullOrEmpty()) {
+        if (detail.biography.isEmpty()) {
             includeBinding.expandableText.isVisible = false
             includeBinding.biographyText.isVisible = false
         }
-        if (detail.birthday.isNullOrEmpty()) {
+        if (detail.birthday.isEmpty()) {
             includeBinding.bornText.isVisible = false
             includeBinding.artistBirthdayText.isVisible = false
         }
-        if (detail.deathday.isNullOrEmpty()) {
+        if (detail.deathday.isEmpty()) {
             includeBinding.artistDeathDayText.isVisible = false
             includeBinding.deathText.isVisible = false
         }
