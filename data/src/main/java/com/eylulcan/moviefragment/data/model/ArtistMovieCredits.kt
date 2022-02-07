@@ -11,11 +11,11 @@ import javax.annotation.Generated
 class ArtistMovieCredits {
     @SerializedName("cast")
     @Expose
-    val castEntity: List<CastEntity>? = null
+    val cast: List<CastEntity>? = null
 
     @SerializedName("crew")
     @Expose
-    val crewEntity: List<CrewEntity>? = null
+    val crew: List<CrewEntity>? = null
 
     @SerializedName("id")
     @Expose
