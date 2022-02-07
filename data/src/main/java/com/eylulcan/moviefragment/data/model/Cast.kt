@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import javax.annotation.Generated
 
-
 @Generated("jsonschema2pojo")
 class Cast {
     @SerializedName("id")
@@ -13,7 +12,7 @@ class Cast {
 
     @SerializedName("original_title")
     @Expose
-    private val originalTitle: String? = null
+    val originalTitle: String? = null
 
     @SerializedName("poster_path")
     @Expose
@@ -21,7 +20,7 @@ class Cast {
 
     @SerializedName("video")
     @Expose
-    private val video: Boolean? = null
+    val video: Boolean? = null
 
     @SerializedName("vote_average")
     @Expose
@@ -29,15 +28,15 @@ class Cast {
 
     @SerializedName("overview")
     @Expose
-    private val overview: String? = null
+    val overview: String? = null
 
     @SerializedName("release_date")
     @Expose
-    private val releaseDate: String? = null
+    val releaseDate: String? = null
 
     @SerializedName("vote_count")
     @Expose
-    private val voteCount: Int? = null
+    val voteCount: Int? = null
 
     @SerializedName("title")
     @Expose
@@ -45,7 +44,7 @@ class Cast {
 
     @SerializedName("adult")
     @Expose
-    private val adult: Boolean? = null
+    val adult: Boolean? = null
 
     @SerializedName("backdrop_path")
     @Expose
@@ -53,7 +52,7 @@ class Cast {
 
     @SerializedName("original_language")
     @Expose
-    private val originalLanguage: String? = null
+    val originalLanguage: String? = null
 
     @SerializedName("genre_ids")
     @Expose
@@ -61,17 +60,17 @@ class Cast {
 
     @SerializedName("popularity")
     @Expose
-    private val popularity: Double? = null
+    val popularity: Double? = null
 
     @SerializedName("character")
     @Expose
-    private val character: String? = null
+    val character: String? = null
 
     @SerializedName("credit_id")
     @Expose
-    private val creditId: String? = null
+    val creditId: String? = null
 
     @SerializedName("order")
     @Expose
-    private val order: Int? = null
+    val order: Int? = null
 }

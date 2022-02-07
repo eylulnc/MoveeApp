@@ -8,11 +8,11 @@ import javax.annotation.Generated
 class MovieCast {
     @SerializedName("adult")
     @Expose
-    private val adult: Boolean? = null
+    val adult: Boolean? = null
 
     @SerializedName("gender")
     @Expose
-    private val gender: Int? = null
+    val gender: Int? = null
 
     @SerializedName("id")
     @Expose
@@ -20,7 +20,7 @@ class MovieCast {
 
     @SerializedName("known_for_department")
     @Expose
-    private val knownForDepartment: String? = null
+    val knownForDepartment: String? = null
 
     @SerializedName("name")
     @Expose
@@ -28,11 +28,11 @@ class MovieCast {
 
     @SerializedName("original_name")
     @Expose
-    private val originalName: String? = null
+    val originalName: String? = null
 
     @SerializedName("popularity")
     @Expose
-    private val popularity: Double? = null
+    val popularity: Double? = null
 
     @SerializedName("profile_path")
     @Expose
@@ -40,7 +40,7 @@ class MovieCast {
 
     @SerializedName("cast_id")
     @Expose
-    private val castId: Int? = null
+    val castId: Int? = null
 
     @SerializedName("character")
     @Expose
@@ -48,9 +48,9 @@ class MovieCast {
 
     @SerializedName("credit_id")
     @Expose
-    private val creditId: String? = null
+    val creditId: String? = null
 
     @SerializedName("order")
     @Expose
-    private val order: Int? = null
+    val order: Int? = null
 }

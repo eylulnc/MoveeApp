@@ -1,8 +1,6 @@
 package com.eylulcan.moviefragment.data.model
 
-import com.eylulcan.moviefragment.domain.entity.ReviewEntity
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 import javax.annotation.Generated
 
@@ -18,7 +16,7 @@ class ReviewList {
 
     @SerializedName("results")
     @Expose
-    val results: List<ReviewEntity>? = null
+    val results: List<Review>? = null
 
     @SerializedName("total_pages")
     @Expose

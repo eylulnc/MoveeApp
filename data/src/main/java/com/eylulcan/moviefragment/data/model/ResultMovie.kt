@@ -10,7 +10,7 @@ class ResultMovie: Serializable {
 
     @SerializedName("adult")
     @Expose
-    private val adult: Boolean? = null
+     val adult: Boolean? = null
 
     @SerializedName("backdrop_path")
     @Expose
@@ -30,7 +30,7 @@ class ResultMovie: Serializable {
 
     @SerializedName("original_title")
     @Expose
-    private val originalTitle: String? = null
+    val originalTitle: String? = null
 
     @SerializedName("overview")
     @Expose
@@ -38,7 +38,7 @@ class ResultMovie: Serializable {
 
     @SerializedName("popularity")
     @Expose
-    private val popularity: String? = null
+    val popularity: String? = null
 
     @SerializedName("poster_path")
     @Expose
@@ -62,6 +62,6 @@ class ResultMovie: Serializable {
 
     @SerializedName("vote_count")
     @Expose
-    private val voteCount: Int? = null
+    val voteCount: Int? = null
 
 }

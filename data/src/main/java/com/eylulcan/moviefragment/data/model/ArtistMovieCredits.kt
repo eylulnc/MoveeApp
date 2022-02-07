@@ -1,9 +1,6 @@
 package com.eylulcan.moviefragment.data.model
 
-import com.eylulcan.moviefragment.domain.entity.CastEntity
-import com.eylulcan.moviefragment.domain.entity.CrewEntity
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 import javax.annotation.Generated
 
@@ -11,11 +8,11 @@ import javax.annotation.Generated
 class ArtistMovieCredits {
     @SerializedName("cast")
     @Expose
-    val cast: List<CastEntity>? = null
+    val cast: List<Cast>? = null
 
     @SerializedName("crew")
     @Expose
-    val crew: List<CrewEntity>? = null
+    val crew: List<Crew>? = null
 
     @SerializedName("id")
     @Expose

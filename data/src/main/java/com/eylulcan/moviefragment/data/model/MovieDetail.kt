@@ -1,9 +1,5 @@
 package com.eylulcan.moviefragment.data.model
 
-import com.eylulcan.moviefragment.domain.entity.BelongsToCollectionEntity
-import com.eylulcan.moviefragment.domain.entity.GenreEntity
-import com.eylulcan.moviefragment.domain.entity.ProductionCountryEntity
-import com.eylulcan.moviefragment.domain.entity.SpokenLanguageEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import javax.annotation.Generated
@@ -20,7 +16,7 @@ class MovieDetail {
 
     @SerializedName("belongs_to_collection")
     @Expose
-    val belongsToCollection: BelongsToCollectionEntity? = null
+    val belongsToCollection: BelongsToCollection? = null
 
     @SerializedName("budget")
     @Expose
@@ -28,7 +24,7 @@ class MovieDetail {
 
     @SerializedName("genres")
     @Expose
-    val genres: List<GenreEntity>? = null
+    val genres: List<Genre>? = null
 
     @SerializedName("homepage")
     @Expose
@@ -64,11 +60,11 @@ class MovieDetail {
 
     @SerializedName("production_companies")
     @Expose
-    val productionCompany: List<ProductionCountryEntity>? = null
+    val productionCompany: List<ProductionCountry>? = null
 
     @SerializedName("production_countries")
     @Expose
-    val productionCountry: List<ProductionCountryEntity>? = null
+    val productionCountry: List<ProductionCountry>? = null
 
     @SerializedName("release_date")
     @Expose
@@ -84,7 +80,7 @@ class MovieDetail {
 
     @SerializedName("spoken_languages")
     @Expose
-    val spokenLanguages: List<SpokenLanguageEntity>? = null
+    val spokenLanguages: List<SpokenLanguage>? = null
 
     @SerializedName("status")
     @Expose

@@ -8,15 +8,15 @@ import javax.annotation.Generated
 class AuthorDetails {
     @SerializedName("name")
     @Expose
-    private val name: String? = null
+    val name: String? = null
 
     @SerializedName("username")
     @Expose
-    private val username: String? = null
+    val username: String? = null
 
     @SerializedName("avatar_path")
     @Expose
-    val avatarPath: Any? = null
+    val avatarPath: String? = null
 
     @SerializedName("rating")
     @Expose

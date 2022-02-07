@@ -12,7 +12,7 @@ class SpokenLanguage {
 
     @SerializedName("iso_639_1")
     @Expose
-    private val iso6391: String? = null
+    val iso6391: String? = null
 
     @SerializedName("name")
     @Expose

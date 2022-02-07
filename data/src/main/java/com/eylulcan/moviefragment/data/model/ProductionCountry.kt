@@ -8,18 +8,18 @@ import javax.annotation.Generated
 class ProductionCountry {
     @SerializedName("id")
     @Expose
-    private val id: Int? = null
+    val id: Int? = null
 
     @SerializedName("logo_path")
     @Expose
-    private val logoPath: Any? = null
+    val logoPath: String? = null
 
     @SerializedName("name")
     @Expose
-    private val name: String? = null
+    val name: String? = null
 
     @SerializedName("origin_country")
     @Expose
-    private val originCountry: String? = null
+    val originCountry: String? = null
 
 }

@@ -1,19 +1,18 @@
 package com.eylulcan.moviefragment.data.model
 
-import com.eylulcan.moviefragment.domain.entity.KnownForEntity
-import javax.annotation.Generated
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import javax.annotation.Generated
 
 @Generated("jsonschema2pojo")
 class ArtistResult {
     @SerializedName("adult")
     @Expose
-    private val adult: Boolean? = null
+    val adult: Boolean? = null
 
     @SerializedName("gender")
     @Expose
-    private val gender: Int? = null
+    val gender: Int? = null
 
     @SerializedName("id")
     @Expose
@@ -21,7 +20,7 @@ class ArtistResult {
 
     @SerializedName("known_for")
     @Expose
-    private val knownForEntity: List<KnownForEntity>? = null
+    val knownFor: List<KnownFor>? = null
 
     @SerializedName("known_for_department")
     @Expose
@@ -33,7 +32,7 @@ class ArtistResult {
 
     @SerializedName("popularity")
     @Expose
-    private val popularity: Double? = null
+    val popularity: Double? = null
 
     @SerializedName("profile_path")
     @Expose

@@ -1,10 +1,9 @@
 package com.eylulcan.moviefragment.data.model
 
-import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
-import javax.annotation.Generated
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import javax.annotation.Generated
 
 @Generated("jsonschema2pojo")
 class Movie: Serializable {
@@ -15,7 +14,7 @@ class Movie: Serializable {
 
     @SerializedName("results")
     @Expose
-    val results: List<ResultMovieEntity>? = null
+    val results: List<ResultMovie>? = null
 
     @SerializedName("total_pages")
     @Expose

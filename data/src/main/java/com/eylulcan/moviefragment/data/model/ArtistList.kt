@@ -1,6 +1,5 @@
 package com.eylulcan.moviefragment.data.model
 
-import com.eylulcan.moviefragment.domain.entity.ArtistResultEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -12,7 +11,7 @@ class ArtistList {
 
     @SerializedName("results")
     @Expose
-    val results: List<ArtistResultEntity>? = null
+    val results: List<ArtistResult>? = null
 
     @SerializedName("total_pages")
     @Expose

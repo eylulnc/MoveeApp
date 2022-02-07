@@ -8,15 +8,15 @@ import javax.annotation.Generated
 class VideoResult {
     @SerializedName("iso_639_1")
     @Expose
-    private val iso6391: String? = null
+    val iso6391: String? = null
 
     @SerializedName("iso_3166_1")
     @Expose
-    private val iso31661: String? = null
+    val iso31661: String? = null
 
     @SerializedName("name")
     @Expose
-    private val name: String? = null
+    val name: String? = null
 
     @SerializedName("key")
     @Expose
@@ -28,22 +28,22 @@ class VideoResult {
 
     @SerializedName("size")
     @Expose
-    private val size: Int? = null
+    val size: Int? = null
 
     @SerializedName("type")
     @Expose
-    private val type: String? = null
+    val type: String? = null
 
     @SerializedName("official")
     @Expose
-    private val official: Boolean? = null
+    val official: Boolean? = null
 
     @SerializedName("published_at")
     @Expose
-    private val publishedAt: String? = null
+    val publishedAt: String? = null
 
     @SerializedName("id")
     @Expose
-    private val id: String? = null
+    val id: String? = null
 
 }

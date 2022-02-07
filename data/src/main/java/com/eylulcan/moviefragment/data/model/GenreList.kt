@@ -1,6 +1,5 @@
 package com.eylulcan.moviefragment.data.model
 
-import com.eylulcan.moviefragment.domain.entity.GenreEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import javax.annotation.Generated
@@ -9,5 +8,5 @@ import javax.annotation.Generated
  class GenreList {
     @SerializedName("genres")
     @Expose
-    val genres :List<GenreEntity>? = null
+    val genres :List<Genre>? = null
 }
