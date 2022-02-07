@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class GenreMovieListViewModel @Inject constructor(private val genreMovieListUseCase: GenreMovieListUseCase): ViewModel() {
+class GenreMovieListViewModel @Inject constructor(private val genreMovieListUseCase: GenreMovieListUseCase) :
+    ViewModel() {
 
     private val movieList = MutableLiveData<MovieEntity>()
     val movies: LiveData<MovieEntity> get() = movieList
@@ -20,14 +21,10 @@ class GenreMovieListViewModel @Inject constructor(private val genreMovieListUseC
 
     fun getMovieListByGenre(genreId: Int, pageNo: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            /*if (pageNo == 1) {
-                //movieList.postValue(MovieEntity())
-                //TODO("Check what is the problem")
-            }*/
             val response = genreMovieListUseCase.invoke(genreId = genreId, pageNo = pageNo)
             response.let {
-                        movieList.postValue(it)
-                    }
-                }
+                movieList.postValue(it)
             }
         }
+    }
+}
