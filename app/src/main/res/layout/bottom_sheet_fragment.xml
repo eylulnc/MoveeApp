@@ -63,6 +63,7 @@
                 android:text="@string/biography"
                 android:textColor="@color/orange"
                 android:textSize="@dimen/movie_detail_bottom_sheet_biographyText_textSize"
+                android:fontFamily="@font/lato_bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +85,6 @@
                     android:id="@+id/expand_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     expandableTextView:animDuration="200"
                     expandableTextView:maxCollapsedLines="3">
 
@@ -119,6 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/movie_detail_bottom_sheet_bornText_margin"
+                android:layout_marginTop="@dimen/movie_detail_bottom_sheet_bornText_marginTop"
                 android:layout_marginEnd="@dimen/movie_detail_bottom_sheet_bornText_margin"
                 android:fontFamily="@font/lato_bold"
                 android:text="@string/born"

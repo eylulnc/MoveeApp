@@ -265,11 +265,12 @@
     <dimen name="movie_detail_bottom_sheet_extendableTextLayout_margin">16dp</dimen>
     <dimen name="movie_detail_bottom_sheet_extendableText_textSize">16sp</dimen>
     <dimen name="movie_detail_bottom_sheet_bornText_margin">16dp</dimen>
-    <dimen name="movie_detail_bottom_sheet_textSize">16sp</dimen>
+    <dimen name="movie_detail_bottom_sheet_bornText_marginTop">10dp</dimen>
+    <dimen name="movie_detail_bottom_sheet_textSize">18sp</dimen>
     <dimen name="movie_detail_bottom_sheet_artistBirthDayText_margin">16dp</dimen>
     <dimen name="movie_detail_bottom_sheet_artistBirthdayText_textSize">16sp</dimen>
     <dimen name="movie_detail_bottom_sheet_deathText_margin">16dp</dimen>
-    <dimen name="movie_detail_bottom_sheet_deathText_textSize">16sp</dimen>
+    <dimen name="movie_detail_bottom_sheet_deathText_textSize">18sp</dimen>
     <dimen name="movie_detail_bottom_sheet_photosText_margin">16dp</dimen>
     <dimen name="movie_detail_bottom_sheet_photosText_textSize">20sp</dimen>
     <dimen name="movie_detail_bottom_sheet_artistDeathDayText_margin">16dp</dimen>
