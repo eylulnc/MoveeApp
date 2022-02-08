@@ -36,7 +36,7 @@ class DiscoverViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             val result = popularMovieUseCase()
             result.let {
-                topRatedMovieList.postValue(it)
+                popularMovieList.postValue(it)
             }
         }
     }
@@ -52,7 +52,7 @@ class DiscoverViewModel @Inject constructor(
 
     fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = nowPlayingDataUseCase()
+            val result = nowPlayingDataUseCase.invoke()
             result.let {
                 nowPlayingMovieList.postValue(it)
             }
@@ -61,7 +61,7 @@ class DiscoverViewModel @Inject constructor(
 
     fun getGuestSession() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = guestSessionUseCase()
+            val response = guestSessionUseCase.invoke()
             response.let {
                 userSession.postValue(it)
             }
@@ -70,7 +70,7 @@ class DiscoverViewModel @Inject constructor(
 
     fun getUpcomingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = upcomingDataUseCase()
+            val response = upcomingDataUseCase.invoke()
             response.let {
                 upcoming.postValue(it)
             }
