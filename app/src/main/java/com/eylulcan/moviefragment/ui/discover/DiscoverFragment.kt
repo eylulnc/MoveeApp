@@ -103,10 +103,10 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
         discoverViewModel.nowPlaying.observe(viewLifecycleOwner) { movieData ->
             movieData?.let { movie ->
                 val results = movie.results
-                val restValue: Int = results?.size?.mod(GRID_COUNT) ?: 0
+                val restValue: Int = results.size.mod(GRID_COUNT)
                 restValue.let {
                     nowPlayingList.clear()
-                    nowPlayingList.addAll(results?.dropLast(it) as ArrayList<ResultMovieEntity>)
+                    nowPlayingList.addAll(results.dropLast(it) as ArrayList<ResultMovieEntity>)
                 }
                 allListItems.add(nowPlayingList)
                 fragmentBinding.discoverMainRecyclerView.apply {
@@ -153,6 +153,12 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
             Toast.makeText(context, R.string.logged_out_movie_list, Toast.LENGTH_LONG).show()
             this.parentFragment?.parentFragment?.findNavController()?.navigate(
                 R.id.action_dashboardFragment_to_loginFragment, null,
+                NavOptions.Builder().setPopUpTo(R.id.dashboardFragment, true).build()
+            )
+            return true
+        }else if (item?.itemId == R.id.visitedMovies) {
+            this.parentFragment?.parentFragment?.findNavController()?.navigate(
+                R.id.action_dashboardFragment_to_lastVisitedFragment, null,
                 NavOptions.Builder().setPopUpTo(R.id.dashboardFragment, true).build()
             )
             return true

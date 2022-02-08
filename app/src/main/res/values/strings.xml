@@ -176,5 +176,6 @@
     <string name="biography">Biography</string>
     <string name="born">Born</string>
     <string name="death">Death</string>
+    <string name="recently_viewed">Recently Viewed</string>
 
 </resources>
