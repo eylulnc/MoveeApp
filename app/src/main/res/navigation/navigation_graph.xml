@@ -91,6 +91,9 @@
             app:exitAnim="@animator/slide_out_left"
             app:popEnterAnim="@animator/slide_in_left"
             app:popExitAnim="@animator/slide_out_right"/>
+        <action
+            android:id="@+id/action_dashboardFragment_to_lastVisitedFragment"
+            app:destination="@id/lastVisitedFragment" />
     </fragment>
     <fragment
         android:id="@+id/artistDetailFragment"
@@ -161,5 +164,14 @@
         <action
             android:id="@+id/action_searchFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lastVisitedFragment"
+        android:name="com.eylulcan.moviefragment.ui.lastvisited.LastVisitedFragment"
+        android:label="fragment_last_visited"
+        tools:layout="@layout/fragment_last_visited" >
+        <action
+            android:id="@+id/action_lastVisitedFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
     </fragment>
 </navigation>

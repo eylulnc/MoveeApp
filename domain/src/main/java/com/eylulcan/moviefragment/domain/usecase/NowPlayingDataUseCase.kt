@@ -8,6 +8,5 @@ class NowPlayingDataUseCase @Inject constructor(private val repository: MovieRep
 
     suspend operator fun invoke(): MovieEntity? {
         return repository.getNowPlayingData()
-
     }
 }
