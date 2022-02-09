@@ -29,7 +29,7 @@ private const val RC_SIGN_IN: Int = 7777
 class LoginFragment : Fragment() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var binding: FragmentLoginBinding
     private lateinit var email: String
     private lateinit var password: String
@@ -78,7 +78,7 @@ class LoginFragment : Fragment() {
                 .addOnSuccessListener {
                     val userMap = hashMapOf<String, Any>()
                     userMap[getString(R.string.user_email)] = email
-                    firestore.collection(getString(R.string.users)).add(userMap)
+                    fireStore.collection(getString(R.string.users)).add(userMap)
                         .addOnSuccessListener { navigateToMovieList() }
                     Toast.makeText(context, R.string.user_created, Toast.LENGTH_LONG).show()
                 }
@@ -118,7 +118,7 @@ class LoginFragment : Fragment() {
                 googleAccount?.let {
                     val userMap = hashMapOf<String, Any>()
                     userMap[getString(R.string.user_email)] = googleAccount.email as String
-                    firestore.collection(getString(R.string.users)).add(userMap)
+                    fireStore.collection(getString(R.string.users)).add(userMap)
                         .addOnSuccessListener { navigateToMovieList() }
                     Toast.makeText(context, R.string.user_created, Toast.LENGTH_LONG).show()
                 }

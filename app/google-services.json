@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "9750633851",
+    "firebase_url": "https://moviefragment-7991c-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "moviefragment-7991c",
     "storage_bucket": "moviefragment-7991c.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "9750633851-i1e5lls7qq3782al4k06rh7lvngbia3h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eylulcan.moviefragment",
+            "certificate_hash": "95f78676ca0e0130852e3abc8b781ba2a427989a"
+          }
+        },
         {
           "client_id": "9750633851-lskdes1h4i7smloji9qjplqbf8hjt2ln.apps.googleusercontent.com",
           "client_type": 1,

@@ -12,10 +12,14 @@ import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
+import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
 import com.eylulcan.moviefragment.domain.entity.MovieDetailEntity
-import com.eylulcan.moviefragment.ui.moviedetail.popup.CustomPopUpDialogFragment
 import com.eylulcan.moviefragment.domain.util.Utils
+import com.eylulcan.moviefragment.ui.moviedetail.popup.CustomPopUpDialogFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
 import javax.inject.Inject
@@ -29,11 +33,13 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
+    private val fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var fragmentBinding: FragmentMovieDetailBinding
     private val tabNames = arrayOf("Cast", "Reviews", "More")
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
     private var placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +50,7 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         fragmentBinding = FragmentMovieDetailBinding.bind(view)
         setPlaceholders()
         val selectedMovieDataArgument =
@@ -112,6 +119,13 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
 
     private fun setupUI(movieDetailsEntity: MovieDetailEntity?) {
         movieDetailsEntity?.let { selectedMovie ->
+            sendDataToDatabase(
+                MovieDao(
+                    selectedMovie.id.toString(),
+                    selectedMovie.title,
+                    selectedMovie.posterPath
+                )
+            )
             glide.load(setImageUrl(selectedMovie.backdropPath))
                 .into(fragmentBinding.detailImagePoster)
             fragmentBinding.detailMovieNameText.text = selectedMovie.title
@@ -131,6 +145,16 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
                 }
             }
         }
+    }
+
+    private fun sendDataToDatabase(movie: MovieDao) {
+        val movieMap = hashMapOf<String, MovieDao>()
+        movieMap[movie.id] = movie
+        val ref = auth.currentUser?.uid?.let {
+            fireStore.collection(getString(R.string.lastVisited)).document(it)
+        }
+        ref?.set(movieMap, SetOptions.merge())
+
     }
 
     private fun setPlaceholders() {
