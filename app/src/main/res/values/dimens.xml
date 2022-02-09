@@ -283,4 +283,13 @@
     <dimen name="movie_detail_bottom_sheet_recycler_row_artistImage_marginTop">8dp</dimen>
     <dimen name="movie_detail_bottom_sheet_recycler_row_artistImage_marginEnc">12dp</dimen>
 
+    <dimen name="last_visited_recycler_row_text_size">14sp</dimen>
+    <dimen name="last_visited_recycler_row_text_paddingLeft">16dp</dimen>
+    <dimen name="last_visited_recycler_row_text_paddingRight">16dp</dimen>
+    <dimen name="last_visited_recycler_row_text_margin">8dp</dimen>
+    <dimen name="last_visited_recycler_row_text_height">50dp</dimen>
+    <dimen name="last_visited_recycler_view_margin">4dp</dimen>
+    <dimen name="last_visited_recyclerRow_movieImage_width">150dp</dimen>
+    <dimen name="last_visited_recyclerRow_movieImage_height">200dp</dimen>
+
 </resources>

@@ -177,5 +177,8 @@
     <string name="born">Born</string>
     <string name="death">Death</string>
     <string name="recently_viewed">Recently Viewed</string>
-
+    <string name="id">id</string>
+    <string name="title">title</string>
+    <string name="posterPath">posterPath</string>
+    <string name="lastVisited">Last Visited Movies</string>
 </resources>
