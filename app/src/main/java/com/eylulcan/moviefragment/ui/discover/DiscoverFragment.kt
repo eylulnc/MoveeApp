@@ -148,7 +148,7 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.logout) {
-            auth.signOut()
+            discoverViewModel.signOut()
             Toast.makeText(context, R.string.logged_out_movie_list, Toast.LENGTH_LONG).show()
             this.parentFragment?.parentFragment?.findNavController()?.navigate(
                 R.id.action_dashboardFragment_to_loginFragment, null,

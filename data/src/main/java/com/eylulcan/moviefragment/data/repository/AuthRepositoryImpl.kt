@@ -35,5 +35,9 @@ class AuthRepositoryImpl @Inject constructor(private val authRemoteDataSource: A
         }
     }
 
+    override suspend fun signOut()  {
+        authRemoteDataSource.signOut()
+    }
+
 
 }

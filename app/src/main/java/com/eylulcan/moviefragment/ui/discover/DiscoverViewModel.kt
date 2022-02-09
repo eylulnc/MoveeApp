@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.domain.entity.GuestSessionEntity
 import com.eylulcan.moviefragment.domain.entity.MovieEntity
+import com.eylulcan.moviefragment.domain.usecase.auth.SignOutUseCase
 import com.eylulcan.moviefragment.domain.usecase.movie.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,8 @@ class DiscoverViewModel @Inject constructor(
     private val popularMovieUseCase: PopularMovieUseCase,
     private val upcomingDataUseCase: UpcomingDataUseCase,
     private val nowPlayingDataUseCase: NowPlayingDataUseCase,
-    private val guestSessionUseCase: GuestSessionUseCase
+    private val guestSessionUseCase: GuestSessionUseCase,
+    private  val signOutUseCase: SignOutUseCase
 ) : ViewModel() {
 
     private var popularMovieList = MutableLiveData<MovieEntity>()
@@ -74,6 +76,12 @@ class DiscoverViewModel @Inject constructor(
             response.let {
                 upcoming.postValue(it)
             }
+        }
+    }
+
+    fun signOut() {
+        CoroutineScope(Dispatchers.IO).launch {
+            signOutUseCase.invoke()
         }
     }
 

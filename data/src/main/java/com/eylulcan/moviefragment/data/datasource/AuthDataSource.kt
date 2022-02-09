@@ -44,4 +44,8 @@ class AuthDataSource @Inject constructor(private val auth: FirebaseAuth) : AuthR
         }
 
     }
+
+    override suspend fun signOut() {
+            auth.signOut()
+    }
 }
