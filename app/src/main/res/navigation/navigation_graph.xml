@@ -173,5 +173,8 @@
         <action
             android:id="@+id/action_lastVisitedFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/action_lastVisitedFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
 </navigation>

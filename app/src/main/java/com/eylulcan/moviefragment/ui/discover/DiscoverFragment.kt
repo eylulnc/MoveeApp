@@ -17,14 +17,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eylulcan.moviefragment.ui.ItemListener
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
 import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
 import com.eylulcan.moviefragment.domain.util.Utils
+import com.eylulcan.moviefragment.ui.ItemListener
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.InternalCoroutinesApi
 import me.samlss.broccoli.Broccoli
 import javax.inject.Inject
 
@@ -156,11 +155,9 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
                 NavOptions.Builder().setPopUpTo(R.id.dashboardFragment, true).build()
             )
             return true
-        }else if (item?.itemId == R.id.visitedMovies) {
+        } else if (item?.itemId == R.id.visitedMovies) {
             this.parentFragment?.parentFragment?.findNavController()?.navigate(
-                R.id.action_dashboardFragment_to_lastVisitedFragment, null,
-                NavOptions.Builder().setPopUpTo(R.id.dashboardFragment, true).build()
-            )
+                R.id.action_dashboardFragment_to_lastVisitedFragment)
             return true
         }
         return false
