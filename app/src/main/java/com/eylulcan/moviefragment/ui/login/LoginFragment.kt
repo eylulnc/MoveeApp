@@ -9,17 +9,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentLoginBinding
+import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG: String = "SignInGoogle"
@@ -28,8 +29,7 @@ private const val RC_SIGN_IN: Int = 7777
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var binding: FragmentLoginBinding
     private lateinit var email: String
     private lateinit var password: String
@@ -51,20 +51,57 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         ViewCompat.setTranslationZ(view, 1F)
         binding = FragmentLoginBinding.bind(view)
+        observeViewModel()
         binding.signInButton.setOnClickListener { signIn() }
         binding.signUpButton.setOnClickListener { signUp() }
         binding.googleSignInButton.setOnClickListener { googleSignIn() }
+    }
+
+    private fun observeViewModel() {
+        loginViewModel.signInResults.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultData.Success -> {
+                    navigateToMovieList()
+                }
+                is ResultData.Failed -> {
+                    Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
+                }
+                else -> {}
+            }
+        }
+        loginViewModel.signUpResults.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultData.Success -> {
+                    Toast.makeText(context, R.string.user_created, Toast.LENGTH_LONG).show()
+                    navigateToMovieList()
+                }
+                is ResultData.Failed -> {
+                    Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
+                }
+                else -> {}
+            }
+        }
+        loginViewModel.googleSignInResults.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultData.Success -> {
+                    Log.d(TAG, getString(R.string.login_log_message_sign_in_success))
+                    val googleAccount = GoogleSignIn.getLastSignedInAccount(requireContext())
+                    Toast.makeText(context, R.string.user_created, Toast.LENGTH_LONG).show()
+                    navigateToMovieList()
+                }
+                is ResultData.Failed -> {
+                    Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
+                }
+                else -> {}
+            }
+        }
     }
 
     private fun signIn() {
         email = binding.userEmail.text.toString()
         password = binding.userPassword.text.toString()
         if (email != "" && password != "") {
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener { navigateToMovieList() }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(context, exception.localizedMessage, Toast.LENGTH_LONG).show()
-                }
+            loginViewModel.signIn(email, password)
         } else {
             Toast.makeText(context, R.string.empty_field, Toast.LENGTH_LONG).show()
         }
@@ -74,17 +111,7 @@ class LoginFragment : Fragment() {
         email = binding.userEmail.text.toString()
         password = binding.userPassword.text.toString()
         if (email != "" && password != "") {
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    val userMap = hashMapOf<String, Any>()
-                    userMap[getString(R.string.user_email)] = email
-                    fireStore.collection(getString(R.string.users)).add(userMap)
-                        .addOnSuccessListener { navigateToMovieList() }
-                    Toast.makeText(context, R.string.user_created, Toast.LENGTH_LONG).show()
-                }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(context, exception.localizedMessage, Toast.LENGTH_LONG).show()
-                }
+            loginViewModel.signUp(email, password)
         } else {
             Toast.makeText(context, R.string.empty_field, Toast.LENGTH_LONG).show()
         }
@@ -111,21 +138,7 @@ class LoginFragment : Fragment() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d(TAG, getString(R.string.login_log_message_sign_in_success))
-                val googleAccount = GoogleSignIn.getLastSignedInAccount(requireContext())
-                googleAccount?.let {
-                    val userMap = hashMapOf<String, Any>()
-                    userMap[getString(R.string.user_email)] = googleAccount.email as String
-                    fireStore.collection(getString(R.string.users)).add(userMap)
-                        .addOnSuccessListener { navigateToMovieList() }
-                    Toast.makeText(context, R.string.user_created, Toast.LENGTH_LONG).show()
-                }
-            } else {
-                Log.w(TAG, getString(R.string.login_log_message_sign_in_fail), task.exception)
-            }
-        }
+        loginViewModel.signInGoogle(credential)
     }
 
     private fun navigateToMovieList() {

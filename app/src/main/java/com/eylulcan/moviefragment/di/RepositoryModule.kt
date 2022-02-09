@@ -1,29 +1,19 @@
 package com.eylulcan.moviefragment.di
 
 import com.eylulcan.moviefragment.data.datasource.*
-import com.eylulcan.moviefragment.data.datasource.remote.ArtistRemoteDataSource
-import com.eylulcan.moviefragment.data.datasource.remote.GenreRemoteDataSource
-import com.eylulcan.moviefragment.data.datasource.remote.MovieRemoteDataSource
-import com.eylulcan.moviefragment.data.datasource.remote.SearchRemoteDataSource
+import com.eylulcan.moviefragment.data.datasource.remote.*
 import com.eylulcan.moviefragment.data.mapper.ArtistMapper
 import com.eylulcan.moviefragment.data.mapper.GenreMapper
 import com.eylulcan.moviefragment.data.mapper.MovieMapper
 import com.eylulcan.moviefragment.data.mapper.SearchMapper
-import com.eylulcan.moviefragment.data.repository.ArtistRepositoryImpl
-import com.eylulcan.moviefragment.data.repository.GenreRepositoryImpl
-import com.eylulcan.moviefragment.data.repository.MovieRepositoryImpl
-import com.eylulcan.moviefragment.data.repository.SearchRepositoryImpl
+import com.eylulcan.moviefragment.data.repository.*
 import com.eylulcan.moviefragment.data.service.MovieAPI
-import com.eylulcan.moviefragment.domain.repository.ArtistRepository
-import com.eylulcan.moviefragment.domain.repository.GenreRepository
-import com.eylulcan.moviefragment.domain.repository.MovieRepository
-import com.eylulcan.moviefragment.domain.repository.SearchRepository
+import com.eylulcan.moviefragment.domain.repository.*
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -115,6 +105,21 @@ object RepositoryModule {
     @Provides
     fun provideGenreMapper(): GenreMapper {
         return GenreMapper()
+    }
+
+    @Provides
+    fun providesAuthRepository(
+        dataSource: AuthRemoteDataSource
+    ): AuthRepository {
+        return AuthRepositoryImpl(
+            dataSource
+        )
+    }
+
+    @Provides
+    fun providesAuthDataSource(
+    ): AuthRemoteDataSource {
+        return AuthDataSource(FirebaseAuth.getInstance())
     }
 
 }
