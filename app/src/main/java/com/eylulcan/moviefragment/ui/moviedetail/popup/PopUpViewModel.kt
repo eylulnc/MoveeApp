@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.domain.entity.PostRatingBodyEntity
 import com.eylulcan.moviefragment.domain.entity.RatingPostResponseEntity
-import com.eylulcan.moviefragment.domain.usecase.PostRatingUseCase
+import com.eylulcan.moviefragment.domain.usecase.movie.PostRatingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

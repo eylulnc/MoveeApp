@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment.domain.usecase
+package com.eylulcan.moviefragment.domain.usecase.movie
 
 import com.eylulcan.moviefragment.domain.entity.PostRatingBodyEntity
 import com.eylulcan.moviefragment.domain.entity.RatingPostResponseEntity

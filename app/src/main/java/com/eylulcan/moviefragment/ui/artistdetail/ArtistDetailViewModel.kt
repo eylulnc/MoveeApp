@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.domain.entity.ArtistAlbumEntity
 import com.eylulcan.moviefragment.domain.entity.ArtistDetailEntity
 import com.eylulcan.moviefragment.domain.entity.ArtistMovieCreditsEntity
-import com.eylulcan.moviefragment.domain.usecase.ArtistAlbumUseCase
-import com.eylulcan.moviefragment.domain.usecase.ArtistDetailUseCase
-import com.eylulcan.moviefragment.domain.usecase.ArtistMovieCreditsUseCase
+import com.eylulcan.moviefragment.domain.usecase.artist.ArtistAlbumUseCase
+import com.eylulcan.moviefragment.domain.usecase.artist.ArtistDetailUseCase
+import com.eylulcan.moviefragment.domain.usecase.artist.ArtistMovieCreditsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment.domain.usecase
+package com.eylulcan.moviefragment.domain.usecase.search
 
 import com.eylulcan.moviefragment.domain.entity.SearchResultListEntity
 import com.eylulcan.moviefragment.domain.repository.SearchRepository

@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment.domain.usecase
+package com.eylulcan.moviefragment.domain.usecase.artist
 
 import com.eylulcan.moviefragment.domain.entity.ArtistAlbumEntity
 import com.eylulcan.moviefragment.domain.repository.ArtistRepository
