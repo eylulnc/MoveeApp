@@ -125,18 +125,18 @@ object RepositoryModule {
 
     @Provides
     fun providesLatestRepository(
-        dataSource: LatestRemoteDataSource
-    ): LatestRepository {
-        return LatestRepositoryImpl(
+        dataSource: LastVisitedDataSource
+    ): LastVisitedRepository {
+        return LastVisitedRepositoryImpl(
             dataSource
         )
     }
 
     @Provides
-    fun providesLatestDataSource(
+    fun providesLastVisitedDataSource(
         auth: FirebaseAuth,
         fireStore: FirebaseFirestore
-    ): LatestRemoteDataSource {
-        return LatestDataSource(auth, fireStore)
+    ): LastVisitedRemoteDataSource {
+        return LastVisitedDataSource(auth, fireStore)
     }
 }

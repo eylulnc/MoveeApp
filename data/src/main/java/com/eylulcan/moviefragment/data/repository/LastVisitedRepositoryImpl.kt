@@ -1,19 +1,19 @@
 package com.eylulcan.moviefragment.data.repository
 
-import com.eylulcan.moviefragment.data.datasource.remote.LatestRemoteDataSource
+import com.eylulcan.moviefragment.data.datasource.remote.LastVisitedRemoteDataSource
 import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
 import com.eylulcan.moviefragment.domain.entity.ResultData
-import com.eylulcan.moviefragment.domain.repository.LatestRepository
+import com.eylulcan.moviefragment.domain.repository.LastVisitedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class LatestRepositoryImpl @Inject constructor(private val latestRemoteDataSource: LatestRemoteDataSource) :
-    LatestRepository {
+class LastVisitedRepositoryImpl @Inject constructor(private val lastVisitedRemoteDataSource: LastVisitedRemoteDataSource) :
+    LastVisitedRepository {
     override suspend fun updateDB(movieMap: HashMap<String, MovieDao>): Flow<ResultData<Unit>> = flow {
         emit(ResultData.Loading())
-        val result = latestRemoteDataSource.updateDB(movieMap)
+        val result = lastVisitedRemoteDataSource.updateDB(movieMap)
         result.collect {
             emit(it)
         }
@@ -21,7 +21,7 @@ class LatestRepositoryImpl @Inject constructor(private val latestRemoteDataSourc
 
     override suspend fun readFromDB(): Flow<ResultData<ArrayList<MovieDao>>> = flow {
         emit(ResultData.Loading())
-        val result = latestRemoteDataSource.readFromDB()
+        val result = lastVisitedRemoteDataSource.readFromDB()
         result.collect {
             emit(it)
         }

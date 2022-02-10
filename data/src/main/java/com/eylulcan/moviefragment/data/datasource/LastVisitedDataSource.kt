@@ -1,6 +1,6 @@
 package com.eylulcan.moviefragment.data.datasource
 
-import com.eylulcan.moviefragment.data.datasource.remote.LatestRemoteDataSource
+import com.eylulcan.moviefragment.data.datasource.remote.LastVisitedRemoteDataSource
 import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
 import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.google.firebase.auth.FirebaseAuth
@@ -16,10 +16,10 @@ private const val ID = "id"
 private const val POSTER_PATH = "posterPath"
 private const val TITLE = "title"
 
-class LatestDataSource @Inject constructor(
+class LastVisitedDataSource @Inject constructor(
     private val auth: FirebaseAuth,
     private val fireStore: FirebaseFirestore
-) : LatestRemoteDataSource {
+) : LastVisitedRemoteDataSource {
     override suspend fun updateDB(movieMap: HashMap<String, MovieDao>): Flow<ResultData<Unit>> {
         return flowViaChannel { flowVia ->
             val ref = auth.currentUser?.uid?.let {
