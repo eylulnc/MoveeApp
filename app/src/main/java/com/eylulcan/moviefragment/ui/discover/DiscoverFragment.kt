@@ -34,21 +34,18 @@ private const val GRID_COUNT = 3
 class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
     Toolbar.OnMenuItemClickListener {
 
+    @Inject
+    lateinit var recyclerViewAdapter: DiscoverParentAdapter
+    @Inject
+    lateinit var sliderAdapter: SliderAdapter
     private lateinit var fragmentBinding: FragmentDiscoverBinding
     private val discoverViewModel: DiscoverViewModel by viewModels()
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var nowPlayingList: ArrayList<ResultMovieEntity> = arrayListOf()
     private var topRatedList: ArrayList<ResultMovieEntity> = arrayListOf()
     private var mostPopularList: ArrayList<ResultMovieEntity> = arrayListOf()
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovieEntity>> = arrayListOf()
-
-    @Inject
-    lateinit var recyclerViewAdapter: DiscoverParentAdapter
-
-    @Inject
-    lateinit var sliderAdapter: SliderAdapter
     private val placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
 
@@ -137,8 +134,8 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
             sliderScroll()
             removePlaceholders()
         }
-        discoverViewModel.signOut.observe(viewLifecycleOwner) {
-            when(it) {
+        discoverViewModel.signOut.observe(this.requireActivity()) {
+            when (it) {
                 is ResultData.Success -> {}
                 else -> {}
             }

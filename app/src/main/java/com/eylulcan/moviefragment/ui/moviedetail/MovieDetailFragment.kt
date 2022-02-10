@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
@@ -25,6 +28,7 @@ import javax.inject.Inject
 private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
 private const val VIMEO_LINK = "https://vimeo.com/"
 private const val MINUTES_IN_HOUR = 60
+private const val IF_ID_NULL = 0
 
 @AndroidEntryPoint
 class MovieDetailFragment @Inject constructor() : Fragment() {
@@ -46,11 +50,18 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         fragmentBinding = FragmentMovieDetailBinding.bind(view)
         setPlaceholders()
         val selectedMovieDataArgument =
             arguments?.get(getString(R.string.movieId)) as Int
+        if (selectedMovieDataArgument == IF_ID_NULL) {
+            Toast.makeText(context, getString(R.string.notFoundMovie), Toast.LENGTH_LONG).show()
+            this.parentFragment?.findNavController()?.navigate(
+                R.id.action_movieDetailFragment_to_dashboardFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(R.id.movieDetailFragment, true).build()
+            )
+        }
         observeViewModel()
         selectedMovieDataArgument.let { id ->
             movieDetailViewModel.getMovieCast(id)
@@ -95,8 +106,8 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
             removePlaceholders()
             setupUI(movie)
         }
-        movieDetailViewModel.dbUpdated.observe(viewLifecycleOwner) {
-            when(it) {
+        movieDetailViewModel.dbUpdated.observe(this.requireActivity()) {
+            when (it) {
                 is ResultData.Success -> {}
                 else -> {}
             }
