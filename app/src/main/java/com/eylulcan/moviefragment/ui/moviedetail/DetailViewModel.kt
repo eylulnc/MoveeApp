@@ -3,11 +3,14 @@ package com.eylulcan.moviefragment.ui.moviedetail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
 import com.eylulcan.moviefragment.domain.entity.*
+import com.eylulcan.moviefragment.domain.usecase.lastvisited.UpdateFirestoreUseCase
 import com.eylulcan.moviefragment.domain.usecase.movie.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,7 +20,8 @@ class DetailViewModel @Inject constructor(
     private val movieCreditsUseCase: MovieCreditsUseCase,
     private val movieDetailUseCase: MovieDetailUseCase,
     private val movieReviewsUseCase: MovieReviewsUseCase,
-    private val videoListUseCase: VideoListUseCase
+    private val videoListUseCase: VideoListUseCase,
+    private val updateFirestoreUseCase: UpdateFirestoreUseCase
 ) : ViewModel() {
 
     private val movieCast = MutableLiveData<MovieCreditsEntity>()
@@ -30,6 +34,8 @@ class DetailViewModel @Inject constructor(
     val videos: LiveData<VideoListEntity> get() = videoList
     private val movieDetails = MutableLiveData<MovieDetailEntity>()
     val detailEntity: LiveData<MovieDetailEntity> get() = movieDetails
+    private val updateDBResult = MutableLiveData<ResultData<Unit>>()
+    val dbUpdated: LiveData<ResultData<Unit>> get() = updateDBResult
 
     fun getMovieCast(id: Int) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -72,6 +78,15 @@ class DetailViewModel @Inject constructor(
             val response = movieDetailUseCase.invoke(id)
             response.let {
                 movieDetails.postValue(it)
+            }
+        }
+    }
+
+    fun updatedFirestore(movieMap: HashMap<String, MovieDao>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = updateFirestoreUseCase.invoke(movieMap)
+            response.collect {
+                updateDBResult.postValue(it)
             }
         }
     }

@@ -5,6 +5,7 @@ import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
 import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowViaChannel
@@ -19,13 +20,19 @@ class LatestDataSource @Inject constructor(
     private val auth: FirebaseAuth,
     private val fireStore: FirebaseFirestore
 ) : LatestRemoteDataSource {
-    override suspend fun updateDB(): Flow<ResultData<Unit>> {
-        TODO("Not yet implemented")
+    override suspend fun updateDB(movieMap: HashMap<String, MovieDao>): Flow<ResultData<Unit>> {
+        return flowViaChannel { flowVia ->
+            val ref = auth.currentUser?.uid?.let {
+                fireStore.collection(LAST_VISITED).document(it)
+            }
+            ref?.set(movieMap, SetOptions.merge())?.addOnSuccessListener {
+                flowVia.sendBlocking(ResultData.Success())
+            }
+        }
     }
 
     override suspend fun readFromDB(): Flow<ResultData<ArrayList<MovieDao>>> {
         return flowViaChannel { flowVia ->
-            println("encenc datasource in ")
             var movie: MovieDao
             val movieList = arrayListOf<MovieDao>()
             val docRef = auth.currentUser?.uid?.let {

@@ -11,9 +11,9 @@ import javax.inject.Inject
 
 class LatestRepositoryImpl @Inject constructor(private val latestRemoteDataSource: LatestRemoteDataSource) :
     LatestRepository {
-    override suspend fun updateDB(): Flow<ResultData<Unit>> = flow {
+    override suspend fun updateDB(movieMap: HashMap<String, MovieDao>): Flow<ResultData<Unit>> = flow {
         emit(ResultData.Loading())
-        val result = latestRemoteDataSource.updateDB()
+        val result = latestRemoteDataSource.updateDB(movieMap)
         result.collect {
             emit(it)
         }
