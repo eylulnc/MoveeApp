@@ -63,13 +63,15 @@ class MovieMapper @Inject constructor() {
     }
 
     fun convertToMovieCreditsEntity(movieCredits: MovieCredits): MovieCreditsEntity {
-        val cast = arrayListOf<MovieCastEntity>()
-        movieCredits.cast?.forEach {
-            cast.add(convertToMovieCastEntity(it))
+        val castList = arrayListOf<MovieCastEntity>()
+        movieCredits.cast?.let {
+            it.forEach {  cast ->
+                castList.add(convertToMovieCastEntity(cast))
+            }
         }
         return MovieCreditsEntity(
             id = movieCredits.id ?: IF_INT_NULL,
-            cast = cast
+            cast = castList
         )
     }
 
@@ -94,8 +96,10 @@ class MovieMapper @Inject constructor() {
 
     fun convertToReviewListEntity(reviewList: ReviewList): ReviewListEntity {
         val reviews = arrayListOf<ReviewEntity>()
-        reviewList.results?.forEach {
-            reviews.add(convertToReviewEntity(it))
+        reviewList.results?.let { review ->
+            review.forEach {
+                reviews.add(convertToReviewEntity(it))
+            }
         }
         return ReviewListEntity(
             id = reviewList.id ?: IF_INT_NULL,
