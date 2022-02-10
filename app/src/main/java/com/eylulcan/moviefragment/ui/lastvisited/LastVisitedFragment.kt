@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentLastVisitedBinding
-import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
+import com.eylulcan.moviefragment.domain.daoEntity.MovieDaoEntity
 import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.eylulcan.moviefragment.ui.ItemListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,7 +58,7 @@ class LastVisitedFragment @Inject constructor() : Fragment(), ItemListener {
         }
     }
 
-    private fun setUI(movieList: ArrayList<MovieDao>) {
+    private fun setUI(movieList: ArrayList<MovieDaoEntity>) {
         binding.lastVisitedRecyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = lastVisitedAdapter

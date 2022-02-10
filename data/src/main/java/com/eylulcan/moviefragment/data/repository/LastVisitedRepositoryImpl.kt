@@ -2,6 +2,7 @@ package com.eylulcan.moviefragment.data.repository
 
 import com.eylulcan.moviefragment.data.datasource.remote.LastVisitedRemoteDataSource
 import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
+import com.eylulcan.moviefragment.domain.daoEntity.MovieDaoEntity
 import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.eylulcan.moviefragment.domain.repository.LastVisitedRepository
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,7 @@ class LastVisitedRepositoryImpl @Inject constructor(private val lastVisitedRemot
         }
     }
 
-    override suspend fun readFromDB(): Flow<ResultData<ArrayList<MovieDao>>> = flow {
+    override suspend fun readFromDB(): Flow<ResultData<ArrayList<MovieDaoEntity>>> = flow {
         emit(ResultData.Loading())
         val result = lastVisitedRemoteDataSource.readFromDB()
         result.collect {

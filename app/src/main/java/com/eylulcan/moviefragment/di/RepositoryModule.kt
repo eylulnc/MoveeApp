@@ -2,10 +2,7 @@ package com.eylulcan.moviefragment.di
 
 import com.eylulcan.moviefragment.data.datasource.*
 import com.eylulcan.moviefragment.data.datasource.remote.*
-import com.eylulcan.moviefragment.data.mapper.ArtistMapper
-import com.eylulcan.moviefragment.data.mapper.GenreMapper
-import com.eylulcan.moviefragment.data.mapper.MovieMapper
-import com.eylulcan.moviefragment.data.mapper.SearchMapper
+import com.eylulcan.moviefragment.data.mapper.*
 import com.eylulcan.moviefragment.data.repository.*
 import com.eylulcan.moviefragment.data.service.MovieAPI
 import com.eylulcan.moviefragment.domain.repository.*
@@ -135,8 +132,15 @@ object RepositoryModule {
     @Provides
     fun providesLastVisitedDataSource(
         auth: FirebaseAuth,
-        fireStore: FirebaseFirestore
+        fireStore: FirebaseFirestore,
+        mapper: LatestVisitedMapper
     ): LastVisitedRemoteDataSource {
-        return LastVisitedDataSource(auth, fireStore)
+        return LastVisitedDataSource(auth, fireStore, mapper)
     }
+
+    @Provides
+    fun latestVisitedMapper(): LatestVisitedMapper {
+        return LatestVisitedMapper()
+    }
+
 }

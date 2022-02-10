@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.databinding.LastVisitedRecyclerRowBinding
-import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
+import com.eylulcan.moviefragment.domain.daoEntity.MovieDaoEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import javax.inject.Inject
 
@@ -37,23 +37,23 @@ class LastVisitedAdapter @Inject constructor(private var glide: RequestManager) 
         glide.load(url).into(holder.binding.lastVisitedRecyclerRowImage)
         holder.binding.lastVisitedRecyclerRowText.text = movie.title
         holder.itemView.setOnClickListener {
-            childOnItemClickListener?.let { it1 -> it1(movie.id.toInt()) } }
+            childOnItemClickListener?.let { it1 -> it1(movie.id) } }
         }
 
     override fun getItemCount(): Int {
         return movieList.size
     }
-    private val diffUtil = object : DiffUtil.ItemCallback<MovieDao>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<MovieDaoEntity>() {
         override fun areItemsTheSame(
-            oldItem: MovieDao,
-            newItem: MovieDao
+            oldItem: MovieDaoEntity,
+            newItem: MovieDaoEntity
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: MovieDao,
-            newItem: MovieDao
+            oldItem: MovieDaoEntity,
+            newItem: MovieDaoEntity
         ): Boolean {
             return oldItem.equals(newItem)
         }
@@ -62,7 +62,7 @@ class LastVisitedAdapter @Inject constructor(private var glide: RequestManager) 
 
     private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var movieList: List<MovieDao>
+    var movieList: List<MovieDaoEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
