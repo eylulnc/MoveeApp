@@ -27,7 +27,7 @@ class AuthRepositoryImpl @Inject constructor(private val authRemoteDataSource: A
         }
     }
 
-    override suspend fun googleSignIn(credential: AuthCredential): Flow<ResultData<Unit>> = flow{
+    override suspend fun googleSignIn(credential: AuthCredential): Flow<ResultData<Unit>> = flow {
         emit(ResultData.Loading())
         val result = authRemoteDataSource.googleSignIn(credential)
         result.collect {
@@ -35,8 +35,12 @@ class AuthRepositoryImpl @Inject constructor(private val authRemoteDataSource: A
         }
     }
 
-    override suspend fun signOut()  {
-        authRemoteDataSource.signOut()
+    override suspend fun signOut(): Flow<ResultData<Unit>> = flow {
+        emit(ResultData.Loading())
+        val result = authRemoteDataSource.signOut()
+        result.collect {
+            emit(it)
+        }
     }
 
 

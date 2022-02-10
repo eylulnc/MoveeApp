@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.domain.entity.GuestSessionEntity
 import com.eylulcan.moviefragment.domain.entity.MovieEntity
+import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.eylulcan.moviefragment.domain.usecase.auth.SignOutUseCase
 import com.eylulcan.moviefragment.domain.usecase.movie.*
 import kotlinx.coroutines.CoroutineScope
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 
 @HiltViewModel
 class DiscoverViewModel @Inject constructor(
@@ -20,7 +22,7 @@ class DiscoverViewModel @Inject constructor(
     private val upcomingDataUseCase: UpcomingDataUseCase,
     private val nowPlayingDataUseCase: NowPlayingDataUseCase,
     private val guestSessionUseCase: GuestSessionUseCase,
-    private  val signOutUseCase: SignOutUseCase
+    private val signOutUseCase: SignOutUseCase
 ) : ViewModel() {
 
     private var popularMovieList = MutableLiveData<MovieEntity>()
@@ -33,6 +35,8 @@ class DiscoverViewModel @Inject constructor(
     val sessionEntityId: LiveData<GuestSessionEntity> get() = userSession
     private val upcoming = MutableLiveData<MovieEntity>()
     val upcomingMovies: LiveData<MovieEntity> get() = upcoming
+    private val signOutResult = MutableLiveData<ResultData<Unit>>()
+    val signOut: LiveData<ResultData<Unit>> get() = signOutResult
 
     fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -81,7 +85,10 @@ class DiscoverViewModel @Inject constructor(
 
     fun signOut() {
         CoroutineScope(Dispatchers.IO).launch {
-            signOutUseCase.invoke()
+            val response = signOutUseCase.invoke()
+            response.collect {
+                signOutResult.postValue(it)
+            }
         }
     }
 

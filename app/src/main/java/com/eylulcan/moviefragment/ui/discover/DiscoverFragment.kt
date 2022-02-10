@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
+import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import com.eylulcan.moviefragment.ui.ItemListener
@@ -135,6 +136,12 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
             fragmentBinding.dotsIndicator.setViewPager2(fragmentBinding.discoverSlider)
             sliderScroll()
             removePlaceholders()
+        }
+        discoverViewModel.signOut.observe(viewLifecycleOwner) {
+            when(it) {
+                is ResultData.Success -> {}
+                else -> {}
+            }
         }
     }
 

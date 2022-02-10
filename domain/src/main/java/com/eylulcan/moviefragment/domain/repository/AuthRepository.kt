@@ -8,5 +8,5 @@ interface AuthRepository {
     suspend fun signUp(email: String, password: String): Flow<ResultData<Unit>>
     suspend fun signIn(email: String, password: String): Flow<ResultData<Unit>>
     suspend fun googleSignIn(credential: AuthCredential): Flow<ResultData<Unit>>
-    suspend fun signOut()
+    suspend fun signOut(): Flow<ResultData<Unit>>
 }

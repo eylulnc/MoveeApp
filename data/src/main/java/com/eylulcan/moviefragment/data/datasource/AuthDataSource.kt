@@ -45,7 +45,13 @@ class AuthDataSource @Inject constructor(private val auth: FirebaseAuth) : AuthR
 
     }
 
-    override suspend fun signOut() {
+    override suspend fun signOut(): Flow<ResultData<Unit>> {
+        return flowViaChannel { flowVia ->
             auth.signOut()
+            if (auth.currentUser == null) {
+                flowVia.sendBlocking(ResultData.Success())
+            }
+
+        }
     }
 }
