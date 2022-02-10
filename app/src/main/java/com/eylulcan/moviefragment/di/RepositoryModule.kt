@@ -10,6 +10,7 @@ import com.eylulcan.moviefragment.data.repository.*
 import com.eylulcan.moviefragment.data.service.MovieAPI
 import com.eylulcan.moviefragment.domain.repository.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -122,4 +123,20 @@ object RepositoryModule {
         return AuthDataSource(FirebaseAuth.getInstance())
     }
 
+    @Provides
+    fun providesLatestRepository(
+        dataSource: LatestRemoteDataSource
+    ): LatestRepository {
+        return LatestRepositoryImpl(
+            dataSource
+        )
+    }
+
+    @Provides
+    fun providesLatestDataSource(
+        auth: FirebaseAuth,
+        fireStore: FirebaseFirestore
+    ): LatestRemoteDataSource {
+        return LatestDataSource(auth, fireStore)
+    }
 }

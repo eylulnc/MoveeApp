@@ -7,6 +7,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.data.service.MovieAPI
 import com.eylulcan.moviefragment.domain.util.Utils
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,4 +45,16 @@ object ProviderModule {
             RequestOptions().placeholder(R.color.grey_light)
                 .error(R.color.grey_light)
         )
+
+    @Singleton
+    @Provides
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
+    }
 }
