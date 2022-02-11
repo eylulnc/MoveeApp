@@ -23,12 +23,12 @@ import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import com.eylulcan.moviefragment.ui.ItemListener
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
 import javax.inject.Inject
 
 private const val GRID_COUNT = 3
+private const val START_POSITION = 0
 
 @AndroidEntryPoint
 class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
@@ -204,20 +204,19 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
 
     private fun sliderScroll() {
         val handler = Handler()
-        val startPosition = 0
 
         val runnable = object : Runnable {
             override fun run() {
                 val count = fragmentBinding.discoverSlider.adapter?.itemCount ?: 0
                 if (fragmentBinding.discoverSlider.currentItem == count - 1) {
                     handler.postDelayed(this, 10000)
-                    fragmentBinding.discoverSlider.setCurrentItem(startPosition, true)
+                    fragmentBinding.discoverSlider.setCurrentItem(START_POSITION, true)
                 } else {
+                    handler.postDelayed(this, 10000)
                     fragmentBinding.discoverSlider.setCurrentItem(
                         fragmentBinding.discoverSlider.currentItem + 1,
                         true
                     )
-                    handler.postDelayed(this, 10000)
                 }
             }
         }
