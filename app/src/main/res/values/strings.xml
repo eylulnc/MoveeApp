@@ -183,4 +183,5 @@
     <string name="lastVisited">Last Visited Movies</string>
     <string name="notFoundMovie">No such movie found!</string>
     <string name="no_review_found">No Review Found</string>
+    <string name="ratingSend">We received your rating!</string>
 </resources>

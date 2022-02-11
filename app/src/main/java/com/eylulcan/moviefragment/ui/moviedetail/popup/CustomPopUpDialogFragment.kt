@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.MovieDetailPopupRatingScreenBinding
 import dagger.hilt.android.AndroidEntryPoint
+
+private const val MUL_TWO = 2
 
 @AndroidEntryPoint
 class CustomPopUpDialogFragment : DialogFragment() {
@@ -39,9 +42,10 @@ class CustomPopUpDialogFragment : DialogFragment() {
             dismiss()
         }
         binding.rateButton.setOnClickListener {
-            val rate = binding.popUpRatingBar.rating.times(2).toDouble()
+            val rate = binding.popUpRatingBar.rating.times(MUL_TWO).toDouble()
             popUpViewModel.postMovieRating(movieID = movieID, rate = rate, sessionId = sessionID)
             dismiss()
+            Toast.makeText(context, getString(R.string.ratingSend), Toast.LENGTH_LONG).show()
         }
         return rootView
     }
@@ -52,7 +56,7 @@ class CustomPopUpDialogFragment : DialogFragment() {
 
     private fun observeViewModel() {
         popUpViewModel.responseRating.observe(viewLifecycleOwner) {
-            // TODO ask
+
         }
     }
 }
