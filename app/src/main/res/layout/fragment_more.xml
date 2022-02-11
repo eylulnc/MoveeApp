@@ -6,6 +6,19 @@
     tools:context=".ui.moviedetail.more.MoreFragment"
     android:background="@color/black_gray">
 
+    <TextView
+        android:id="@+id/textView"
+        android:textSize="@dimen/more_fragment_text_size"
+        android:layout_marginTop="@dimen/more_fragment_text_marginTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_gray"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/no_suggestion_found"
+        android:textColor="@color/white_light_grey" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moreRecyclerView"
         android:layout_width="match_parent"

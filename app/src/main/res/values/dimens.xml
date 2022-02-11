@@ -210,6 +210,9 @@
     <dimen name="moreRecyclerRow_genres_size">14sp</dimen>
     <dimen name="moreRecyclerRow_ratingBar_marginEnd">32dp</dimen>
 
+    <dimen name="more_fragment_text_marginTop">16dp</dimen>
+    <dimen name="more_fragment_text_size">18sp</dimen>
+
     <dimen name="album_fragment_albumConstraintLayout_marginStart">8dp</dimen>
     <dimen name="album_fragment_albumConstraintLayout_marginEnd">8dp</dimen>
     <dimen name="album_fragment_albumConstraintLayout_marginBottom">16dp</dimen>
@@ -240,6 +243,9 @@
     <dimen name="castRecyclerRow_characterName_textSize">16sp</dimen>
     <dimen name="castRecyclerRow_characterName_marginTop">16dp</dimen>
     <dimen name="castRecyclerRow_characterName_marginBottom">16dp</dimen>
+
+    <dimen name="cast_fragment_text_marginTop">16dp</dimen>
+    <dimen name="cast_fragment_text_size">18sp</dimen>
 
     <dimen name="search_recycler_row_text_width">100dp</dimen>
     <dimen name="search_recycler_row_text_height">40dp</dimen>

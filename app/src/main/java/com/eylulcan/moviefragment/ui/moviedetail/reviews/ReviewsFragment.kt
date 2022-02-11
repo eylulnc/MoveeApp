@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,10 +19,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ReviewsFragment @Inject constructor(): Fragment() {
+class ReviewsFragment @Inject constructor() : Fragment() {
 
     private lateinit var binding: FragmentReviewsBinding
     private val detailViewModel: DetailViewModel by activityViewModels()
+
     @Inject
     lateinit var reviewsAdapter: ReviewsAdapter
     private var lastLoadedPage: Int = 1
@@ -41,11 +43,13 @@ class ReviewsFragment @Inject constructor(): Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.reviewFragmentRecyclerView.adapter = reviewsAdapter
         observeViewModel()
-        binding.reviewFragmentRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.reviewFragmentRecyclerView.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
                     lastLoadedPage += 1
+                    binding.textView.isVisible = false
                     detailViewModel.getReviews(movieId = id, pageNo = lastLoadedPage)
                 }
             }
@@ -55,15 +59,17 @@ class ReviewsFragment @Inject constructor(): Fragment() {
     private fun observeViewModel() {
         detailViewModel.reviews.observe(this.requireActivity()) { reviewList ->
             reviewResultList.clear()
-            reviewList?.let {  reviewResultList.addAll(reviewList.results)
-                reviewsAdapter.reviewResult = reviewResultList
-                reviewsAdapter.notifyDataSetChanged() }.run {
+            reviewList?.let {
+                if (reviewList.results.isEmpty()) {
                     binding.textView.isVisible = true
                     binding.reviewFragmentRecyclerView.isVisible = false
-            }
-
-
+                } else {
+                    reviewResultList.addAll(reviewList.results)
+                    reviewsAdapter.reviewResult = reviewResultList
+                    reviewsAdapter.notifyDataSetChanged()
+                }
             }
         }
+    }
 
 }

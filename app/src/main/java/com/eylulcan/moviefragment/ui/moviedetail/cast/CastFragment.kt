@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -40,7 +42,6 @@ class CastFragment @Inject constructor() : Fragment(), ItemListener {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCastBinding.bind(view)
         setupUI()
-
         observeViewModel()
 
     }
@@ -56,10 +57,17 @@ class CastFragment @Inject constructor() : Fragment(), ItemListener {
 
     private fun observeViewModel() {
         movieDetailViewModel.cast.observe(viewLifecycleOwner) { movieCredits ->
-            binding.castRecyclerView.adapter = castAdapter
-            castAdapter.movieCredits = movieCredits.cast ?: emptyList()
-            castAdapter.setOnItemClickListener {
-                onItemClicked(it)
+            movieCredits?.let { creditsEntity ->
+                if (creditsEntity.cast.isEmpty()) {
+                    binding.textView.isVisible = true
+                    binding.castRecyclerView.isVisible = false
+                } else {
+                    binding.castRecyclerView.adapter = castAdapter
+                    castAdapter.movieCredits = creditsEntity.cast
+                    castAdapter.setOnItemClickListener {
+                        onItemClicked(it)
+                    }
+                }
             }
         }
     }

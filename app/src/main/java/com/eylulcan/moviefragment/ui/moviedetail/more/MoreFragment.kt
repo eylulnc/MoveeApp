@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -41,11 +42,18 @@ class MoreFragment @Inject constructor() : Fragment(), ItemListener {
 
     private fun observeViewModel() {
         detailViewModel.more.observe(viewLifecycleOwner) { movie ->
-            binding.moreRecyclerView.adapter = moreAdapter
-            moreAdapter.setOnItemClickListener {
-                onItemClicked(it)
+            if (movie.results.isEmpty()) {
+                binding.moreRecyclerView.isVisible = false
+                binding.textView.isVisible = true
+
+            } else {
+                binding.moreRecyclerView.adapter = moreAdapter
+                moreAdapter.setOnItemClickListener {
+                    onItemClicked(it)
+                }
+                moreAdapter.movies = movie.results
             }
-            moreAdapter.movies = movie.results ?: emptyList()
+
         }
     }
 
