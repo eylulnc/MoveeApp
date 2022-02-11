@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -29,20 +30,20 @@ private const val SPAN_COUNT = 3
 
 @AndroidEntryPoint
 class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener {
+
     @Inject
     lateinit var glide: RequestManager
+    @Inject
+    lateinit var artistMovieAdapter: ArtistMovieAdapter
+    @Inject
+    lateinit var albumRecyclerAdapter: AlbumRecyclerAdapter
     private lateinit var binding: FragmentArtistDetailBinding
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
     private val placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
     private lateinit var includeBinding: BottomSheetFragmentBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
-
-    @Inject
-    lateinit var artistMovieAdapter: ArtistMovieAdapter
-
-    @Inject
-    lateinit var albumRecyclerAdapter: AlbumRecyclerAdapter
+    private var screenBottomRatio = 0.40
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,19 +100,30 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener {
         }
 
         artistDetailViewModel.artistMovieCredits.observe(viewLifecycleOwner) { movieCredits ->
-            if (Utils.isTablet(requireContext())) {
-                binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+            setupUI()
+            if (movieCredits.cast.isEmpty()) {
+                binding.knownForText.isVisible = false
+                val displayMetrics = requireActivity().resources.displayMetrics
+                val height = displayMetrics.heightPixels
+                val maxHeight = height.times(screenBottomRatio).toInt()
+                BottomSheetBehavior.from(binding.linearLayout).peekHeight = maxHeight
             } else {
-                binding.artistMovieRecycler.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.artistMovieRecycler.adapter = artistMovieAdapter
+                artistMovieAdapter.setOnItemClickListener { id -> onItemClicked(id) }
+                artistMovieAdapter.artistMovieCredits = movieCredits.cast
             }
-
-            binding.artistMovieRecycler.adapter = artistMovieAdapter
-            artistMovieAdapter.setOnItemClickListener { id -> onItemClicked(id) }
-            artistMovieAdapter.artistMovieCredits = movieCredits.cast
-
         }
 
+    }
+
+    private fun setupUI() {
+        if (Utils.isTablet(requireContext())) {
+            binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+            screenBottomRatio = 0.6
+        } else {
+            binding.artistMovieRecycler.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
     private fun setImageUrl(profile_path: String?): String =
