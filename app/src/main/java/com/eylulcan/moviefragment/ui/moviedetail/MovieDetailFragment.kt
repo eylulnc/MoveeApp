@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.RequestManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentMovieDetailBinding
@@ -20,6 +21,7 @@ import com.eylulcan.moviefragment.domain.entity.MovieDetailEntity
 import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.eylulcan.moviefragment.domain.util.Utils
 import com.eylulcan.moviefragment.ui.moviedetail.popup.CustomPopUpDialogFragment
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
@@ -69,16 +71,47 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
             movieDetailViewModel.getReviews(id)
             movieDetailViewModel.getMovieDetail(id)
             movieDetailViewModel.getVideoClips(id)
+            tabAdapterSetup(id)
         }
-        tabAdapterSetup()
+
     }
 
     private fun setImageUrl(poster_path: String?): String =
         Utils.BASE_IMAGE_URL_ORIGINAL.plus(poster_path)
 
-    private fun tabAdapterSetup() {
+    private fun tabAdapterSetup(id:Int) {
         val adapter = DetailTabAdapter(childFragmentManager, lifecycle)
         fragmentBinding.movieDetailViewPager.adapter = adapter
+        fragmentBinding.detailTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                when(tab.position) {
+                    0 -> movieDetailViewModel.getMovieCast(id)
+                    1 -> movieDetailViewModel.getReviews(id)
+                    2 -> movieDetailViewModel.getMovieMore(id)
+                    else -> {}
+                }
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
+        fragmentBinding.movieDetailViewPager.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                if (position > 0 && positionOffset == 0.0f && positionOffsetPixels == 0) {
+                    fragmentBinding.movieDetailViewPager.layoutParams.height =
+                        fragmentBinding.movieDetailViewPager.getChildAt(0).height
+                }
+            }
+        })
         TabLayoutMediator(
             fragmentBinding.detailTabLayout,
             fragmentBinding.movieDetailViewPager

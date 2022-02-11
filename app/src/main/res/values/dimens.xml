@@ -198,6 +198,8 @@
     <dimen name="review_fragment_expandableText_marginRight">8dp</dimen>
     <dimen name="review_fragment_expandCollapseButton_padding">4dp</dimen>
     <dimen name="review_recyclerview_marginBottom">32dp</dimen>
+    <dimen name="review_recyclerview_text_marginTop">16dp</dimen>
+    <dimen name="review_recyclerview_text_size">18sp</dimen>
 
     <dimen name="moreRecyclerRow_moreMainConstraintLayout_margin">16dp</dimen>
     <dimen name="moreRecyclerRow_linearLayout_marginStart">16dp</dimen>

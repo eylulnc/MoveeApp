@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentReviewsBinding
+import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.eylulcan.moviefragment.domain.entity.ReviewEntity
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,11 +53,17 @@ class ReviewsFragment @Inject constructor(): Fragment() {
     }
 
     private fun observeViewModel() {
-        detailViewModel.reviews.observe(viewLifecycleOwner, { reviewList ->
-            reviewResultList.addAll(reviewList.results ?: arrayListOf())
-            reviewsAdapter.reviewResult = reviewResultList
-            reviewsAdapter.notifyDataSetChanged()
-        })
-    }
+        detailViewModel.reviews.observe(this.requireActivity()) { reviewList ->
+            reviewResultList.clear()
+            reviewList?.let {  reviewResultList.addAll(reviewList.results)
+                reviewsAdapter.reviewResult = reviewResultList
+                reviewsAdapter.notifyDataSetChanged() }.run {
+                    binding.textView.isVisible = true
+                    binding.reviewFragmentRecyclerView.isVisible = false
+            }
+
+
+            }
+        }
 
 }

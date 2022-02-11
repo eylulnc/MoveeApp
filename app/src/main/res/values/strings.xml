@@ -182,4 +182,5 @@
     <string name="posterPath">posterPath</string>
     <string name="lastVisited">Last Visited Movies</string>
     <string name="notFoundMovie">No such movie found!</string>
+    <string name="no_review_found">No Review Found</string>
 </resources>
