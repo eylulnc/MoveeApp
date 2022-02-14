@@ -8,9 +8,11 @@ import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import kotlinx.coroutines.channels.sendBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowViaChannel
+import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
 private const val LAST_VISITED = "Last Visited Movies"
@@ -20,19 +22,21 @@ class LastVisitedDataSource @Inject constructor(
     private val fireStore: FirebaseFirestore,
     private val mapper: LatestVisitedMapper
 ) : LastVisitedRemoteDataSource {
+
     override suspend fun updateDB(movieMap: HashMap<String, MovieDao>): Flow<ResultData<Unit>> {
-        return flowViaChannel { flowVia ->
+        return callbackFlow {
             val ref = auth.currentUser?.uid?.let {
                 fireStore.collection(LAST_VISITED).document(it)
             }
             ref?.set(movieMap, SetOptions.merge())?.addOnSuccessListener {
-                flowVia.sendBlocking(ResultData.Success())
+                trySend(ResultData.Success())
             }
+            awaitClose { cancel() }
         }
     }
 
     override suspend fun readFromDB(): Flow<ResultData<ArrayList<MovieDaoEntity>>> {
-        return flowViaChannel { flowVia ->
+        return callbackFlow {
             val movieList = arrayListOf<MovieDaoEntity>()
             val docRef = auth.currentUser?.uid?.let {
                 fireStore.collection(LAST_VISITED)
@@ -42,11 +46,12 @@ class LastVisitedDataSource @Inject constructor(
                 val data = doc.data
                 data?.forEach { map ->
                     val movieMap = map.value as HashMap<String, *>
-                    val movie:MovieDaoEntity = mapper.convertToMovieDaoEntity(movieMap)
+                    val movie: MovieDaoEntity = mapper.convertToMovieDaoEntity(movieMap)
                     movieList.add(movie)
                 }
-                flowVia.sendBlocking(ResultData.Success(movieList))
+                trySend(ResultData.Success(movieList))
             }
+            awaitClose { cancel() }
         }
     }
 
