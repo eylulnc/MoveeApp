@@ -22,6 +22,7 @@
         android:layout_width="@dimen/artist_recyclerRow_movieImage_width"
         android:layout_height="@dimen/artist_recyclerRow_movieImage_height"
         android:contentDescription="@string/artist_image"
+        android:background="@color/black_gray"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -13,6 +13,8 @@ import com.eylulcan.moviefragment.databinding.FragmentSliderBinding
 import com.eylulcan.moviefragment.domain.util.Utils
 import com.eylulcan.moviefragment.ui.ItemListener
 
+private const val IMAGE_MULTIPLIER = 1.5
+
 class SliderFragment(private val movieInfo: Pair<Int, String>, private val glide: RequestManager) :
     Fragment(),
     ItemListener {
@@ -30,11 +32,19 @@ class SliderFragment(private val movieInfo: Pair<Int, String>, private val glide
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
         glide.load(setImageUrl(movieInfo.second)).into(binding.sliderImageView)
         binding.sliderLayout.setOnClickListener {
             onItemClicked(movieInfo.first)
         }
 
+    }
+
+    private fun setupUI() {
+        if (Utils.isTablet(requireContext())) {
+            val sliderHeight = binding.sliderImageView.layoutParams.height
+            binding.sliderImageView.layoutParams.height = sliderHeight.times(IMAGE_MULTIPLIER).toInt()
+        }
     }
 
     override fun onItemClicked(id: Int) {

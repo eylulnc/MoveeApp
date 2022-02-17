@@ -154,7 +154,7 @@
     <dimen name="artist_movie_recycler_row_movieImage_height">180dp</dimen>
 
     <dimen name="artist_detail_artistDetailCoverImage_height">250dp</dimen>
-    <dimen name="artist_detail_artistDetailCoverImage_height_tablet">400dp</dimen>
+    <dimen name="artist_detail_artistDetailCoverImage_height_tablet">300dp</dimen>
     <dimen name="artist_detail_artistDetailCoverImage_marginTop">16dp</dimen>
     <dimen name="artist_detail_artistDetailCoverImage_marginTop_tablet">32dp</dimen>
     <dimen name="artist_detail_knownForText_text_marginTop">10dp</dimen>
@@ -168,8 +168,8 @@
     <dimen name="artist_detail_artistName_text_size">20sp</dimen>
     <dimen name="artist_detail_artistMovieRecycler_marginTop">8dp</dimen>
     <dimen name="artist_detail_linearLayout_marginBottom">16dp</dimen>
-    <dimen name="artist_detail_linearLayout_peekHeight">38dp</dimen>
-    <dimen name="artist_detail_recycler_peekHeight">35dp</dimen>
+    <dimen name="artist_detail_linearLayout_peekHeight">50dp</dimen>
+    <dimen name="artist_detail_recycler_peekHeight">50dp</dimen>
     <dimen name="artist_detail_linearLayout_peekHeight_Tablet">100dp</dimen>
 
     <dimen name="summary_summaryTextView_margin">16dp</dimen>

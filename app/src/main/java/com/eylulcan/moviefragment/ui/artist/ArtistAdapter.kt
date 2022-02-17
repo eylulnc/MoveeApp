@@ -72,7 +72,7 @@ class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
     override fun getItemCount(): Int = artistResult.size
 
     private fun setImageUrl(poster_path: String?): String =
-        Utils.BASE_IMAGE_URL_185.plus(poster_path)
+        Utils.BASE_IMAGE_URL_ORIGINAL.plus(poster_path)
 
     private val diffUtil = object : DiffUtil.ItemCallback<ArtistResultEntity>() {
         override fun areItemsTheSame(

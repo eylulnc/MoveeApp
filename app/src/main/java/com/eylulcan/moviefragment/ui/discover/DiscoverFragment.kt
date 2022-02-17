@@ -29,6 +29,9 @@ import javax.inject.Inject
 
 private const val GRID_COUNT = 3
 private const val START_POSITION = 0
+private const val IMAGE_MULTIPLIER = 1.5
+private const val RECYCLER_MULTIPLIER = 1.5
+private const val DELAY : Long = 10000
 
 @AndroidEntryPoint
 class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
@@ -36,6 +39,7 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
 
     @Inject
     lateinit var recyclerViewAdapter: DiscoverParentAdapter
+
     @Inject
     lateinit var sliderAdapter: SliderAdapter
     private lateinit var fragmentBinding: FragmentDiscoverBinding
@@ -144,9 +148,12 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
 
     private fun setupUI() {
         if (Utils.isTablet(requireContext())) {
-            val height = fragmentBinding.discoverMainRecyclerView.layoutParams.height
+            val recyclerViewHeight = fragmentBinding.discoverMainRecyclerView.layoutParams.height
             fragmentBinding.discoverMainRecyclerView.layoutParams.height =
-                (height * 1.1).toInt()
+                recyclerViewHeight.times(RECYCLER_MULTIPLIER).toInt()
+            val sliderHeight = fragmentBinding.discoverSlider.layoutParams.height
+            fragmentBinding.discoverSlider.layoutParams.height =
+                sliderHeight.times(IMAGE_MULTIPLIER).toInt()
         }
     }
 
@@ -161,7 +168,8 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
             return true
         } else if (item?.itemId == R.id.visitedMovies) {
             this.parentFragment?.parentFragment?.findNavController()?.navigate(
-                R.id.action_dashboardFragment_to_lastVisitedFragment)
+                R.id.action_dashboardFragment_to_lastVisitedFragment
+            )
             return true
         }
         return false
@@ -208,13 +216,13 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
         val runnable = object : Runnable {
             override fun run() {
                 val count = fragmentBinding.discoverSlider.adapter?.itemCount ?: 0
-                if (fragmentBinding.discoverSlider.currentItem == count - 1) {
-                    handler.postDelayed(this, 10000)
+                if (fragmentBinding.discoverSlider.currentItem == count.dec()) {
+                    handler.postDelayed(this, DELAY)
                     fragmentBinding.discoverSlider.setCurrentItem(START_POSITION, true)
                 } else {
-                    handler.postDelayed(this, 10000)
+                    handler.postDelayed(this, DELAY)
                     fragmentBinding.discoverSlider.setCurrentItem(
-                        fragmentBinding.discoverSlider.currentItem + 1,
+                        fragmentBinding.discoverSlider.currentItem.inc(),
                         true
                     )
                 }

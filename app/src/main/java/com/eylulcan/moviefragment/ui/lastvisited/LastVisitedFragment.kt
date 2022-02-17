@@ -30,10 +30,7 @@ import coil.compose.rememberImagePainter
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.domain.daoEntity.MovieDaoEntity
 import com.eylulcan.moviefragment.domain.util.Utils
-import com.eylulcan.moviefragment.ui.theme.BlackGray
-import com.eylulcan.moviefragment.ui.theme.MovieFragmentTheme
-import com.eylulcan.moviefragment.ui.theme.WhileLightGrey
-import com.eylulcan.moviefragment.ui.theme.latoFontFamily
+import com.eylulcan.moviefragment.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -49,12 +46,11 @@ class LastVisitedFragment @Inject constructor() :
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-       val view = ComposeView(requireContext())
+        val view = ComposeView(requireContext())
         lastVisitedViewModel.readFromDB()
         view.apply {
-           setContent {
-               //val navController = rememberNavController()
-               Surface(
+            setContent {
+                Surface(
                     color = BlackGray,
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -84,7 +80,7 @@ fun SetupUI(
         modifier = Modifier.fillMaxSize()
     ) {
         if (isLoading) {
-            CircularProgressIndicator(color = MaterialTheme.colors.primary)
+            CircularProgressIndicator(color = Orange)
         }
 
     }
@@ -99,41 +95,50 @@ fun GridView(movieList: ArrayList<MovieDaoEntity>, context: LastVisitedFragment)
     ) {
         Scaffold(content = {
             LazyVerticalGrid(
-                cells = GridCells.Fixed(3)
+                cells = GridCells.Fixed(3),
+                modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp)
             ) {
                 items(movies.size) {
                     Card(
                         backgroundColor = BlackGray, modifier =
                         Modifier
-                            .padding(start = 8.dp, top = 0.dp, bottom = 16.dp)
+                            .padding(horizontal = 4.dp, vertical = 8.dp)
                             .clickable {
                                 val movieDataBundle = bundleOf(MOVIE_KEY to movies[it].id)
-                               findNavController(context).navigate(
+                                findNavController(context).navigate(
                                     R.id.action_lastVisitedFragment_to_movieDetailFragment,
                                     movieDataBundle, null, null
                                 )
                             },
                         content = {
+                            var (imageHeight, imageWidth, textHeight) = listOf(
+                                200.dp,
+                                150.dp,
+                                50.dp
+                            )
+                            if (Utils.isTablet(context = context.requireContext())) {
+                                imageHeight = 300.dp; imageWidth = 200.dp
+                            }
                             Column(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(top = 0.dp, bottom = 0.dp),
-                                verticalArrangement = Arrangement.Center
+                                    .width(imageWidth)
+                                    .height(imageHeight + textHeight)
+                                    .background(BlackGray),
+                                verticalArrangement = Arrangement.Center,
                             ) {
                                 val url = Utils.BASE_IMAGE_URL_300 + movies[it].posterPath
                                 Image(
                                     painter = rememberImagePainter(url),
                                     contentDescription = null,
                                     modifier = Modifier
-                                        .height(200.dp)
-                                        .width(150.dp)
+                                        .height(imageHeight)
+                                        .width(imageWidth)
                                 )
                                 Box(
                                     contentAlignment = Alignment.Center,
                                     modifier = Modifier
-                                        .height(50.dp)
-                                        .padding(4.dp, 4.dp)
+                                        .height(textHeight)
                                 ) {
                                     Text(
                                         text = movies[it].title,
