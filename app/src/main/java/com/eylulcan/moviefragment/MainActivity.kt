@@ -50,14 +50,14 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         navController = navHostFragment.navController
         val currentUser = auth.currentUser
         currentUser?.let {
-            navGraph.startDestination = R.id.dashboardFragment
+            navGraph.setStartDestination(R.id.dashboardFragment)
         } ?: run {
             firstTimeOpened = sharedPreferences.getBoolean(getString(R.string.isFirst), true)
             if (firstTimeOpened == true) {
                 sharedPreferences.edit().putBoolean(getString(R.string.isFirst), false).apply()
-                navGraph.startDestination = R.id.onBoardViewPagerFragment
+                navGraph.setStartDestination(R.id.onBoardViewPagerFragment)
             } else {
-                navGraph.startDestination = R.id.loginFragment
+                navGraph.setStartDestination(R.id.loginFragment)
             }
             navController.graph = navGraph
         }
