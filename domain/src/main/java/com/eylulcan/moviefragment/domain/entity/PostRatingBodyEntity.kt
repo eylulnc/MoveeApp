@@ -1,5 +1,5 @@
 package com.eylulcan.moviefragment.domain.entity
 
 data class PostRatingBodyEntity(
-    var ratingValue: Double
+    var value: Double
 )

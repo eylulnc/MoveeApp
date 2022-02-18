@@ -186,4 +186,5 @@
     <string name="ratingSend">We received your rating!</string>
     <string name="no_cast_information_found">No Cast Information Found</string>
     <string name="no_suggestion_found">No Suggestion Found</string>
+    <string name="fyi">FYI</string>
 </resources>

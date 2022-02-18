@@ -27,8 +27,11 @@ class PopUpViewModel @Inject constructor(private val postRatingUseCase: PostRati
                 sessionId = sessionId,
                 postBody = postRatingBody
             )
+
             response.let {
-                ratingResponse.postValue(it)
+                if(response?.success == true) {
+                    ratingResponse.postValue(it)
+                }
             }
         }
     }
