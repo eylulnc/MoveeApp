@@ -24,8 +24,8 @@ private const val NOTIFICATION_ID = 101
 @AndroidEntryPoint
 class MainActivity @Inject constructor() : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
+    @Inject
+    lateinit var fragmentFactory: MovieFragmentFactory
     @Inject
     lateinit var auth: FirebaseAuth
     lateinit var sharedPreferences: SharedPreferences
@@ -34,9 +34,8 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
+    private lateinit var binding: ActivityMainBinding
 
-    @Inject
-    lateinit var fragmentFactory: MovieFragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.SplashScreen)
@@ -77,12 +76,13 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannel = NotificationChannel(
-                CHANNEL_ID, "Notification Title",
+                CHANNEL_ID, getString(R.string.title),
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "Notification Description"
+                description = getString(R.string.description)
 
-                notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             }
             notificationManager.createNotificationChannel(notificationChannel)
         }
@@ -107,11 +107,10 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         )
     }
 
-
     private fun getTime(): Long {
         val now = Calendar.getInstance()
         val time = now.clone() as Calendar
-        time.add(Calendar.MINUTE,2)
+        time.add(Calendar.MINUTE, 2)
         return time.timeInMillis
     }
 

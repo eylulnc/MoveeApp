@@ -1,20 +1,16 @@
 package com.eylulcan.moviefragment
 
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-
 
 private const val CHANNEL_ID = "com.eylulcan.moviefragment"
 private const val NOTIFICATION_ID = 101
 
 private const val TITLE = "Check This Out!"
-private const val DESC = "Can\'t find a movie to watch check most popular movie section"
+private const val DESC = "Can\'t find a movie to watch check us!!"
 
 class Notification: BroadcastReceiver() {
 
