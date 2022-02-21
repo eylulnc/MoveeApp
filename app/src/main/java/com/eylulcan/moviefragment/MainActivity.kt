@@ -1,7 +1,10 @@
 package com.eylulcan.moviefragment
 
+import android.app.*
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,20 +14,26 @@ import androidx.navigation.fragment.NavHostFragment
 import com.eylulcan.moviefragment.databinding.ActivityMainBinding
 import com.eylulcan.moviefragment.ui.MovieFragmentFactory
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
+
+private const val CHANNEL_ID = "com.eylulcan.moviefragment"
+private const val NOTIFICATION_ID = 101
 
 @AndroidEntryPoint
 class MainActivity @Inject constructor() : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val auth: FirebaseAuth = Firebase.auth
+
+    @Inject
+    lateinit var auth: FirebaseAuth
     lateinit var sharedPreferences: SharedPreferences
     private var firstTimeOpened: Boolean? = null
     private lateinit var navGraph: NavGraph
     private lateinit var navController: NavController
+    private lateinit var notificationManager: NotificationManager
+    private lateinit var notificationChannel: NotificationChannel
 
     @Inject
     lateinit var fragmentFactory: MovieFragmentFactory
@@ -39,10 +48,12 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
             getString(R.string.app_package_name),
             Context.MODE_PRIVATE
         )
-        setUpUI()
+        createNotificationChannel()
+        scheduleNotification()
+        setupUI()
     }
 
-    private fun setUpUI() {
+    private fun setupUI() {
         val navHostFragment =
             binding.fragmentContainerView.getFragment<Fragment>() as NavHostFragment
         val graphInflater = navHostFragment.navController.navInflater
@@ -61,6 +72,47 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
             }
             navController.graph = navGraph
         }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel = NotificationChannel(
+                CHANNEL_ID, "Notification Title",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "Notification Description"
+
+                notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            }
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
+    }
+
+    private fun scheduleNotification() {
+        val intent = Intent(applicationContext, Notification::class.java)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            NOTIFICATION_ID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getTime()
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            time,
+            pendingIntent
+        )
+    }
+
+
+    private fun getTime(): Long {
+        val now = Calendar.getInstance()
+        val time = now.clone() as Calendar
+        time.add(Calendar.MINUTE,2)
+        return time.timeInMillis
     }
 
 }
