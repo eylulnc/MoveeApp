@@ -28,10 +28,10 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding) :
         SearchRecyclerViewHolder(binding) {
 
         fun bind(movie: SearchResultEntity, listener: SearchListener, glide: RequestManager) {
-            glide.load(setImageUrl(movie?.posterPath)).into(binding.searchItemImage)
-            binding.searchItemName.text = movie?.title
+            glide.load(setImageUrl(movie.posterPath)).into(binding.searchItemImage)
+            binding.searchItemName.text = movie.title
             itemView.setOnClickListener {
-                movie?.id?.let { listener.onMovieClicked(it) }
+                movie.id.let { listener.onMovieClicked(it) }
             }
 
         }
@@ -44,8 +44,8 @@ open class SearchRecyclerViewHolder(binding: SearchFragmentRecyclerRowBinding) :
         SearchRecyclerViewHolder(binding) {
 
         fun bind(tvShow: SearchResultEntity, glide: RequestManager) {
-            glide.load(setImageUrl(tvShow?.posterPath)).into(binding.searchItemImage)
-            binding.searchItemName.text = tvShow?.name
+            glide.load(setImageUrl(tvShow.posterPath)).into(binding.searchItemImage)
+            binding.searchItemName.text = tvShow.name
         }
 
         fun setImageUrl(poster_path: String?): String =
