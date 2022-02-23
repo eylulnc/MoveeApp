@@ -1,13 +1,14 @@
 package com.eylulcan.moviefragment.ui.artistdetail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.os.bundleOf
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -27,14 +28,17 @@ import me.samlss.broccoli.Broccoli
 import javax.inject.Inject
 
 private const val SPAN_COUNT = 3
+private const val TAG = "ArtistDetail"
 
 @AndroidEntryPoint
-class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener {
+class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, ArtistDetailListener {
 
     @Inject
     lateinit var glide: RequestManager
+
     @Inject
     lateinit var artistMovieAdapter: ArtistMovieAdapter
+
     @Inject
     lateinit var albumRecyclerAdapter: AlbumRecyclerAdapter
     private lateinit var binding: FragmentArtistDetailBinding
@@ -48,11 +52,12 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_artist_detail, container, false)
-        binding = FragmentArtistDetailBinding.bind(view)
+    ): View {
+        binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_artist_detail, container, false
+        )
         includeBinding = binding.bottomSheetFragment
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,9 +76,10 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener {
         artistDetailViewModel.artistDetail.observe(viewLifecycleOwner) { detail ->
             setupUIBottomSheet(detail)
             removePlaceholders()
+            val detailArtist: ArtistDetailEntity = detail
             binding.artistName.text = detail.name
-            val knownForDepartment = detail.knownForDepartment
-            binding.knownWithText.text = knownForDepartment
+            binding.detail = detailArtist
+            binding.listener = this
             binding.artistDetailCoverImage.let {
                 glide.load(setImageUrl(detail.profilePath)).circleCrop().into(it)
             }
@@ -119,7 +125,7 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener {
     private fun setupUI() {
         if (Utils.isTablet(requireContext())) {
             binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
-            screenBottomRatio = 0.6
+            screenBottomRatio = 0.5
         } else {
             binding.artistMovieRecycler.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -195,6 +201,10 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener {
             R.id.action_artistDetailFragment_to_movieDetailFragment,
             movieDataBundle, null, null
         )
+    }
+
+    override fun onArtistImageClick(v: View) {
+        Log.v(TAG, "Image Clicked")
     }
 
 }

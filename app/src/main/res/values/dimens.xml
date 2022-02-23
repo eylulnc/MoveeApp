@@ -168,9 +168,9 @@
     <dimen name="artist_detail_artistName_text_size">20sp</dimen>
     <dimen name="artist_detail_artistMovieRecycler_marginTop">8dp</dimen>
     <dimen name="artist_detail_linearLayout_marginBottom">16dp</dimen>
-    <dimen name="artist_detail_linearLayout_peekHeight">50dp</dimen>
-    <dimen name="artist_detail_recycler_peekHeight">50dp</dimen>
-    <dimen name="artist_detail_linearLayout_peekHeight_Tablet">100dp</dimen>
+    <dimen name="artist_detail_linearLayout_peekHeight">40dp</dimen>
+    <dimen name="artist_detail_recycler_peekHeight">30dp</dimen>
+    <dimen name="artist_detail_linearLayout_peekHeight_Tablet">50dp</dimen>
 
     <dimen name="summary_summaryTextView_margin">16dp</dimen>
 

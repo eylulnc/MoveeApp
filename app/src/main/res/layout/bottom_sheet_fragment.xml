@@ -32,6 +32,7 @@
                     android:layout_weight="2"
                     android:height="@dimen/movie_detail_bottom_sheet_moreDetailText_height"
                     android:background="@color/white_light_grey"
+                    android:fontFamily="@font/lato_bold"
                     android:gravity="center|start"
                     android:paddingStart="@dimen/movie_detail_bottom_sheet_moreDetailText_padding"
                     android:paddingEnd="@dimen/movie_detail_bottom_sheet_moreDetailText_padding"

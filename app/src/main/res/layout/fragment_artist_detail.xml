@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+    <variable name="detail"
+        type = "com.eylulcan.moviefragment.domain.entity.ArtistDetailEntity"/>
+    <variable
+        name="listener"
+        type="com.eylulcan.moviefragment.ui.artistdetail.ArtistDetailListener" />
+</data>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -36,7 +44,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ImageContrastCheck"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:onClick="@{listener.onArtistImageClick}"/>
 
             <com.eylulcan.moviefragment.CustomTitleTextView
                 android:id="@+id/artistName"
@@ -82,7 +91,7 @@
                 app:layout_constraintStart_toStartOf="@+id/artistName"
                 app:layout_constraintTop_toBottomOf="@+id/artistName"
                 tools:ignore="TextContrastCheck"
-                tools:text="TextView" />
+                android:text="@{detail.knownForDepartment, default=@string/placeholder_text}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/artistMovieRecycler"
@@ -132,3 +141,4 @@
             app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

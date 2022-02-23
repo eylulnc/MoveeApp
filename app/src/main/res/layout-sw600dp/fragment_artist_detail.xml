@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="detail"
+            type = "com.eylulcan.moviefragment.domain.entity.ArtistDetailEntity"/>
+
+    </data>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -79,7 +84,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/artistName"
                 app:layout_constraintStart_toStartOf="@+id/artistName"
                 app:layout_constraintTop_toBottomOf="@+id/artistName"
-                tools:text="TextView" />
+                android:text="@{detail.knownForDepartment, default=@string/placeholder_text}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/artistMovieRecycler"
@@ -130,3 +135,4 @@
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

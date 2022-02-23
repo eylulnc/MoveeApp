@@ -4,36 +4,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.ArtistMovieFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.domain.entity.CastEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import me.samlss.broccoli.Broccoli
-import java.util.*
 import javax.inject.Inject
 
 class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) :
     RecyclerView.Adapter<ArtistMovieAdapter.ViewHolder>() {
 
-    private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap<View, Broccoli>()
-    private val mTaskManager: HashMap<View, Runnable> = HashMap<View, Runnable>()
+    private val mViewPlaceholderManager: HashMap<View, Broccoli> = HashMap()
+    private val mTaskManager: HashMap<View, Runnable> = HashMap()
     private var onItemClickListener: ((id: Int) -> Unit)? = null
     private val broccoli = Broccoli()
     private val placeholderNeeded = arrayListOf<View>()
+    private lateinit var view: View
 
     class ViewHolder(val binding: ArtistMovieFragmentRecyclerRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            ArtistMovieFragmentRecyclerRowBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ArtistMovieFragmentRecyclerRowBinding>(
+            inflater,
+            R.layout.artist_movie_fragment_recycler_row,
+            parent,
+            false
+        )
+        view = inflater.inflate(R.layout.artist_movie_fragment_recycler_row, parent, false)
         return ViewHolder(binding)
     }
 
@@ -45,7 +49,7 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
         }
         setPlaceholders(holder)
         val movie = artistMovieCredits[position]
-        holder.binding.movieNameArtistMovie.text = movie.title
+        holder.binding.movieCredits = movie
         glide.load(setImageUrl(movie.posterPath))
             .into(holder.binding.movieImage)
         holder.itemView.setOnClickListener {
@@ -115,6 +119,5 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
     var artistMovieCredits: List<CastEntity>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
-
 
 }

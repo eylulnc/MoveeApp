@@ -6,15 +6,7 @@
     <string name="movieImage">TODO</string>
     <string name="movie_info">Movie Info</string>
     <string name="movie_name">Movie Name</string>
-    <string name="avengers">Avengers</string>
-    <string name="titanic">Titanic</string>
-    <string name="harry_potter">Harry Potter and Chamber of Secrets</string>
-    <string name="interstellar">Interstellar</string>
-    <string name="avengers_info">Avengers Info Text</string>
-    <string name="titanic_info">Titanic Info Text</string>
     <string name="movie">movie</string>
-    <string name="interstellar_info">Interstellar Info Text</string>
-    <string name="harry_potter_info">Harry Potter and Chamber of Secrets Info Text</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_e_mail">Enter E-Mail</string>
     <string name="logo">logo</string>
@@ -80,6 +72,26 @@
     <string name="search_fragment_image">Search Fragment Image</string>
     <string name="genreId">genreId</string>
     <string name="isFirst">isFirst</string>
+    <string name="vote">Vote</string>
+    <string name="as">as</string>
+    <string name="known_for">Known For</string>
+    <string name="more_detail">More Detail</string>
+    <string name="biography">Biography</string>
+    <string name="born">Born</string>
+    <string name="death">Death</string>
+    <string name="recently_viewed">Recently Viewed</string>
+    <string name="id">id</string>
+    <string name="title">title</string>
+    <string name="description">description</string>
+    <string name="posterPath">posterPath</string>
+    <string name="lastVisited">Last Visited Movies</string>
+    <string name="notFoundMovie">No such movie found!</string>
+    <string name="no_review_found">No Review Found</string>
+    <string name="ratingSend">We received your rating!</string>
+    <string name="no_cast_information_found">No Cast Information Found</string>
+    <string name="no_suggestion_found">No Suggestion Found</string>
+    <string name="fyi">FYI</string>
+    <string name="placeholder_text"> </string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -169,23 +181,5 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="vote">Vote</string>
-    <string name="as">as</string>
-    <string name="known_for">Known For</string>
-    <string name="more_detail">More Detail</string>
-    <string name="biography">Biography</string>
-    <string name="born">Born</string>
-    <string name="death">Death</string>
-    <string name="recently_viewed">Recently Viewed</string>
-    <string name="id">id</string>
-    <string name="title">title</string>
-    <string name="description">description</string>
-    <string name="posterPath">posterPath</string>
-    <string name="lastVisited">Last Visited Movies</string>
-    <string name="notFoundMovie">No such movie found!</string>
-    <string name="no_review_found">No Review Found</string>
-    <string name="ratingSend">We received your rating!</string>
-    <string name="no_cast_information_found">No Cast Information Found</string>
-    <string name="no_suggestion_found">No Suggestion Found</string>
-    <string name="fyi">FYI</string>
+
 </resources>
