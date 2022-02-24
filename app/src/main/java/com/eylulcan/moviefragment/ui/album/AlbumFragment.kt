@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.compiler.plugins.kotlin.lower.COMPOSABLE_LAMBDA_N_INSTANCE
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -21,20 +22,20 @@ private const val SPAN_COUNT = 3
 class AlbumFragment @Inject constructor(private val albumAdapter: AlbumAdapter) : Fragment(),
     ImageListener {
 
-    private lateinit var binding: FragmentAlbumBinding
+    private var _binding: FragmentAlbumBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_album, container, false)
-        binding = FragmentAlbumBinding.bind(view)
-        binding.albumRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
-        return view
+    ): View {
+        _binding = FragmentAlbumBinding.inflate(inflater, container, false)
+        return  binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.albumRecyclerView.layoutManager = GridLayoutManager(requireContext().applicationContext, SPAN_COUNT)
         val selectedArtistAlbum =
             arguments?.get(getString(R.string.photo_album)) as ArtistAlbumEntity
         val artistAlbum = selectedArtistAlbum.artistProfileImages
@@ -52,5 +53,10 @@ class AlbumFragment @Inject constructor(private val albumAdapter: AlbumAdapter) 
             R.id.action_albumFragment_to_imageFragment,
             imageAlbumDataBundle
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

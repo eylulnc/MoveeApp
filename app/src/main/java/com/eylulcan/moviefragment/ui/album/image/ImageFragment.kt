@@ -15,27 +15,32 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ImageFragment @Inject constructor(private val imageAdapter: ImageAdapter) : Fragment() {
 
-    private lateinit var binding: FragmentImageBinding
+    private  var _binding: FragmentImageBinding? = null
+    private val binding get() =  _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_image, container, false)
+    ): View {
+        _binding = FragmentImageBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentImageBinding.bind(view)
         binding.imageFragmentRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(requireContext().applicationContext, LinearLayoutManager.HORIZONTAL, false)
         val albumInformation = arguments?.get(getString(R.string.image_url)) as Pair<*, *>
         val album = albumInformation.first as List<ProfileImageEntity>?
         val position = albumInformation.second as Int
         binding.imageFragmentRecyclerView.adapter = imageAdapter
         imageAdapter.album = album ?: emptyList()
         binding.imageFragmentRecyclerView.scrollToPosition(position)
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

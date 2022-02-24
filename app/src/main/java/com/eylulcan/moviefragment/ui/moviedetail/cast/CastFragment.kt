@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -28,30 +27,29 @@ class CastFragment @Inject constructor() : Fragment(), ItemListener {
     @Inject
     lateinit var castAdapter: CastAdapter
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
-    private lateinit var binding: FragmentCastBinding
+    private var _binding: FragmentCastBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_cast, container, false)
+    ): View {
+        _binding = FragmentCastBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentCastBinding.bind(view)
         setupUI()
         observeViewModel()
-
     }
 
     private fun setupUI() {
         if (Utils.isTablet(requireContext())) {
-            binding.castRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
+            binding.castRecyclerView.layoutManager = GridLayoutManager(requireContext().applicationContext, SPAN_COUNT_TABLET)
         } else {
             binding.castRecyclerView.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(requireContext().applicationContext, LinearLayoutManager.VERTICAL, false)
         }
     }
 
@@ -77,6 +75,13 @@ class CastFragment @Inject constructor() : Fragment(), ItemListener {
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_movieDetailFragment_to_artistDetailFragment, artistIdBundle, null, null
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.castRecyclerView.adapter = null
+        _binding = null
+
     }
 
 }

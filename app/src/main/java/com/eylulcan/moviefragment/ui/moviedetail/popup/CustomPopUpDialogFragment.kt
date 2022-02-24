@@ -26,7 +26,8 @@ class CustomPopUpDialogFragment : DialogFragment() {
 
     private var movieID: Int = -1
     private var sessionID: String = ""
-    private lateinit var binding: MovieDetailPopupRatingScreenBinding
+    private var _binding: MovieDetailPopupRatingScreenBinding? = null
+    private val binding get() = _binding!!
     private val popUpViewModel: PopUpViewModel by viewModels()
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
@@ -36,17 +37,19 @@ class CustomPopUpDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView: View =
-            inflater.inflate(R.layout.movie_detail_popup_rating_screen, container, false)
+        _binding = MovieDetailPopupRatingScreenBinding.inflate(inflater, container, false)
         observeViewModel()
-        binding = MovieDetailPopupRatingScreenBinding.bind(rootView)
         val sharedPref =
             activity?.getSharedPreferences(
                 getString(R.string.app_package_name),
                 Context.MODE_PRIVATE
             )
         sessionID = sharedPref?.getString(getString(R.string.sessionId), null).toString()
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.cancelButton.setOnClickListener {
             dismiss()
         }
@@ -57,7 +60,6 @@ class CustomPopUpDialogFragment : DialogFragment() {
             Toast.makeText(context, getString(R.string.ratingSend), Toast.LENGTH_LONG).show()
             buildLocalNotification()
         }
-        return rootView
     }
 
     fun setMovieID(id: Int) {
@@ -73,9 +75,9 @@ class CustomPopUpDialogFragment : DialogFragment() {
     private fun buildLocalNotification() {
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel = NotificationChannel(CHANNEL_ID,"Notification Title",
+            notificationChannel = NotificationChannel(CHANNEL_ID,getString(R.string.title),
                 NotificationManager.IMPORTANCE_DEFAULT).apply {
-                    description = "Notification Description"
+                    description = getString(R.string.description)
             }
             notificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(notificationChannel)

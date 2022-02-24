@@ -26,7 +26,8 @@ class SearchFragment : Fragment(), SearchListener {
 
     @Inject
     lateinit var searchAdapter: SearchAdapter
-    private lateinit var binding: FragmentSearchBinding
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
     private val searchViewModel: SearchViewModel by viewModels()
     private var searchQuery: String = ""
     private var searchResultList: ArrayList<SearchResultEntity> = arrayListOf()
@@ -35,17 +36,18 @@ class SearchFragment : Fragment(), SearchListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSearchBinding.bind(view)
-        if (Utils.isTablet(requireContext())) {
-            binding.searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
+
+        if (Utils.isTablet(requireContext().applicationContext)) {
+            binding.searchRecyclerView.layoutManager = GridLayoutManager(requireContext().applicationContext, SPAN_COUNT_TABLET)
         } else {
-            binding.searchRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_PHONE)
+            binding.searchRecyclerView.layoutManager = GridLayoutManager(requireContext().applicationContext, SPAN_COUNT_PHONE)
         }
         binding.searchRecyclerView.adapter = searchAdapter
         searchAdapter.setOnItemClickListener(this)
@@ -119,5 +121,10 @@ class SearchFragment : Fragment(), SearchListener {
     override fun onStop() {
         super.onStop()
         searchViewModel.results.removeObservers(this)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -23,18 +23,19 @@ class MoreFragment @Inject constructor() : Fragment(), ItemListener {
     @Inject
     lateinit var moreAdapter: MoreAdapter
     private val detailViewModel: DetailViewModel by activityViewModels()
-    private lateinit var binding: FragmentMoreBinding
+    private var _binding: FragmentMoreBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_more, container, false)
+    ): View {
+        _binding = FragmentMoreBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMoreBinding.bind(view)
         binding.moreRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         observeViewModel()
@@ -62,6 +63,11 @@ class MoreFragment @Inject constructor() : Fragment(), ItemListener {
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_movieDetailFragment_self, movieIdBundle, null, null
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

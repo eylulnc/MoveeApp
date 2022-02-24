@@ -26,7 +26,8 @@ class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapte
     ItemListener {
 
     private val artistViewModel: ArtistViewModel by viewModels()
-    private lateinit var binding: FragmentArtistBinding
+    private var _binding: FragmentArtistBinding? = null
+    private val binding get() = _binding!!
     private var artistList: ArrayList<ArtistResultEntity> = arrayListOf()
     private var enableToRequest: Boolean = false
     private var moviesInAPage: List<ArtistResultEntity>? = emptyList()
@@ -34,17 +35,16 @@ class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapte
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_artist, container, false)
-        binding = FragmentArtistBinding.bind(view)
-        if (Utils.isTablet(requireContext())) {
-            binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_TABLET)
+    ): View {
+        _binding = FragmentArtistBinding.inflate(inflater, container, false)
+        if (Utils.isTablet(requireContext().applicationContext)) {
+            binding.artistRecyclerView.layoutManager = GridLayoutManager(requireContext().applicationContext, SPAN_COUNT_TABLET)
         } else {
-            binding.artistRecyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT_PHONE)
+            binding.artistRecyclerView.layoutManager = GridLayoutManager(requireContext().applicationContext, SPAN_COUNT_PHONE)
         }
         binding.artistRecyclerView.adapter = artistAdapter
         artistAdapter.setOnItemClickListener { id -> onItemClicked(id) }
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,6 +95,11 @@ class ArtistFragment @Inject constructor(private val artistAdapter: ArtistAdapte
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_dashboardFragment_to_artistDetailFragment, artistIdBundle, null, null
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

@@ -17,7 +17,7 @@ open class MovieFragmentFactory @Inject constructor(
     private val onboardAdapter: OnboardAdapter,
     private val albumAdapter: AlbumAdapter,
     private val imageAdapter: ImageAdapter,
-    private val artistAdapter: ArtistAdapter,
+    private val artistAdapter: ArtistAdapter
 ) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {

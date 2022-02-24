@@ -25,13 +25,15 @@ import com.eylulcan.moviefragment.domain.util.Utils
 import com.eylulcan.moviefragment.ui.ItemListener
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 private const val GRID_COUNT = 3
 private const val START_POSITION = 0
+private const val NO_ITEM = 0
 private const val IMAGE_MULTIPLIER = 1.5
 private const val RECYCLER_MULTIPLIER = 1.5
-private const val DELAY : Long = 10000
+private const val DELAY: Long = 10000
 
 @AndroidEntryPoint
 class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
@@ -42,7 +44,8 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
 
     @Inject
     lateinit var sliderAdapter: SliderAdapter
-    private lateinit var fragmentBinding: FragmentDiscoverBinding
+    private var _binding: FragmentDiscoverBinding? = null
+    private val fragmentBinding get() = _binding!!
     private val discoverViewModel: DiscoverViewModel by viewModels()
     private var nowPlayingList: ArrayList<ResultMovieEntity> = arrayListOf()
     private var topRatedList: ArrayList<ResultMovieEntity> = arrayListOf()
@@ -50,8 +53,10 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
     private lateinit var sharedPreferenceForSessionID: SharedPreferences
     private var sessionID: String? = null
     private val allListItems: ArrayList<ArrayList<ResultMovieEntity>> = arrayListOf()
-    private val placeholderNeeded = arrayListOf<View>()
-    private var broccoli = Broccoli()
+    private var placeholderNeeded = arrayListOf<View>()
+    private var broccoli: Broccoli? = Broccoli()
+    private var handler: Handler? = Handler()
+    private lateinit var runnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,16 +68,15 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_discover, container, false)
-        fragmentBinding = FragmentDiscoverBinding.bind(view)
-        setPlaceholders()
-        setToolbarMenu()
-        return view
+    ): View {
+        _binding = FragmentDiscoverBinding.inflate(inflater, container, false)
+        return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setPlaceholders()
+        setToolbarMenu()
         setupUI()
         observeViewModel()
         allListItems.clear()
@@ -134,7 +138,7 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
                 setMoviesInfo(movies.results as java.util.ArrayList<ResultMovieEntity>)
             fragmentBinding.discoverSlider.adapter = sliderAdapter
             sliderAdapter.updateList(moviesInfo)
-            fragmentBinding.dotsIndicator.setViewPager2(fragmentBinding.discoverSlider)
+            fragmentBinding.discoverSlider.let { fragmentBinding.dotsIndicator.setViewPager2(it) }
             sliderScroll()
             removePlaceholders()
         }
@@ -198,29 +202,27 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
                 fragmentBinding.sliderTemplate
             )
         )
-        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
+        broccoli?.let { Utils.addPlaceholders(broccoli = it, placeholderNeeded) }
     }
 
     private fun removePlaceholders() {
         placeholderNeeded.forEach { view ->
             view.apply {
-                broccoli.clearPlaceholder(this)
+                broccoli?.clearPlaceholder(this)
                 this.isVisible = false
             }
         }
     }
 
     private fun sliderScroll() {
-        val handler = Handler()
-
-        val runnable = object : Runnable {
+        runnable = object : Runnable {
             override fun run() {
-                val count = fragmentBinding.discoverSlider.adapter?.itemCount ?: 0
+                val count = fragmentBinding.discoverSlider.adapter?.itemCount ?: NO_ITEM
                 if (fragmentBinding.discoverSlider.currentItem == count.dec()) {
-                    handler.postDelayed(this, DELAY)
+                    handler?.postDelayed(this, DELAY)
                     fragmentBinding.discoverSlider.setCurrentItem(START_POSITION, true)
                 } else {
-                    handler.postDelayed(this, DELAY)
+                    handler?.postDelayed(this, DELAY)
                     fragmentBinding.discoverSlider.setCurrentItem(
                         fragmentBinding.discoverSlider.currentItem.inc(),
                         true
@@ -228,8 +230,7 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
                 }
             }
         }
-
-        handler.post(runnable)
+        handler?.post(runnable)
     }
 
     override fun onItemClicked(id: Int) {
@@ -243,10 +244,18 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
     override fun onDestroyView() {
         super.onDestroyView()
         discoverViewModel.setListsToDefault()
+        handler?.removeCallbacks(runnable)
+        fragmentBinding.discoverSlider.adapter = null
+        fragmentBinding.discoverMainRecyclerView.adapter = null
+        placeholderNeeded = arrayListOf()
+        broccoli = null
+        _binding = null
+        handler = null
     }
 
     override fun onStop() {
         super.onStop()
+        fragmentBinding.discoverMainRecyclerView.adapter = null
         fragmentBinding.discoverSlider.adapter = null
     }
 }

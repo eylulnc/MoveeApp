@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentReviewsBinding
-import com.eylulcan.moviefragment.domain.entity.ResultData
 import com.eylulcan.moviefragment.domain.entity.ReviewEntity
 import com.eylulcan.moviefragment.ui.moviedetail.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +19,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ReviewsFragment @Inject constructor() : Fragment() {
 
-    private lateinit var binding: FragmentReviewsBinding
+    private var _binding: FragmentReviewsBinding? = null
+    private val binding get () = _binding!!
     private val detailViewModel: DetailViewModel by activityViewModels()
 
     @Inject
@@ -32,13 +31,13 @@ class ReviewsFragment @Inject constructor() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_reviews, container, false)
+    ): View {
+        _binding = FragmentReviewsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentReviewsBinding.bind(view)
         binding.reviewFragmentRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.reviewFragmentRecyclerView.adapter = reviewsAdapter
@@ -48,7 +47,7 @@ class ReviewsFragment @Inject constructor() : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
-                    lastLoadedPage += 1
+                    lastLoadedPage.inc()
                     binding.textView.isVisible = false
                     detailViewModel.getReviews(movieId = id, pageNo = lastLoadedPage)
                 }
@@ -57,7 +56,7 @@ class ReviewsFragment @Inject constructor() : Fragment() {
     }
 
     private fun observeViewModel() {
-        detailViewModel.reviews.observe(this.requireActivity()) { reviewList ->
+        detailViewModel.reviews.observe(viewLifecycleOwner) { reviewList ->
             reviewResultList.clear()
             reviewList?.let {
                 if (reviewList.results.isEmpty()) {
@@ -72,4 +71,9 @@ class ReviewsFragment @Inject constructor() : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.reviewFragmentRecyclerView.adapter = null
+        _binding = null
+    }
 }

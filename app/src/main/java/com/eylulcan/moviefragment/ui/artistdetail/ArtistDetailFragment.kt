@@ -41,11 +41,13 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
 
     @Inject
     lateinit var albumRecyclerAdapter: AlbumRecyclerAdapter
-    private lateinit var binding: FragmentArtistDetailBinding
+    private var _binding: FragmentArtistDetailBinding? = null
+    private val binding get() = _binding!!
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
     private val placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
-    private lateinit var includeBinding: BottomSheetFragmentBinding
+    private var _includeBinding: BottomSheetFragmentBinding? = null
+    private val includeBinding get() = _includeBinding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private var screenBottomRatio = 0.40
 
@@ -53,10 +55,10 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(
+        _binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_artist_detail, container, false
         )
-        includeBinding = binding.bottomSheetFragment
+        _includeBinding = binding.bottomSheetFragment
         return binding.root
     }
 
@@ -124,11 +126,11 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
 
     private fun setupUI() {
         if (Utils.isTablet(requireContext())) {
-            binding.artistMovieRecycler.layoutManager = GridLayoutManager(context, SPAN_COUNT)
+            binding.artistMovieRecycler.layoutManager = GridLayoutManager(requireContext().applicationContext, SPAN_COUNT)
             screenBottomRatio = 0.5
         } else {
             binding.artistMovieRecycler.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(requireContext().applicationContext, LinearLayoutManager.HORIZONTAL, false)
         }
     }
 
@@ -156,6 +158,8 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
     override fun onDestroyView() {
         super.onDestroyView()
         artistDetailViewModel.setListsToDefault()
+        _includeBinding = null
+        _binding = null
     }
 
     private fun setupUIBottomSheet(detail: ArtistDetailEntity) {
@@ -188,6 +192,7 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
                     BottomSheetBehavior.STATE_HIDDEN -> {
                         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                     }
+                    else -> {}
                 }
             }
 
@@ -204,7 +209,7 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
     }
 
     override fun onArtistImageClick(v: View) {
-        Log.v(TAG, "Image Clicked")
+        Log.v(TAG, getString(R.string.imageClicked))
     }
 
 }

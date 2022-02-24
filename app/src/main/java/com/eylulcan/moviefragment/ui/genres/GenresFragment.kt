@@ -19,7 +19,8 @@ import javax.inject.Inject
 class GenresFragment : Fragment(), ItemListener {
 
     private val genreViewModel: GenresViewModel by viewModels()
-    private lateinit var binding: FragmentGenresBinding
+    private var _binding: FragmentGenresBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var genreListAdapter: GenresAdapter
@@ -27,16 +28,15 @@ class GenresFragment : Fragment(), ItemListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_genres, container, false)
-        binding = FragmentGenresBinding.bind(view)
-        binding.genresFragmentRecyclerView.layoutManager =
-            GridLayoutManager(context, 2)
-        return view
+    ): View {
+        _binding = FragmentGenresBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.genresFragmentRecyclerView.layoutManager =
+            GridLayoutManager(requireContext().applicationContext, 2)
         observeViewModel()
         genreViewModel.getGenreList()
     }
@@ -44,7 +44,7 @@ class GenresFragment : Fragment(), ItemListener {
     private fun observeViewModel() {
         genreViewModel.genres.observe(viewLifecycleOwner) { genreData ->
             genreData?.let { genreList ->
-                val list = genreList.genres ?: emptyList()
+                val list = genreList.genres
                 binding.genresFragmentRecyclerView.adapter = genreListAdapter
                 genreListAdapter.setOnItemClickListener { id ->
                     onItemClicked(id)
@@ -62,5 +62,11 @@ class GenresFragment : Fragment(), ItemListener {
             null,
             null
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.genresFragmentRecyclerView.adapter = null
+        _binding = null
     }
 }

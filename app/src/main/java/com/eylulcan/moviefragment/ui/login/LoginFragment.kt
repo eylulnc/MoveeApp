@@ -25,12 +25,14 @@ import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG: String = "SignInGoogle"
 private const val RC_SIGN_IN: Int = 7777
+private const val EMPTY_STR = ""
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var binding: FragmentLoginBinding
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -43,14 +45,14 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ViewCompat.setTranslationZ(view, 1F)
-        binding = FragmentLoginBinding.bind(view)
         observeViewModel()
         binding.signInButton.setOnClickListener { signIn() }
         binding.signUpButton.setOnClickListener { signUp() }
@@ -100,7 +102,7 @@ class LoginFragment : Fragment() {
     private fun signIn() {
         email = binding.userEmail.text.toString()
         password = binding.userPassword.text.toString()
-        if (email != "" && password != "") {
+        if (email != EMPTY_STR && password != EMPTY_STR) {
             loginViewModel.signIn(email, password)
         } else {
             Toast.makeText(context, R.string.empty_field, Toast.LENGTH_LONG).show()
@@ -110,7 +112,7 @@ class LoginFragment : Fragment() {
     private fun signUp() {
         email = binding.userEmail.text.toString()
         password = binding.userPassword.text.toString()
-        if (email != "" && password != "") {
+        if (email != EMPTY_STR && password != EMPTY_STR) {
             loginViewModel.signUp(email, password)
         } else {
             Toast.makeText(context, R.string.empty_field, Toast.LENGTH_LONG).show()

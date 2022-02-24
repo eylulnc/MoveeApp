@@ -92,6 +92,7 @@
     <string name="no_suggestion_found">No Suggestion Found</string>
     <string name="fyi">FYI</string>
     <string name="placeholder_text"> </string>
+    <string name="imageClicked">Image Clicked</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

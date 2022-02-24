@@ -31,13 +31,16 @@ private const val YOUTUBE_LINK = "https://www.youtube.com/watch?v="
 private const val VIMEO_LINK = "https://vimeo.com/"
 private const val MINUTES_IN_HOUR = 60
 private const val IF_ID_NULL = 0
+private const val EMPTY_STR = ""
+private const val TAG = "customDialog"
 
 @AndroidEntryPoint
 class MovieDetailFragment @Inject constructor() : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
-    private lateinit var fragmentBinding: FragmentMovieDetailBinding
+    private var _binding: FragmentMovieDetailBinding? = null
+    private val fragmentBinding get() = _binding!!
     private val tabNames = arrayOf("Cast", "Reviews", "More")
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
     private var placeholderNeeded = arrayListOf<View>()
@@ -46,13 +49,13 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie_detail, container, false)
+    ): View {
+        _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
+        return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentBinding = FragmentMovieDetailBinding.bind(view)
         setPlaceholders()
         val selectedMovieDataArgument =
             arguments?.get(getString(R.string.movieId)) as Int
@@ -98,6 +101,7 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
 
             }
         })
+
         fragmentBinding.movieDetailViewPager.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
@@ -139,7 +143,7 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
             removePlaceholders()
             setupUI(movie)
         }
-        movieDetailViewModel.dbUpdated.observe(this.requireActivity()) {
+        movieDetailViewModel.dbUpdated.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultData.Success -> {}
                 else -> {}
@@ -149,7 +153,7 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
     }
 
     private fun setVideoUri(videoSite: String, key: String): String {
-        var uri = ""
+        var uri = EMPTY_STR
         if (videoSite == getString(R.string.youtube)) {
             uri = YOUTUBE_LINK.plus(key)
         } else if (videoSite == getString(R.string.vimeo)) {
@@ -188,7 +192,7 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
                     popUpDialog.setMovieID(id)
                 }
                 fragmentManager?.let { manager ->
-                    popUpDialog.show(manager, "customDialog")
+                    popUpDialog.show(manager, TAG)
                 }
             }
         }
@@ -216,6 +220,11 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
                 this.isVisible = false
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
