@@ -36,9 +36,9 @@ class MoreAdapter @Inject constructor(private var glide: RequestManager) :
         holder.binding.movieNameMore.text = movie.title
         glide.load(setImageUrl(movie.backdropPath)).into(holder.binding.movieImage)
         genreNames = ""
-        movie.genreIds?.forEach { genreId ->
+        movie.genreIds.forEach { genreId ->
             genreNames =
-                genreNames.plus(genreId?.let { Genres.valueOfInt(it)?.movieGenreName() })
+                genreNames.plus(genreId.let { Genres.valueOfInt(it)?.movieGenreName() })
                     .plus(" | ")
         }
         holder.binding.genresMore.text = genreNames
