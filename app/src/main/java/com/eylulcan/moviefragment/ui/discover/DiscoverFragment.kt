@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
@@ -25,7 +24,6 @@ import com.eylulcan.moviefragment.domain.util.Utils
 import com.eylulcan.moviefragment.ui.ItemListener
 import dagger.hilt.android.AndroidEntryPoint
 import me.samlss.broccoli.Broccoli
-import java.lang.NullPointerException
 import javax.inject.Inject
 
 private const val GRID_COUNT = 3
@@ -133,7 +131,6 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
                 .putString(getString(R.string.sessionId), session.sessionID).commit()
         }
         discoverViewModel.upcomingMovies.observe(viewLifecycleOwner) { movies ->
-            removePlaceholders()
             val moviesInfo: ArrayList<Pair<Int, String>> =
                 setMoviesInfo(movies.results as java.util.ArrayList<ResultMovieEntity>)
             fragmentBinding.discoverSlider.adapter = sliderAdapter
@@ -209,7 +206,7 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
         placeholderNeeded.forEach { view ->
             view.apply {
                 broccoli?.clearPlaceholder(this)
-                this.isVisible = false
+                this.visibility = View.INVISIBLE
             }
         }
     }

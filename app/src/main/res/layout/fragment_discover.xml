@@ -63,16 +63,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
-                    android:id="@+id/sliderTemplate"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/discover_discoverSlider_height"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:background="@color/black_gray"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
                 <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                     android:id="@+id/dots_indicator"
                     android:layout_width="wrap_content"
@@ -88,6 +78,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:progressMode="true"
                     app:selectedDotColor="@color/orange" />
+
+                <View
+                    android:id="@+id/sliderTemplate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/discover_discoverSlider_height"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@color/black_gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView

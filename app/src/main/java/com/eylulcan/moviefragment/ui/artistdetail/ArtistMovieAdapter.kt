@@ -66,7 +66,7 @@ class ArtistMovieAdapter @Inject constructor(private var glide: RequestManager) 
         } else {
             holder.itemView.removeCallbacks(task)
         }
-        holder.itemView.postDelayed(task, 2000)
+        holder.itemView.postDelayed(task, 1000)
 
     }
 

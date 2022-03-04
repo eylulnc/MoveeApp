@@ -3,7 +3,6 @@ package com.eylulcan.moviefragment.ui.artist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +11,6 @@ import com.eylulcan.moviefragment.databinding.ArtistFragmentRecyclerRowBinding
 import com.eylulcan.moviefragment.domain.entity.ArtistResultEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import me.samlss.broccoli.Broccoli
-import java.util.*
 import javax.inject.Inject
 
 class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
@@ -110,7 +108,7 @@ class ArtistAdapter @Inject constructor(private var glide: RequestManager) :
         placeholderNeeded.forEach { view ->
             view.apply {
                 broccoli.clearPlaceholder(this)
-                this.isVisible = false
+                this.visibility = View.GONE
             }
         }
     }

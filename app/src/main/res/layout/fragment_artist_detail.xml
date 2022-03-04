@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <data>
     <variable name="detail"
         type = "com.eylulcan.moviefragment.domain.entity.ArtistDetailEntity"/>
@@ -8,8 +10,6 @@
         type="com.eylulcan.moviefragment.ui.artistdetail.ArtistDetailListener" />
 </data>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_gray">
@@ -46,6 +46,17 @@
                 tools:ignore="ImageContrastCheck"
                 tools:srcCompat="@tools:sample/backgrounds/scenic"
                 android:onClick="@{listener.onArtistImageClick}"/>
+
+            <View
+                android:id="@+id/templateArtistCoverView"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
+                android:layout_marginTop="16dp"
+                android:background="@color/black_gray"
+                app:layout_constraintBottom_toTopOf="@+id/artistName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.eylulcan.moviefragment.CustomTitleTextView
                 android:id="@+id/artistName"
@@ -107,16 +118,6 @@
             </androidx.recyclerview.widget.RecyclerView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:id="@+id/templateArtistCoverView"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height"
-            android:layout_marginTop="@dimen/artist_detail_artistDetailCoverImage_marginTop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/black_gray"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

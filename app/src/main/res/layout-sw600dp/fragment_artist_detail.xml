@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="detail"
             type = "com.eylulcan.moviefragment.domain.entity.ArtistDetailEntity"/>
-
+        <variable
+            name="listener"
+            type="com.eylulcan.moviefragment.ui.artistdetail.ArtistDetailListener" />
     </data>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_gray">
@@ -40,7 +43,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:onClick="@{listener.onArtistImageClick}"/>
+
+            <View
+                android:id="@+id/templateArtistCoverView"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height_tablet"
+                android:layout_marginTop="32dp"
+                android:background="@color/black_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.eylulcan.moviefragment.CustomTitleTextView
                 android:id="@+id/artistName"
@@ -98,16 +112,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/knownForText">
 
             </androidx.recyclerview.widget.RecyclerView>
-
-            <View
-                android:id="@+id/templateArtistCoverView"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/artist_detail_artistDetailCoverImage_height_tablet"
-                android:layout_marginTop="32dp"
-                android:background="@color/black_gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
