@@ -63,6 +63,7 @@ class MoreFragment @Inject constructor() : Fragment(), ItemListener {
         this.parentFragment?.parentFragment?.findNavController()?.navigate(
             R.id.action_movieDetailFragment_self, movieIdBundle, null, null
         )
+        detailViewModel.setListsToDefault()
     }
 
     override fun onDestroyView() {

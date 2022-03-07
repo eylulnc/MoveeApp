@@ -201,7 +201,8 @@
                 android:layout_marginBottom="@dimen/movie_detail_bottom_sheet_albumPreview_recycler_marginBottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/photosTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/photosTextView"
+                android:paddingLeft="16dp"/>
         </LinearLayout>
     </ScrollView>
 

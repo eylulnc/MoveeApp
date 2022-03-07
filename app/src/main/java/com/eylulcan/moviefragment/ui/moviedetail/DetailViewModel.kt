@@ -24,17 +24,17 @@ class DetailViewModel @Inject constructor(
     private val updateFirestoreUseCase: UpdateFirestoreUseCase
 ) : ViewModel() {
 
-    private val movieCast = MutableLiveData<MovieCreditsEntity>()
+    private var movieCast = MutableLiveData<MovieCreditsEntity>()
     val cast: LiveData<MovieCreditsEntity> get() = movieCast
-    private val movieReviews = MutableLiveData<ReviewListEntity>()
+    private var movieReviews = MutableLiveData<ReviewListEntity>()
     val reviews: LiveData<ReviewListEntity> get() = movieReviews
-    private val movieMore = MutableLiveData<MovieEntity>()
+    private var movieMore = MutableLiveData<MovieEntity>()
     val more: LiveData<MovieEntity> get() = movieMore
-    private val videoList = MutableLiveData<VideoListEntity>()
+    private var videoList = MutableLiveData<VideoListEntity>()
     val videos: LiveData<VideoListEntity> get() = videoList
-    private val movieDetails = MutableLiveData<MovieDetailEntity>()
+    private var movieDetails = MutableLiveData<MovieDetailEntity>()
     val detailEntity: LiveData<MovieDetailEntity> get() = movieDetails
-    private val updateDBResult = MutableLiveData<ResultData<Unit>>()
+    private var updateDBResult = MutableLiveData<ResultData<Unit>>()
     val dbUpdated: LiveData<ResultData<Unit>> get() = updateDBResult
 
     fun getMovieCast(id: Int) {
@@ -89,5 +89,14 @@ class DetailViewModel @Inject constructor(
                 updateDBResult.postValue(it)
             }
         }
+    }
+
+    fun setListsToDefault() {
+        movieCast = MutableLiveData<MovieCreditsEntity>()
+        movieReviews = MutableLiveData<ReviewListEntity>()
+        movieMore = MutableLiveData<MovieEntity>()
+        videoList = MutableLiveData<VideoListEntity>()
+        movieDetails = MutableLiveData<MovieDetailEntity>()
+        updateDBResult = MutableLiveData<ResultData<Unit>>()
     }
 }

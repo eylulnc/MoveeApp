@@ -43,8 +43,7 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
     private val fragmentBinding get() = _binding!!
     private val tabNames = arrayOf("Cast", "Reviews", "More")
     private val movieDetailViewModel: DetailViewModel by activityViewModels()
-    private var placeholderNeeded = arrayListOf<View>()
-    private var broccoli = Broccoli()
+    private var movieId:Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +55,6 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setPlaceholders()
         val selectedMovieDataArgument =
             arguments?.get(getString(R.string.movieId)) as Int
         if (selectedMovieDataArgument == IF_ID_NULL) {
@@ -69,11 +67,8 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
         }
         observeViewModel()
         selectedMovieDataArgument.let { id ->
-            movieDetailViewModel.getMovieCast(id)
-            movieDetailViewModel.getMovieMore(id)
-            movieDetailViewModel.getReviews(id)
-            movieDetailViewModel.getMovieDetail(id)
-            movieDetailViewModel.getVideoClips(id)
+            movieId = id
+            getData()
             tabAdapterSetup(id)
         }
 
@@ -140,10 +135,9 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
             }
         }
         movieDetailViewModel.detailEntity.observe(viewLifecycleOwner) { movie ->
-            removePlaceholders()
             setupUI(movie)
         }
-        movieDetailViewModel.dbUpdated.observe(viewLifecycleOwner) {
+        movieDetailViewModel.dbUpdated.observe(this.requireActivity()) {
             when (it) {
                 is ResultData.Success -> {}
                 else -> {}
@@ -204,26 +198,22 @@ class MovieDetailFragment @Inject constructor() : Fragment() {
         movieDetailViewModel.updatedFirestore(movieMap)
     }
 
-    private fun setPlaceholders() {
-        arrayListOf(
-            fragmentBinding.templateConstraintLayout,
-            fragmentBinding.templateViewPagerView,
-            fragmentBinding.templateCardView
-        )
-        Utils.addPlaceholders(broccoli = broccoli, placeholderNeeded)
+    private fun getData() {
+        movieDetailViewModel.getMovieCast(movieId)
+        movieDetailViewModel.getMovieMore(movieId)
+        movieDetailViewModel.getReviews(movieId)
+        movieDetailViewModel.getMovieDetail(movieId)
+        movieDetailViewModel.getVideoClips(movieId)
     }
 
-    private fun removePlaceholders() {
-        placeholderNeeded.forEach { view ->
-            view.apply {
-                broccoli.clearPlaceholder(this)
-                this.isVisible = false
-            }
-        }
+    override fun onResume() {
+        super.onResume()
+        getData()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        movieDetailViewModel.setListsToDefault()
         _binding = null
     }
 
