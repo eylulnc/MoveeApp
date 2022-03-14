@@ -3,7 +3,7 @@ package com.eylulcan.moviefragment.data.repository
 import com.eylulcan.moviefragment.data.datasource.remote.LastVisitedRemoteDataSource
 import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
 import com.eylulcan.moviefragment.domain.daoEntity.MovieDaoEntity
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.eylulcan.moviefragment.domain.repository.LastVisitedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect

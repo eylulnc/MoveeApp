@@ -3,7 +3,7 @@ package com.eylulcan.moviefragment.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.eylulcan.moviefragment.domain.usecase.auth.GoogleSignInUseCase
 import com.eylulcan.moviefragment.domain.usecase.auth.SignInUseCase
 import com.eylulcan.moviefragment.domain.usecase.auth.SignUpUseCase

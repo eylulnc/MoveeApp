@@ -1,4 +1,4 @@
-package com.eylulcan.moviefragment.domain.entity
+package com.eylulcan.moviefragment.domain.util
 
 sealed class ResultData<out T> {
     data class Loading(val nothing: Nothing? = null) : ResultData<Nothing>()

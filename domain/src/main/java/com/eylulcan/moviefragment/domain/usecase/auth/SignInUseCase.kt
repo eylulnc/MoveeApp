@@ -1,6 +1,6 @@
 package com.eylulcan.moviefragment.domain.usecase.auth
 
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.eylulcan.moviefragment.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

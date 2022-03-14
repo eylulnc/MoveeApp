@@ -1,6 +1,6 @@
 package com.eylulcan.moviefragment.domain.repository
 
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.google.firebase.auth.AuthCredential
 import kotlinx.coroutines.flow.Flow
 

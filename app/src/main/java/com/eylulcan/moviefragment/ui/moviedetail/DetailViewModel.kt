@@ -7,6 +7,7 @@ import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
 import com.eylulcan.moviefragment.domain.entity.*
 import com.eylulcan.moviefragment.domain.usecase.lastvisited.UpdateFirestoreUseCase
 import com.eylulcan.moviefragment.domain.usecase.movie.*
+import com.eylulcan.moviefragment.domain.util.ResultData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

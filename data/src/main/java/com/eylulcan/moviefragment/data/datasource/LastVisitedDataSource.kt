@@ -4,11 +4,10 @@ import com.eylulcan.moviefragment.data.datasource.remote.LastVisitedRemoteDataSo
 import com.eylulcan.moviefragment.data.mapper.LatestVisitedMapper
 import com.eylulcan.moviefragment.domain.daoEntity.MovieDao
 import com.eylulcan.moviefragment.domain.daoEntity.MovieDaoEntity
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -30,6 +29,8 @@ class LastVisitedDataSource @Inject constructor(
             }
             ref?.set(movieMap, SetOptions.merge())?.addOnSuccessListener {
                 trySend(ResultData.Success())
+            }?.addOnFailureListener {
+                trySend(ResultData.Failed())
             }
             awaitClose { cancel() }
         }
@@ -50,7 +51,9 @@ class LastVisitedDataSource @Inject constructor(
                     movieList.add(movie)
                 }
                 trySend(ResultData.Success(movieList))
-            }
+            }?.addOnFailureListener {
+                    trySend(ResultData.Failed())
+                }
             awaitClose { cancel() }
         }
     }

@@ -1,7 +1,7 @@
 package com.eylulcan.moviefragment.data.repository
 
 import com.eylulcan.moviefragment.data.datasource.remote.AuthRemoteDataSource
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.eylulcan.moviefragment.domain.repository.AuthRepository
 import com.google.firebase.auth.AuthCredential
 import kotlinx.coroutines.flow.Flow
