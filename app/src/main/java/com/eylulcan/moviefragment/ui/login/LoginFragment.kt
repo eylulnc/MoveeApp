@@ -14,12 +14,11 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentLoginBinding
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,7 +65,7 @@ class LoginFragment : Fragment() {
                     navigateToMovieList()
                 }
                 is ResultData.Failed -> {
-                    Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.signFailed), Toast.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
@@ -78,7 +77,7 @@ class LoginFragment : Fragment() {
                     navigateToMovieList()
                 }
                 is ResultData.Failed -> {
-                    Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.signFailed), Toast.LENGTH_SHORT).show()
                 }
                 else -> {}
             }
@@ -102,20 +101,35 @@ class LoginFragment : Fragment() {
     private fun signIn() {
         email = binding.userEmail.text.toString()
         password = binding.userPassword.text.toString()
-        if (email != EMPTY_STR && password != EMPTY_STR) {
+        if (isCredentialValid(email,password)) {
             loginViewModel.signIn(email, password)
         } else {
+            Toast.makeText(context, R.string.signFailed, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun isCredentialValid(email: String, password: String) : Boolean {
+        return if (email == EMPTY_STR && password == EMPTY_STR) {
             Toast.makeText(context, R.string.empty_field, Toast.LENGTH_LONG).show()
+            false
+        } else if (!email.contains("@")) {
+            Toast.makeText(context, R.string.enterEmail, Toast.LENGTH_LONG).show()
+            false
+        } else if (password.length < 6) {
+            Toast.makeText(context, R.string.invalidLength, Toast.LENGTH_LONG).show()
+            false
+        } else {
+            true
         }
     }
 
     private fun signUp() {
         email = binding.userEmail.text.toString()
         password = binding.userPassword.text.toString()
-        if (email != EMPTY_STR && password != EMPTY_STR) {
+        if (isCredentialValid(email,password)) {
             loginViewModel.signUp(email, password)
         } else {
-            Toast.makeText(context, R.string.empty_field, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.signFailed, Toast.LENGTH_LONG).show()
         }
     }
 
