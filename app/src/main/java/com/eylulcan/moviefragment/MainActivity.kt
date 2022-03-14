@@ -34,14 +34,15 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var notificationManager: NotificationManager
     private lateinit var notificationChannel: NotificationChannel
-    private lateinit var binding: ActivityMainBinding
+    private var _binding :ActivityMainBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.SplashScreen)
         super.onCreate(savedInstanceState)
         supportFragmentManager.fragmentFactory = fragmentFactory
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sharedPreferences = this.getSharedPreferences(
             getString(R.string.app_package_name),
@@ -112,6 +113,11 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         val time = now.clone() as Calendar
         time.add(Calendar.MINUTE, 2)
         return time.timeInMillis
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

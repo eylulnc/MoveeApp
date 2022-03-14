@@ -2,7 +2,7 @@ package com.eylulcan.moviefragment.data.datasource
 
 import android.util.Log
 import com.eylulcan.moviefragment.data.datasource.remote.AuthRemoteDataSource
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.cancel
@@ -19,8 +19,12 @@ class AuthDataSource @Inject constructor(private val auth: FirebaseAuth) : AuthR
     override suspend fun signUp(email: String, password: String): Flow<ResultData<Unit>> {
         return callbackFlow {
             auth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    trySend(ResultData.Success())
+                .addOnCompleteListener {
+                    it.addOnSuccessListener {
+                        trySend(ResultData.Success())
+                    }.addOnFailureListener {
+                        trySend(ResultData.Failed())
+                    }
                 }
             awaitClose { cancel() }
         }
@@ -30,6 +34,9 @@ class AuthDataSource @Inject constructor(private val auth: FirebaseAuth) : AuthR
         return callbackFlow {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener { trySend(ResultData.Success()) }
+                .addOnFailureListener {
+                    trySend(ResultData.Failed())
+                }
             awaitClose { cancel() }
         }
     }
@@ -44,6 +51,9 @@ class AuthDataSource @Inject constructor(private val auth: FirebaseAuth) : AuthR
                         Log.w(TAG, FAIL_MESSAGE, task.exception)
                     }
                 }.addOnSuccessListener { trySend(ResultData.Success()) }
+                .addOnFailureListener {
+                    trySend(ResultData.Failed())
+                }
             awaitClose { cancel() }
         }
 

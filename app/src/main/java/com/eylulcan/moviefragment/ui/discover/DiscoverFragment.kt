@@ -18,7 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moviefragment.R
 import com.eylulcan.moviefragment.databinding.FragmentDiscoverBinding
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.eylulcan.moviefragment.domain.entity.ResultMovieEntity
 import com.eylulcan.moviefragment.domain.util.Utils
 import com.eylulcan.moviefragment.ui.ItemListener
@@ -71,6 +71,12 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
         return fragmentBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        discoverViewModel.getPopularMovieList()
+        discoverViewModel.getUpcomingMovieList()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPlaceholders()
@@ -78,8 +84,6 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
         setupUI()
         observeViewModel()
         allListItems.clear()
-        discoverViewModel.getPopularMovieList()
-        discoverViewModel.getUpcomingMovieList()
         sessionID = sharedPreferenceForSessionID.getString(getString(R.string.sessionId), null)
         if (sessionID == null) {
             discoverViewModel.getGuestSession()
@@ -252,7 +256,9 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
 
     override fun onStop() {
         super.onStop()
+        handler?.removeCallbacks(runnable)
         fragmentBinding.discoverMainRecyclerView.adapter = null
         fragmentBinding.discoverSlider.adapter = null
+        handler = null
     }
 }

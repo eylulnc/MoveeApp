@@ -28,6 +28,7 @@ import me.samlss.broccoli.Broccoli
 import javax.inject.Inject
 
 private const val SPAN_COUNT = 3
+private const val SCREEN_BOTTOM_RATIO = 0.5
 private const val TAG = "ArtistDetail"
 
 @AndroidEntryPoint
@@ -127,7 +128,7 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
     private fun setupUI() {
         if (Utils.isTablet(requireContext())) {
             binding.artistMovieRecycler.layoutManager = GridLayoutManager(requireContext().applicationContext, SPAN_COUNT)
-            screenBottomRatio = 0.5
+            screenBottomRatio = SCREEN_BOTTOM_RATIO
         } else {
             binding.artistMovieRecycler.layoutManager =
                 LinearLayoutManager(requireContext().applicationContext, LinearLayoutManager.HORIZONTAL, false)

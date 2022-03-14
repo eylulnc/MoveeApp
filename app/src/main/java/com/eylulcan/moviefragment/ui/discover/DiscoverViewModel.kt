@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eylulcan.moviefragment.domain.entity.GuestSessionEntity
 import com.eylulcan.moviefragment.domain.entity.MovieEntity
-import com.eylulcan.moviefragment.domain.entity.ResultData
+import com.eylulcan.moviefragment.domain.util.ResultData
 import com.eylulcan.moviefragment.domain.usecase.auth.SignOutUseCase
 import com.eylulcan.moviefragment.domain.usecase.movie.*
 import kotlinx.coroutines.CoroutineScope
@@ -41,7 +41,7 @@ class DiscoverViewModel @Inject constructor(
     fun getPopularMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val result = popularMovieUseCase()
-            result.let {
+            result?.let {
                 popularMovieList.postValue(it)
             }
         }
@@ -50,7 +50,7 @@ class DiscoverViewModel @Inject constructor(
     fun getTopRatedMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val result = topRatedMovieUseCase.invoke()
-            result.let {
+            result?.let {
                 topRatedMovieList.postValue(it)
             }
         }
@@ -59,7 +59,7 @@ class DiscoverViewModel @Inject constructor(
     fun getNowPlayingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val result = nowPlayingDataUseCase.invoke()
-            result.let {
+            result?.let {
                 nowPlayingMovieList.postValue(it)
             }
         }
@@ -68,7 +68,7 @@ class DiscoverViewModel @Inject constructor(
     fun getGuestSession() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = guestSessionUseCase.invoke()
-            response.let {
+            response?.let {
                 userSession.postValue(it)
             }
         }
@@ -77,7 +77,7 @@ class DiscoverViewModel @Inject constructor(
     fun getUpcomingMovieList() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = upcomingDataUseCase.invoke()
-            response.let {
+            response?.let {
                 upcoming.postValue(it)
             }
         }
