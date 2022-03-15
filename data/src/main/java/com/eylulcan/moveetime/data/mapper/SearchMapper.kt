@@ -1,0 +1,35 @@
+package com.eylulcan.moveetime.data.mapper
+
+import com.eylulcan.moveetime.data.Utils.IF_INT_NULL
+import com.eylulcan.moveetime.data.Utils.IF_STR_NULL
+import com.eylulcan.moveetime.data.model.SearchResult
+import com.eylulcan.moveetime.data.model.SearchResultList
+import com.eylulcan.moveetime.domain.entity.SearchResultEntity
+import com.eylulcan.moveetime.domain.entity.SearchResultListEntity
+import javax.inject.Inject
+
+class SearchMapper @Inject constructor() {
+    fun convertSearchResultListEntity(searchResultList: SearchResultList): SearchResultListEntity {
+        val searchResults = arrayListOf<SearchResultEntity>()
+        searchResultList.searchResults?.forEach {
+            searchResults.add(convertToSearchResultEntity(it))
+        }
+        return SearchResultListEntity(
+            page = searchResultList.page ?: IF_INT_NULL,
+            searchResults = searchResults,
+            totalPages = searchResultList.totalPages ?: IF_INT_NULL,
+            totalResults = searchResultList.totalResults ?: IF_INT_NULL
+        )
+    }
+
+    private fun convertToSearchResultEntity(searchResult: SearchResult): SearchResultEntity {
+        return SearchResultEntity(
+            id = searchResult.id ?: IF_INT_NULL,
+            name = searchResult.name ?: IF_STR_NULL,
+            posterPath = searchResult.posterPath ?: IF_STR_NULL,
+            profilePath = searchResult.profilePath ?: IF_STR_NULL,
+            title = searchResult.title ?: IF_STR_NULL,
+            mediaType = searchResult.mediaType ?: IF_STR_NULL
+        )
+    }
+}

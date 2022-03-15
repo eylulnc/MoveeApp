@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_artist_detail.xml" value="0.12109375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30520833333333336" />
         <entry key="app/src/main/res/layout/album_fragment_recycler_row.xml" value="0.2869791666666667" />
         <entry key="app/src/main/res/layout/album_recycler_row.xml" value="0.25" />
@@ -28,6 +30,11 @@
         <entry key="app/src/main/res/layout/recycler_row.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/menu-v26/menu.xml" value="0.2515625" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.196875" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.219" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2125" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_logo.xml" value="0.219" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_logo_round.xml" value="0.124" />
+        <entry key="app/src/main/res/mipmap-xxhdpi/ic_logo_round.xml" value="0.219" />
       </map>
     </option>
   </component>

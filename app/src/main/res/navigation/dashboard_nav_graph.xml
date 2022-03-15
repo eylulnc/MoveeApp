@@ -6,22 +6,22 @@
     app:startDestination="@id/discoverFragment">
     <fragment
         android:id="@+id/discoverFragment"
-        android:name="com.eylulcan.moviefragment.ui.discover.DiscoverFragment"
+        android:name="com.eylulcan.moveetime.ui.discover.DiscoverFragment"
         android:label="fragment_discover"
         tools:layout="@layout/fragment_discover" />
     <fragment
         android:id="@+id/artistsFragment"
-        android:name="com.eylulcan.moviefragment.ui.artist.ArtistFragment"
+        android:name="com.eylulcan.moveetime.ui.artist.ArtistFragment"
         android:label="fragment_artists"
         tools:layout="@layout/fragment_artist" />
     <fragment
         android:id="@+id/genresFragment"
-        android:name="com.eylulcan.moviefragment.ui.genres.GenresFragment"
+        android:name="com.eylulcan.moveetime.ui.genres.GenresFragment"
         android:label="fragment_genres"
         tools:layout="@layout/fragment_genres" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.eylulcan.moviefragment.ui.search.SearchFragment"
+        android:name="com.eylulcan.moveetime.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
 </navigation>

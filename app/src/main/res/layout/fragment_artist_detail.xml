@@ -4,10 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 <data>
     <variable name="detail"
-        type = "com.eylulcan.moviefragment.domain.entity.ArtistDetailEntity"/>
+        type = "com.eylulcan.moveetime.domain.entity.ArtistDetailEntity"/>
     <variable
         name="listener"
-        type="com.eylulcan.moviefragment.ui.artistdetail.ArtistDetailListener" />
+        type="com.eylulcan.moveetime.ui.artistdetail.ArtistDetailListener" />
 </data>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ImageContrastCheck"
                 tools:srcCompat="@tools:sample/backgrounds/scenic"
-                android:onClick="@{listener.onArtistImageClick}"/>
+                android:onClick="@{listener::onArtistImageClick}"/>
 
             <View
                 android:id="@+id/templateArtistCoverView"
@@ -58,7 +58,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.eylulcan.moviefragment.CustomTitleTextView
+            <com.eylulcan.moveetime.CustomTitleTextView
                 android:id="@+id/artistName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.eylulcan.moviefragment.CustomTitleTextView
+                    <com.eylulcan.moveetime.CustomTitleTextView
                         android:id="@+id/detailMovieNameText"
                         android:layout_width="@dimen/detail_movie_detailMovieNameText_width"
                         android:layout_height="wrap_content"

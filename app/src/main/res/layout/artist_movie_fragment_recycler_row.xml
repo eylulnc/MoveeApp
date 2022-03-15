@@ -5,7 +5,7 @@
     <data>
         <variable
             name="movieCredits"
-            type="com.eylulcan.moviefragment.domain.entity.CastEntity" />
+            type="com.eylulcan.moveetime.domain.entity.CastEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
