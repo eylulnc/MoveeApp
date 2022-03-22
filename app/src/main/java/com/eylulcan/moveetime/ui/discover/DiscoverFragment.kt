@@ -53,7 +53,7 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
     private val allListItems: ArrayList<ArrayList<ResultMovieEntity>> = arrayListOf()
     private var placeholderNeeded = arrayListOf<View>()
     private var broccoli: Broccoli? = Broccoli()
-    private var handler: Handler? = Handler()
+    private var handler: Handler? = null
     private lateinit var runnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +73,8 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
 
     override fun onResume() {
         super.onResume()
+        observeViewModel()
+        handler= Handler()
         discoverViewModel.getPopularMovieList()
         discoverViewModel.getUpcomingMovieList()
     }
@@ -82,7 +84,6 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
         setPlaceholders()
         setToolbarMenu()
         setupUI()
-        observeViewModel()
         allListItems.clear()
         sessionID = sharedPreferenceForSessionID.getString(getString(R.string.sessionId), null)
         if (sessionID == null) {

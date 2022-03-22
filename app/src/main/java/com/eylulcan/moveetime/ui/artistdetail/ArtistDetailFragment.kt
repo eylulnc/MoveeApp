@@ -42,13 +42,11 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
 
     @Inject
     lateinit var albumRecyclerAdapter: AlbumRecyclerAdapter
-    private var _binding: FragmentArtistDetailBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentArtistDetailBinding
     private val artistDetailViewModel: ArtistDetailViewModel by activityViewModels()
     private val placeholderNeeded = arrayListOf<View>()
     private var broccoli = Broccoli()
-    private var _includeBinding: BottomSheetFragmentBinding? = null
-    private val includeBinding get() = _includeBinding!!
+    private lateinit var includeBinding: BottomSheetFragmentBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private var screenBottomRatio = 0.40
 
@@ -56,10 +54,10 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_artist_detail, container, false
         )
-        _includeBinding = binding.bottomSheetFragment
+        includeBinding = binding.bottomSheetFragment
         return binding.root
     }
 
@@ -159,8 +157,6 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
     override fun onDestroyView() {
         super.onDestroyView()
         artistDetailViewModel.setListsToDefault()
-        _includeBinding = null
-        _binding = null
     }
 
     private fun setupUIBottomSheet(detail: ArtistDetailEntity) {

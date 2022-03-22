@@ -35,12 +35,16 @@ class GenresFragment : Fragment(), ItemListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
         binding.genresFragmentRecyclerView.layoutManager =
             GridLayoutManager(requireContext().applicationContext, 2)
-        observeViewModel()
-        genreViewModel.getGenreList()
     }
 
+    override fun onResume() {
+        super.onResume()
+        genreViewModel.getGenreList()
+
+    }
     private fun observeViewModel() {
         genreViewModel.genres.observe(viewLifecycleOwner) { genreData ->
             genreData?.let { genreList ->

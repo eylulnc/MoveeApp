@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +48,7 @@ class LastVisitedFragment @Inject constructor() :
         savedInstanceState: Bundle?
     ): View {
         val view = ComposeView(requireContext())
-        lastVisitedViewModel.readFromDB()
+
         view.apply {
             setContent {
                 Surface(
@@ -59,6 +60,17 @@ class LastVisitedFragment @Inject constructor() :
             }
             return view
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        lastVisitedViewModel.movieList = mutableStateOf(arrayListOf())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lastVisitedViewModel.readFromDB()
+
     }
 }
 
