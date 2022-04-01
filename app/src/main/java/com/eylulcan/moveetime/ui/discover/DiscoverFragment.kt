@@ -18,8 +18,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eylulcan.moveetime.R
 import com.eylulcan.moveetime.databinding.FragmentDiscoverBinding
-import com.eylulcan.moveetime.domain.util.ResultData
 import com.eylulcan.moveetime.domain.entity.ResultMovieEntity
+import com.eylulcan.moveetime.domain.util.ResultData
 import com.eylulcan.moveetime.domain.util.Utils
 import com.eylulcan.moveetime.ui.ItemListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -258,8 +258,14 @@ class DiscoverFragment @Inject constructor() : Fragment(), ItemListener,
     override fun onStop() {
         super.onStop()
         handler?.removeCallbacks(runnable)
+        discoverViewModel.popularMovies.removeObservers(this)
+        discoverViewModel.topRatedMovies.removeObservers(this)
+        discoverViewModel.nowPlaying.removeObservers(this)
+        discoverViewModel.upcomingMovies.removeObservers(this)
+        discoverViewModel.setListsToDefault()
         fragmentBinding.discoverMainRecyclerView.adapter = null
         fragmentBinding.discoverSlider.adapter = null
         handler = null
+
     }
 }

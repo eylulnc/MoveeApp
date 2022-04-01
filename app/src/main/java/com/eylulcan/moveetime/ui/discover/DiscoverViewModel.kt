@@ -33,7 +33,7 @@ class DiscoverViewModel @Inject constructor(
     val nowPlaying: LiveData<MovieEntity> get() = nowPlayingMovieList
     private val userSession = MutableLiveData<GuestSessionEntity>()
     val sessionEntityId: LiveData<GuestSessionEntity> get() = userSession
-    private val upcoming = MutableLiveData<MovieEntity>()
+    private var upcoming = MutableLiveData<MovieEntity>()
     val upcomingMovies: LiveData<MovieEntity> get() = upcoming
     private val signOutResult = MutableLiveData<ResultData<Unit>>()
     val signOut: LiveData<ResultData<Unit>> get() = signOutResult
@@ -96,6 +96,7 @@ class DiscoverViewModel @Inject constructor(
         popularMovieList = MutableLiveData<MovieEntity>()
         topRatedMovieList = MutableLiveData<MovieEntity>()
         nowPlayingMovieList = MutableLiveData<MovieEntity>()
+        upcoming = MutableLiveData<MovieEntity>()
     }
 
 }
