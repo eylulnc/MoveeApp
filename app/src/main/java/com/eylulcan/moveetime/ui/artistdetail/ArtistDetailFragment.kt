@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -58,6 +59,24 @@ class ArtistDetailFragment @Inject constructor() : Fragment(), ItemListener, Art
             inflater, R.layout.fragment_artist_detail, container, false
         )
         includeBinding = binding.bottomSheetFragment
+
+        binding.artistDetailCoverImage.isVisible = true
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true)
+            {
+                override fun handleOnBackPressed() {
+                    if (binding.artistDetailCoverImage.isVisible) {
+                        binding.artistDetailCoverImage.isVisible = false
+                    } else {
+                        isEnabled = false
+                        activity?.onBackPressed()
+                    }
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            callback
+        )
         return binding.root
     }
 
