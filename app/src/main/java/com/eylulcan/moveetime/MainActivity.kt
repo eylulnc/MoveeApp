@@ -1,6 +1,9 @@
 package com.eylulcan.moveetime
 
-import android.app.*
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,11 +14,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
+import androidx.work.*
 import com.eylulcan.moveetime.databinding.ActivityMainBinding
 import com.eylulcan.moveetime.ui.MovieFragmentFactory
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 private const val CHANNEL_ID = "com.eylulcan.moviefragment"
@@ -65,6 +70,7 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
         } ?: run {
             firstTimeOpened = sharedPreferences.getBoolean(getString(R.string.isFirst), true)
             if (firstTimeOpened == true) {
+                updateUsage()
                 sharedPreferences.edit().putBoolean(getString(R.string.isFirst), false).apply()
                 navGraph.setStartDestination(R.id.onBoardViewPagerFragment)
             } else {
@@ -118,6 +124,20 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+    private fun updateUsage() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresCharging(false)
+            .build()
+
+        val workRequest : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StoreAppUsage>(15, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest)
     }
 
 }
