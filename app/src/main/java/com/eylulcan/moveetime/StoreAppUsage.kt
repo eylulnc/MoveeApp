@@ -79,9 +79,9 @@ class StoreAppUsage @AssistedInject constructor(
             firestore.collection(APP_USAGE).document(it)
         }
         ref?.set(appUsageMap, SetOptions.merge())?.addOnSuccessListener {
-            println("Success")
+            //println("Success")
         }?.addOnFailureListener {
-            println("Fail")
+           // println("Fail")
         }
     }
 }

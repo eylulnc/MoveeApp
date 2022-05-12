@@ -133,7 +133,7 @@ class MainActivity @Inject constructor() : AppCompatActivity() {
             .setRequiresCharging(false)
             .build()
 
-        val workRequest : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StoreAppUsage>(15, TimeUnit.MINUTES)
+        val workRequest : PeriodicWorkRequest = PeriodicWorkRequestBuilder<StoreAppUsage>(1, TimeUnit.DAYS)
             .setConstraints(constraints)
             .build()
 
